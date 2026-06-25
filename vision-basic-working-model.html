@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VISION Basic Working Model</title>
+<style>
+  :root{
+    --navy:#0E4C6D;
+    --teal:#1C8A8A;
+    --aqua:#A9D6D9;
+    --light:#F4F8F9;
+    --dark:#12313F;
+    --border:#dbe4e8;
+    --muted:#5f7380;
+    --good-bg:#ecfdf5;
+    --good-bd:#bbf7d0;
+    --warn-bg:#fffbeb;
+    --warn-bd:#fde68a;
+    --risk-bg:#fff1f2;
+    --risk-bd:#fecdd3;
+    --info-bg:#ecfeff;
+    --info-bd:#a5f3fc;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:var(--light);
+    color:var(--dark);
+  }
+  .container{max-width:1400px;margin:0 auto;padding:24px}
+  .hero{
+    background:linear-gradient(135deg,var(--navy),var(--teal));
+    color:#fff;
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 8px 24px rgba(0,0,0,.12);
+    display:grid;
+    grid-template-columns: 1.4fr .9fr;
+    gap:20px;
+    align-items:center;
+  }
+  .hero h1{margin:0;font-size:44px;letter-spacing:.5px}
+  .hero .sub{opacity:.8;text-transform:uppercase;font-size:12px;letter-spacing:3px}
+  .hero .voice{
+    background:rgba(255,255,255,.1);
+    border-radius:22px;
+    padding:18px;
+    backdrop-filter: blur(4px);
+  }
+  .vlogo{
+    width:50px;height:50px;border-radius:16px;background:rgba(255,255,255,.18);
+    display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;margin-right:12px
+  }
+  .card{
+    background:#fff;border:1px solid var(--border);border-radius:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04)
+  }
+  .card h3{margin:0;padding:18px 18px 0 18px;font-size:20px}
+  .card .body{padding:18px}
+  .nav{display:flex;flex-wrap:wrap;gap:8px}
+  .btn{
+    border:1px solid var(--border);background:#fff;color:#334155;
+    padding:12px 16px;border-radius:16px;cursor:pointer;font-weight:600
+  }
+  .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .btn.navy{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .btn.amber{background:#b45309;color:#fff;border-color:#b45309}
+  .btn.green{background:#166534;color:#fff;border-color:#166534}
+  .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:20px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .metric{
+    border:1px solid var(--border);padding:16px;border-radius:18px;background:#f8fafc;cursor:pointer
+  }
+  .metric .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;opacity:.7}
+  .metric .value{font-size:22px;font-weight:700;margin-top:6px}
+  .good{background:var(--good-bg);border-color:var(--good-bd)}
+  .warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+  .risk{background:var(--risk-bg);border-color:var(--risk-bd)}
+  .info{background:var(--info-bg);border-color:var(--info-bd)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
+  .field input,.field select,.field textarea{
+    width:100%;padding:12px 14px;border-radius:16px;border:1px solid #cbd5e1;font-size:14px
+  }
+  .field textarea{min-height:96px;resize:vertical}
+  .hidden{display:none}
+  .section{margin-top:20px}
+  ul{margin:10px 0 0 20px;padding:0}
+  li{margin:8px 0}
+  .soft{
+    border:1px solid var(--border);background:#f8fafc;border-radius:20px;padding:16px
+  }
+  .split{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .supporter-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+  .muted{color:var(--muted)}
+  .nowrap{white-space:pre-wrap}
+  @media (max-width: 980px){
+    .hero{grid-template-columns:1fr}
+    .grid-2,.grid-4,.grid-3,.split,.supporter-row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div>
+      <div style="display:flex;align-items:center;margin-bottom:8px">
+        <div class="vlogo">V</div>
+        <div>
+          <div class="sub">i3 Host Internal Agent</div>
+          <h1>VISION</h1>
+        </div>
+      </div>
+      <div style="font-size:18px;line-height:1.5;max-width:900px">
+        Your internal sales agent to guide reps and approved partners by stage, protect company knowledge, and move deals faster from lead to close.
+      </div>
+    </div>
+    <div class="voice">
+      <div class="muted" style="color:#d7eef0">Agent voice simulation</div>
+      <div id="voiceText" style="font-size:18px;font-weight:700;line-height:1.5;margin-top:8px">
+        “Good morning. I reviewed your pipeline and built your highest priority actions for today.”
+      </div>
+    </div>
+  </div>
+
+  <div class="card section">
+    <h3>Navigation</h3>
+    <div class="body">
+      <div class="nav" id="nav"></div>
+    </div>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+const state = {
+  stage: "Dashboard",
+  admin: {
+    employee:"Avery Chen", role:"Business Development Manager", segment:"Grocery",
+    territory:"Quebec and Atlantic Canada", annualGoal:"$4.5M revenue",
+    manager:"David Crook", responsibilities:"Drive pipeline, run presentations, move qualified accounts into POC.",
+    linkedin:"linkedin.com/in/averychen"
+  },
+  deal: {
+    repName:"Avery Chen", account:"Metro Quebec Pilot", segment:"Grocery", region:"Quebec, Canada",
+    objective:"Shorten sales cycle and validate privacy readiness for a retail pilot.",
+    monthlyGoal:"$375K", commitments:"3 presentations, 1 POC, 8 new prospect meetings",
+    pipeline:"$1.2M active", orders:"$180K booked"
+  },
+  onboarding: {
+    experience:"New Hire", trainingWeek:"Week 2", mentorsMet:"2", confidence:"6",
+    learned:"Product positioning, grocery pain points, and demo flow.",
+    challenge:"Linking solution features to real operator outcomes.",
+    linkedinAssessment:"Needs stronger point of view on grocery, fewer generic posts, more proof and segment relevance."
+  },
+  prospecting: {
+    targetProblem:"ORC, shrink, and limited store visibility",
+    intentSignals:"Visited retail safety page, opened two emails, viewed AI analytics deck",
+    outreachStyle:"Insight-led",
+    nextDayAction:"Call Director of Operations first, send tailored note to VP Asset Protection, and route social proof to IT Director."
+  },
+  presentation: {
+    audience:"VP AP, Director of Ops, IT Manager",
+    meetingGoal:"Get agreement for a scoped pilot and executive walkthrough",
+    objections:"Budget, privacy concerns, integration effort",
+    transcript:"Customer said they want fewer disconnected systems, stronger ORC visibility, and a pilot that proves value before rollout. IT wants clear scope. Operations wants reporting that managers can actually use."
+  },
+  poc: {
+    site:"Toronto terminal", successMetrics:"Incident capture, measurable safety insights, operator adoption",
+    duration:"45 days", blockers:"Need exact scope and approved validation criteria",
+    supporters:[
+      {name:"Chris Lytwtn", title:"IT Director", email:"chris@example.com"},
+      {name:"Dana Brooks", title:"Operations Leader", email:"dana@example.com"}
+    ]
+  },
+  legal: {
+    jurisdiction:"Quebec, Canada", purpose:"Loss prevention and incident investigation",
+    identifiesPeople:"Yes", biometrics:"Yes", profiling:"Potentially",
+    signage:"Needs update", dataResidency:"Canada cloud with some U.S. support access",
+    privacyOfficer:"Unknown", evidence:"Shrink data, repeat incidents, and internal case logs"
+  },
+  closing: {
+    commercialGoal:"Move from pilot to phased rollout",
+    pricePosition:"Value and scalability",
+    competitiveRisk:"High cost incumbent and privacy hesitation",
+    nextCommitment:"Executive review and commercial checkpoint"
+  },
+  voice: "Good morning. I reviewed your pipeline and built your highest priority actions for today."
+};
+
+const stages = ["Dashboard","Admin Setup","Onboarding","Prospecting","Presentation","POC","Legal & Privacy","Closing"];
+const segments = ["Grocery","Retail","QSR","Commercial","Schools","Integrator","Healthcare"];
+const personaMap = {
+  Grocery:["VP Asset Protection","Director of Operations","IT Director","Loss Prevention Manager","Store Operations Leader"],
+  Retail:["VP Asset Protection","Director of Retail Operations","IT Director","Loss Prevention Director","Regional Manager"],
+  QSR:["VP Operations","Director of Loss Prevention","IT Director","Franchise Operations Leader","Facilities Leader"],
+  Commercial:["Security Director","Operations Director","IT Manager","Risk Manager","Facilities Director"],
+  Schools:["Superintendent","Director of Security","IT Director","Principal","Facilities Director"],
+  Integrator:["Owner","VP Sales","Technical Director","Solutions Architect","Operations Lead"],
+  Healthcare:["Security Director","Director of Operations","IT Director","Compliance Leader","Facilities Director"]
+};
+
+function setVoice(text){ state.voice = text; document.getElementById('voiceText').innerText = `“${text}”`; }
+
+function personas(){ return personaMap[state.deal.segment] || []; }
+
+function onboardingResult(){
+  const c = Number(state.onboarding.confidence||0);
+  const readiness = c >= 8 ? "Ready for live calls" : c >= 6 ? "Needs guided reps" : "Needs more structure";
+  const actions = [];
+  if(Number(state.onboarding.mentorsMet)<3) actions.push("Schedule more mentor shadowing before independent outreach.");
+  if(c<7) actions.push("Assign role-play session with manager and product specialist.");
+  actions.push("Set meeting with marketing to tighten LinkedIn presence and segment relevance.");
+  actions.push("Recommend associations and social channels aligned to the assigned market.");
+  return {readiness, actions};
+}
+
+function linkedinPlan(){
+  return [
+    `Rewrite headline so it clearly supports the ${state.admin.segment} segment and territory.`,
+    "Add 3 proof points tied to real operator or retailer outcomes.",
+    "Pin one post that explains i3's practical market value, not just features.",
+    "Meet with marketing to create a simple 30-day social relevance plan.",
+    `Join associations, groups, and events where ${state.admin.segment} buyers already spend time.`
+  ];
+}
+
+function prospectingResult(){
+  const signals = state.prospecting.intentSignals.toLowerCase();
+  const score = ["visited","opened","viewed","downloaded","demo"].filter(x=>signals.includes(x)).length*18+28;
+  const intensity = score >= 80 ? "Hot" : score >= 60 ? "Warm" : "Cold";
+  const p = personas();
+  const message = intensity === "Hot"
+    ? `The account is showing strong intent. Go multi-threaded. Start with ${p[0] || "the lead contact"}, then map the buying group and assign follow-up by role.`
+    : intensity === "Warm"
+    ? `Keep momentum with a role-specific follow-up sequence and one useful insight per persona.`
+    : `This account needs nurture and more proof before direct push.`;
+  return {score: Math.min(score,96), intensity, message};
+}
+
+function generatedPOC(){
+  const names = state.poc.supporters.filter(s=>s.name && s.title).map(s=>`${s.name}, ${s.title}`).join("; ");
+  return `POC Summary
+Site: ${state.poc.site}
+Objective: Validate ${state.presentation.transcript.includes("ORC") ? "visibility and operational value" : "solution fit"} through a ${state.poc.duration} pilot.
+Customer Drivers: ${state.presentation.transcript}
+Success Metrics: ${state.poc.successMetrics}
+Support Team: ${names || "Add named supporters before launch"}
+Blockers: ${state.poc.blockers}
+Recommended Next Step: handoff to PM agent to formalize scope, timeline, cybersecurity forms, and stakeholder approvals.`;
+}
+
+function riskResult(){
+  let score = 0; const laws = []; const nextSteps=[]; const warnings=[];
+  const l = state.legal;
+  if(l.jurisdiction.includes("Quebec")) laws.push("Bill 25");
+  if(l.jurisdiction.includes("Canada")) laws.push("PIPEDA");
+  if(l.identifiesPeople === "Yes") score += 2;
+  if(l.biometrics === "Yes"){ score += 3; warnings.push("Biometric processing detected."); nextSteps.push("Confirm whether biometric processing is actually necessary for the stated purpose.");}
+  if(l.profiling === "Potentially"){ score += 2; warnings.push("Profiling risk may exist because data sets are being combined."); nextSteps.push("Run the four-part necessity and proportionality test on this exact use case.");}
+  if(l.signage !== "Adequate"){ score += 1; nextSteps.push("Generate updated signage and transparency language before launch.");}
+  if(l.dataResidency.includes("U.S.")){ score += 1; warnings.push("Cross-border support access needs review."); nextSteps.push("Review cross-border data access and document support roles.");}
+  if(l.privacyOfficer === "Unknown") nextSteps.push("Confirm privacy owner before POC starts.");
+  nextSteps.push("Store all notes, stakeholders, and legal answers back to Salesforce and i3-owned records.");
+  const level = score >= 7 ? "High" : score >= 4 ? "Medium" : "Low";
+  const decision = level === "High" ? "Escalate before POC approval" : level === "Medium" ? "Proceed with privacy checkpoint" : "Proceed with standard controls";
+  return {score,laws,nextSteps,warnings,level,decision};
+}
+
+function metric(label,value,tone='',click=''){
+  return `<button class="metric ${tone}" ${click?`onclick="${click}"`:''}>
+    <div class="label">${label}</div><div class="value">${value}</div>
+  </button>`;
+}
+
+function inputField(label, key, value, section, type='text'){
+  if(type==='textarea'){
+    return `<div class="field"><label>${label}</label><textarea onchange="state.${section}.${key}=this.value;render();">${value||''}</textarea></div>`;
+  }
+  if(Array.isArray(type)){
+    return `<div class="field"><label>${label}</label><select onchange="state.${section}.${key}=this.value;${section==='admin'&&key==='segment'?'state.deal.segment=this.value;':''}render();">${type.map(o=>`<option ${o===value?'selected':''}>${o}</option>`).join('')}</select></div>`;
+  }
+  return `<div class="field"><label>${label}</label><input value="${(value||'').replace(/"/g,'&quot;')}" onchange="state.${section}.${key}=this.value;render();" /></div>`;
+}
+
+function renderNav(){
+  const nav = document.getElementById('nav');
+  nav.innerHTML = stages.map(s=>`<button class="btn ${state.stage===s?'primary':''}" onclick="state.stage='${s}';render();">${s}</button>`).join('');
+}
+
+function render(){
+  renderNav();
+  document.getElementById('voiceText').innerText = `“${state.voice}”`;
+  const content = document.getElementById('content');
+  if(state.stage === "Dashboard"){
+    content.innerHTML = `
+      <div class="grid-2">
+        <div>
+          <div class="card section">
+            <h3>Salesperson dashboard</h3>
+            <div class="body">
+              <div class="grid-4">
+                ${metric('Goal this month',state.deal.monthlyGoal,'info',"setVoice('Your monthly goal is behind pace. Start with the accounts showing the highest buying intent today.')")}
+                ${metric('Commitments',state.deal.commitments,'good',"state.stage='Presentation';render()")}
+                ${metric('Pipeline',state.deal.pipeline,'',"state.stage='Prospecting';render()")}
+                ${metric('Orders booked',state.deal.orders,'warn',"state.stage='Closing';render()")}
+              </div>
+              <div class="grid-3 section">
+                ${metric("Today's leads","12",'',"state.stage='Prospecting';setVoice('I ranked your leads by intent and suggested the best buying group to target first.');render()")}
+                ${metric("Active presentations","4",'',"state.stage='Presentation';setVoice('I prepared your presentation path and the transcript-to-POC workflow.');render()")}
+                ${metric("Active POCs","2",'',"state.stage='POC';setVoice('I can help you convert presentation notes into a POC plan and prepare the PM handoff.');render()")}
+              </div>
+            </div>
+          </div>
+          <div class="card section">
+            <h3>What VISION says to do today</h3>
+            <div class="body">
+              <ul>
+                <li>Call 3 highest-intent accounts before noon</li>
+                <li>Advance 1 presentation to a scoped POC</li>
+                <li>Review legal checkpoints on 1 active deal</li>
+                <li>Complete weekly reflection and update next-day plan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card section">
+            <h3>Company control</h3>
+            <div class="body muted">Everything entered into VISION is treated as proprietary company knowledge. The purpose is to push clean, structured information into Salesforce and i3-owned systems so no deal knowledge walks away with the rep.</div>
+          </div>
+          <div class="card section">
+            <h3>Fast paths</h3>
+            <div class="body" style="display:grid;gap:10px">
+              <button class="btn navy" onclick="state.stage='Admin Setup';render()">Open new employee setup</button>
+              <button class="btn primary" onclick="state.stage='Prospecting';render()">Open lead engine</button>
+              <button class="btn amber" onclick="state.stage='Legal & Privacy';render()">Open legal and privacy agent</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+  if(state.stage === "Admin Setup"){
+    content.innerHTML = `<div class="card section"><h3>Administrator setup for a new salesperson</h3><div class="body">
+      <div class="split">
+        ${inputField('Employee','employee',state.admin.employee,'admin')}
+        ${inputField('Role','role',state.admin.role,'admin')}
+        ${inputField('Segment','segment',state.admin.segment,'admin',segments)}
+        ${inputField('Territory','territory',state.admin.territory,'admin')}
+        ${inputField('Annual goal','annualGoal',state.admin.annualGoal,'admin')}
+        ${inputField('Manager','manager',state.admin.manager,'admin')}
+      </div>
+      <div class="split section">
+        ${inputField('Responsibilities','responsibilities',state.admin.responsibilities,'admin','textarea')}
+        ${inputField('LinkedIn profile','linkedin',state.admin.linkedin,'admin')}
+      </div>
+      <div class="grid-2 section">
+        ${metric('System result','Workflow generated','good',"setVoice('The administrator setup is complete. I can now guide this rep daily based on segment, territory, and goals.')")}
+        ${metric('Recommended next screen','Onboarding dashboard','',"state.stage='Onboarding';render()")}
+      </div>
+    </div></div>`;
+    return;
+  }
+  if(state.stage === "Onboarding"){
+    const o = onboardingResult();
+    content.innerHTML = `<div class="grid-2">
+      <div class="card section"><h3>Onboarding and LinkedIn readiness</h3><div class="body">
+        <div class="split">
+          ${inputField('Experience level','experience',state.onboarding.experience,'onboarding',["New Hire","Mid-Level","Veteran","Partner"])}
+          ${inputField('Training week','trainingWeek',state.onboarding.trainingWeek,'onboarding')}
+          ${inputField('Mentors met','mentorsMet',state.onboarding.mentorsMet,'onboarding')}
+          ${inputField('Confidence score out of 10','confidence',state.onboarding.confidence,'onboarding')}
+        </div>
+        <div class="split section">
+          ${inputField('What the rep learned','learned',state.onboarding.learned,'onboarding','textarea')}
+          ${inputField('Main challenge','challenge',state.onboarding.challenge,'onboarding','textarea')}
+        </div>
+        <div class="section">${inputField('LinkedIn assessment','linkedinAssessment',state.onboarding.linkedinAssessment,'onboarding','textarea')}</div>
+        <div class="grid-2 section">
+          ${metric('Readiness',o.readiness,o.readiness==='Ready for live calls'?'good':(o.readiness==='Needs guided reps'?'warn':'risk'))}
+          ${metric('Next step','Marketing image review','',"setVoice('I recommend a meeting with marketing to improve segment relevance, social proof, and online trust signals.')")}
+        </div>
+      </div></div>
+      <div class="card section"><h3>Recommended actions</h3><div class="body">
+        <ul>${o.actions.map(a=>`<li>${a}</li>`).join('')}</ul>
+        <div class="soft section">
+          <div style="font-weight:700">LinkedIn and relevance plan</div>
+          <ul>${linkedinPlan().map(a=>`<li>${a}</li>`).join('')}</ul>
+        </div>
+      </div></div>
+    </div>`;
+    return;
+  }
+  if(state.stage === "Prospecting"){
+    const p = prospectingResult();
+    content.innerHTML = `<div class="grid-2">
+      <div class="card section"><h3>Lead engine and buying group guidance</h3><div class="body">
+        <div class="split">
+          ${inputField('Segment','segment',state.deal.segment,'deal',segments)}
+          ${inputField('Outreach style','outreachStyle',state.prospecting.outreachStyle,'prospecting',["Insight-led","Technical","Executive","Problem-first"])}
+        </div>
+        <div class="split section">
+          ${inputField('Target problem','targetProblem',state.prospecting.targetProblem,'prospecting','textarea')}
+          ${inputField('Intent signals from ZoomInfo and 6sense','intentSignals',state.prospecting.intentSignals,'prospecting','textarea')}
+        </div>
+        <div class="grid-3 section">
+          ${metric('Intent score',`${p.score}/100`,p.intensity==='Hot'?'good':(p.intensity==='Warm'?'warn':''))}
+          ${metric('Lead status',p.intensity,p.intensity==='Hot'?'good':(p.intensity==='Warm'?'warn':''))}
+          ${metric('Next-day action','Ready','info',"setVoice(state.prospecting.nextDayAction)")}
+        </div>
+        <div class="soft section">${p.message}</div>
+      </div></div>
+      <div class="card section"><h3>Suggested buying group for this segment</h3><div class="body">
+        <ul>${personas().map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="soft section">VISION should not target just one person. It should suggest the full decision map, route content by role, and tell the rep who to contact first, second, and third.</div>
+      </div></div>
+    </div>`;
+    return;
+  }
+  if(state.stage === "Presentation"){
+    content.innerHTML = `<div class="grid-2">
+      <div class="card section"><h3>Presentation stage and transcript capture</h3><div class="body">
+        <div class="split">
+          ${inputField('Audience','audience',state.presentation.audience,'presentation')}
+          ${inputField('Meeting goal','meetingGoal',state.presentation.meetingGoal,'presentation')}
+        </div>
+        <div class="section">${inputField('Likely objections','objections',state.presentation.objections,'presentation','textarea')}</div>
+        <div class="section">${inputField('Presentation transcript or meeting notes','transcript',state.presentation.transcript,'presentation','textarea')}</div>
+        <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" onclick="setVoice('I reviewed the presentation notes. I can now build the draft proof of concept and show you what the PM handoff could look like.')">Analyze transcript</button>
+          <button class="btn navy" onclick="state.stage='POC';render()">Generate draft POC</button>
+        </div>
+      </div></div>
+      <div class="card section"><h3>Transcript to POC preview</h3><div class="body">
+        <div class="muted">This simulation shows how presentation transcripts become structured POC input instead of getting lost in email or personal notes.</div>
+        <div class="soft section nowrap">${generatedPOC()}</div>
+      </div></div>
+    </div>`;
+    return;
+  }
+  if(state.stage === "POC"){
+    content.innerHTML = `<div class="grid-2">
+      <div class="card section"><h3>POC builder and PM handoff</h3><div class="body">
+        <div class="split">
+          ${inputField('Site or pilot location','site',state.poc.site,'poc')}
+          ${inputField('Pilot duration','duration',state.poc.duration,'poc')}
+        </div>
+        <div class="split section">
+          ${inputField('Success metrics','successMetrics',state.poc.successMetrics,'poc','textarea')}
+          ${inputField('Current blocker','blockers',state.poc.blockers,'poc','textarea')}
+        </div>
+        <div class="soft section">
+          <div style="font-weight:700">POC supporters and named stakeholders</div>
+          <div style="margin-top:10px">${state.poc.supporters.map((s,i)=>`
+            <div class="supporter-row">
+              <div class="field"><label>Name</label><input value="${(s.name||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].name=this.value;render()" /></div>
+              <div class="field"><label>Title</label><input value="${(s.title||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].title=this.value;render()" /></div>
+              <div class="field"><label>Email</label><input value="${(s.email||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].email=this.value;render()" /></div>
+            </div>`).join('')}
+          </div>
+          <button class="btn primary" onclick="state.poc.supporters.push({name:'',title:'',email:''});render()">Add supporter</button>
+        </div>
+      </div></div>
+      <div class="card section"><h3>Generated POC preview</h3><div class="body">
+        <div class="soft nowrap">${generatedPOC()}</div>
+        <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn navy" onclick="setVoice('The POC draft is ready. Next, route it to the PM agent so scope, timeline, cybersecurity forms, and implementation tasks stay on track.')">Simulate PM handoff</button>
+          <button class="btn green" onclick="setVoice('Structured notes would now be pushed into Salesforce and company-owned records.')">Push structured notes to Salesforce</button>
+        </div>
+      </div></div>
+    </div>`;
+    return;
+  }
+  if(state.stage === "Legal & Privacy"){
+    const r = riskResult();
+    content.innerHTML = `<div class="grid-2">
+      <div class="card section"><h3>V-Guard: Privacy and legal simulation</h3><div class="body">
+        <div class="split">
+          ${inputField('Jurisdiction','jurisdiction',state.legal.jurisdiction,'legal')}
+          ${inputField('Business purpose','purpose',state.legal.purpose,'legal')}
+          ${inputField('Identifies people','identifiesPeople',state.legal.identifiesPeople,'legal',["Yes","No","Not sure"])}
+          ${inputField('Biometrics involved','biometrics',state.legal.biometrics,'legal',["Yes","No","Not sure"])}
+          ${inputField('Profiling risk','profiling',state.legal.profiling,'legal',["No","Potentially","Yes"])}
+          ${inputField('Signage status','signage',state.legal.signage,'legal',["Adequate","Needs update","None"])}
+          ${inputField('Data residency and access','dataResidency',state.legal.dataResidency,'legal')}
+          ${inputField('Privacy officer','privacyOfficer',state.legal.privacyOfficer,'legal',["Yes","No","Unknown"])}
+        </div>
+        <div class="section">${inputField('Evidence supporting necessity','evidence',state.legal.evidence,'legal','textarea')}</div>
+        <div class="grid-4 section">
+          ${metric('Applicable laws',r.laws.join(', ') || 'None')}
+          ${metric('Risk points',String(r.score),r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
+          ${metric('Risk level',r.level,r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
+          ${metric('Decision',r.decision,r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
+        </div>
+      </div></div>
+      <div class="card section"><h3>Required next steps</h3><div class="body">
+        <ul>${r.nextSteps.map(x=>`<li>${x}</li>`).join('')}</ul>
+      </div></div>
+    </div>`;
+    return;
+  }
+  if(state.stage === "Closing"){
+    content.innerHTML = `<div class="card section"><h3>Commercial close simulation</h3><div class="body">
+      <div class="split">
+        ${inputField('Commercial goal','commercialGoal',state.closing.commercialGoal,'closing')}
+        ${inputField('Price position','pricePosition',state.closing.pricePosition,'closing')}
+        ${inputField('Competitive risk','competitiveRisk',state.closing.competitiveRisk,'closing','textarea')}
+        ${inputField('Next commitment','nextCommitment',state.closing.nextCommitment,'closing','textarea')}
+      </div>
+      <div class="soft section">VISION should use the earlier stages to arrive here with clean documentation, named stakeholders, legal answers, and commercial clarity already captured. Closing should feel like the final controlled step, not a scramble.</div>
+    </div></div>`;
+    return;
+  }
+}
+
+render();
+</script>
+</body>
+</html>
