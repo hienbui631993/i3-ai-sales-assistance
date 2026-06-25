@@ -348,13 +348,18 @@ function compute(){
     signage.push("Article 13 transparency notice at entry: controller identity, purposes, lawful basis, retention, and data-subject rights.");
     if(f.biometric){score+=2; warn.push("EU/UK: biometrics that uniquely identify are special-category data (GDPR Art. 9)."); docs.push("DPIA (GDPR Art. 35) — mandatory for biometrics / large-scale monitoring.");}
   }
-  if(j==="California, USA"){ signage.push("CCPA/CPRA 'Notice at Collection' at the point of capture."); if(f.biometric){steps.push("Offer a 'Limit the Use of My Sensitive Personal Information' option.");} }
+  if(j==="California, USA"){ signage.push("CCPA/CPRA 'Notice at Collection' at the point of capture."); if(f.biometric){steps.push("Offer a 'Limit the Use of My Sensitive Personal Information' option; biometrics are sensitive PI under CPRA.");} }
   if(j==="Illinois, USA" && f.biometric){
-    score+=3; warn.push("Illinois BIPA — strictest US biometric law, private right of action.");
-    steps.push("Obtain prior written release before any biometric capture; publish a retention/destruction schedule; never sell biometric data.");
+    score+=3; warn.push("Illinois BIPA — strictest US biometric law, with a private right of action (statutory damages $1,000–$5,000 per violation).");
+    steps.push("Obtain prior written release before any biometric capture; publish a retention/destruction schedule; never sell or profit from biometric data.");
     docs.push("BIPA written consent + public retention/destruction policy.");
   }
-  if(j==="Texas, USA" && f.biometric){ score+=1; steps.push("Texas CUBI: notice + consent before biometric capture."); docs.push("CUBI notice + consent record."); }
+  if(j==="Texas, USA" && f.biometric){ score+=1; steps.push("Texas CUBI: notice + consent before biometric capture for a commercial purpose (enforced by the Texas AG)."); docs.push("CUBI notice + consent record."); }
+  // US facial-recognition landscape (SIA Guide to State & Local FRT Laws)
+  if(j.indexOf("USA")>=0 && f.biometric){
+    steps.push("Per the SIA guide: commercial facial recognition is legal in all 50 states, but biometrics are increasingly governed by state data-privacy laws — confirm the deployment state's biometric rules (IL BIPA, CA CCPA/CPRA, TX CUBI lead).");
+    warn.push("Note: the dedicated state FRT statutes (Maine, Washington, Utah, Colorado, Montana) restrict GOVERNMENT / law-enforcement use, not commercial — but several states are extending biometric guardrails to commercial use.");
+  }
 
   // cross-border / residency
   if((a.residency||"").indexOf("Cross-border")===0){score+=1; warn.push("Cross-border / U.S. support access — needs documented controls."); steps.push("Document cross-border access and support roles; add transfer safeguards (SCCs for EU/UK). Privacy prefers Canada-for-Canada storage.");}
@@ -412,7 +417,8 @@ function renderBrief(){
     <h4>Sales positioning</h4><div class="soft">${r.positioning}</div>
     <h4>Who owns each step (deck slide 5)</h4>
     <div class="soft"><ul>${ownership.map(o=>`<li><b>${o[0]}</b> → ${o[1]}</li>`).join('')}</ul></div>
-    ${r.level==='High'?`<h4>Escalation</h4><div class="soft">Route to the <b>i3 Privacy Team</b> — Grace Hoang (lead), with Steve M, Kishan P, and Sharon Bauer (Bamboo Data Consulting) — before POC approval.</div>`:''}`;
+    ${r.level==='High'?`<h4>Escalation</h4><div class="soft">Route to the <b>i3 Privacy Team</b> — Grace Hoang (lead), with Steve M, Kishan P, and Sharon Bauer (Bamboo Data Consulting) — before POC approval.</div>`:''}
+    <h4>Sources</h4><div class="muted" style="font-size:12px">Grounded in: i3 Q25 deck (“Quebec 25 and i3 International”); 2026 Loss Prevention & In-Store Privacy Guide (Bamboo Data Consulting, Sharon Bauer) — four-part test, OPC biometric guidance; SIA Guide to U.S. State & Local Facial Recognition Laws (2023). Reference only — not legal advice; confirm with counsel and the privacy officer.</div>`;
 }
 
 function restart(){ state.step=0; state.answers={apps:[]}; state.done=false; transcript=[]; boot(); }
