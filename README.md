@@ -37,6 +37,7 @@ headcount does**.
 | `GUIDE.md` | The operating playbook, including the Q25 privacy due-diligence process. |
 | `USER_GUIDE.md` | Step-by-step instructions for end users (reps, managers, leadership). |
 | `TECHNICAL.md` | How to run/deploy the prototype and the production LLM architecture. |
+| `BUILD_SPEC.md` | Engineering spec: per-agent system prompts, tool definitions, and orchestration. |
 | `documents/` | Source material (Q25 deck, Gardewine POC, onboarding schedule, competitor matrix, privacy guides). *On the `main` branch.* |
 
 ---
