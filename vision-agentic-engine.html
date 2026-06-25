@@ -179,6 +179,18 @@ function storyFor(persona){
   return roleStory.Executive;
 }
 
+/* competitive cost data (from i3 Competitor's Cost Matrix, Oct 2022 — TCO per camera / month) */
+const competitorPricing=[
+  {name:"i3 SSP-VVD",        tco:"$6–7.50",  perCam:"$0/cam (+$120 head-end)", ai:"Path included", lock:"4-yr term · open", us:true},
+  {name:"i3 DSP-VVD (+AI/ML)",tco:"$10–25",  perCam:"~$120 + $15 AI/ML",       ai:"AI/ML included", lock:"3-yr term · open", us:true},
+  {name:"Verkada",          tco:"~$24",      perCam:"$479–$1,799",             ai:"On-camera",      lock:"Proprietary HW · up to 10-yr"},
+  {name:"Ava",              tco:"—",         perCam:"$499–$1,499",             ai:"AI-powered",     lock:"Proprietary · 10-yr warranty"},
+  {name:"Rhombus",          tco:"$22–$322",  perCam:"$249.50",                 ai:"None",           lock:"Cloud · multi-yr"},
+  {name:"Eagle Eye",        tco:"$25–$142",  perCam:"+$11/cam",                ai:"Per-function $",  lock:"Cloud subscription"},
+  {name:"Open Eye",         tco:"$13–14",    perCam:"$118.50",                 ai:"Integrate-only", lock:"3-yr term"},
+  {name:"Solink",           tco:"$4–19",     perCam:"$100",                    ai:"None (in dev)",  lock:"No contract"}
+];
+
 /* real onboarding training modules (from the 30/60/90 schedule) */
 const trainingModules=[
   "Sales Mastery: Market Shift & i3 Go-to-Market Strategy",
@@ -503,16 +515,22 @@ function render(){
   }
 
   if(state.stage==="Closing"){
-    c.innerHTML=`<div class="card section"><h3>Commercial close <span class="agent-tag">V-Close</span></h3><div class="body">
-      <div class="split">
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>Commercial close <span class="agent-tag">V-Close</span></h3><div class="body">
         ${inputField('Commercial goal','commercialGoal',state.closing.commercialGoal,'closing')}
         ${inputField('Price position','pricePosition',state.closing.pricePosition,'closing','textarea')}
         ${inputField('Competitive risk','competitiveRisk',state.closing.competitiveRisk,'closing','textarea')}
         ${inputField('Next commitment','nextCommitment',state.closing.nextCommitment,'closing','textarea')}
-      </div>
-      <div class="soft section">VISION arrives here with clean documentation, named stakeholders, verified activity, legal answers, and competitive positioning already captured (incumbent: ${state.poc.competitor}). Closing is the final controlled step, not a scramble.</div>
-      <div class="section"><button class="btn green" onclick="think('Generating the executive review pack and commercial checkpoint — phased rollout from the Gardewine pilot.')">Generate close pack</button></div>
-    </div></div>`;
+        <div class="soft section">VISION arrives here with clean documentation, named stakeholders, verified activity, legal answers, and competitive positioning already captured (incumbent: ${state.poc.competitor}). Closing is the final controlled step, not a scramble.</div>
+        <div class="section"><button class="btn green" onclick="think('Generating the executive review pack and commercial checkpoint — phased rollout from the Gardewine pilot.')">Generate close pack</button></div>
+      </div></div>
+      <div class="card section"><h3>Competitive cost position <span class="agent-tag">i3 Cost Matrix</span></h3><div class="body">
+        <div class="muted" style="margin-bottom:8px">Total cost of ownership per camera / month. i3 rows highlighted.</div>
+        <table><tr><th>Solution</th><th>TCO/cam/mo</th><th>Per camera</th><th>AI</th></tr>
+          ${competitorPricing.map(p=>`<tr style="${p.us?'background:#ecfdf5':''}"><td><b>${p.name}</b><div class="muted" style="font-size:11px">${p.lock}</div></td><td>${p.tco}</td><td>${p.perCam}</td><td>${p.ai}</td></tr>`).join('')}
+        </table>
+        <div class="soft section"><b>V's positioning:</b> i3 delivers among the <b>lowest TCO per camera/month with AI/ML included</b> and <b>no proprietary-hardware lock-in</b> — the direct counter to high-cost incumbents (Verkada $479–$1,799/cam, Ava $499–$1,499/cam) and to the "${state.poc.competitor}" cost concern in the ${state.poc.account} deal. Lead with operational value at a price that enables <b>company-wide adoption</b>.</div>
+      </div></div>`;
     return;
   }
 
