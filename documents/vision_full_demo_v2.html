@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VISION Full Demo</title>
+<style>
+body{font-family:Arial;background:#F4F8F9;padding:20px;color:#12313F}
+h1{color:#0E4C6D}
+.section{background:white;border-radius:12px;padding:20px;margin-bottom:20px}
+button{padding:10px 14px;border:none;border-radius:8px;background:#1C8A8A;color:white;cursor:pointer;margin-right:10px}
+input,textarea,select{width:100%;padding:8px;margin-top:5px;margin-bottom:10px;border-radius:6px;border:1px solid #ccc}
+</style>
+</head>
+<body>
+
+<h1>VISION – Full Sales Agent Demo</h1>
+
+<div class="section">
+<h3>Dashboard</h3>
+<p><b>Goal:</b> $375K</p>
+<p><b>Pipeline:</b> $1.2M</p>
+<p><b>Orders:</b> $180K</p>
+<button onclick="alert('Focus on high-intent leads and move one deal to POC')">Run Vision</button>
+</div>
+
+<div class="section">
+<h3>Admin Setup</h3>
+<label>Segment</label>
+<select>
+<option>Grocery</option>
+<option>Retail</option>
+<option>QSR</option>
+</select>
+<label>Territory</label>
+<input placeholder="Enter territory"/>
+</div>
+
+<div class="section">
+<h3>Prospecting</h3>
+<p>Suggested buying group:</p>
+<ul>
+<li>VP Asset Protection</li>
+<li>Director of Operations</li>
+<li>IT Director</li>
+</ul>
+<p><b>Next Action:</b> Call Director of Ops first</p>
+</div>
+
+<div class="section">
+<h3>Presentation → POC</h3>
+<label>Paste Transcript</label>
+<textarea>Customer wants ORC visibility and pilot validation.</textarea>
+<button onclick="document.getElementById('poc').style.display='block'">Generate POC</button>
+</div>
+
+<div id="poc" class="section" style="display:none">
+<h3>Generated POC</h3>
+<p><b>Site:</b> Toronto</p>
+<p><b>Duration:</b> 45 days</p>
+<p><b>Goal:</b> Validate operational visibility</p>
+</div>
+
+<div class="section">
+<h3>Legal Check</h3>
+<p>Biometrics detected → Risk: HIGH</p>
+<p>Action: Escalate before POC approval</p>
+</div>
+
+<div class="section">
+<h3>Closing</h3>
+<p>Next Step: Executive review</p>
+</div>
+
+</body>
+</html>
