@@ -3,86 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VISION — Agentic Sales Engine</title>
+<title>VISION — i3 Future Revenue System</title>
 <style>
   :root{
-    --navy:#0E4C6D;
-    --teal:#1C8A8A;
-    --aqua:#A9D6D9;
-    --light:#F4F8F9;
-    --dark:#12313F;
-    --border:#dbe4e8;
-    --muted:#5f7380;
-    --good-bg:#ecfdf5;
-    --good-bd:#bbf7d0;
-    --warn-bg:#fffbeb;
-    --warn-bd:#fde68a;
-    --risk-bg:#fff1f2;
-    --risk-bd:#fecdd3;
-    --info-bg:#ecfeff;
-    --info-bd:#a5f3fc;
+    --navy:#0E4C6D;--teal:#1C8A8A;--aqua:#A9D6D9;--light:#F4F8F9;--dark:#12313F;
+    --border:#dbe4e8;--muted:#5f7380;
+    --good-bg:#ecfdf5;--good-bd:#bbf7d0;--warn-bg:#fffbeb;--warn-bd:#fde68a;
+    --risk-bg:#fff1f2;--risk-bd:#fecdd3;--info-bg:#ecfeff;--info-bd:#a5f3fc;
   }
   *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:var(--light);
-    color:var(--dark);
-  }
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark)}
   .container{max-width:1400px;margin:0 auto;padding:24px}
-  .hero{
-    background:linear-gradient(135deg,var(--navy),var(--teal));
-    color:#fff;
-    border-radius:28px;
-    padding:28px;
-    box-shadow:0 8px 24px rgba(0,0,0,.12);
-    display:grid;
-    grid-template-columns: 1.4fr .9fr;
-    gap:20px;
-    align-items:center;
-  }
+  .hero{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:28px;padding:28px;
+    box-shadow:0 8px 24px rgba(0,0,0,.12);display:grid;grid-template-columns:1.4fr .9fr;gap:20px;align-items:center}
   .hero h1{margin:0;font-size:44px;letter-spacing:.5px}
   .hero .sub{opacity:.8;text-transform:uppercase;font-size:12px;letter-spacing:3px}
-  .hero .voice{
-    background:rgba(255,255,255,.1);
-    border-radius:22px;
-    padding:18px;
-    backdrop-filter: blur(4px);
-    position:relative;
-  }
-  .vlogo{
-    width:50px;height:50px;border-radius:16px;background:rgba(255,255,255,.18);
-    display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;margin-right:12px;
-    position:relative;
-  }
-  /* pulsing "alive" ring around the V logo */
-  .vlogo::after{
-    content:"";position:absolute;inset:-6px;border-radius:20px;
-    border:2px solid rgba(255,255,255,.45);
-    animation:vpulse 2.2s ease-out infinite;
-  }
-  @keyframes vpulse{
-    0%{transform:scale(.85);opacity:.9}
-    70%{transform:scale(1.25);opacity:0}
-    100%{opacity:0}
-  }
-  /* thinking indicator */
+  .hero .voice{background:rgba(255,255,255,.1);border-radius:22px;padding:18px;backdrop-filter:blur(4px);position:relative}
+  .vlogo{width:50px;height:50px;border-radius:16px;background:rgba(255,255,255,.18);display:inline-flex;
+    align-items:center;justify-content:center;font-weight:700;font-size:24px;margin-right:12px;position:relative}
+  .vlogo::after{content:"";position:absolute;inset:-6px;border-radius:20px;border:2px solid rgba(255,255,255,.45);animation:vpulse 2.2s ease-out infinite}
+  @keyframes vpulse{0%{transform:scale(.85);opacity:.9}70%{transform:scale(1.25);opacity:0}100%{opacity:0}}
   .think-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#d7eef0;margin-left:3px;animation:blink 1.1s infinite}
-  .think-dot:nth-child(2){animation-delay:.18s}
-  .think-dot:nth-child(3){animation-delay:.36s}
+  .think-dot:nth-child(2){animation-delay:.18s}.think-dot:nth-child(3){animation-delay:.36s}
   @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
   .voice.thinking #voiceText{opacity:.85;font-style:italic}
-  .card{
-    background:#fff;border:1px solid var(--border);border-radius:24px;
-    box-shadow:0 2px 8px rgba(0,0,0,.04)
-  }
-  .card h3{margin:0;padding:18px 18px 0 18px;font-size:20px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .card h3{margin:0;padding:18px 18px 0;font-size:20px}
   .card .body{padding:18px}
   .nav{display:flex;flex-wrap:wrap;gap:8px}
-  .btn{
-    border:1px solid var(--border);background:#fff;color:#334155;
-    padding:12px 16px;border-radius:16px;cursor:pointer;font-weight:600
-  }
+  .btn{border:1px solid var(--border);background:#fff;color:#334155;padding:12px 16px;border-radius:16px;cursor:pointer;font-weight:600}
   .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
   .btn.navy{background:var(--navy);color:#fff;border-color:var(--navy)}
   .btn.amber{background:#b45309;color:#fff;border-color:#b45309}
@@ -90,9 +39,7 @@
   .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:20px}
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .metric{
-    border:1px solid var(--border);padding:16px;border-radius:18px;background:#f8fafc;cursor:pointer;text-align:left
-  }
+  .metric{border:1px solid var(--border);padding:16px;border-radius:18px;background:#f8fafc;cursor:pointer;text-align:left}
   .metric .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;opacity:.7}
   .metric .value{font-size:22px;font-weight:700;margin-top:6px}
   .good{background:var(--good-bg);border-color:var(--good-bd)}
@@ -101,38 +48,31 @@
   .info{background:var(--info-bg);border-color:var(--info-bd)}
   .field{margin-bottom:14px}
   .field label{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
-  .field input,.field select,.field textarea{
-    width:100%;padding:12px 14px;border-radius:16px;border:1px solid #cbd5e1;font-size:14px
-  }
+  .field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:16px;border:1px solid #cbd5e1;font-size:14px}
   .field textarea{min-height:96px;resize:vertical}
-  .hidden{display:none}
   .section{margin-top:20px}
-  ul{margin:10px 0 0 20px;padding:0}
-  li{margin:8px 0}
-  .soft{
-    border:1px solid var(--border);background:#f8fafc;border-radius:20px;padding:16px
-  }
+  ul{margin:10px 0 0 20px;padding:0}li{margin:8px 0}
+  .soft{border:1px solid var(--border);background:#f8fafc;border-radius:20px;padding:16px}
   .split{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .supporter-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
   .muted{color:var(--muted)}
   .nowrap{white-space:pre-wrap}
   .pill{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--aqua);color:var(--navy);margin:0 6px 6px 0}
   .agent-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
-  /* architecture infographic */
   .archwrap{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}
   .arch-svg{width:100%;height:auto;display:block}
-  .node-rect{cursor:pointer;transition:filter .2s}
-  .node-rect:hover{filter:brightness(1.08)}
+  .node-rect{cursor:pointer;transition:filter .2s}.node-rect:hover{filter:brightness(1.08)}
   .flow{stroke-dasharray:6 8;animation:flow 1.6s linear infinite}
   @keyframes flow{to{stroke-dashoffset:-28}}
   .corepulse{animation:corepulse 2.4s ease-in-out infinite}
-  @keyframes corepulse{0%,100%{opacity:.18;r:64}50%{opacity:.05;r:88}}
+  @keyframes corepulse{0%,100%{opacity:.18;r:60}50%{opacity:.05;r:84}}
   .legend-item{display:flex;align-items:flex-start;gap:10px;margin:10px 0}
   .legend-dot{width:14px;height:14px;border-radius:5px;margin-top:3px;flex:none}
-  @media (max-width: 980px){
-    .hero{grid-template-columns:1fr}
-    .grid-2,.grid-4,.grid-3,.split,.supporter-row,.archwrap{grid-template-columns:1fr}
-  }
+  .bar{height:10px;border-radius:999px;background:#eef2f4;overflow:hidden}
+  .bar > div{height:100%}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  @media(max-width:980px){.hero{grid-template-columns:1fr}.grid-2,.grid-4,.grid-3,.split,.archwrap{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -141,14 +81,12 @@
     <div>
       <div style="display:flex;align-items:center;margin-bottom:8px">
         <div class="vlogo">V</div>
-        <div>
-          <div class="sub">i3 Host Internal Agentic Engine</div>
-          <h1>VISION</h1>
-        </div>
+        <div><div class="sub">i3 Future Revenue System</div><h1>VISION</h1></div>
       </div>
       <div style="font-size:18px;line-height:1.5;max-width:900px">
-        A multi-agent sales engine. <b>V</b> is the orchestrator — it detects the deal stage, routes the rep to the right
-        specialist agent, enforces process, protects company knowledge, and moves deals faster from lead to close.
+        A closed-loop, AI-driven revenue engine. <b>V</b> is the orchestrator — it captures how top performers sell,
+        standardizes it, routes each rep to the right agent by stage, verifies real activity, and feeds results back.
+        Built to push i3 beyond <b>$50M+ by 2028</b> by raising output per rep, not headcount.
       </div>
     </div>
     <div class="voice" id="voicePanel">
@@ -159,90 +97,64 @@
     </div>
   </div>
 
-  <div class="card section">
-    <h3>Navigation</h3>
-    <div class="body">
-      <div class="nav" id="nav"></div>
-    </div>
-  </div>
-
+  <div class="card section"><h3>Navigation</h3><div class="body"><div class="nav" id="nav"></div></div></div>
   <div id="content"></div>
 </div>
 
 <script>
 const state = {
-  stage: "Dashboard",
-  entryPoint: "New hire",
-  admin: {
-    employee:"Avery Chen", role:"Business Development Manager", segment:"Grocery",
-    territory:"Quebec and Atlantic Canada", annualGoal:"$4.5M revenue",
-    manager:"David Crook", responsibilities:"Drive pipeline, run presentations, move qualified accounts into POC.",
-    linkedin:"linkedin.com/in/averychen"
-  },
-  deal: {
-    repName:"Avery Chen", account:"Metro Quebec Pilot", segment:"Grocery", region:"Quebec, Canada",
-    objective:"Shorten sales cycle and validate privacy readiness for a retail pilot.",
-    monthlyGoal:"$375K", commitments:"3 presentations, 1 POC, 8 new prospect meetings",
-    pipeline:"$1.2M active", orders:"$180K booked"
-  },
-  onboarding: {
-    experience:"New Hire", trainingWeek:"Week 2", mentorsMet:"2", confidence:"6",
-    learned:"Product positioning, grocery pain points, and demo flow.",
-    challenge:"Linking solution features to real operator outcomes.",
-    linkedinAssessment:"Needs stronger point of view on grocery, fewer generic posts, more proof and segment relevance."
-  },
-  prospecting: {
-    targetProblem:"ORC, shrink, and limited store visibility",
+  stage:"Dashboard", entryPoint:"New hire",
+  rep:{ name:"Avery Chen", role:"Business Development Manager", region:"Quebec & Atlantic Canada",
+        segment:"Grocery", experience:"New Hire", manager:"David Crook", start:"2025-06-06" },
+  deal:{ segment:"Grocery", monthlyGoal:"$375K", commitments:"3 presentations, 1 POC, 8 prospect meetings",
+         pipeline:"$1.2M active", orders:"$180K booked" },
+  onboarding:{ trainingWeek:"Week 2", mentorsMet:"2", confidence:"6",
+    modulesDone:["Sales Mastery: Market Shift & Go-to-Market","Sales Operations: Salesforce, Quoting, Forecasting, DocuSign"],
+    learned:"Product positioning, grocery pain points, demo flow.",
+    challenge:"Linking solution features to real operator outcomes." },
+  prospecting:{ targetProblem:"ORC, shrink, and limited store visibility",
     intentSignals:"Visited retail safety page, opened two emails, viewed AI analytics deck",
     outreachStyle:"Insight-led",
-    nextDayAction:"Call Director of Operations first, send tailored note to VP Asset Protection, and route social proof to IT Director."
-  },
-  presentation: {
-    audience:"VP AP, Director of Ops, IT Manager",
-    meetingGoal:"Get agreement for a scoped pilot and executive walkthrough",
+    nextDayAction:"Call Director of Operations first, send tailored note to VP Asset Protection, route social proof to IT Director." },
+  verify:{ emailsSent:18, emailsClaimed:20, callsLogged:9, callsClaimed:14, meetingsHeld:3, linkedin:11 },
+  presentation:{ audience:"VP AP, Director of Ops, IT Manager", manager:"David Crook (joining)",
+    meetingGoal:"Agreement for a scoped pilot and executive walkthrough",
     objections:"Budget, privacy concerns, integration effort",
-    transcript:"Customer said they want fewer disconnected systems, stronger ORC visibility, and a pilot that proves value before rollout. IT wants clear scope. Operations wants reporting that managers can actually use."
-  },
-  poc: {
-    site:"Toronto terminal", successMetrics:"Incident capture, measurable safety insights, operator adoption",
-    duration:"45 days", blockers:"Need exact scope and approved validation criteria",
-    aiTools:["Facial Recognition / Watchlist","People Counting & Analytics"],
-    supporters:[
-      {name:"Chris Lytwtn", title:"IT Director", email:"chris@example.com"},
-      {name:"Dana Brooks", title:"Operations Leader", email:"dana@example.com"}
-    ]
-  },
-  legal: {
-    jurisdiction:"Quebec, Canada", purpose:"Loss prevention and incident investigation",
-    identifiesPeople:"Yes", biometrics:"Yes", profiling:"Potentially",
-    signage:"Needs update", dataResidency:"Canada cloud with some U.S. support access",
-    privacyOfficer:"Unknown", evidence:"Shrink data, repeat incidents, and internal case logs"
-  },
-  closing: {
-    commercialGoal:"Move from pilot to phased rollout",
-    pricePosition:"Value and scalability",
-    competitiveRisk:"High cost incumbent and privacy hesitation",
-    nextCommitment:"Executive review and commercial checkpoint"
-  },
-  voice: "Good morning. I reviewed your pipeline and built your highest priority actions for today."
+    transcript:"Customer wants fewer disconnected systems, stronger ORC visibility, and a pilot that proves value before rollout. IT wants clear scope. Operations wants reporting managers can use." },
+  poc:{ account:"Gardewine", site:"Toronto terminal", duration:"45 days",
+    objective:"Replace/enhance a basic VMS, prove operational value at a scalable price, validate health & safety data.",
+    competitor:"Protex AI (high cost, hard to scale)", installer:"SI Alarms",
+    successMetrics:"Quantifiable safety incidents captured, clear leadership reporting, lower incident frequency",
+    phase2:"Forklift behavior, speeding, advanced safety analytics",
+    blockers:"Pricing pending site walkthrough; confirm scope and validation criteria",
+    aiTools:["Behavioral / Loitering Detection","People Counting & Analytics"],
+    supporters:[{name:"Chris Lytwtn",title:"IT Director",email:"chris@gardewine.com"}] },
+  legal:{ jurisdiction:"Quebec, Canada", biometrics:"Yes", profiling:"Potentially", signage:"Needs update" },
+  closing:{ commercialGoal:"Move from pilot to phased, company-wide rollout",
+    pricePosition:"Operational value at a price point that enables company-wide adoption (vs high-cost incumbent)",
+    competitiveRisk:"High-cost incumbent (Protex AI) and privacy hesitation",
+    nextCommitment:"Executive review and commercial checkpoint" },
+  voice:"Good morning. I reviewed your pipeline and built your highest priority actions for today."
 };
 
-const stages = ["Dashboard","Architecture","Admin Setup","Onboarding","Prospecting","Presentation","POC","Legal & Privacy","Closing"];
-const segments = ["Grocery","Retail","QSR","Commercial","Schools","Integrator","Healthcare"];
+const stages=["Dashboard","Architecture","Onboarding","Prospecting","Verification","Presentation","POC","Legal & Privacy","Closing","Leadership"];
+const segments=["Grocery","Retail","QSR","Commercial","Schools","Integrator","Healthcare"];
 
-/* Named agents in the V stack. Each one owns a stage and routes the rep there. */
-const agents = [
-  {code:"V-Start",   name:"Onboarding",        stage:"Onboarding",      color:"#1C8A8A", desc:"Turns HR data, role, and segment into a rep profile, training path, and readiness score."},
-  {code:"V-Coach",   name:"Training & Exec",   stage:"Onboarding",      color:"#0E4C6D", desc:"Pushes i3 training, monitors call transcripts, scores performance, reinforces best practices."},
-  {code:"V-Target",  name:"Lead Intelligence", stage:"Prospecting",     color:"#2563eb", desc:"ZoomInfo / 6sense / Salesforce into prioritized accounts, buying-group map, intent signals."},
-  {code:"V-Reach",   name:"Outreach",          stage:"Prospecting",     color:"#7c3aed", desc:"Generates persona-aware emails, LinkedIn notes, and call scripts by segment."},
-  {code:"V-Present", name:"Presentation",      stage:"Presentation",    color:"#b45309", desc:"Builds the deck, preps objections and positioning, captures the meeting transcript."},
-  {code:"V-Prove",   name:"POC Builder",       stage:"POC",             color:"#166534", desc:"Turns transcript into a scoped POC: success criteria, timeline, ROI, PM handoff."},
-  {code:"V-Guard",   name:"Privacy & Legal",   stage:"Legal & Privacy", color:"#be123c", desc:"Screens the POC against Bill 25, GDPR, PIPEDA, BIPA, CCPA. Triggers signage + documentation."},
-  {code:"V-Close",   name:"Commercial Close",  stage:"Closing",         color:"#0f766e", desc:"Pricing strategy, contract language, and negotiation positioning into a clean close."}
+/* Agents = the i3 workflow + the four engines from the Agentic Sales blueprint */
+const agents=[
+  {code:"V-Start",  name:"HR Onboarding",        stage:"Onboarding",     color:"#1C8A8A", engine:"Sales Execution Agent", desc:"HR data → rep profile, permissions, training path, segment assignment."},
+  {code:"V-Coach",  name:"Training & Readiness", stage:"Onboarding",     color:"#0E4C6D", engine:"Sales Execution Agent", desc:"i3 Live / i3host training, real modules, readiness & certification, 45-day ramp."},
+  {code:"V-Target", name:"Account Intelligence", stage:"Prospecting",    color:"#2563eb", engine:"Lead Intelligence Engine", desc:"6sense / SixthSense / Salesforce → account map, full buying group, role-based pain points."},
+  {code:"V-Reach",  name:"Guided Outreach",      stage:"Prospecting",    color:"#7c3aed", engine:"Sales Execution Agent", desc:"Drafts email / LinkedIn / call openings, validates contact data, sets the action queue."},
+  {code:"V-Verify", name:"Proof of Work",        stage:"Verification",   color:"#0891b2", engine:"Performance Intelligence", desc:"Verifies real activity from email, phone, and mobile — not what the rep says happened."},
+  {code:"V-Present",name:"Presentation",         stage:"Presentation",   color:"#b45309", engine:"Sales Execution Agent", desc:"Preps deck, objections, positioning, pulls the manager in, captures transcript."},
+  {code:"V-Prove",  name:"POC Builder",          stage:"POC",            color:"#166534", engine:"Sales Execution Agent", desc:"Transcript → scoped POC with success criteria, timeline, PM handoff (Gardewine model)."},
+  {code:"V-Guard",  name:"Privacy & Legal",      stage:"Legal & Privacy",color:"#be123c", engine:"Compliance Agent", desc:"Screens the POC against Q25, GDPR, PIPEDA, BIPA. Triggers signage + documentation."},
+  {code:"V-Close",  name:"Commercial Close",     stage:"Closing",        color:"#0f766e", engine:"Sales Execution Agent", desc:"Price position vs incumbent, contract language, commitment to phased rollout."},
+  {code:"V-Score",  name:"Performance & Leadership",stage:"Leadership",  color:"#9333ea", engine:"Performance & Leadership Engine", desc:"Rep scoring, segmentation, KPI funnel, expert-intervention triggers, forecast."}
 ];
 
-const personaMap = {
+const personaMap={
   Grocery:["VP Asset Protection","Director of Operations","IT Director","Loss Prevention Manager","Store Operations Leader"],
   Retail:["VP Asset Protection","Director of Retail Operations","IT Director","Loss Prevention Director","Regional Manager"],
   QSR:["VP Operations","Director of Loss Prevention","IT Director","Franchise Operations Leader","Facilities Leader"],
@@ -251,552 +163,401 @@ const personaMap = {
   Integrator:["Owner","VP Sales","Technical Director","Solutions Architect","Operations Lead"],
   Healthcare:["Security Director","Director of Operations","IT Director","Compliance Leader","Facilities Director"]
 };
+/* role → which story i3 leads with (from the blueprint's messaging strategy) */
+const roleStory={
+  "IT":"Integration and security story — clean scope, data residency, cybersecurity.",
+  "Operations":"Efficiency and cost-reduction story — reporting managers actually use.",
+  "Executive":"ROI and business-value story — incident reduction, scalable rollout.",
+  "Asset Protection":"Shrink/ORC reduction and provable loss-prevention outcomes."
+};
+function storyFor(persona){
+  const p=persona.toLowerCase();
+  if(p.includes("it")) return roleStory.IT;
+  if(p.includes("oper")) return roleStory.Operations;
+  if(p.includes("vp")||p.includes("superintendent")||p.includes("owner")||p.includes("director of retail")) return roleStory.Executive;
+  if(p.includes("asset")||p.includes("loss")) return roleStory["Asset Protection"];
+  return roleStory.Executive;
+}
 
-/* i3 AI tooling that can trigger privacy review when selected in a POC */
-const aiToolCatalog = [
-  {name:"Facial Recognition / Watchlist", biometric:true,  identifies:true,  profiling:true},
-  {name:"License Plate Recognition (LPR)", biometric:false, identifies:true,  profiling:true},
-  {name:"People Counting & Analytics",     biometric:false, identifies:false, profiling:false},
-  {name:"Heat Mapping / Dwell Time",       biometric:false, identifies:false, profiling:true},
-  {name:"Age / Gender Estimation",         biometric:true,  identifies:false, profiling:true},
-  {name:"Behavioral / Loitering Detection",biometric:false, identifies:false, profiling:true},
-  {name:"Standard Video Recording",        biometric:false, identifies:true,  profiling:false}
+/* real onboarding training modules (from the 30/60/90 schedule) */
+const trainingModules=[
+  "Sales Mastery: Market Shift & i3 Go-to-Market Strategy",
+  "Sales Operations: Salesforce, Quoting Tool, Expense, Forecasting, DocuSign",
+  "i3 Technology Core & Sales Process (Vy, Hal, Paul L, George, Brent)",
+  "i3 Technology Center: Hardware, Solutions (Safety & Security, AP Tools, Operational Insight, Predictive Analytics)",
+  "Pricing & Kits (Channel Account)",
+  "Production Training: build your own server (Kevin)",
+  "Strategic Thinking: craft solutions that lead to bigger deals",
+  "Marketing & social media as a lead source (Edward Chan)",
+  "Building a VAR network & using AI tools to optimize the day (Vy)",
+  "Growing retail clients & polishing presentation skills (Vy)"
 ];
 
-/* ---------- voice + "thinking" ---------- */
-let thinkTimer = null;
-function setVoice(text){
-  state.voice = text;
-  const el = document.getElementById('voiceText');
-  document.getElementById('voicePanel').classList.remove('thinking');
-  el.innerText = `“${text}”`;
+/* ---------- voice + thinking ---------- */
+let thinkTimer=null;
+function setVoice(t){state.voice=t;document.getElementById('voicePanel').classList.remove('thinking');document.getElementById('voiceText').innerText=`“${t}”`;}
+function think(t){
+  const panel=document.getElementById('voicePanel'),el=document.getElementById('voiceText');
+  panel.classList.add('thinking');clearInterval(thinkTimer);let n=0;const base="V is analyzing the inputs";
+  el.innerHTML=base+' <span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span>';
+  thinkTimer=setInterval(()=>{n=(n+1)%4;el.innerHTML=base+'.'.repeat(n)+' <span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span>';},260);
+  setTimeout(()=>{clearInterval(thinkTimer);setVoice(t);},1300);
 }
-/* Makes V appear to reason before answering. */
-function think(text){
-  const panel = document.getElementById('voicePanel');
-  const el = document.getElementById('voiceText');
-  panel.classList.add('thinking');
-  clearInterval(thinkTimer);
-  let n = 0;
-  const base = "V is analyzing the inputs";
-  el.innerHTML = base + ' <span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span>';
-  thinkTimer = setInterval(()=>{ n=(n+1)%4; el.innerHTML = base + '.'.repeat(n) + ' <span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span>'; }, 260);
-  setTimeout(()=>{ clearInterval(thinkTimer); setVoice(text); }, 1300);
-}
+function go(stage,voice){state.stage=stage;render();if(voice)think(voice);}
+function personas(){return personaMap[state.deal.segment]||[];}
 
-function go(stage, voice){ state.stage = stage; render(); if(voice){ think(voice); } }
-
-function personas(){ return personaMap[state.deal.segment] || []; }
-
-function onboardingResult(){
-  const c = Number(state.onboarding.confidence||0);
-  const readiness = c >= 8 ? "Ready for live calls" : c >= 6 ? "Needs guided reps" : "Needs more structure";
-  const actions = [];
-  if(Number(state.onboarding.mentorsMet)<3) actions.push("Schedule more mentor shadowing before independent outreach.");
-  if(c<7) actions.push("Assign role-play session with manager and product specialist.");
-  actions.push("Set meeting with marketing to tighten LinkedIn presence and segment relevance.");
-  actions.push("Recommend associations and social channels aligned to the assigned market.");
-  return {readiness, actions};
-}
-
-function linkedinPlan(){
-  return [
-    `Rewrite headline so it clearly supports the ${state.admin.segment} segment and territory.`,
-    "Add 3 proof points tied to real operator or retailer outcomes.",
-    "Pin one post that explains i3's practical market value, not just features.",
-    "Meet with marketing to create a simple 30-day social relevance plan.",
-    `Join associations, groups, and events where ${state.admin.segment} buyers already spend time.`
-  ];
-}
-
-function prospectingResult(){
-  const signals = state.prospecting.intentSignals.toLowerCase();
-  const score = ["visited","opened","viewed","downloaded","demo"].filter(x=>signals.includes(x)).length*18+28;
-  const intensity = score >= 80 ? "Hot" : score >= 60 ? "Warm" : "Cold";
-  const p = personas();
-  const message = intensity === "Hot"
-    ? `The account is showing strong intent. Go multi-threaded. Start with ${p[0] || "the lead contact"}, then map the buying group and assign follow-up by role.`
-    : intensity === "Warm"
-    ? `Keep momentum with a role-specific follow-up sequence and one useful insight per persona.`
-    : `This account needs nurture and more proof before direct push.`;
-  return {score: Math.min(score,96), intensity, message};
-}
-
-function generatedPOC(){
-  const names = state.poc.supporters.filter(s=>s.name && s.title).map(s=>`${s.name}, ${s.title}`).join("; ");
-  const tools = (state.poc.aiTools||[]).join("; ") || "None selected";
-  return `POC Summary
-Site: ${state.poc.site}
-i3 AI Tools in Scope: ${tools}
-Objective: Validate ${state.presentation.transcript.includes("ORC") ? "visibility and operational value" : "solution fit"} through a ${state.poc.duration} pilot.
-Customer Drivers: ${state.presentation.transcript}
-Success Metrics: ${state.poc.successMetrics}
-Support Team: ${names || "Add named supporters before launch"}
-Blockers: ${state.poc.blockers}
-Privacy Gate: V-Guard review ${pocTriggersPrivacy() ? "REQUIRED before launch (sensitive AI tooling in scope)" : "standard"}.
-Recommended Next Step: handoff to PM agent to formalize scope, timeline, cybersecurity forms, and stakeholder approvals.`;
-}
-
-/* Does the selected AI tooling trip a privacy review? */
-function pocTriggersPrivacy(){
-  return (state.poc.aiTools||[]).some(t=>{
-    const c = aiToolCatalog.find(x=>x.name===t);
-    return c && (c.biometric || c.identifies || c.profiling);
-  });
-}
-
-/* ---------- V-Guard legal engine: multi-jurisdiction ---------- */
-const jurisdictions = [
-  "Quebec, Canada","Canada (outside Quebec)","European Union","United Kingdom",
-  "California, USA","Illinois, USA","United States (other)"
-];
-function lawsFor(j){
-  const m = {
-    "Quebec, Canada":["Quebec Law 25 (Bill 25)","PIPEDA"],
-    "Canada (outside Quebec)":["PIPEDA"],
-    "European Union":["GDPR"],
-    "United Kingdom":["UK GDPR","Data Protection Act 2018"],
-    "California, USA":["CCPA / CPRA"],
-    "Illinois, USA":["BIPA","Illinois state law"],
-    "United States (other)":["State-specific privacy laws"]
-  };
-  return m[j] || [];
-}
-
-function riskResult(){
-  let score = 0;
-  const nextSteps = [], warnings = [], docs = [];
-  const l = state.legal;
-  const laws = lawsFor(l.jurisdiction);
-
-  // pull signals from the POC tooling too, so the legal agent reacts to what was scoped
-  const toolBiometric = (state.poc.aiTools||[]).some(t=>{const c=aiToolCatalog.find(x=>x.name===t);return c&&c.biometric;});
-  const biometrics = l.biometrics === "Yes" || toolBiometric;
-
-  if(l.identifiesPeople === "Yes"){ score += 2; docs.push("Privacy notice describing what personal data is captured and why."); }
-
-  if(biometrics){
-    score += 3;
-    warnings.push("Biometric processing detected" + (toolBiometric ? " (triggered by the AI tools selected in the POC)." : "."));
-    nextSteps.push("Confirm whether biometric processing is actually necessary for the stated purpose.");
-    if(l.jurisdiction.includes("Quebec")){
-      score += 1;
-      nextSteps.push("Quebec Law 25: disclose any biometric database to the CAI at least 60 days before bringing it into service, and obtain express consent.");
-      docs.push("CAI biometric disclosure form (Law 25).");
-    }
-    if(l.jurisdiction.includes("Illinois")){
-      score += 2;
-      warnings.push("Illinois BIPA requires written consent before collecting biometric identifiers.");
-      nextSteps.push("BIPA: obtain written release, publish a retention/destruction schedule, and never sell biometric data.");
-      docs.push("BIPA written consent + retention schedule.");
-    }
-    if(l.jurisdiction.includes("European")||l.jurisdiction.includes("Kingdom")){
-      score += 1;
-      warnings.push("Biometrics are special-category data under GDPR Article 9.");
-      nextSteps.push("GDPR: complete a Data Protection Impact Assessment (DPIA) and identify an Article 9 lawful basis.");
-      docs.push("DPIA (GDPR Art. 35).");
-    }
-  }
-
-  if(l.profiling === "Potentially" || l.profiling === "Yes"){
-    score += 2;
-    warnings.push("Profiling risk exists because data sets are being combined.");
-    nextSteps.push("Run the four-part necessity and proportionality test (necessary, effective, proportionate, least-intrusive) on this exact use case.");
-  }
-
-  if(l.signage !== "Adequate"){
-    score += 1;
-    nextSteps.push("Generate updated on-site signage and transparency language before launch.");
-    docs.push("Customer-facing signage at every monitored entrance/zone.");
-  }
-
-  if(l.dataResidency.toLowerCase().includes("u.s.") || l.dataResidency.toLowerCase().includes("us ")){
-    score += 1;
-    warnings.push("Cross-border support access needs review.");
-    nextSteps.push("Review cross-border data access and document support roles.");
-    if(l.jurisdiction.includes("European")||l.jurisdiction.includes("Kingdom")){
-      nextSteps.push("GDPR: put Standard Contractual Clauses (SCCs) in place for EU/UK to U.S. transfers.");
-      docs.push("Standard Contractual Clauses (SCCs).");
-    }
-  }
-
-  if(l.privacyOfficer === "Unknown" || l.privacyOfficer === "No"){
-    nextSteps.push("Confirm a named privacy owner before the POC starts.");
-  }
-
-  nextSteps.push("Store all notes, stakeholders, and legal answers back to Salesforce and i3-owned records.");
-
-  const level = score >= 7 ? "High" : score >= 4 ? "Medium" : "Low";
-  const decision = level === "High" ? "Escalate before POC approval" : level === "Medium" ? "Proceed with privacy checkpoint" : "Proceed with standard controls";
-  return {score,laws,nextSteps,warnings,docs,level,decision};
-}
-
-function metric(label,value,tone='',click=''){
-  return `<button class="metric ${tone}" ${click?`onclick="${click}"`:''}>
-    <div class="label">${label}</div><div class="value">${value}</div>
-  </button>`;
-}
-
-function inputField(label, key, value, section, type='text'){
-  if(type==='textarea'){
-    return `<div class="field"><label>${label}</label><textarea onchange="state.${section}.${key}=this.value;render();">${value||''}</textarea></div>`;
-  }
-  if(Array.isArray(type)){
-    return `<div class="field"><label>${label}</label><select onchange="state.${section}.${key}=this.value;${section==='admin'&&key==='segment'?'state.deal.segment=this.value;':''}render();">${type.map(o=>`<option ${o===value?'selected':''}>${o}</option>`).join('')}</select></div>`;
-  }
+/* ---------- helpers ---------- */
+function metric(label,value,tone='',click=''){return `<button class="metric ${tone}" ${click?`onclick="${click}"`:''}><div class="label">${label}</div><div class="value">${value}</div></button>`;}
+function inputField(label,key,value,section,type='text'){
+  if(type==='textarea')return `<div class="field"><label>${label}</label><textarea onchange="state.${section}.${key}=this.value;render();">${value||''}</textarea></div>`;
+  if(Array.isArray(type))return `<div class="field"><label>${label}</label><select onchange="state.${section}.${key}=this.value;${section==='rep'&&key==='segment'?'state.deal.segment=this.value;':''}render();">${type.map(o=>`<option ${o===value?'selected':''}>${o}</option>`).join('')}</select></div>`;
   return `<div class="field"><label>${label}</label><input value="${(value||'').replace(/"/g,'&quot;')}" onchange="state.${section}.${key}=this.value;render();" /></div>`;
 }
+function renderNav(){document.getElementById('nav').innerHTML=stages.map(s=>`<button class="btn ${state.stage===s?'primary':''}" onclick="state.stage='${s}';render();">${s}</button>`).join('');}
 
-function renderNav(){
-  const nav = document.getElementById('nav');
-  nav.innerHTML = stages.map(s=>`<button class="btn ${state.stage===s?'primary':''}" onclick="state.stage='${s}';render();">${s}</button>`).join('');
+/* ---------- engines ---------- */
+function readiness(){
+  const c=Number(state.onboarding.confidence||0);
+  const done=(state.onboarding.modulesDone||[]).length;
+  const lvl=(c>=8&&done>=4)?"Ready for live calls":(c>=6?"Needs guided reps":"Needs more structure");
+  const ramp=c>=8?"15–30 days (top-performer track)":c>=6?"30–45 days (i3 target)":"45+ days — extra coaching";
+  return {lvl,ramp,done};
+}
+function prospect(){
+  const s=state.prospecting.intentSignals.toLowerCase();
+  const score=Math.min(["visited","opened","viewed","downloaded","demo"].filter(x=>s.includes(x)).length*18+28,96);
+  const intensity=score>=80?"Hot":score>=60?"Warm":"Cold";
+  return {score,intensity};
+}
+function verifyGap(){
+  const v=state.verify;
+  const emailGap=v.emailsClaimed-v.emailsSent, callGap=v.callsClaimed-v.callsLogged;
+  const integrity=Math.max(0,Math.round(100-(emailGap*4+callGap*6)));
+  const status=integrity>=90?"Verified":integrity>=75?"Minor variance":"Needs review";
+  return {emailGap,callGap,integrity,status};
+}
+function pocTriggersPrivacy(){
+  const sens=["Facial Recognition / Watchlist","Age / Gender Estimation","License Plate Recognition (LPR)","Behavioral / Loitering Detection","Heat Mapping / Dwell Time"];
+  return (state.poc.aiTools||[]).some(t=>sens.includes(t));
+}
+const aiToolCatalog=["Facial Recognition / Watchlist","Age / Gender Estimation","License Plate Recognition (LPR)","Behavioral / Loitering Detection","Heat Mapping / Dwell Time","People Counting & Analytics","Standard Video Recording"];
+function generatedPOC(){
+  const names=state.poc.supporters.filter(s=>s.name).map(s=>`${s.name}, ${s.title}`).join("; ");
+  return `POC Summary — ${state.poc.account}
+Site: ${state.poc.site}   Duration: ${state.poc.duration}
+Objective: ${state.poc.objective}
+Competing solution: ${state.poc.competitor}
+i3 AI Tools in scope: ${(state.poc.aiTools||[]).join("; ")||"None selected"}
+Success metrics: ${state.poc.successMetrics}
+Phase 2 (after value proven): ${state.poc.phase2}
+Support team: ${names||"Add named supporters"}   Installer: ${state.poc.installer}
+Blockers: ${state.poc.blockers}
+Privacy gate: V-Guard review ${pocTriggersPrivacy()?"REQUIRED (sensitive AI tooling in scope)":"standard"}.
+Next step: PM handoff to formalize scope, timeline, cybersecurity forms, and stakeholder approvals.`;
 }
 
 /* ---------- architecture infographic ---------- */
 function archSVG(){
-  const cx=400, cy=270, rx=205, ry=180;
-  const n = agents.length;
-  let lines='', nodes='';
+  const cx=400,cy=300,rx=300,ry=235,n=agents.length;let lines='',nodes='';
   agents.forEach((a,i)=>{
-    const ang = (-90 + i*(360/n)) * Math.PI/180;
-    const x = cx + rx*Math.cos(ang);
-    const y = cy + ry*Math.sin(ang);
-    // data-flow line back to the core
-    lines += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(0)}" y2="${y.toFixed(0)}" stroke="${a.color}" stroke-width="2.5" opacity=".55" class="flow"></line>`;
-    // node
-    const w=140,h=52;
-    nodes += `<g class="node-rect" onclick="go('${a.stage}','Routing you to ${a.code}. ${a.desc.replace(/'/g,"")}')">
-        <rect x="${(x-w/2).toFixed(0)}" y="${(y-h/2).toFixed(0)}" rx="14" width="${w}" height="${h}" fill="#ffffff" stroke="${a.color}" stroke-width="2"></rect>
-        <text x="${x.toFixed(0)}" y="${(y-6).toFixed(0)}" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="${a.color}">${a.code}</text>
-        <text x="${x.toFixed(0)}" y="${(y+12).toFixed(0)}" text-anchor="middle" font-family="Arial" font-size="11" fill="#5f7380">${a.name}</text>
-      </g>`;
+    const ang=(-90+i*(360/n))*Math.PI/180,x=cx+rx*Math.cos(ang),y=cy+ry*Math.sin(ang),w=132,h=50;
+    lines+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(0)}" y2="${y.toFixed(0)}" stroke="${a.color}" stroke-width="2.5" opacity=".5" class="flow"></line>`;
+    nodes+=`<g class="node-rect" onclick="go('${a.stage}','Routing you to ${a.code}. ${a.desc.replace(/'/g,"")}')">
+      <rect x="${(x-w/2).toFixed(0)}" y="${(y-h/2).toFixed(0)}" rx="13" width="${w}" height="${h}" fill="#fff" stroke="${a.color}" stroke-width="2"></rect>
+      <text x="${x.toFixed(0)}" y="${(y-6).toFixed(0)}" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="${a.color}">${a.code}</text>
+      <text x="${x.toFixed(0)}" y="${(y+11).toFixed(0)}" text-anchor="middle" font-family="Arial" font-size="10" fill="#5f7380">${a.name}</text></g>`;
   });
-  return `<svg viewBox="0 0 800 560" class="arch-svg" role="img" aria-label="VISION agent architecture">
-    <defs>
-      <radialGradient id="core" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#1C8A8A"/><stop offset="100%" stop-color="#0E4C6D"/>
-      </radialGradient>
-    </defs>
-    ${lines}
-    <circle cx="${cx}" cy="${cy}" r="64" fill="#1C8A8A" class="corepulse"></circle>
-    ${nodes}
+  return `<svg viewBox="0 0 800 620" class="arch-svg" role="img" aria-label="VISION architecture">
+    <defs><radialGradient id="core" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1C8A8A"/><stop offset="100%" stop-color="#0E4C6D"/></radialGradient></defs>
+    ${lines}<circle cx="${cx}" cy="${cy}" r="60" fill="#1C8A8A" class="corepulse"></circle>${nodes}
     <g class="node-rect" onclick="go('Dashboard','I am V, the orchestrator. I detect deal stage and route to the right agent.')">
-      <circle cx="${cx}" cy="${cy}" r="52" fill="url(#core)"></circle>
-      <text x="${cx}" y="${cy-2}" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#fff">V</text>
-      <text x="${cx}" y="${cy+18}" text-anchor="middle" font-family="Arial" font-size="11" fill="#d7eef0">ORCHESTRATOR</text>
-    </g>
-  </svg>`;
+      <circle cx="${cx}" cy="${cy}" r="50" fill="url(#core)"></circle>
+      <text x="${cx}" y="${cy-2}" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#fff">V</text>
+      <text x="${cx}" y="${cy+17}" text-anchor="middle" font-family="Arial" font-size="10" fill="#d7eef0">ORCHESTRATOR</text></g></svg>`;
 }
 
+/* ---------- render ---------- */
 function render(){
   renderNav();
-  if(!document.getElementById('voicePanel').classList.contains('thinking')){
-    document.getElementById('voiceText').innerText = `“${state.voice}”`;
-  }
-  const content = document.getElementById('content');
+  if(!document.getElementById('voicePanel').classList.contains('thinking'))document.getElementById('voiceText').innerText=`“${state.voice}”`;
+  const c=document.getElementById('content');
 
-  if(state.stage === "Dashboard"){
-    content.innerHTML = `
-      <div class="grid-2">
-        <div>
-          <div class="card section">
-            <h3>Salesperson dashboard</h3>
-            <div class="body">
-              <div class="field" style="max-width:380px">
-                <label>Entry point — V routes from wherever the rep starts</label>
-                <select onchange="state.entryPoint=this.value;routeEntry();">
-                  ${["New hire","Existing rep","Advanced rep (POC)","Partner / Integrator"].map(o=>`<option ${o===state.entryPoint?'selected':''}>${o}</option>`).join('')}
-                </select>
-              </div>
-              <div class="grid-4">
-                ${metric('Goal this month',state.deal.monthlyGoal,'info',"think('Your monthly goal is behind pace. Start with the accounts showing the highest buying intent today.')")}
-                ${metric('Commitments',state.deal.commitments,'good',"state.stage='Presentation';render()")}
-                ${metric('Pipeline',state.deal.pipeline,'',"state.stage='Prospecting';render()")}
-                ${metric('Orders booked',state.deal.orders,'warn',"state.stage='Closing';render()")}
-              </div>
-              <div class="grid-3 section">
-                ${metric("Today's leads","12",'',"go('Prospecting','I ranked your leads by intent and suggested the best buying group to target first.')")}
-                ${metric("Active presentations","4",'',"go('Presentation','I prepared your presentation path and the transcript-to-POC workflow.')")}
-                ${metric("Active POCs","2",'',"go('POC','I can convert presentation notes into a POC plan and prepare the PM handoff.')")}
-              </div>
-            </div>
-          </div>
-          <div class="card section">
-            <h3>What VISION says to do today</h3>
-            <div class="body">
-              <ul>
-                <li>Call 3 highest-intent accounts before noon</li>
-                <li>Advance 1 presentation to a scoped POC</li>
-                <li>Run V-Guard privacy review on 1 active deal</li>
-                <li>Complete weekly reflection and update next-day plan</li>
-              </ul>
-            </div>
-          </div>
+  if(state.stage==="Dashboard"){
+    c.innerHTML=`<div class="grid-2"><div>
+      <div class="card section"><h3>Salesperson dashboard</h3><div class="body">
+        <div class="field" style="max-width:380px"><label>Entry point — V routes from wherever the rep starts</label>
+          <select onchange="state.entryPoint=this.value;routeEntry();">${["New hire","Existing rep","Advanced rep (POC)","Partner / Integrator"].map(o=>`<option ${o===state.entryPoint?'selected':''}>${o}</option>`).join('')}</select></div>
+        <div class="grid-4">
+          ${metric('Goal this month',state.deal.monthlyGoal,'info',"think('Your monthly goal is behind pace. Start with the accounts showing the highest buying intent today.')")}
+          ${metric('Commitments',state.deal.commitments,'good',"state.stage='Presentation';render()")}
+          ${metric('Pipeline',state.deal.pipeline,'',"state.stage='Prospecting';render()")}
+          ${metric('Orders booked',state.deal.orders,'warn',"state.stage='Closing';render()")}
         </div>
-        <div>
-          <div class="card section">
-            <h3>The V agent stack</h3>
-            <div class="body">
-              <div class="muted" style="margin-bottom:10px">V routes each deal to the right specialist. Tap any agent to open it.</div>
-              ${agents.map(a=>`<button class="metric" style="width:100%;margin-bottom:8px;border-left:5px solid ${a.color}" onclick="go('${a.stage}','Opening ${a.code}. ${a.desc.replace(/'/g,'')}')">
-                  <div class="agent-tag" style="color:${a.color}">${a.code} · ${a.name}</div>
-                  <div style="font-size:13px;color:#334155;font-weight:600">${a.desc}</div>
-                </button>`).join('')}
-            </div>
-          </div>
-          <div class="card section">
-            <h3>Company control</h3>
-            <div class="body muted">Everything entered into VISION is treated as proprietary company knowledge. The purpose is to push clean, structured information into Salesforce and i3-owned systems so no deal knowledge walks away with the rep.</div>
-          </div>
+        <div class="grid-3 section">
+          ${metric('Company target','$50M+ by 2028','info')}
+          ${metric('Your ramp model',readiness().ramp,'')}
+          ${metric('Activity integrity',verifyGap().integrity+'%',verifyGap().integrity>=90?'good':'warn',"state.stage='Verification';render()")}
         </div>
-      </div>`;
+      </div></div>
+      <div class="card section"><h3>What VISION says to do today</h3><div class="body"><ul>
+        <li>Call 3 highest-intent accounts before noon</li>
+        <li>Advance 1 presentation to a scoped POC</li>
+        <li>Run V-Guard privacy review on the Gardewine deal</li>
+        <li>Log call outcomes — V-Verify shows a gap vs claimed activity</li>
+      </ul></div></div></div>
+      <div><div class="card section"><h3>The V agent stack</h3><div class="body">
+        <div class="muted" style="margin-bottom:10px">Ten agents, one orchestrator. Tap any to open it.</div>
+        ${agents.map(a=>`<button class="metric" style="width:100%;margin-bottom:8px;border-left:5px solid ${a.color}" onclick="go('${a.stage}','Opening ${a.code}. ${a.desc.replace(/'/g,'')}')">
+          <div class="agent-tag" style="color:${a.color}">${a.code} · ${a.name} <span class="muted" style="text-transform:none;letter-spacing:0">· ${a.engine}</span></div>
+          <div style="font-size:13px;color:#334155;font-weight:600">${a.desc}</div></button>`).join('')}
+      </div></div>
+      <div class="card section"><h3>Model & control layer</h3><div class="body muted">
+        External models (OpenAI, Claude, Copilot) handle reasoning, messaging, and structured output.
+        The internal model (Llama) handles deal scoring, rep performance, and forecasting.
+        Everything entered is proprietary company knowledge, pushed to Salesforce and i3-owned systems — so no deal knowledge walks away with the rep.
+      </div></div></div></div>`;
     return;
   }
 
-  if(state.stage === "Architecture"){
-    content.innerHTML = `<div class="card section"><h3>VISION agent architecture</h3><div class="body">
-      <div class="muted" style="margin-bottom:14px">V (Vision) is the orchestrator. It detects the stage, activates the right agent, guides the action, and feeds the result back into the system — a closed loop. Click any node to jump in.</div>
-      <div class="archwrap">
-        <div class="soft">${archSVG()}</div>
-        <div>
-          <div class="soft">
-            <div style="font-weight:700;margin-bottom:6px">How the loop works</div>
-            <div class="muted" style="font-size:14px;line-height:1.5">Entry, then V detects stage, then the right agent is activated, then guidance and action, then data is fed back. Reps can enter as a new hire, an existing rep at lead stage, an advanced rep at POC, or a partner in the integrator flow.</div>
-          </div>
-          <div class="soft section">
-            <div style="font-weight:700;margin-bottom:6px">Agents</div>
-            ${agents.map(a=>`<div class="legend-item"><span class="legend-dot" style="background:${a.color}"></span><div><b>${a.code}</b> — ${a.name}<div class="muted" style="font-size:12px">${a.desc}</div></div></div>`).join('')}
-          </div>
-        </div>
-      </div>
-    </div></div>`;
+  if(state.stage==="Architecture"){
+    c.innerHTML=`<div class="card section"><h3>VISION agent architecture</h3><div class="body">
+      <div class="muted" style="margin-bottom:14px">A closed loop: entry → V detects stage → right agent activated → guidance + verified action → data fed back. Reps enter as a new hire, an existing rep at lead stage, an advanced rep at POC, or a partner in the integrator flow. Click any node.</div>
+      <div class="archwrap"><div class="soft">${archSVG()}</div><div>
+        <div class="soft"><div style="font-weight:700;margin-bottom:6px">The four engines</div>
+          <div class="muted" style="font-size:14px;line-height:1.5">Lead Intelligence (V-Target) · Sales Execution (V-Start/Coach/Reach/Present/Prove/Close) · Performance Intelligence (V-Verify) · Performance & Leadership (V-Score), with V-Guard as the compliance gate.</div></div>
+        <div class="soft section"><div style="font-weight:700;margin-bottom:6px">Agents</div>
+          ${agents.map(a=>`<div class="legend-item"><span class="legend-dot" style="background:${a.color}"></span><div><b>${a.code}</b> — ${a.name}<div class="muted" style="font-size:12px">${a.desc}</div></div></div>`).join('')}</div>
+      </div></div></div></div>`;
     return;
   }
 
-  if(state.stage === "Admin Setup"){
-    content.innerHTML = `<div class="card section"><h3>Administrator setup for a new salesperson <span class="agent-tag">V-Start</span></h3><div class="body">
-      <div class="split">
-        ${inputField('Employee','employee',state.admin.employee,'admin')}
-        ${inputField('Role','role',state.admin.role,'admin')}
-        ${inputField('Segment','segment',state.admin.segment,'admin',segments)}
-        ${inputField('Territory','territory',state.admin.territory,'admin')}
-        ${inputField('Annual goal','annualGoal',state.admin.annualGoal,'admin')}
-        ${inputField('Manager','manager',state.admin.manager,'admin')}
-      </div>
-      <div class="split section">
-        ${inputField('Responsibilities','responsibilities',state.admin.responsibilities,'admin','textarea')}
-        ${inputField('LinkedIn profile','linkedin',state.admin.linkedin,'admin')}
-      </div>
-      <div class="grid-2 section">
-        ${metric('System result','Workflow generated','good',"think('Administrator setup is complete. I can now guide this rep daily based on segment, territory, and goals.')")}
-        ${metric('Recommended next screen','Onboarding dashboard','',"state.stage='Onboarding';render()")}
-      </div>
-    </div></div>`;
-    return;
-  }
-
-  if(state.stage === "Onboarding"){
-    const o = onboardingResult();
-    content.innerHTML = `<div class="grid-2">
-      <div class="card section"><h3>Onboarding and LinkedIn readiness <span class="agent-tag">V-Start · V-Coach</span></h3><div class="body">
+  if(state.stage==="Onboarding"){
+    const r=readiness();
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>HR onboarding & readiness <span class="agent-tag">V-Start · V-Coach</span></h3><div class="body">
         <div class="split">
-          ${inputField('Experience level','experience',state.onboarding.experience,'onboarding',["New Hire","Mid-Level","Veteran","Partner"])}
-          ${inputField('Training week','trainingWeek',state.onboarding.trainingWeek,'onboarding')}
+          ${inputField('Employee','name',state.rep.name,'rep')}
+          ${inputField('Role','role',state.rep.role,'rep')}
+          ${inputField('Region','region',state.rep.region,'rep')}
+          ${inputField('Segment','segment',state.rep.segment,'rep',segments)}
+          ${inputField('Experience','experience',state.rep.experience,'rep',["New Hire","Mid-Level","Veteran","Partner"])}
+          ${inputField('Manager','manager',state.rep.manager,'rep')}
+        </div>
+        <div class="split section">
           ${inputField('Mentors met','mentorsMet',state.onboarding.mentorsMet,'onboarding')}
-          ${inputField('Confidence score out of 10','confidence',state.onboarding.confidence,'onboarding')}
+          ${inputField('Confidence out of 10','confidence',state.onboarding.confidence,'onboarding')}
         </div>
         <div class="split section">
           ${inputField('What the rep learned','learned',state.onboarding.learned,'onboarding','textarea')}
           ${inputField('Main challenge','challenge',state.onboarding.challenge,'onboarding','textarea')}
         </div>
-        <div class="section">${inputField('LinkedIn assessment','linkedinAssessment',state.onboarding.linkedinAssessment,'onboarding','textarea')}</div>
-        <div class="grid-2 section">
-          ${metric('Readiness',o.readiness,o.readiness==='Ready for live calls'?'good':(o.readiness==='Needs guided reps'?'warn':'risk'))}
-          ${metric('Next step','Marketing image review','',"think('I recommend a meeting with marketing to improve segment relevance, social proof, and online trust signals.')")}
+        <div class="grid-3 section">
+          ${metric('Readiness',r.lvl,r.lvl==='Ready for live calls'?'good':(r.lvl==='Needs guided reps'?'warn':'risk'))}
+          ${metric('Ramp model',r.ramp,'info')}
+          ${metric('Modules complete',r.done+' / '+trainingModules.length,'')}
         </div>
       </div></div>
-      <div class="card section"><h3>Recommended actions</h3><div class="body">
-        <ul>${o.actions.map(a=>`<li>${a}</li>`).join('')}</ul>
-        <div class="soft section">
-          <div style="font-weight:700">LinkedIn and relevance plan</div>
-          <ul>${linkedinPlan().map(a=>`<li>${a}</li>`).join('')}</ul>
-        </div>
-      </div></div>
-    </div>`;
+      <div class="card section"><h3>i3 training path</h3><div class="body">
+        <div class="muted" style="margin-bottom:8px">From the 30/60/90 schedule. Click a module to mark it complete.</div>
+        ${trainingModules.map(m=>{const on=(state.onboarding.modulesDone||[]).includes(m);
+          return `<label class="metric" style="display:flex;gap:10px;align-items:center;margin-bottom:8px;cursor:pointer" onclick="toggleModule('${m.replace(/'/g,"")}')">
+            <input type="checkbox" ${on?'checked':''} style="width:auto" onclick="event.preventDefault()"/> <span style="font-weight:600;font-size:13px">${m}</span></label>`;}).join('')}
+        <div class="soft section">Mentorship, weekly reflection forms, and manager progress reviews run alongside — V-Coach tracks completion and flags readiness for live calls.</div>
+      </div></div></div>`;
     return;
   }
 
-  if(state.stage === "Prospecting"){
-    const p = prospectingResult();
-    content.innerHTML = `<div class="grid-2">
-      <div class="card section"><h3>Lead engine and buying group guidance <span class="agent-tag">V-Target · V-Reach</span></h3><div class="body">
+  if(state.stage==="Prospecting"){
+    const p=prospect();
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>Account intelligence & guided outreach <span class="agent-tag">V-Target · V-Reach</span></h3><div class="body">
         <div class="split">
           ${inputField('Segment','segment',state.deal.segment,'deal',segments)}
           ${inputField('Outreach style','outreachStyle',state.prospecting.outreachStyle,'prospecting',["Insight-led","Technical","Executive","Problem-first"])}
         </div>
         <div class="split section">
           ${inputField('Target problem','targetProblem',state.prospecting.targetProblem,'prospecting','textarea')}
-          ${inputField('Intent signals from ZoomInfo and 6sense','intentSignals',state.prospecting.intentSignals,'prospecting','textarea')}
+          ${inputField('Intent signals (6sense / SixthSense / ZoomInfo)','intentSignals',state.prospecting.intentSignals,'prospecting','textarea')}
         </div>
         <div class="grid-3 section">
-          ${metric('Intent score',`${p.score}/100`,p.intensity==='Hot'?'good':(p.intensity==='Warm'?'warn':''))}
+          ${metric('Intent score',p.score+'/100',p.intensity==='Hot'?'good':(p.intensity==='Warm'?'warn':''))}
           ${metric('Lead status',p.intensity,p.intensity==='Hot'?'good':(p.intensity==='Warm'?'warn':''))}
           ${metric('Next-day action','Ready','info',"think(state.prospecting.nextDayAction)")}
         </div>
-        <div class="soft section">${p.message}</div>
+        <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" onclick="think('Drafting a role-specific email, LinkedIn note, and call opening for each decision maker, then validating contact data before you reach out.')">Draft outreach</button>
+          <button class="btn navy" onclick="go('Verification','Pushing this to your action queue. I will verify the activity actually happens.')">Send to action queue</button>
+        </div>
       </div></div>
-      <div class="card section"><h3>Suggested buying group for this segment</h3><div class="body">
-        <ul>${personas().map(x=>`<li>${x}</li>`).join('')}</ul>
-        <div class="soft section">VISION should not target just one person. It should suggest the full decision map, route content by role, and tell the rep who to contact first, second, and third.</div>
-      </div></div>
-    </div>`;
+      <div class="card section"><h3>Buying group & role-based messaging</h3><div class="body">
+        <div class="muted" style="margin-bottom:8px">V maps the whole decision group, not one contact, and routes a different story to each role.</div>
+        <table><tr><th>Decision maker</th><th>Lead with</th></tr>
+          ${personas().map(x=>`<tr><td>${x}</td><td class="muted">${storyFor(x)}</td></tr>`).join('')}</table>
+        <div class="soft section">Contact first → second → third, by intent and influence. V-Reach validates each number/email and flags bad data to fix.</div>
+      </div></div></div>`;
     return;
   }
 
-  if(state.stage === "Presentation"){
-    content.innerHTML = `<div class="grid-2">
-      <div class="card section"><h3>Presentation stage and transcript capture <span class="agent-tag">V-Present</span></h3><div class="body">
+  if(state.stage==="Verification"){
+    const g=verifyGap(),v=state.verify;
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>Proof of work <span class="agent-tag">V-Verify</span></h3><div class="body">
+        <div class="muted" style="margin-bottom:10px">The system does not rely on what the rep says happened — it verifies what actually happened from email, phone, and mobile.</div>
+        <table>
+          <tr><th>Channel</th><th>Verified</th><th>Claimed</th><th>Gap</th></tr>
+          <tr><td>Email</td><td>${v.emailsSent}</td><td>${v.emailsClaimed}</td><td>${g.emailGap}</td></tr>
+          <tr><td>Calls</td><td>${v.callsLogged}</td><td>${v.callsClaimed}</td><td>${g.callGap}</td></tr>
+          <tr><td>Meetings held</td><td>${v.meetingsHeld}</td><td>${v.meetingsHeld}</td><td>0</td></tr>
+          <tr><td>LinkedIn touches</td><td>${v.linkedin}</td><td>${v.linkedin}</td><td>0</td></tr>
+        </table>
+        <div class="grid-2 section">
+          ${metric('Activity integrity',g.integrity+'%',g.integrity>=90?'good':(g.integrity>=75?'warn':'risk'))}
+          ${metric('Status',g.status,g.integrity>=90?'good':(g.integrity>=75?'warn':'risk'))}
+        </div>
+        <div class="bar section"><div style="width:${g.integrity}%;background:${g.integrity>=90?'#16a34a':(g.integrity>=75?'#d97706':'#be123c')}"></div></div>
+      </div></div>
+      <div class="card section"><h3>What V-Verify does with this</h3><div class="body"><ul>
+        <li>Confirms email sent, timestamp, recipient, reply, and follow-up timing.</li>
+        <li>Confirms calls dialed, duration, whether a conversation occurred, and transcript when available.</li>
+        <li>Captures company-mobile work calls so field activity counts.</li>
+        <li>Feeds verified activity (not claims) into V-Score and the rep's engagement score.</li>
+      </ul>
+      <div class="soft section">When claimed activity outruns verified activity, V flags it for coaching — protecting forecast accuracy.</div>
+      <div class="section"><button class="btn navy" onclick="go('Presentation','Verified activity is clean enough to advance. Prepping your presentation.')">Advance to presentation</button></div>
+      </div></div></div>`;
+    return;
+  }
+
+  if(state.stage==="Presentation"){
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>Presentation & transcript capture <span class="agent-tag">V-Present</span></h3><div class="body">
         <div class="split">
           ${inputField('Audience','audience',state.presentation.audience,'presentation')}
-          ${inputField('Meeting goal','meetingGoal',state.presentation.meetingGoal,'presentation')}
+          ${inputField('Manager attending','manager',state.presentation.manager,'presentation')}
         </div>
-        <div class="section">${inputField('Likely objections','objections',state.presentation.objections,'presentation','textarea')}</div>
-        <div class="section">${inputField('Presentation transcript or meeting notes','transcript',state.presentation.transcript,'presentation','textarea')}</div>
+        ${inputField('Meeting goal','meetingGoal',state.presentation.meetingGoal,'presentation')}
+        ${inputField('Likely objections','objections',state.presentation.objections,'presentation','textarea')}
+        ${inputField('Presentation transcript or meeting notes','transcript',state.presentation.transcript,'presentation','textarea')}
         <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn primary" onclick="think('I reviewed the presentation notes. I can now build the draft proof of concept and show you the PM handoff.')">Analyze transcript</button>
+          <button class="btn primary" onclick="think('I reviewed the notes. I can build the draft POC and show the PM handoff. Looping your manager in for the executive walkthrough.')">Analyze transcript</button>
           <button class="btn navy" onclick="go('POC','Drafting the POC from your transcript now.')">Generate draft POC</button>
         </div>
       </div></div>
-      <div class="card section"><h3>Transcript to POC preview</h3><div class="body">
-        <div class="muted">This shows how presentation transcripts become structured POC input instead of getting lost in email or personal notes.</div>
+      <div class="card section"><h3>Transcript → POC preview</h3><div class="body">
+        <div class="muted">Presentation notes become structured POC input instead of getting lost in email.</div>
         <div class="soft section nowrap">${generatedPOC()}</div>
-      </div></div>
-    </div>`;
+      </div></div></div>`;
     return;
   }
 
-  if(state.stage === "POC"){
-    const triggers = pocTriggersPrivacy();
-    content.innerHTML = `<div class="grid-2">
-      <div class="card section"><h3>POC builder and PM handoff <span class="agent-tag">V-Prove</span></h3><div class="body">
+  if(state.stage==="POC"){
+    const triggers=pocTriggersPrivacy();
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>POC builder & PM handoff <span class="agent-tag">V-Prove</span></h3><div class="body">
+        <div class="muted" style="margin-bottom:8px">Pre-loaded with the Gardewine model (Toronto terminal, 45-day validation, Protex AI as the incumbent).</div>
         <div class="split">
-          ${inputField('Site or pilot location','site',state.poc.site,'poc')}
-          ${inputField('Pilot duration','duration',state.poc.duration,'poc')}
+          ${inputField('Account','account',state.poc.account,'poc')}
+          ${inputField('Site','site',state.poc.site,'poc')}
+          ${inputField('Duration','duration',state.poc.duration,'poc')}
+          ${inputField('Competing solution','competitor',state.poc.competitor,'poc')}
         </div>
+        ${inputField('Objective','objective',state.poc.objective,'poc','textarea')}
+        ${inputField('Success metrics','successMetrics',state.poc.successMetrics,'poc','textarea')}
+        ${inputField('Phase 2 (after value proven)','phase2',state.poc.phase2,'poc','textarea')}
         <div class="soft section">
-          <div style="font-weight:700">i3 AI tools in scope for this POC</div>
-          <div class="muted" style="font-size:13px;margin:6px 0 10px">Selecting biometric, identifying, or profiling tools automatically triggers a V-Guard privacy review.</div>
-          <div>${aiToolCatalog.map(t=>{
-            const on=(state.poc.aiTools||[]).includes(t.name);
-            const flag = (t.biometric||t.identifies||t.profiling)?' ⚠':'';
-            return `<label style="display:inline-flex;align-items:center;gap:8px;margin:0 14px 10px 0;font-weight:600;font-size:13px">
-              <input type="checkbox" ${on?'checked':''} onchange="toggleTool('${t.name.replace(/'/g,"")}')" style="width:auto" /> ${t.name}${flag}
-            </label>`;}).join('')}</div>
-          ${triggers?`<div class="metric risk" style="cursor:default"><div class="label">Privacy gate</div><div class="value" style="font-size:16px">V-Guard review required before launch</div></div>`:`<div class="metric good" style="cursor:default"><div class="label">Privacy gate</div><div class="value" style="font-size:16px">Standard controls — no sensitive tooling selected</div></div>`}
-        </div>
-        <div class="split section">
-          ${inputField('Success metrics','successMetrics',state.poc.successMetrics,'poc','textarea')}
-          ${inputField('Current blocker','blockers',state.poc.blockers,'poc','textarea')}
-        </div>
-        <div class="soft section">
-          <div style="font-weight:700">POC supporters and named stakeholders</div>
-          <div style="margin-top:10px">${state.poc.supporters.map((s,i)=>`
-            <div class="supporter-row">
-              <div class="field"><label>Name</label><input value="${(s.name||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].name=this.value;render()" /></div>
-              <div class="field"><label>Title</label><input value="${(s.title||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].title=this.value;render()" /></div>
-              <div class="field"><label>Email</label><input value="${(s.email||'').replace(/"/g,'&quot;')}" onchange="state.poc.supporters[${i}].email=this.value;render()" /></div>
-            </div>`).join('')}
-          </div>
-          <button class="btn primary" onclick="state.poc.supporters.push({name:'',title:'',email:''});render()">Add supporter</button>
+          <div style="font-weight:700">i3 AI tools in scope</div>
+          <div class="muted" style="font-size:13px;margin:6px 0 10px">Biometric / identifying / profiling tools trigger a V-Guard privacy review.</div>
+          ${aiToolCatalog.map(t=>{const on=(state.poc.aiTools||[]).includes(t);const flag=t!=="People Counting & Analytics"&&t!=="Standard Video Recording";
+            return `<label style="display:inline-flex;align-items:center;gap:8px;margin:0 14px 10px 0;font-weight:600;font-size:13px"><input type="checkbox" ${on?'checked':''} onchange="toggleTool('${t.replace(/'/g,"")}')" style="width:auto"/> ${t}${flag?' ⚠':''}</label>`;}).join('')}
+          ${triggers?`<div class="metric risk" style="cursor:default"><div class="label">Privacy gate</div><div class="value" style="font-size:16px">V-Guard review required before launch</div></div>`:`<div class="metric good" style="cursor:default"><div class="label">Privacy gate</div><div class="value" style="font-size:16px">Standard controls</div></div>`}
         </div>
       </div></div>
       <div class="card section"><h3>Generated POC preview</h3><div class="body">
         <div class="soft nowrap">${generatedPOC()}</div>
         <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
-          ${triggers?`<button class="btn amber" onclick="go('Legal & Privacy','Sensitive AI tooling is in scope. Routing you to V-Guard for the privacy and legal review.')">Run V-Guard review</button>`:''}
-          <button class="btn navy" onclick="think('The POC draft is ready. Next, route it to the PM agent so scope, timeline, cybersecurity forms, and implementation tasks stay on track.')">Simulate PM handoff</button>
-          <button class="btn green" onclick="think('Structured notes would now be pushed into Salesforce and company-owned records.')">Push structured notes to Salesforce</button>
+          ${triggers?`<button class="btn amber" onclick="go('Legal & Privacy','Sensitive AI tooling is in scope. Routing you to V-Guard for the privacy review.')">Run V-Guard review</button>`:''}
+          <button class="btn navy" onclick="think('POC draft ready. Routing to the PM agent for scope, timeline, cybersecurity forms, and approvals. Installer: SI Alarms.')">Simulate PM handoff</button>
+          <button class="btn green" onclick="think('Structured notes pushed into Salesforce and company-owned records.')">Push to Salesforce</button>
         </div>
-      </div></div>
-    </div>`;
+      </div></div></div>`;
     return;
   }
 
-  if(state.stage === "Legal & Privacy"){
-    const r = riskResult();
-    content.innerHTML = `<div class="grid-2">
-      <div class="card section"><h3>V-Guard: Privacy and legal simulation <span class="agent-tag">V-Guard</span></h3><div class="body">
-        <div class="split">
-          ${inputField('Jurisdiction','jurisdiction',state.legal.jurisdiction,'legal',jurisdictions)}
-          ${inputField('Business purpose','purpose',state.legal.purpose,'legal')}
-          ${inputField('Identifies people','identifiesPeople',state.legal.identifiesPeople,'legal',["Yes","No","Not sure"])}
-          ${inputField('Biometrics involved','biometrics',state.legal.biometrics,'legal',["Yes","No","Not sure"])}
-          ${inputField('Profiling risk','profiling',state.legal.profiling,'legal',["No","Potentially","Yes"])}
-          ${inputField('Signage status','signage',state.legal.signage,'legal',["Adequate","Needs update","None"])}
-          ${inputField('Data residency and access','dataResidency',state.legal.dataResidency,'legal')}
-          ${inputField('Privacy officer','privacyOfficer',state.legal.privacyOfficer,'legal',["Yes","No","Unknown"])}
-        </div>
-        <div class="section">${inputField('Evidence supporting necessity','evidence',state.legal.evidence,'legal','textarea')}</div>
-        <div class="grid-4 section">
-          ${metric('Applicable laws',r.laws.join(', ') || 'None')}
-          ${metric('Risk points',String(r.score),r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
-          ${metric('Risk level',r.level,r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
-          ${metric('Decision',r.decision,r.level==='High'?'risk':(r.level==='Medium'?'warn':'good'))}
-        </div>
-        <div class="section">${r.laws.map(x=>`<span class="pill">${x}</span>`).join('')}</div>
-      </div></div>
-      <div class="card section"><h3>Required next steps and documentation</h3><div class="body">
-        ${r.warnings.length?`<div class="soft" style="background:var(--risk-bg);border-color:var(--risk-bd)"><b>Warnings</b><ul>${r.warnings.map(w=>`<li>${w}</li>`).join('')}</ul></div>`:''}
-        <div class="section" style="font-weight:700">Action checklist</div>
-        <ul>${r.nextSteps.map(x=>`<li>${x}</li>`).join('')}</ul>
-        ${r.docs.length?`<div class="soft section"><b>Documentation & signage to generate</b><ul>${r.docs.map(d=>`<li>${d}</li>`).join('')}</ul></div>`:''}
-        <div class="section" style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn amber" onclick="think('I packaged the privacy findings, required documentation, and the four-part necessity test for the privacy officer to approve.')">Package for privacy officer</button>
-          <button class="btn navy" onclick="go('Closing','Privacy gate handled. Bringing clean documentation into the commercial close.')">Continue to close</button>
-        </div>
-      </div></div>
-    </div>`;
-    return;
-  }
-
-  if(state.stage === "Closing"){
-    content.innerHTML = `<div class="card section"><h3>Commercial close simulation <span class="agent-tag">V-Close</span></h3><div class="body">
+  if(state.stage==="Legal & Privacy"){
+    c.innerHTML=`<div class="card section"><h3>V-Guard: privacy & legal gate <span class="agent-tag">V-Guard</span></h3><div class="body">
       <div class="split">
-        ${inputField('Commercial goal','commercialGoal',state.closing.commercialGoal,'closing')}
-        ${inputField('Price position','pricePosition',state.closing.pricePosition,'closing')}
-        ${inputField('Competitive risk','competitiveRisk',state.closing.competitiveRisk,'closing','textarea')}
-        ${inputField('Next commitment','nextCommitment',state.closing.nextCommitment,'closing','textarea')}
+        ${inputField('Jurisdiction','jurisdiction',state.legal.jurisdiction,'legal',["Quebec, Canada","Canada (other prov.)","European Union","California, USA","Illinois, USA"])}
+        ${inputField('Biometrics involved','biometrics',state.legal.biometrics,'legal',["Yes","No","Not sure"])}
+        ${inputField('Profiling risk','profiling',state.legal.profiling,'legal',["No","Potentially","Yes"])}
+        ${inputField('Signage status','signage',state.legal.signage,'legal',["Adequate","Needs update","None"])}
       </div>
-      <div class="soft section">VISION should use the earlier stages to arrive here with clean documentation, named stakeholders, legal answers, and commercial clarity already captured. Closing should feel like the final controlled step, not a scramble.</div>
-      <div class="section">
-        <button class="btn green" onclick="think('All stages are documented. Generating the executive review pack and the commercial checkpoint summary now.')">Generate close pack</button>
+      <div class="grid-3 section">
+        ${metric('Applicable law',state.legal.jurisdiction.includes("Quebec")?"Law 25 + PIPEDA":(state.legal.jurisdiction.includes("Canada")?"PIPEDA":(state.legal.jurisdiction.includes("European")?"GDPR":(state.legal.jurisdiction.includes("Illinois")?"BIPA":"CCPA/CPRA"))),'info')}
+        ${metric('Risk',state.legal.biometrics==="Yes"?"High":(state.legal.profiling!=="No"?"Medium":"Low"),state.legal.biometrics==="Yes"?'risk':(state.legal.profiling!=="No"?'warn':'good'))}
+        ${metric('4-part necessity test','Required','warn',"think('Running the four-part necessity and proportionality test: purpose, technology need, less-intrusive alternatives, and proportionality.')")}
       </div>
+      <div class="soft section">This is the embedded summary. For the full guided intake — questions, signage wording, CAI/PIA/BIPA documentation, and PDF export — open the dedicated <b>V-Guard legal agent</b> (vguard-legal-agent.html). It is grounded in the Q25 deck.</div>
+      <div class="section"><button class="btn navy" onclick="go('Closing','Privacy gate handled. Bringing clean documentation into the commercial close.')">Continue to close</button></div>
     </div></div>`;
     return;
   }
+
+  if(state.stage==="Closing"){
+    c.innerHTML=`<div class="card section"><h3>Commercial close <span class="agent-tag">V-Close</span></h3><div class="body">
+      <div class="split">
+        ${inputField('Commercial goal','commercialGoal',state.closing.commercialGoal,'closing')}
+        ${inputField('Price position','pricePosition',state.closing.pricePosition,'closing','textarea')}
+        ${inputField('Competitive risk','competitiveRisk',state.closing.competitiveRisk,'closing','textarea')}
+        ${inputField('Next commitment','nextCommitment',state.closing.nextCommitment,'closing','textarea')}
+      </div>
+      <div class="soft section">VISION arrives here with clean documentation, named stakeholders, verified activity, legal answers, and competitive positioning already captured (incumbent: ${state.poc.competitor}). Closing is the final controlled step, not a scramble.</div>
+      <div class="section"><button class="btn green" onclick="think('Generating the executive review pack and commercial checkpoint — phased rollout from the Gardewine pilot.')">Generate close pack</button></div>
+    </div></div>`;
+    return;
+  }
+
+  if(state.stage==="Leadership"){
+    const segs=[{n:"Top performers",c:"#16a34a",pct:80,note:"Move faster, handle larger opportunities. Ramp 15–30 days."},
+      {n:"Mid performers",c:"#d97706",pct:55,note:"Gaining structure and consistency. Ramp 30–45 days."},
+      {n:"Developing",c:"#be123c",pct:32,note:"Need direction and measurable feedback."}];
+    const funnel=[["Lead → Meeting","41%"],["Meeting → POC","28%"],["POC → Close","52%"],["Avg time between stages","11 days"]];
+    c.innerHTML=`<div class="grid-2">
+      <div class="card section"><h3>Performance intelligence <span class="agent-tag">V-Score</span></h3><div class="body">
+        <div class="muted" style="margin-bottom:8px">14–15 reps today. Optimize output per rep before adding headcount.</div>
+        ${segs.map(s=>`<div class="section"><div style="display:flex;justify-content:space-between"><b>${s.n}</b><span class="muted">${s.pct}</span></div>
+          <div class="bar"><div style="width:${s.pct}%;background:${s.c}"></div></div>
+          <div class="muted" style="font-size:13px;margin-top:4px">${s.note}</div></div>`).join('')}
+      </div></div>
+      <div class="card section"><h3>KPI funnel & interventions</h3><div class="body">
+        <table><tr><th>KPI</th><th>Rate</th></tr>${funnel.map(f=>`<tr><td>${f[0]}</td><td>${f[1]}</td></tr>`).join('')}</table>
+        <div class="soft section"><div style="font-weight:700;margin-bottom:6px">Expert-intervention triggers</div><ul>
+          <li>Deal size exceeds threshold</li><li>Engagement drops</li><li>POC risk increases</li><li>High-value opportunity identified</li>
+        </ul><div class="muted" style="font-size:13px;margin-top:6px">When triggered, V pulls in senior expertise precisely — not everywhere.</div></div>
+        <div class="section"><button class="btn navy" onclick="think('Forecast updated from verified activity. Recommending coaching for two developing reps before any new hire.')">Run leadership forecast</button></div>
+      </div></div></div>`;
+    return;
+  }
 }
 
-/* toggle an AI tool in/out of the POC scope */
+/* ---------- actions ---------- */
+function toggleModule(m){
+  const arr=state.onboarding.modulesDone||(state.onboarding.modulesDone=[]);
+  const i=arr.indexOf(m);if(i>=0)arr.splice(i,1);else arr.push(m);render();
+}
 function toggleTool(name){
-  const arr = state.poc.aiTools || (state.poc.aiTools=[]);
-  const i = arr.indexOf(name);
-  if(i>=0) arr.splice(i,1); else arr.push(name);
+  const arr=state.poc.aiTools||(state.poc.aiTools=[]);
+  const i=arr.indexOf(name);if(i>=0)arr.splice(i,1);else arr.push(name);
   render();
-  if(pocTriggersPrivacy()) think("Heads up — that tool can identify or profile people. I'm flagging a V-Guard privacy review before this POC can launch.");
+  if(pocTriggersPrivacy())think("That tool can identify or profile people. I'm flagging a V-Guard privacy review before this POC can launch.");
 }
-
-/* route the rep based on chosen entry point */
 function routeEntry(){
-  const map = {
-    "New hire":["Admin Setup","Welcome. As a new hire, I'm starting you in setup and onboarding before live deals."],
-    "Existing rep":["Prospecting","Welcome back. I'm dropping you straight into the lead engine."],
-    "Advanced rep (POC)":["POC","You're advanced, let's go right to the POC builder and lock the scope."],
-    "Partner / Integrator":["Architecture","Partner flow. Here's the full agent architecture and where you plug in."]
-  };
-  const [stage,voice] = map[state.entryPoint] || ["Dashboard",""];
-  go(stage, voice);
+  const map={
+    "New hire":["Onboarding","Welcome. As a new hire, I'm starting you in HR onboarding and the i3 training path."],
+    "Existing rep":["Prospecting","Welcome back. Dropping you into account intelligence and the lead engine."],
+    "Advanced rep (POC)":["POC","You're advanced — straight to the POC builder to lock scope."],
+    "Partner / Integrator":["Architecture","Partner flow. Here's the full agent architecture and where you plug in."]};
+  const [stage,voice]=map[state.entryPoint]||["Dashboard",""];go(stage,voice);
 }
-
 render();
 </script>
 </body>
