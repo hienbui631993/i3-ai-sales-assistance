@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>i3 Privacy Compliance Agent · Q25</title>
+<style>
+  :root{
+    --ink:#101826; --ink2:#3a4658; --muted:#6b7686; --line:#e3e8ef;
+    --bg:#eef2f7; --panel:#ffffff; --brand:#13507a; --brand2:#2aa19a;
+    --accent:#7c5cff;
+    --okbg:#e9faf2; --okbd:#a9ecca; --oktx:#0a7d4f;
+    --wnbg:#fff7e8; --wnbd:#ffdf9e; --wntx:#9a6a06;
+    --hibg:#fdeef0; --hibd:#f6bcc4; --hitx:#bb2233;
+    --inbg:#eaf4fb; --inbd:#bcdcf2; --intx:#0d557e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);}
+  .wrap{max-width:1240px;margin:0 auto;padding:22px;}
+  header.top{
+    background:linear-gradient(120deg,var(--brand),var(--brand2));
+    color:#fff;border-radius:20px;padding:22px 26px;box-shadow:0 10px 30px rgba(19,80,122,.18);
+    display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  header.top .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#cdeeec;margin-bottom:6px}
+  header.top h1{margin:0;font-size:25px;letter-spacing:.2px}
+  header.top p{margin:7px 0 0;max-width:560px;color:#e9f6f5;font-size:13.5px;line-height:1.5}
+  .statwrap{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:9px 13px;min-width:104px}
+  .stat .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6f0ee}
+  .stat .v{font-size:16px;font-weight:700;margin-top:2px}
+  .stat.lvl-High .v{color:#ffd9de}.stat.lvl-Medium .v{color:#ffe7b0}.stat.lvl-Low .v{color:#c8f6df}
+
+  .layout{display:grid;grid-template-columns:1.32fr .9fr;gap:18px;margin-top:18px}
+  @media(max-width:980px){.layout{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 14px rgba(16,24,38,.05)}
+  .panel .ph{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .panel .ph h2{margin:0;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand)}
+  .panel .ph .progress{font-size:12px;color:var(--muted)}
+
+  /* conversation */
+  .thread{padding:18px;max-height:560px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+  .row{display:flex;gap:11px;align-items:flex-start}
+  .row.me{flex-direction:row-reverse}
+  .av{flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
+  .av.bot{background:linear-gradient(135deg,var(--brand),var(--brand2))}
+  .av.me{background:#46536b}
+  .bubble{max-width:80%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5}
+  .bot .bubble{background:#f3f6fa;border:1px solid var(--line);border-top-left-radius:4px;color:var(--ink)}
+  .me .bubble{background:var(--brand);color:#fff;border-top-right-radius:4px}
+  .bubble .note{display:block;margin-top:6px;font-size:12px;color:var(--muted);line-height:1.45}
+  .me .bubble .note{color:#d8e6f0}
+
+  /* answer controls */
+  .controls{padding:14px 18px;border-top:1px solid var(--line);background:#fafcfe;border-radius:0 0 18px 18px}
+  .qlabel{font-size:13px;color:var(--ink2);margin-bottom:10px}
+  .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .opt{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:11px;padding:9px 14px;font-size:13.5px;cursor:pointer;transition:.12s;font-weight:600}
+  .opt:hover{border-color:var(--brand2);background:#f0fbfa}
+  .opt.multi.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .opt.go{background:var(--brand2);color:#fff;border-color:var(--brand2)}
+  .freerow{display:flex;gap:9px;margin-top:4px}
+  .freerow input{flex:1;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:14px}
+  .ctarow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+  .ghost{background:transparent;border:none;color:var(--muted);font-size:12.5px;cursor:pointer;text-decoration:underline}
+  .restart{background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:12.5px;cursor:pointer;color:var(--ink2)}
+
+  /* brief */
+  .brief{padding:16px 18px;max-height:600px;overflow-y:auto}
+  .briefcard{border:1px solid var(--line);border-radius:13px;padding:12px 13px;margin-bottom:12px;background:#fff}
+  .briefcard h3{margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .kv{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:3px 0;border-bottom:1px dashed #eef2f6}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--ink2)}.kv .v{font-weight:700;text-align:right}
+  .chip{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 10px;margin:0 5px 5px 0}
+  .chip.law{background:var(--inbg);color:var(--intx);border:1px solid var(--inbd)}
+  .chip.high{background:var(--hibg);color:var(--hitx);border:1px solid var(--hibd)}
+  .chip.cau{background:var(--wnbg);color:var(--wntx);border:1px solid var(--wnbd)}
+  .chip.ok{background:var(--okbg);color:var(--oktx);border:1px solid var(--okbd)}
+  .empty{color:var(--muted);font-size:13px;font-style:italic}
+
+  .gauge{height:10px;border-radius:999px;background:#edf1f6;overflow:hidden;margin:6px 0 4px}
+  .gauge>span{display:block;height:100%;transition:.4s}
+  .lvl-Low .gauge>span{background:var(--brand2)}
+  .lvl-Medium .gauge>span{background:#e0a008}
+  .lvl-High .gauge>span{background:#cf3344}
+
+  /* report */
+  .report{padding:0 18px 18px;display:none}
+  .report.show{display:block}
+  .decision{border-radius:14px;padding:14px 16px;margin:14px 0;font-size:14.5px;font-weight:600;line-height:1.5}
+  .decision.lvl-High{background:var(--hibg);border:1px solid var(--hibd);color:var(--hitx)}
+  .decision.lvl-Medium{background:var(--wnbg);border:1px solid var(--wnbd);color:var(--wntx)}
+  .decision.lvl-Low{background:var(--okbg);border:1px solid var(--okbd);color:var(--oktx)}
+  .sec{margin:16px 0}
+  .sec h3{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand);margin:0 0 8px;border-left:3px solid var(--brand2);padding-left:9px}
+  ol.steps{margin:0;padding-left:20px;font-size:13.5px;line-height:1.6}
+  ol.steps li{margin-bottom:6px}
+  .doc{white-space:pre-wrap;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:12.8px;line-height:1.55;color:var(--ink2)}
+  .testgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){.testgrid{grid-template-columns:1fr}}
+  .tcell{border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:12.8px;background:#fff}
+  .tcell .st{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .tcell.pass{border-color:var(--okbd);background:var(--okbg)}.tcell.pass .st{color:var(--oktx)}
+  .tcell.part{border-color:var(--wnbd);background:var(--wnbg)}.tcell.part .st{color:var(--wntx)}
+  .tcell.fail{border-color:var(--hibd);background:var(--hibg)}.tcell.fail .st{color:var(--hitx)}
+  .btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  .btn{border:none;border-radius:11px;padding:10px 15px;font-size:13px;font-weight:700;cursor:pointer}
+  .btn.p{background:var(--brand);color:#fff}.btn.s{background:var(--brand2);color:#fff}.btn.g{background:#eef2f7;color:var(--ink2)}
+  .disclaim{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  @media print{header.top,.controls,.ghost,.btnrow,.restart{display:none!important}.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">i3 International · Sales Due Diligence</div>
+      <h1>Privacy Compliance Agent</h1>
+      <p>Your on-call privacy expert for every POC. I ask the questions Quebec Law 25, GDPR,
+      PIPEDA, PIPA and CCPA would ask, weigh the risk of the i3 applications you're proposing,
+      and tell you exactly what to do before the deal moves forward.</p>
+    </div>
+    <div class="statwrap" id="stats"></div>
+  </header>
+
+  <div class="layout">
+    <!-- LEFT: conversation -->
+    <section class="panel">
+      <div class="ph"><h2>Interview</h2><div class="progress" id="prog">Question 1</div></div>
+      <div class="thread" id="thread"></div>
+      <div class="controls" id="controls"></div>
+    </section>
+
+    <!-- RIGHT: live brief + report -->
+    <aside class="panel">
+      <div class="ph"><h2>Live compliance brief</h2><button class="restart" onclick="restart()">Restart</button></div>
+      <div class="brief" id="brief"></div>
+      <div class="report" id="report"></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   i3 PRIVACY COMPLIANCE AGENT
+   Knowledge base derived solely from the Q25 (Quebec Law 25 / Bill 25)
+   presentation deck. Conversational interview -> live risk brief -> report.
+   ===================================================================== */
+
+/* ---- i3 application catalogue (deck slide 14 standing + slide 12 limits) ---- */
+var APPS = [
+  {id:"facial",  nm:"Facial Recognition", tier:"high", w:3, biometric:true,  sign:"facial recognition / biometric matching"},
+  {id:"loyalty", nm:"i3 AI Loyalty",      tier:"high", w:3, biometric:true, profiling:true, sign:"recognition of repeat visitors"},
+  {id:"audio",   nm:"Audio Monitoring",   tier:"high", w:3, sign:"audio recording"},
+  {id:"sentry",  nm:"AI Sentry",          tier:"high", w:2, profiling:true, sign:"AI-assisted person detection"},
+  {id:"lpr",     nm:"LPR / Gate Control", tier:"cau",  w:2, sign:"licence-plate recognition"},
+  {id:"engage",  nm:"Engagement / Productivity", tier:"cau", w:2, employee:true, profiling:true, sign:"staff engagement analytics"},
+  {id:"anomaly", nm:"Service Anomaly",    tier:"cau",  w:2, profiling:true, sign:"behaviour-pattern analytics"},
+  {id:"overflow",nm:"Customer Overflow",  tier:"cau",  w:1, sign:"occupancy / queue analytics"},
+  {id:"heat",    nm:"Heat Mapping",       tier:"cau",  w:1, profiling:true, sign:"movement heat-mapping"},
+  {id:"pos",     nm:"POS + Video Integration", tier:"cau", w:2, combine:true, sign:"transaction-to-video linking"},
+  {id:"health",  nm:"Health Monitoring",  tier:"ok", w:0},
+  {id:"alert",   nm:"Alert Center",       tier:"ok", w:0},
+  {id:"door",    nm:"Door Count",         tier:"ok", w:0},
+  {id:"mining",  nm:"Data Mining / Analytics", tier:"ok", w:0},
+  {id:"incident",nm:"Incident Reporting (EVT)", tier:"ok", w:0},
+  {id:"donation",nm:"Donation",           tier:"ok", w:0},
+  {id:"basket",  nm:"Below-Basket Detection", tier:"ok", w:0}
+];
+function app(id){ for(var i=0;i<APPS.length;i++) if(APPS[i].id===id) return APPS[i]; }
+
+/* ---- jurisdiction -> standards (deck slide 7) ---- */
+function laws(place){
+  var L=[];
+  if(place==="Quebec"){ L.push("Quebec Law 25"); L.push("PIPEDA"); }
+  else if(place==="Alberta"||place==="British Columbia"){ L.push("PIPA"); L.push("PIPEDA"); }
+  else if(place==="Other Canada"){ L.push("PIPEDA"); }
+  else if(place==="California"){ L.push("CCPA / CPRA"); }
+  else if(place==="Other US"){ L.push("State biometric / privacy laws"); }
+  else if(place==="Europe / UK"){ L.push("GDPR"); }
+  return L;
+}
+
+/* ---- conversation script ---- */
+var Q = [
+  {id:"account", type:"text", ph:"e.g. Metro Quebec Pilot",
+   bot:"Let's set up the privacy review for this opportunity. What's the account or project name?",
+   note:"This goes on the customer-ready documents I'll generate."},
+  {id:"place", type:"single",
+   bot:"Where will this system operate? Location decides which privacy law governs the POC.",
+   note:"Quebec → Law 25 · Europe → GDPR · California → CCPA · elsewhere in Canada → PIPEDA / PIPA.",
+   opts:["Quebec","Alberta","British Columbia","Other Canada","California","Other US","Europe / UK"]},
+  {id:"apps", type:"multi",
+   bot:"Which i3 applications are on the quote? Select all that apply — I'll flag the ones that carry privacy weight.",
+   note:"Tap to toggle. Red = high sensitivity, amber = needs scoping, green = generally low-risk.",
+   from:"apps"},
+  {id:"purpose", type:"single",
+   bot:"What's the primary purpose the customer is solving for?",
+   note:"Law 25 requires each purpose to be defined and assessed on its own.",
+   opts:["Loss Prevention","Workplace Safety","Operational Analytics","Customer Experience","Access Control"]},
+  {id:"evidence", type:"single",
+   bot:"Is there evidence of a real, current problem driving this — shrink data, incident logs, audits?",
+   note:"Speculative purposes fail Step 1 of the Four-Part Test.",
+   opts:["Yes — documented evidence","Some / anecdotal","No — speculative"]},
+  {id:"alt", type:"single",
+   bot:"Have less-intrusive alternatives been considered (paper logs, basic recording, fewer analytics)?",
+   note:"The customer must show video / analytics is the least-intrusive method that works.",
+   opts:["Yes — and ruled out","In progress","Not yet"]},
+  {id:"privacyArea", type:"single",
+   bot:"Will any cameras cover areas with an expectation of privacy — breakrooms, restrooms, change areas?",
+   note:"Law 25 restricts cameras in privacy-expectation areas outright.",
+   opts:["No","Yes","Not sure"]},
+  {id:"consent", type:"single",
+   bot:"How will the end users be told and consent obtained?",
+   note:"Implied (signage) can work for basic video — but biometrics need EXPRESS, opt-in consent.",
+   opts:["Express opt-in (signed)","Implied — signage only","Nothing yet"]},
+  {id:"signage", type:"single",
+   bot:"What's the state of the customer's current signage?",
+   note:"The OPC found generic 'may include biometric technologies' signs too vague.",
+   opts:["Specific & adequate","Generic / vague","None"]},
+  {id:"pia", type:"single",
+   bot:"Has the customer completed a PIA (Privacy Impact Assessment) for this use?",
+   note:"A PIA is expected for identifiable or sensitive video under Law 25 & PIPEDA.",
+   opts:["Yes","No","Don't know"]},
+  {id:"residency", type:"single",
+   bot:"Where will the data live and who can access it?",
+   note:"Cross-border (e.g. U.S. support access to Canadian data) adds a transfer obligation.",
+   opts:["Canada only","Canada + U.S. access","U.S. / other","Not decided"]}
+];
+
+/* ---- state ---- */
+var S, idx, multiSel;
+function reset(){
+  S={account:"",place:"",apps:[],purpose:"",evidence:"",alt:"",privacyArea:"",consent:"",signage:"",pia:"",residency:""};
+  idx=0; multiSel=[];
+}
+reset();
+
+/* ---- risk engine (derived from deck) ---- */
+function assess(){
+  var risk=0, warn=[], act=[], flags={};
+  var selApps = S.apps.map(app);
+
+  selApps.forEach(function(a){
+    risk+=a.w;
+    if(a.biometric) flags.biometric=true;
+    if(a.profiling) flags.profiling=true;
+    if(a.employee)  flags.employee=true;
+    if(a.tier==="high") warn.push({l:"high", t:a.nm+" is high-sensitivity under Law 25 — it needs explicit treatment."});
+    else if(a.tier==="cau") warn.push({l:"cau", t:a.nm+" must be scoped tightly to the stated purpose."});
+  });
+  // integration escalation (deck slide 17)
+  if(S.apps.indexOf("pos")>-1 && selApps.length>1){
+    risk+=2; warn.push({l:"cau", t:"Linking POS with video creates a new data combination — this alone re-triggers risk assessment (low → high)."});
+  }
+  if(flags.biometric){
+    risk+=2;
+    act.push("Treat biometrics as a last resort and obtain EXPRESS opt-in consent — implied/signage consent is not enough.");
+  }
+  if(flags.profiling){
+    risk+=1;
+    act.push("Disclose any profiling. Law 25 defines profiling as using personal information to evaluate, categorize or predict behaviour — confirm it is not a prohibited use (e.g. theft prediction).");
+  }
+  if(flags.employee){
+    risk+=2;
+    act.push("Run an employee-privacy review — staff engagement / productivity monitoring carries added obligations.");
+  }
+  if(S.privacyArea==="Yes"){ risk+=3; warn.push({l:"high",t:"Cameras in privacy-expectation areas are restricted under Law 25."}); act.push("Re-zone or remove cameras covering breakrooms / restrooms / change areas."); }
+  else if(S.privacyArea==="Not sure"){ risk+=1; act.push("Confirm no camera covers a privacy-expectation area before deployment."); }
+
+  if(S.evidence==="No — speculative"){ risk+=2; act.push("Gather evidence of an actual problem (shrink, incident logs, audits) — speculative purposes fail the necessity test."); }
+  else if(S.evidence==="Some / anecdotal"){ risk+=1; }
+  if(S.alt!=="Yes — and ruled out"){ risk+=1; act.push("Document the less-intrusive alternatives considered and why they're insufficient."); }
+  if(S.consent==="Implied — signage only" && flags.biometric){ risk+=2; warn.push({l:"high",t:"Implied/signage consent does not cover biometrics — express opt-in is required."}); }
+  if(S.consent==="Nothing yet"){ risk+=1; act.push("Define the notice & consent approach with the customer."); }
+  if(S.signage!=="Specific & adequate"){ risk+=1; flags.signage=true; act.push("Issue purpose-specific signage (the generic version below) — generic wording was rejected by the OPC."); }
+  if(S.pia==="No"||S.pia==="Don't know"){ risk+=2; flags.pia=true; act.push("Launch a PIA before final POC approval — required for identifiable / sensitive video."); }
+  if(S.residency==="Canada + U.S. access"||S.residency==="U.S. / other"){ risk+=1; flags.cross=true; act.push("Document cross-border access and complete the data-transfer section of the PIA."); }
+  if(S.residency==="Not decided"){ risk+=1; act.push("Decide data residency — privacy prefers Canada-for-Canada."); }
+
+  var lvl="Low"; if(risk>=6) lvl="Medium"; if(risk>=11) lvl="High";
+  var decision, posture;
+  if(lvl==="High"){ decision="ESCALATE — route to the i3 Privacy team for sign-off before this POC is approved."; posture="Position this strictly as a narrow security / incident-investigation use tied to documented evidence. Avoid any language about broad tracking, profiling, demographics or marketing. Lead with the customer's real problem and what they do today, and introduce advanced capability only after consent and signage are agreed."; }
+  else if(lvl==="Medium"){ decision="PROCEED WITH A PRIVACY CHECKPOINT — conditions below must be met during the POC."; posture="Keep the use case tied to the documented purpose. Don't let scope creep in during the sale — the system can't morph beyond its initial intent without re-triggering requirements. Confirm signage and retention up front."; }
+  else { decision="PROCEED — standard security positioning with notice and retention controls in place."; posture="Use standard security & operational-value positioning. Keep the purpose documented so scope stays clean, and confirm notice and retention."; }
+
+  // four-part test
+  var p1 = (S.evidence==="Yes — documented evidence")?"pass":(S.evidence==="Some / anecdotal"?"part":"fail");
+  var p2 = selApps.length?"pass":"part";
+  var p3 = (S.alt==="Yes — and ruled out")?"pass":(S.alt==="In progress"?"part":"fail");
+  var p4 = (lvl==="Low")?"pass":(lvl==="Medium"?"part":"fail");
+  var sc={pass:1,part:.5,fail:0}; var test={p1:p1,p2:p2,p3:p3,p4:p4,score:sc[p1]+sc[p2]+sc[p3]+sc[p4]};
+
+  // de-dup actions
+  var seen={}; act=act.filter(function(a){return seen[a]?false:(seen[a]=1,true);});
+
+  return {risk:risk,lvl:lvl,laws:laws(S.place),warn:warn,act:act,flags:flags,decision:decision,posture:posture,test:test,selApps:selApps};
+}
+
+/* ---- document generators ---- */
+function signageText(r){
+  var pm={"Loss Prevention":"crime prevention, loss prevention and public safety","Workplace Safety":"workplace health and safety","Operational Analytics":"operational and service improvement","Customer Experience":"service and customer experience","Access Control":"site security and access control"};
+  var purpose=pm[S.purpose]||"security and public safety";
+  var techs=r.selApps.filter(function(a){return a.sign;}).map(function(a){return a.sign;});
+  var L=["NOTICE — VIDEO MONITORING IN USE",""];
+  L.push("Images are being monitored and recorded 24 hours a day for the purposes of "+purpose+".");
+  if(techs.length){ L.push(""); L.push("This site uses: "+techs.join("; ")+"."); }
+  if(r.flags.biometric){ L.push(""); L.push("Biometric information (facial measurements) is collected and used only for "+purpose+". It is NOT used for marketing, demographics, or any other purpose. It requires your consent."); }
+  L.push("");
+  L.push("Managed by "+(S.account||"[Customer]")+". For more information or to exercise your privacy rights, contact the Privacy Office at privacy@[customer].ca / 1-XXX-XXX-XXXX.");
+  return L.join("\n");
+}
+function piaText(r){
+  return [
+    "PRIVACY IMPACT ASSESSMENT — STARTER",
+    "Account: "+(S.account||"[Customer]")+"   |   Location: "+S.place+"   |   Laws: "+(r.laws.join(", ")||"—"),
+    "",
+    "1. PURPOSE        — "+S.purpose+"  (evidence: "+S.evidence+")",
+    "2. NECESSITY      — Applications: "+(r.selApps.map(function(a){return a.nm;}).join(", ")||"none")+"",
+    "3. ALTERNATIVES   — Less-intrusive options: "+S.alt,
+    "4. PROPORTIONALITY— Overall risk: "+r.lvl+"   |   Reasonable-person test: [ ] applied",
+    "",
+    "SAFEGUARDS",
+    "  • Consent model        : "+S.consent,
+    "  • Signage              : "+S.signage,
+    "  • Privacy-expectation areas: "+S.privacyArea,
+    "  • Data residency/access: "+S.residency,
+    "  • PIA on file          : "+S.pia,
+    "  • Biometric flag       : "+(r.flags.biometric?"YES — express consent required":"no"),
+    "  • Profiling flag       : "+(r.flags.profiling?"YES — disclose & confirm permitted":"no"),
+    "  • Cross-border flag    : "+(r.flags.cross?"YES — transfer assessment needed":"no"),
+    "",
+    "SIGN-OFF           — i3 Privacy team review: "+(r.lvl==="High"?"REQUIRED before POC approval":"on exception")
+  ].join("\n");
+}
+
+/* ===================== RENDERING ===================== */
+var thread=document.getElementById('thread');
+function pushBot(html){ add('bot','i3', html); }
+function pushMe(html){ add('me','You', html); }
+function add(side,who,html){
+  var row=document.createElement('div'); row.className='row '+side;
+  row.innerHTML='<div class="av '+(side==='bot'?'bot':'me')+'">'+(side==='bot'?'i3':'•')+'</div><div class="bubble">'+html+'</div>';
+  thread.appendChild(row); thread.scrollTop=thread.scrollHeight;
+}
+
+function renderStats(){
+  var r=assess();
+  document.getElementById('stats').innerHTML =
+    stat("Location", S.place||"—","") +
+    stat("Risk score", started()? r.risk : "—","") +
+    stat("Risk level", started()? r.lvl : "—","lvl-"+(started()?r.lvl:""));
+  function stat(l,v,cls){ return '<div class="stat '+cls+'"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'; }
+}
+function started(){ return S.place!=="" || S.apps.length>0; }
+
+function renderBrief(){
+  var r=assess(); var b=document.getElementById('brief'); b.className='brief lvl-'+r.lvl;
+  var html='';
+  // laws
+  html+='<div class="briefcard"><h3>Applicable laws</h3>';
+  html+= r.laws.length? r.laws.map(function(l){return '<span class="chip law">'+l+'</span>';}).join('') : '<div class="empty">Set the location to load the rulebook.</div>';
+  html+='</div>';
+  // risk
+  html+='<div class="briefcard lvl-'+r.lvl+'"><h3>Risk</h3>'+
+        '<div class="gauge"><span style="width:'+Math.min(100,r.risk*7)+'%"></span></div>'+
+        '<div class="kv"><span class="k">Score</span><span class="v">'+r.risk+'</span></div>'+
+        '<div class="kv"><span class="k">Level</span><span class="v">'+r.lvl+'</span></div></div>';
+  // flags
+  var f=[]; if(r.flags.biometric)f.push(['high','Biometric']); if(r.flags.profiling)f.push(['cau','Profiling']);
+  if(r.flags.employee)f.push(['cau','Employee monitoring']); if(r.flags.cross)f.push(['cau','Cross-border']);
+  if(r.flags.pia)f.push(['high','PIA outstanding']); if(r.flags.signage)f.push(['cau','Signage gap']);
+  html+='<div class="briefcard"><h3>Flags</h3>'+ (f.length? f.map(function(x){return '<span class="chip '+x[0]+'">'+x[1]+'</span>';}).join('') : '<div class="empty">None yet.</div>') +'</div>';
+  // selected apps
+  if(r.selApps.length){
+    html+='<div class="briefcard"><h3>Applications on quote</h3>'+ r.selApps.map(function(a){
+      var c=a.tier==="high"?"high":a.tier==="cau"?"cau":"ok"; return '<span class="chip '+c+'">'+a.nm+'</span>';
+    }).join('') +'</div>';
+  }
+  b.innerHTML=html;
+}
+
+function renderQuestion(){
+  var controls=document.getElementById('controls');
+  if(idx>=Q.length){ controls.innerHTML=''; return; }
+  var q=Q[idx];
+  document.getElementById('prog').textContent='Question '+(idx+1)+' of '+Q.length;
+  var html='<div class="qlabel">Your answer</div>';
+  if(q.type==='text'){
+    html+='<div class="freerow"><input id="freein" placeholder="'+q.ph+'" onkeydown="if(event.key===\'Enter\')answerText()"><button class="opt go" onclick="answerText()">Send</button></div>';
+  } else if(q.type==='single'){
+    html+='<div class="opts">'+q.opts.map(function(o){return '<button class="opt" onclick="answerSingle(\''+esc(o)+'\')">'+o+'</button>';}).join('')+'</div>';
+  } else if(q.type==='multi'){
+    html+='<div class="opts">'+APPS.map(function(a){
+      var on=multiSel.indexOf(a.id)>-1; var dot=a.tier==="high"?"#cf3344":a.tier==="cau"?"#e0a008":"#2aa19a";
+      return '<button class="opt multi '+(on?'on':'')+'" onclick="toggleMulti(\''+a.id+'\')"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+dot+';margin-right:6px;vertical-align:middle"></span>'+a.nm+'</button>';
+    }).join('')+'</div>';
+    html+='<div class="ctarow"><span class="ghost">'+multiSel.length+' selected</span><button class="opt go" onclick="answerMulti()">Confirm selection →</button></div>';
+  }
+  controls.innerHTML=html;
+  var fi=document.getElementById('freein'); if(fi) fi.focus();
+}
+function esc(s){ return String(s).replace(/'/g,"\\'"); }
+
+function ask(){
+  if(idx>=Q.length){ finish(); return; }
+  pushBot(Q[idx].bot + (Q[idx].note?'<span class="note">'+Q[idx].note+'</span>':''));
+  renderQuestion();
+}
+
+function answerText(){
+  var v=document.getElementById('freein').value.trim(); if(!v) return;
+  S[Q[idx].id]=v; pushMe(v); idx++; afterAnswer();
+}
+function answerSingle(v){ S[Q[idx].id]=v; pushMe(v); idx++; afterAnswer(); }
+function toggleMulti(id){ var i=multiSel.indexOf(id); if(i>-1)multiSel.splice(i,1); else multiSel.push(id); renderQuestion(); }
+function answerMulti(){
+  S.apps=multiSel.slice();
+  var names=S.apps.map(function(id){return app(id).nm;});
+  pushMe(names.length?names.join(", "):"(none selected)");
+  idx++; afterAnswer();
+}
+function afterAnswer(){ renderStats(); renderBrief(); ask(); }
+
+/* ---- final report ---- */
+function finish(){
+  document.getElementById('controls').innerHTML='<button class="restart" onclick="restart()">Run another review</button>';
+  document.getElementById('prog').textContent='Review complete';
+  pushBot("That's everything I need. I've written up the full compliance brief on the right — decision, the Four-Part Test, your next steps, and the customer-ready signage and PIA starter. Scroll the brief panel.");
+  var r=assess();
+  var rep=document.getElementById('report'); rep.className='report show lvl-'+r.lvl;
+  var tlabel={pass:"Satisfied",part:"Partial",fail:"Gap"};
+  rep.innerHTML =
+    '<div class="decision lvl-'+r.lvl+'">'+r.decision+'</div>'+
+    '<div class="sec"><h3>Four-Part Necessity &amp; Proportionality Test — '+r.test.score+' / 4</h3>'+
+      '<div class="testgrid">'+
+        tcell("1 · Purpose & evidence",r.test.p1,tlabel)+
+        tcell("2 · Technology need",r.test.p2,tlabel)+
+        tcell("3 · Less-intrusive ruled out",r.test.p3,tlabel)+
+        tcell("4 · Proportionality",r.test.p4,tlabel)+
+      '</div></div>'+
+    '<div class="sec"><h3>How to position it in the room</h3><div class="doc">'+r.posture+'</div></div>'+
+    '<div class="sec"><h3>Required next steps</h3>'+ (r.act.length?'<ol class="steps">'+r.act.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ol>':'<div class="empty">No outstanding actions — proceed with standard controls.</div>') +'</div>'+
+    '<div class="sec"><h3>Customer-ready signage (purpose-specific)</h3><div class="doc">'+signageText(r)+'</div></div>'+
+    '<div class="sec"><h3>PIA / DPIA starter</h3><div class="doc">'+piaText(r)+'</div></div>'+
+    '<div class="btnrow">'+
+      '<button class="btn p" onclick="alert(\'Simulated: review record pushed to the Salesforce opportunity — risk '+r.lvl+'.\')">Push to Salesforce</button>'+
+      '<button class="btn s" onclick="window.print()">Print / export pack</button>'+
+      (r.lvl==="High"?'<button class="btn g" onclick="alert(\'Simulated: escalation sent to the i3 Privacy team. POC approval is blocked pending sign-off.\')">Escalate to Privacy team</button>':'<button class="btn g" onclick="alert(\'Simulated: Privacy &amp; PM team notified for the checkpoint.\')">Notify Privacy / PM</button>')+
+    '</div>'+
+    '<div class="disclaim">Decision-support only — not legal advice. High-risk findings require i3 Privacy team sign-off. Knowledge base derived from the Q25 (Quebec Law 25) presentation deck: application standing, the Four-Part Test, OPC signage guidance, and jurisdictional standards.</div>';
+  function tcell(t,st,lab){ return '<div class="tcell '+st+'"><div class="st">'+lab[st]+'</div>'+t+'</div>'; }
+  rep.scrollIntoView({behavior:"smooth"});
+}
+
+function restart(){ reset(); thread.innerHTML=''; document.getElementById('report').className='report'; document.getElementById('report').innerHTML=''; renderStats(); renderBrief(); ask(); }
+
+/* boot */
+renderStats(); renderBrief(); ask();
+</script>
+</body>
+</html>
