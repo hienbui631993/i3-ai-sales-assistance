@@ -7,6 +7,20 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/v-vision-sales-engine.html` (V · Vision agentic engine)
+- New artifact: animated agentic **sales engine** named **V (Vision)**, grounded
+  in the i3 Agentic Sales Assistance doc, Gardewine POC template, competitor
+  cost matrix, and the privacy guides.
+- "Cool infographic that thinks": a glowing central **V** core orbited by 9 area
+  agents, with the active agent pulsing + a hot connection line and a live
+  typewriter **reasoning stream**.
+- 9 agents: V-Start (onboarding), V-Target (6sense/ZoomInfo lead intel),
+  V-Reach (marketing), V-Coach (i3i training), V-Guide (outreach + verification),
+  V-Present (presentation + manager), V-Prove (POC), V-Guard (legal/privacy =
+  Magenta), V-Close (commercial vs cost matrix → Salesforce/Automatica).
+- Multiple entry points (New Hire / Veteran / Jump to POC) and segment selector
+  (Retail / Commercial / School / Integrator). Verified end-to-end headless.
+
 ### Changed — `v2/magenta-portal-simulation.html`
 - Gave catalog product cards more room: title on its own line with spacing,
   price + risk tag on a clean second line, larger tag padding, and the Add

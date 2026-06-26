@@ -54,3 +54,40 @@ and build guide.
 simulation: login → iHost quote → Magenta trigger → function-call trace across
 Salesforce/Automatica/iHost/GoToMeeting → decision → write-back; North America v1;
 sales-cycle framing ~3–5 days → ~8 min).
+
+---
+
+## Request 3 — 2026-06-26 · "V for Vision" agentic sales engine  `#reglog`
+**Source docs:** i3 Competitor's Cost Matrix (xlsx), i3 Agentic Sales Assistance
+(docx), Gardewine POC (docx ×2), SIA Guide to State Facial Recognition Laws (pdf),
+2026 Loss Prevention and Privacy Guide (pdf).
+
+> "I like this let try to build working agentic sale agent call V for vision. give
+> it a cool info graphic image and make it seem like it it thinking. So, based on
+> all the documents that I'm loading up to you here, I want you to create several
+> agentic agents for each area. One for onboarding, two taking the onboarding
+> information and objective of the person getting onboarded. So there should be an
+> area where we load up the onboarding document. Then, using our Zoom and Sixth
+> Sense to process out potential leads. This will then prompt marketing and using
+> their tools to feed this information to the market that the salesperson is going
+> after. Once the system starts running, the salesperson will be pushed to go
+> through i3i and the proper training so follow the document I've given you on the
+> sales process. This will also then lead up to presentation and follow through
+> with the manager or their manager going to the presentation, and the presentation
+> will lead to proof of concept where the documents and everything else will be
+> filled in. So what I'm gonna load next, all the documentation, all the processes,
+> and I want you to create this agentic sales engine with the flow that we assume
+> that they're gonna start at, they can start at either stage, either from brand new
+> employee to a veteran employee, which is going into the proof of concept, or going
+> after a segment that i3 goes after, right? Whether it be one of the retail segments
+> or the commercial or school segment, or even the integrator, setting up an
+> integrator segment. So I'm gonna try to load up as much information as I can, and
+> then you give me what you got."
+
+**Delivered:** `v2/v-vision-sales-engine.html` — animated agentic-sales-engine
+infographic. A central **V** core orbited by 9 area agents (V-Start onboarding,
+V-Target lead intel via 6sense/ZoomInfo, V-Reach marketing, V-Coach training,
+V-Guide outreach/verification, V-Present presentation+manager, V-Prove POC,
+V-Guard legal/privacy = Magenta, V-Close commercial). Entry points (New Hire /
+Veteran / Jump to POC) + segment selector (Retail / Commercial / School /
+Integrator). "Run" plays a live thinking stream as each agent activates.
