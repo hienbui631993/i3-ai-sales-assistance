@@ -121,6 +121,26 @@
   .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:14px;justify-content:center}
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .legend i{width:9px;height:9px;border-radius:50%}
+  .intake{margin-top:18px}
+  .intakeBody{padding:16px}
+  .drop{border:1.5px dashed var(--pline);border-radius:13px;padding:20px;text-align:center;background:var(--panel2)}
+  .drop .di{font-size:30px}
+  .drop .dt{font-size:13px;color:#aec4d8;margin:8px auto 14px;max-width:520px;line-height:1.5}
+  .drop .db{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .drop .opt{border:1px solid #46b3ff;background:rgba(70,179,255,.1);color:#cfe6fb;border-radius:10px;padding:9px 15px;font-size:13px;font-weight:700;cursor:pointer}
+  .drop .opt:hover{background:rgba(70,179,255,.2)}
+  .parsing{display:flex;align-items:center;gap:12px;color:#9fd0ec;font-size:13px;font-weight:700;padding:6px}
+  .parsing .sp{width:20px;height:20px;border-radius:50%;border:2px solid transparent;border-top-color:#46b3ff;animation:spin .7s linear infinite}
+  .profile{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:820px){.profile{grid-template-columns:1fr 1fr}}
+  .pf{background:var(--panel2);border:1px solid var(--pline);border-radius:11px;padding:11px 13px}
+  .pf .k{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pf .val{font-size:13.5px;font-weight:800;color:#eaf2f9;margin-top:3px;line-height:1.3}
+  .pf.wide{grid-column:1/-1}
+  .pf .ment{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+  .pf .ment span{font-size:11px;font-weight:700;color:#bfe6d4;background:rgba(0,166,97,.12);border:1px solid rgba(0,166,97,.3);border-radius:999px;padding:2px 9px}
+  .pf.ok{border-color:rgba(0,166,97,.4)}
+  .reload{background:none;border:none;color:#7fc4ef;font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline}
   .foot{margin-top:24px;text-align:center;font-size:11.5px;color:#6f87a0;line-height:1.6}
   .src{display:inline-block;font-size:10.5px;color:#7fc4ef;background:rgba(70,179,255,.08);border:1px solid rgba(70,179,255,.2);border-radius:6px;padding:1px 7px;margin:2px}
 </style>
@@ -175,6 +195,11 @@
     </div>
   </div>
 
+  <div class="card intake" id="intake">
+    <div class="h"><h2>Onboarding intake · V-Start</h2><span class="meta" id="intakeMeta">no document loaded</span></div>
+    <div class="intakeBody" id="intakeBody"></div>
+  </div>
+
   <div class="legend">
     <span><i style="background:var(--pline)"></i>Queued</span>
     <span><i style="background:#46b3ff"></i>Thinking</span>
@@ -211,9 +236,9 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 /* ===== agents (areas), grounded in the i3 Agentic Sales Assistance doc ===== */
 var AGENTS=[
   {id:"start", nm:"V-Start", area:"Onboarding", ic:"🚀",
-    ds:"Ingests the onboarding document, builds the rep profile, scores readiness and assigns segment + training path.",
-    tools:["Onboarding doc","HR data","i3 Live","i3host"],
-    think:["reading onboarding document…","extracting role, region, experience, manager","building rep profile + permissions","experience level: detected","assigning segment + 45-day ramp plan"]},
+    ds:"Parses the onboarding & acclimation document into a rep profile, assigns the mentor team, schedules NSM training and the 30-day business plan, and sets the weekly reflection cadence.",
+    tools:["Onboarding doc","30-90 schedule","Reflection form","i3host"],
+    think:["reading onboarding & acclimation document…","profile: {NAME} · {ROLE} · {TERR}","assigning mentor team ({MENTORS} mentors) + 12–15 shadow meetings","scheduling NSM national sales training week","building 4–6 week plan + 30-day business plan (SWOT)","setting weekly Friday reflection-form cadence"]},
   {id:"target", nm:"V-Target", area:"Lead Intelligence", ic:"🎯",
     ds:"Pulls intent signals from 6sense & ZoomInfo, finds in-segment accounts and maps the full buying group with role-based pain points.",
     tools:["6sense","ZoomInfo","LinkedIn","HubSpot"],
@@ -223,9 +248,9 @@ var AGENTS=[
     tools:["Marketing automation","Email","Content"],
     think:["handing target accounts to marketing","drafting {SEG} value narrative","spinning up nurture sequence","warming accounts ahead of outreach"]},
   {id:"coach", nm:"V-Coach", area:"Training & Enablement", ic:"🎓",
-    ds:"Routes the rep through i3i / i3 Live training for the stage, certifies readiness and surfaces the right playbook.",
-    tools:["i3i","i3 Live","Sales process doc"],
-    think:["checking certification status…","assigning required {SEG} modules","tracking completion + test scores","readiness score computed","unlocking stage playbook"]},
+    ds:"Routes the rep through i3i / NSM training — Sales Mastery, Sales Ops fundamentals, the i3 Technology Center and production — tracks tests and certifies readiness.",
+    tools:["i3i","NSM training","Salesforce","Quoting tool"],
+    think:["loading {SEG} training path…","Sales Mastery: market shift, go-to-market, sales process","Sales Ops: Salesforce, quoting, forecasting, DocuSign","i3 Technology Center: hardware + solution offering","tracking completion + test scores","readiness score computed — certified"]},
   {id:"guide", nm:"V-Guide", area:"Guided Outreach", ic:"🧭",
     ds:"Drafts email / call / LinkedIn outreach, then verifies real activity (calls, meetings, transcripts) with anti-gaming checks.",
     tools:["Email","Calling","Calendar","Transcripts"],
@@ -261,6 +286,56 @@ var SEGMENTS=[
 var sel={entry:"newhire", seg:"retail"};
 var running=false, nodePos=[];
 
+/* ===== onboarding documents (parsed by V-Start) — from the real i3 docs ===== */
+var DOCS={
+  elie:{file:"Onboarding welcome — Elie P. 06062025.docx", name:"Elie Partamian", role:"Business Development Manager",
+    terr:"MEA", start:"Feb 20", manager:"David Crook", advisor:"Vy Hoang", marketing:"Edward Chung", seg:"commercial",
+    plan:"4-week fast-track (incl. NSM week)",
+    mentors:["Hal Wever","Paul Leiba","Paul Kerling","George Karaolis","Brent Humphrey","Jason Feltham","Steven Middleton"]},
+  newhire:{file:"Onboarding welcome — new hires 06062025.docx", name:"New Hire", role:"Sales Rep",
+    terr:"North America", start:"—", manager:"Sales Manager", advisor:"Vy Hoang", marketing:"Edward Chung", seg:"retail",
+    plan:"6-week acclimation (incl. NSM week)",
+    mentors:["Hal Wever","Paul Leiba","Paul Kerling"]}
+};
+state_profile=null; // V-Start output
+
+/* ---- onboarding intake ---- */
+function renderIntake(){
+  var body=document.getElementById('intakeBody'), meta=document.getElementById('intakeMeta');
+  if(!state_profile){
+    meta.textContent='no document loaded';
+    body.innerHTML='<div class="drop"><div class="di">📄</div>'+
+      '<div class="dt">Load an onboarding document and V-Start parses it into a rep profile, mentor team, acclimation plan and the weekly reflection cadence — then the engine runs against it.</div>'+
+      '<div class="db"><button class="opt" onclick="loadDoc(\'elie\')">Load: Elie P. — BDM, MEA</button>'+
+      '<button class="opt" onclick="loadDoc(\'newhire\')">Load: New Hire — Retail</button></div></div>';
+  }
+}
+function loadDoc(id){
+  if(running)return;
+  var body=document.getElementById('intakeBody');
+  body.innerHTML='<div class="parsing"><span class="sp"></span>V-Start parsing '+DOCS[id].file+' …</div>';
+  document.getElementById('intakeMeta').textContent='parsing…';
+  setTimeout(function(){ showProfile(id); }, 950);
+}
+function showProfile(id){
+  var d=DOCS[id]; state_profile=d;
+  sel.seg=d.seg;                          // doc drives the segment
+  sel.entry="newhire";                    // a fresh hire enters at onboarding
+  buildChips(); buildPipe(); paintStart();
+  document.getElementById('intakeMeta').textContent='✓ parsed by V-Start · '+d.file;
+  document.getElementById('intakeBody').innerHTML=
+    '<div class="profile">'+
+      pf('Rep',d.name)+pf('Role',d.role)+pf('Territory',d.terr)+pf('Start',d.start)+
+      pf('Direct manager',d.manager)+pf('Sales advisor',d.advisor)+pf('Marketing',d.marketing)+pf('Acclimation plan',d.plan)+
+      '<div class="pf wide ok"><div class="k">Mentor team + shadowing (12–15 meetings)</div>'+
+        '<div class="ment">'+d.mentors.map(function(m){return '<span>'+m+'</span>';}).join('')+'</div></div>'+
+      '<div class="pf wide"><div class="k">V-Start scheduled</div><div class="val" style="font-weight:600;font-size:12.5px;color:#aec4d8">'+
+        'NSM national sales training · 30-day business plan + SWOT · weekly Friday reflection form · probation reviews to 6-month milestone</div></div>'+
+    '</div>'+
+    '<div style="margin-top:12px;text-align:right"><button class="reload" onclick="clearDoc()">↻ load a different document</button></div>';
+}
+function clearDoc(){ if(running)return; state_profile=null; renderIntake(); }
+
 /* ---- build chips ---- */
 function buildChips(){
   document.getElementById('entryChips').innerHTML=ENTRIES.map(function(e){
@@ -271,7 +346,7 @@ function buildChips(){
   }).join('');
   var e=ENTRIES.find(function(x){return x.id===sel.entry});
   var s=SEGMENTS.find(function(x){return x.id===sel.seg});
-  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm;
+  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm+(state_profile?' · Doc: '+state_profile.name:'');
 }
 function pickEntry(id){ if(running)return; sel.entry=id; buildChips(); buildPipe(); paintStart(); }
 function pickSeg(id){ if(running)return; sel.seg=id; buildChips(); }
@@ -332,6 +407,18 @@ async function typeLine(prefix,text){
   span.innerHTML=prefix+text;
 }
 
+/* ---- helpers: profile fields + token fill ---- */
+function pf(k,v){ return '<div class="pf"><div class="k">'+k+'</div><div class="val">'+v+'</div></div>'; }
+function segName(){ return SEGMENTS.find(function(x){return x.id===sel.seg}).nm; }
+function fill(s){
+  var P=state_profile;
+  return s.replace(/{SEG}/g,segName())
+          .replace(/{NAME}/g, P?P.name:'the new rep')
+          .replace(/{ROLE}/g, P?P.role:'Sales Rep')
+          .replace(/{TERR}/g, P?P.terr:'North America')
+          .replace(/{MENTORS}/g, P?P.mentors.length:'3');
+}
+
 /* ---- run ---- */
 async function run(){
   if(running)return; running=true;
@@ -351,7 +438,7 @@ async function run(){
     document.getElementById('cMeta').textContent=a.nm+' · '+a.area;
     log('<span class="ag">'+a.nm+'</span> <span class="c">— '+a.area+'</span>','head');
     for(var k=0;k<a.think.length;k++){
-      var t=a.think[k].replace('{SEG}',segNm);
+      var t=fill(a.think[k]);
       await typeLine('  ↳ ', t);
       await sleep(120);
     }
@@ -392,7 +479,7 @@ function resetRun(){
 }
 
 /* boot */
-buildChips(); buildOrbit(); buildPipe();
+buildChips(); buildOrbit(); buildPipe(); renderIntake();
 </script>
 </body>
 </html>

@@ -7,6 +7,15 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/v-vision-sales-engine.html` (onboarding intake + deeper agents)
+- Added an **Onboarding intake** area: load an onboarding document and V-Start
+  parses it into a rep profile, mentor team, acclimation plan and the weekly
+  reflection cadence; the loaded doc drives the segment + entry point.
+- Deepened **V-Start** (NSM training, 30-day business plan + SWOT, Friday
+  reflection forms, mentors) and **V-Coach** (Sales Mastery, Sales Ops on
+  Salesforce/Quoting/Forecasting/DocuSign, i3 Technology Center, production)
+  reasoning — grounded in the onboarding welcome docs and 30-90 schedule.
+
 ### Added — `v2/v-vision-sales-engine.html` (V · Vision agentic engine)
 - New artifact: animated agentic **sales engine** named **V (Vision)**, grounded
   in the i3 Agentic Sales Assistance doc, Gardewine POC template, competitor

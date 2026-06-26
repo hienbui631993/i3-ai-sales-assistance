@@ -91,3 +91,25 @@ V-Guide outreach/verification, V-Present presentation+manager, V-Prove POC,
 V-Guard legal/privacy = Magenta, V-Close commercial). Entry points (New Hire /
 Veteran / Jump to POC) + segment selector (Retail / Commercial / School /
 Integrator). "Run" plays a live thinking stream as each agent activates.
+
+---
+
+## Request 4 — 2026-06-26 · More onboarding docs to deepen the agents  `#reglog`
+**Source docs:** i3 New Hire — Weekly Reflection (pdf), Onboarding 30-90 schedule
+(xlsx), Onboarding welcome documents for new hires & for Elie (docx ×2), plus two
+MS Forms reflection QR codes.
+
+> "here more process and document to help you build the multiple agentic agents to
+> make this sale process more simple and effective"
+
+**Delivered:** Deepened the V engine (`v2/v-vision-sales-engine.html`) with the real
+onboarding process:
+- New **Onboarding intake** area — load an onboarding document and V-Start parses
+  it into a rep profile (rep, role, territory, manager, advisor, marketing,
+  acclimation plan), the mentor team, and the scheduled items (NSM national sales
+  training, 30-day business plan + SWOT, weekly Friday reflection form, probation
+  reviews to 6-month). Two sample docs (Elie — BDM/MEA; generic New Hire — Retail);
+  the loaded doc drives the segment + entry point.
+- Deepened **V-Start** (acclimation plan, mentors, reflection cadence) and
+  **V-Coach** (Sales Mastery, Sales Ops on Salesforce/Quoting/Forecasting/DocuSign,
+  i3 Technology Center, production) reasoning, grounded in the 30-90 schedule.
