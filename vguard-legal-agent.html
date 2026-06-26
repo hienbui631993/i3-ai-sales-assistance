@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>V-Guard — Q25 Privacy & Legal Co-Pilot</title>
+<style>
+  :root{
+    --navy:#0E4C6D; --teal:#1C8A8A; --aqua:#A9D6D9; --light:#F4F8F9; --dark:#12313F;
+    --border:#dbe4e8; --muted:#5f7380;
+    --good-bg:#ecfdf5; --good-bd:#bbf7d0; --warn-bg:#fffbeb; --warn-bd:#fde68a;
+    --risk-bg:#fff1f2; --risk-bd:#fecdd3; --info-bg:#ecfeff; --info-bd:#a5f3fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark)}
+  .container{max-width:1300px;margin:0 auto;padding:24px}
+  .hero{
+    background:linear-gradient(135deg,#7f1d1d,#be123c);color:#fff;border-radius:24px;padding:24px;
+    box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:18px
+  }
+  .shield{
+    width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.18);position:relative;flex:none;
+    display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:26px
+  }
+  .shield::after{content:"";position:absolute;inset:-6px;border-radius:20px;border:2px solid rgba(255,255,255,.45);animation:pulse 2.2s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(.85);opacity:.9}70%{transform:scale(1.25);opacity:0}100%{opacity:0}}
+  .hero h1{margin:0;font-size:30px}
+  .hero .sub{opacity:.85;text-transform:uppercase;font-size:11px;letter-spacing:3px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;margin-top:20px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .card h3{margin:0;padding:16px 18px 0;font-size:18px}
+  .card .body{padding:18px}
+  .chat{display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding-right:6px}
+  .bubble{padding:12px 14px;border-radius:16px;max-width:92%;line-height:1.45;font-size:14px}
+  .v{background:#fef2f2;border:1px solid var(--risk-bd);align-self:flex-start}
+  .v .who{font-size:11px;font-weight:700;letter-spacing:1px;color:#be123c;text-transform:uppercase;margin-bottom:4px}
+  .me{background:var(--navy);color:#fff;align-self:flex-end}
+  .me .who{font-size:11px;font-weight:700;letter-spacing:1px;color:#cfe3ec;text-transform:uppercase;margin-bottom:4px}
+  .think-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#be123c;margin-left:3px;animation:blink 1.1s infinite}
+  .think-dot:nth-child(2){animation-delay:.18s}.think-dot:nth-child(3){animation-delay:.36s}
+  @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;padding:11px 13px;border-radius:14px;border:1px solid #cbd5e1;font-size:14px}
+  .btn{border:1px solid var(--border);background:#fff;color:#334155;padding:11px 16px;border-radius:14px;cursor:pointer;font-weight:700}
+  .btn.red{background:#be123c;color:#fff;border-color:#be123c}
+  .btn.ghost{background:#fff}
+  .grpttl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:10px 0 6px}
+  .tool{display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--border);border-radius:12px;margin-bottom:7px;font-size:13px;font-weight:600;cursor:pointer}
+  .tool input{width:auto}
+  .tool.flag{border-color:var(--risk-bd);background:var(--risk-bg)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--aqua);color:var(--navy);margin:0 6px 6px 0}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-left:6px}
+  .tag.bio{background:#fee2e2;color:#991b1b}.tag.id{background:#ffedd5;color:#9a3412}.tag.prof{background:#fef9c3;color:#854d0e}.tag.audio{background:#ede9fe;color:#5b21b6}
+  .brief h4{margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .soft{border:1px solid var(--border);background:#f8fafc;border-radius:16px;padding:14px}
+  .tmpl{border:1px dashed #be123c;background:#fff5f5;border-radius:14px;padding:14px;font-size:14px;line-height:1.5}
+  .lvl{display:inline-block;padding:6px 14px;border-radius:999px;font-weight:800;font-size:14px}
+  .lvl.High{background:var(--risk-bg);border:1px solid var(--risk-bd);color:#9f1239}
+  .lvl.Medium{background:var(--warn-bg);border:1px solid var(--warn-bd);color:#854d0e}
+  .lvl.Low{background:var(--good-bg);border:1px solid var(--good-bd);color:#166534}
+  ul{margin:8px 0 0 18px;padding:0}li{margin:7px 0;font-size:14px}
+  .step{border-left:3px solid #be123c;padding-left:12px;margin:10px 0}
+  .step b{font-size:13px}
+  .muted{color:var(--muted)}
+  .progress{height:6px;background:#eef2f4;border-radius:999px;overflow:hidden;margin-top:10px}
+  .progress > div{height:100%;background:#be123c;transition:width .3s}
+  .disclaimer{margin-top:14px;background:var(--warn-bg);border:1px solid var(--warn-bd);color:#854d0e;border-radius:14px;padding:12px 16px;font-size:13px;line-height:1.5}
+  @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  @media print{.no-print{display:none}body{background:#fff}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="shield">V</div>
+    <div>
+      <div class="sub">i3 International · Q25 Privacy & Legal Agent</div>
+      <h1>V-Guard</h1>
+      <div style="opacity:.92;font-size:14px;margin-top:4px">The privacy expert your reps bring into every POC. Built on the i3 Q25 deck: the four-part necessity test, the i3 application risk map, OPC signage guidance, and the bills that apply by province, state, and country — before the pilot launches.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">⚠️ <b>Not legal advice.</b> V-Guard is a decision-support tool for i3 sales due diligence. Its output is a starting point — confirm every requirement with qualified counsel and the i3 Privacy Officer before relying on it.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>V-Guard intake</h3>
+      <div class="body">
+        <div class="chat" id="chat"></div>
+        <div class="progress no-print"><div id="bar" style="width:0%"></div></div>
+        <div id="input" class="no-print" style="margin-top:14px"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Live compliance brief</h3>
+      <div class="body"><div id="brief" class="brief">
+        <div class="muted">The brief builds as you answer. When a problematic i3 application is in scope — or two systems are integrated — V-Guard escalates and produces the signage, documentation, and four-part test the Q25 process requires.</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===========================================================
+   Knowledge base — grounded in:
+   "Quebec 25 and i3 International" (Q25 Presentation Deck Rev.2)
+   and the i3 magenta privacy-agent mockup.
+   Slide references kept in comments for traceability.
+=========================================================== */
+
+/* i3 applications and where they fall in the Q25 risk map (deck slide 14).
+   grp "Concern" = problematic / higher risk; "Standard" = generally acceptable. */
+const apps = [
+  {name:"Facial Recognition / Biometrics", grp:"Concern", bio:true,  id:true,  prof:true},
+  {name:"i3 AI Loyalty",                   grp:"Concern", bio:true,  id:true,  prof:true},
+  {name:"AI Sentry",                       grp:"Concern", bio:false, id:true,  prof:true},
+  {name:"Audio Monitoring",                grp:"Concern", bio:false, id:true,  prof:true, audio:true},
+  {name:"LPR / Gate Control",              grp:"Concern", bio:false, id:true,  prof:true},
+  {name:"Engagement / Demographics",       grp:"Concern", bio:true,  id:false, prof:true},
+  {name:"Heat Mapping",                    grp:"Concern", bio:false, id:false, prof:true},
+  {name:"Customer Overflow",               grp:"Concern", bio:false, id:false, prof:true},
+  {name:"Service Anomaly",                 grp:"Concern", bio:false, id:false, prof:true},
+  {name:"Standard Video Recording",        grp:"Standard",bio:false, id:true,  prof:false},
+  {name:"Incident Reporting (EVT)",        grp:"Standard",bio:false, id:true,  prof:false},
+  {name:"Door Count",                      grp:"Standard",bio:false, id:false, prof:false},
+  {name:"Data Mining / Analytics",         grp:"Standard",bio:false, id:false, prof:false},
+  {name:"Alert Center",                    grp:"Standard",bio:false, id:false, prof:false},
+  {name:"Health Monitoring",               grp:"Standard",bio:false, id:false, prof:false},
+  {name:"Below Basket Detection",          grp:"Standard",bio:false, id:false, prof:false},
+  {name:"Donation",                        grp:"Standard",bio:false, id:false, prof:false}
+];
+
+/* Standards by jurisdiction (deck slides 7-8). */
+const jurisdictions = {
+  "Quebec, Canada":        {laws:["Quebec Law 25 (Bill 25)","PIPEDA"]},
+  "Alberta / BC, Canada":  {laws:["PIPA (AB/BC)","PIPEDA"]},
+  "Canada (other prov.)":  {laws:["PIPEDA"]},
+  "European Union":        {laws:["GDPR"]},
+  "United Kingdom":        {laws:["UK GDPR","DPA 2018"]},
+  "California, USA":       {laws:["CCPA / CPRA"]},
+  "Illinois, USA":         {laws:["BIPA (740 ILCS 14)"]},
+  "Texas, USA":            {laws:["Texas CUBI"]},
+  "United States (other)": {laws:["State biometric / FRT laws"]}
+};
+
+/* The recommended, purpose-specific signage (deck slide 16 — Metro example). */
+const signageTemplate =
+`"Images are being monitored and recorded 24 hours for the purposes of crime prevention and public safety.
+This is managed by [i3 / Customer] — for more information contact our Privacy Office at [phone / email]."`;
+
+/* OPC said these are too vague / too broad (deck slide 15). */
+const signageAvoid = [
+  '"These premises are monitored by video surveillance that may include electronic or biometric technologies" — ruled too vague.',
+  '"…to protect our customers and businesses" — ruled too broad.'
+];
+
+/* Four-Part Necessity & Proportionality Test (deck slides 18-19). */
+const fourPartTest = [
+  {t:"Step 1 — Purpose", pts:[
+    "Primary purpose clearly defined and documented; each purpose (loss prevention, safety, analytics) assessed separately.",
+    "Evidence of an actual problem exists (logs, incident reports, shrink data).",
+    "Speculative or prohibited purposes ruled out; consent requirements reviewed, especially for biometrics."]},
+  {t:"Step 2 — Technology Need & Effectiveness", pts:[
+    "Technology is necessary to achieve the stated purpose.",
+    "Effectiveness evaluated — accuracy, bias, error rates; incremental benefit is meaningful.",
+    "Less-intrusive existing measures are insufficient; technical limitations documented."]},
+  {t:"Step 3 — Less-Intrusive Alternatives", pts:[
+    "Alternatives identified and evaluated; unnecessary features disabled (audio, FRT, excess analytics).",
+    "Biometrics treated as a last resort; each new purpose re-assessed.",
+    "Data collection minimized — zones, angles, retention."]},
+  {t:"Step 4 — Proportionality", pts:[
+    "Reasonable-person test applied; intrusion proportionate to severity of risk.",
+    "Overall risk classified (low / medium / high); high-risk uses require enhanced safeguards.",
+    "Retention minimized and justified; safeguards aligned to data sensitivity; assessment fully documented."]}
+];
+
+/* Department ownership of each compliance area (deck slide 5). */
+const ownership = [
+  ["Four-Part Necessity Test","Sales"],
+  ["Consent & Transparency (signage)","Customer + Sales"],
+  ["Data Security / breach prevention / access","SOC 2 + Privacy"],
+  ["Cross-border access & PIA","Privacy + SOC 2"],
+  ["Disclosing personal information","Customer + SOC 2 + Privacy"],
+  ["Data retention","Customer Contract + i3 CMS + Privacy"],
+  ["Employee privacy","Video Applications"],
+  ["Process mapping","Sales + PM Team"],
+  ["Biometric technology","Sales + Privacy"],
+  ["Privacy Officer & i3 Privacy Management Program","i3 Leadership"]
+];
+
+/* ---------------- intake flow ---------------- */
+const questions = [
+  {id:"apps", type:"apps", v:"Hi, I'm V-Guard. Before this POC moves forward, let's clear it through Q25. First — which i3 applications will this pilot use? Anything in the 'Concern' group triggers a deeper review."},
+  {id:"integration", type:"select", v:"Does this pilot integrate two systems together — for example POS data with video, or analytics layered on cameras?", options:["No, single system","Yes — integrating multiple systems"]},
+  {id:"jurisdiction", type:"select", v:"Where will it be deployed? The bills change by province, state, and country.", options:Object.keys(jurisdictions)},
+  {id:"purpose", type:"text", v:"Step 1 of the four-part test: in one line, what is the primary business purpose?", placeholder:"Loss prevention and incident investigation"},
+  {id:"evidence", type:"select", v:"Is there evidence of an actual problem to justify it (shrink data, incident logs, audits)?", options:["Yes — documented evidence","Some, not formalized","No evidence yet"]},
+  {id:"alternative", type:"select", v:"Step 3: are less-intrusive alternatives (e.g. standard video, paper logs) insufficient for this purpose?", options:["Yes — alternatives are insufficient","A less-intrusive option might work","Not assessed yet"]},
+  {id:"subjects", type:"select", v:"Who is in the monitored area?", options:["General public / customers","Employees / staff","Both public and employees","Includes minors / vulnerable people"]},
+  {id:"privacyZones", type:"select", v:"Are any cameras in areas with an expectation of privacy (restrooms, breakrooms, change areas)?", options:["No","Yes","Not sure"]},
+  {id:"signage", type:"select", v:"What's the state of on-site signage and customer notice today?", options:["Adequate and purpose-specific","Generic or vague wording","None in place"]},
+  {id:"residency", type:"select", v:"Where is data stored and who can access it? (Privacy prefers Canada-for-Canada, US-for-US.)", options:["In-country only","Cross-border / U.S. support access","Vendor cloud, location unconfirmed"]},
+  {id:"pia", type:"select", v:"Has a PIA (Privacy Impact Assessment) been completed for this deployment?", options:["Yes","No","In progress"]},
+  {id:"officer", type:"select", v:"Last one — is a privacy officer / person in charge named for this account?", options:["Yes, named","No","Unknown"]}
+];
+
+const state = {step:0, answers:{apps:[]}, done:false};
+
+function flags(){
+  const sel = state.answers.apps || [];
+  const chosen = apps.filter(t=>sel.includes(t.name));
+  return {
+    biometric: chosen.some(t=>t.bio),
+    identifies: chosen.some(t=>t.id),
+    profiling: chosen.some(t=>t.prof),
+    audio: chosen.some(t=>t.audio),
+    concern: chosen.some(t=>t.grp==="Concern"),
+    triggers: chosen.some(t=>t.grp==="Concern") || (state.answers.integration||"").indexOf("Yes")===0,
+    chosen
+  };
+}
+
+/* ---------------- chat ---------------- */
+let transcript = [];
+function pushV(t){ transcript.push({who:"V-Guard",cls:"v",text:t}); }
+function pushMe(t){ transcript.push({who:"Rep",cls:"me",text:t}); }
+function renderChat(){
+  const c=document.getElementById('chat');
+  c.innerHTML = transcript.map(m=>`<div class="bubble ${m.cls}"><div class="who">${m.who}</div>${m.text}</div>`).join('');
+  c.scrollTop=c.scrollHeight;
+}
+function thinkThen(cb){
+  const c=document.getElementById('chat');
+  c.innerHTML += `<div class="bubble v" id="thinking"><div class="who">V-Guard</div>Checking Q25 <span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span></div>`;
+  c.scrollTop=c.scrollHeight;
+  setTimeout(()=>{const t=document.getElementById('thinking');if(t)t.remove();cb();},850);
+}
+
+function renderInput(){
+  const bar=document.getElementById('bar');
+  bar.style.width=Math.round((state.step/questions.length)*100)+"%";
+  const box=document.getElementById('input');
+  if(state.done){ bar.style.width="100%";
+    box.innerHTML=`<button class="btn red" onclick="window.print()">Export brief (print / PDF)</button>
+      <button class="btn ghost" onclick="downloadPIA()">Download PIA workbook (CSV)</button>
+      <button class="btn ghost" onclick="restart()">Start over</button>`; return; }
+  const q=questions[state.step];
+  if(q.type==="apps"){
+    const grp=g=>apps.filter(a=>a.grp===g).map(t=>{
+      const on=(state.answers.apps||[]).includes(t.name);
+      const flag=t.grp==="Concern";
+      return `<label class="tool ${flag?'flag':''}"><input type="checkbox" ${on?'checked':''} onchange="toggleApp('${t.name.replace(/'/g,"")}')"/> ${t.name}
+        ${t.bio?'<span class="tag bio">biometric</span>':''}${t.audio?'<span class="tag audio">audio</span>':''}${t.id&&!t.bio?'<span class="tag id">identifies</span>':''}${t.prof?'<span class="tag prof">profiling</span>':''}</label>`;
+    }).join('');
+    box.innerHTML=`<div class="grpttl">Concern / problematic (deck slide 14)</div>${grp("Concern")}
+      <div class="grpttl">Generally acceptable</div>${grp("Standard")}
+      <button class="btn red" style="margin-top:6px" onclick="answer((state.answers.apps||[]).join(', ')||'None selected')">Continue</button>`;
+  } else if(q.type==="select"){
+    box.innerHTML=`<div class="field"><select id="sel">${q.options.map(o=>`<option>${o}</option>`).join('')}</select></div>
+      <button class="btn red" onclick="answer(document.getElementById('sel').value)">Continue</button>`;
+  } else {
+    box.innerHTML=`<div class="field"><input id="txt" placeholder="${q.placeholder||''}"/></div>
+      <button class="btn red" onclick="answer(document.getElementById('txt').value||'(not provided)')">Continue</button>`;
+  }
+}
+
+function toggleApp(name){
+  const arr=state.answers.apps||(state.answers.apps=[]);
+  const i=arr.indexOf(name); if(i>=0)arr.splice(i,1); else arr.push(name);
+  renderInput(); renderBrief();
+}
+
+function answer(val){
+  const q=questions[state.step];
+  state.answers[q.id]= q.id==="apps" ? (state.answers.apps||[]) : val;
+  pushMe(val);
+  let react="";
+  const f=flags();
+  if(q.id==="apps"){
+    react = f.concern
+      ? "Those applications fall in the Q25 'Concern' group — they can identify or profile people, so I'm escalating to a full review."
+      : "Nothing problematic in that list. We'll keep this light, but a few questions still matter.";
+  } else if(q.id==="integration" && val.indexOf("Yes")===0){
+    react = "Important — integrating two systems (like POS + video) creates new data combinations. Per the deck, that alone moves a deployment from low/average to HIGH risk because it builds a profile that tracks people.";
+  } else if(q.id==="evidence" && val!=="Yes — documented evidence"){
+    react = "Flagging that. Step 1 of the four-part test needs evidence of a real problem — otherwise the purpose looks speculative.";
+  } else if(q.id==="alternative" && val!=="Yes — alternatives are insufficient"){
+    react = "Noted. If a less-intrusive method could work, regulators expect you to use it or justify why it can't. Biometrics are a last resort.";
+  } else if(q.id==="privacyZones" && val==="Yes"){
+    react = "That's a hard stop under Q25 — cameras are restricted in areas with an expectation of privacy (restrooms, breakrooms). Flagging for removal.";
+  } else if(q.id==="signage" && val!=="Adequate and purpose-specific"){
+    react = "Signage is the most common gap. I'll generate purpose-specific wording — the OPC has rejected vague language like the Canadian Tire sign.";
+  }
+  state.step++;
+  renderChat();
+  thinkThen(()=>{
+    if(state.step<questions.length){
+      if(react)pushV(react);
+      pushV(questions[state.step].v);
+    } else {
+      pushV("That's everything. Your compliance brief is on the right — risk level, the four-part test, required signage, the documents to generate, and who owns each step.");
+      state.done=true;
+    }
+    renderChat(); renderInput(); renderBrief();
+  });
+}
+
+/* ---------------- brief engine ---------------- */
+function compute(){
+  const a=state.answers, f=flags();
+  const j=a.jurisdiction||"Quebec, Canada";
+  const laws=(jurisdictions[j]||{}).laws||[];
+  let score=0; const steps=[],docs=[],signage=[],warn=[];
+
+  if(f.identifies){score+=2; docs.push("Privacy notice describing what is captured and why.");}
+  if(f.biometric){score+=3; warn.push("Biometric / facial-recognition processing is in scope — highest-risk category in every framework."); steps.push("Confirm biometrics are strictly necessary and a last resort; document the justification.");}
+  if(f.audio){score+=2; warn.push("Audio monitoring materially increases privacy sensitivity (deck: problematic).");}
+  if(f.profiling){score+=2; steps.push("Run the four-part necessity & proportionality test (below) on this exact use case.");}
+
+  if((a.integration||"").indexOf("Yes")===0){score+=3; warn.push("System integration (e.g. POS + video) creates new data combinations → a profile that tracks people. Per the deck this triggers reassessment and pushes risk to HIGH.");}
+  if(a.evidence==="No evidence yet"){score+=2; warn.push("No documented evidence of a real problem — Step 1 of the four-part test is unmet.");}
+  if(a.evidence==="Some, not formalized"){score+=1;}
+  if(a.alternative && a.alternative!=="Yes — alternatives are insufficient"){score+=1; steps.push("Document why a less-intrusive alternative is not viable, or switch to it (Step 3).");}
+  if(a.subjects==="Employees / staff"||a.subjects==="Both public and employees"){score+=2; warn.push("Employee monitoring is in scope — Q25 restricts engagement/performance metrics and tracking employees across cameras."); steps.push("Route employee-privacy questions to the Video Applications owner; confirm no productivity/engagement profiling.");}
+  if(a.subjects==="Includes minors / vulnerable people"){score+=2; warn.push("Minors / vulnerable people present — heightened consent and necessity standards.");}
+  if(a.privacyZones==="Yes"){score+=3; warn.push("Cameras in privacy-expectation areas (restrooms/breakrooms) are restricted under Q25 — remove before launch.");}
+
+  // signage
+  if(a.signage!=="Adequate and purpose-specific"){
+    score += a.signage==="None in place"?2:1;
+    signage.push("Replace current notice with purpose-specific signage (see recommended wording).");
+  }
+  if(f.biometric){
+    signage.push("Add biometric-specific language: what biometric data is obtained, how it is managed and used, and what it does NOT do (no marketing, no demographics) — per OPC guidance.");
+  }
+
+  // jurisdiction specifics
+  if(j==="Quebec, Canada"){
+    steps.push("Complete a PIA (ÉFVP) — required for personal-information systems under Law 25.");
+    if(f.biometric){
+      score+=2;
+      steps.push("Declare the biometric system/database to the CAI at least 60 days before service.");
+      steps.push("Obtain EXPRESS consent for sensitive PI (individual sign-off) — implied consent is not enough.");
+      docs.push("CAI biometric database declaration (Law 25).");
+      docs.push("Express biometric consent form (separate sign-off).");
+    }
+  }
+  if(j==="Alberta / BC, Canada"){ steps.push("Apply PIPA (AB/BC) — reasonable purpose, notice, and consent for collection."); }
+  if(j==="European Union"||j==="United Kingdom"){
+    steps.push("Document an Article 6 lawful basis (legitimate interests via LIA, or consent).");
+    signage.push("Article 13 transparency notice at entry: controller identity, purposes, lawful basis, retention, and data-subject rights.");
+    if(f.biometric){score+=2; warn.push("EU/UK: biometrics that uniquely identify are special-category data (GDPR Art. 9)."); docs.push("DPIA (GDPR Art. 35) — mandatory for biometrics / large-scale monitoring.");}
+  }
+  if(j==="California, USA"){ signage.push("CCPA/CPRA 'Notice at Collection' at the point of capture."); if(f.biometric){steps.push("Offer a 'Limit the Use of My Sensitive Personal Information' option; biometrics are sensitive PI under CPRA.");} }
+  if(j==="Illinois, USA" && f.biometric){
+    score+=3; warn.push("Illinois BIPA — strictest US biometric law, with a private right of action (statutory damages $1,000–$5,000 per violation).");
+    steps.push("Obtain prior written release before any biometric capture; publish a retention/destruction schedule; never sell or profit from biometric data.");
+    docs.push("BIPA written consent + public retention/destruction policy.");
+  }
+  if(j==="Texas, USA" && f.biometric){ score+=1; steps.push("Texas CUBI: notice + consent before biometric capture for a commercial purpose (enforced by the Texas AG)."); docs.push("CUBI notice + consent record."); }
+  // US facial-recognition landscape (SIA Guide to State & Local FRT Laws)
+  if(j.indexOf("USA")>=0 && f.biometric){
+    steps.push("Per the SIA guide: commercial facial recognition is legal in all 50 states, but biometrics are increasingly governed by state data-privacy laws — confirm the deployment state's biometric rules (IL BIPA, CA CCPA/CPRA, TX CUBI lead).");
+    warn.push("Note: the dedicated state FRT statutes (Maine, Washington, Utah, Colorado, Montana) restrict GOVERNMENT / law-enforcement use, not commercial — but several states are extending biometric guardrails to commercial use.");
+  }
+
+  // cross-border / residency
+  if((a.residency||"").indexOf("Cross-border")===0){score+=1; warn.push("Cross-border / U.S. support access — needs documented controls."); steps.push("Document cross-border access and support roles; add transfer safeguards (SCCs for EU/UK). Privacy prefers Canada-for-Canada storage.");}
+  if(a.residency==="Vendor cloud, location unconfirmed"){score+=1; steps.push("Confirm exactly where data is stored and who can access it before launch.");}
+
+  // PIA / officer
+  if(a.pia==="No"){score+=1; steps.push("Launch the PIA workflow before deployment approval.");}
+  if(a.officer!=="Yes, named"){steps.push("Name a privacy officer / person in charge before the POC starts (i3 Leadership owns the Privacy Management Program).");}
+
+  if(f.biometric||f.profiling) docs.push("Excel PIA / compliance workbook for this deployment.");
+  steps.push("Store all answers, stakeholders, and this brief back to Salesforce and i3-owned records (i3 CMS).");
+
+  const level = !f.triggers ? "Low" : score>=8 ? "High" : score>=4 ? "Medium" : "Low";
+  const decision = level==="High" ? "Escalate to the i3 Privacy Team before POC approval"
+    : level==="Medium" ? "Proceed with a documented privacy checkpoint"
+    : "Proceed with standard controls";
+  const positioning = level==="High"
+    ? "Position narrowly as a defined security / incident-investigation use case. Do NOT describe it as broad tracking, profiling, marketing, or demographic intelligence."
+    : level==="Medium"
+    ? "Keep the use case tightly tied to the documented purpose; don't expand scope during the sales cycle."
+    : "Standard security positioning while confirming notice, retention, and access controls.";
+
+  return {j,laws,score,level,decision,positioning,
+    steps:[...new Set(steps)],docs:[...new Set(docs)],signage:[...new Set(signage)],warn:[...new Set(warn)],f};
+}
+
+function renderBrief(){
+  const el=document.getElementById('brief');
+  const a=state.answers, f=flags();
+  if(!a.jurisdiction && !f.triggers && state.step<2){
+    el.innerHTML=`<div class="muted">The brief builds as you answer. Selecting a 'Concern' application or integrating two systems escalates the review.</div>`;
+    return;
+  }
+  const r=compute();
+  const conc=f.chosen.filter(t=>t.grp==="Concern").map(t=>`<span class="pill">${t.name}</span>`).join('');
+  el.innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="lvl ${r.level}">Risk: ${r.level}</span><span class="muted">Risk points: ${r.score}</span>
+    </div>
+    <h4>Decision</h4><div class="soft" style="font-weight:700">${r.decision}</div>
+    <h4>Jurisdiction & applicable law</h4><div>${r.j} ${r.laws.map(l=>`<span class="pill">${l}</span>`).join('')}</div>
+    ${conc?`<h4>Triggering applications</h4><div>${conc}</div>`:''}
+    ${r.warn.length?`<h4>Warnings</h4><div class="soft" style="background:var(--risk-bg);border-color:var(--risk-bd)"><ul>${r.warn.map(w=>`<li>${w}</li>`).join('')}</ul></div>`:''}
+    <h4>Four-part necessity & proportionality test</h4>
+    <div class="soft">${fourPartTest.map(s=>`<div class="step"><b>${s.t}</b><ul>${s.pts.map(p=>`<li>${p}</li>`).join('')}</ul></div>`).join('')}</div>
+    <h4>Signage & notice</h4>
+    ${r.signage.length?`<ul>${r.signage.map(s=>`<li>${s}</li>`).join('')}</ul>`:`<div class="muted">No signage changes triggered.</div>`}
+    <div class="grpttl" style="margin-top:10px">Recommended wording (deck slide 16)</div>
+    <div class="tmpl">${signageTemplate}</div>
+    <div class="grpttl" style="margin-top:10px">Avoid (OPC rejected these)</div>
+    <div class="soft"><ul>${signageAvoid.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+    <h4>Documentation to generate</h4>
+    ${r.docs.length?`<ul>${r.docs.map(d=>`<li>${d}</li>`).join('')}</ul>`:`<div class="muted">Standard privacy notice only.</div>`}
+    <h4>Action checklist</h4><ul>${r.steps.map(s=>`<li>${s}</li>`).join('')}</ul>
+    <h4>Sales positioning</h4><div class="soft">${r.positioning}</div>
+    <h4>Who owns each step (deck slide 5)</h4>
+    <div class="soft"><ul>${ownership.map(o=>`<li><b>${o[0]}</b> → ${o[1]}</li>`).join('')}</ul></div>
+    ${r.level==='High'?`<h4>Escalation</h4><div class="soft">Route to the <b>i3 Privacy Team</b> — Grace Hoang (lead), with Steve M, Kishan P, and Sharon Bauer (Bamboo Data Consulting) — before POC approval.</div>`:''}
+    <h4>Sources</h4><div class="muted" style="font-size:12px">Grounded in: i3 Q25 deck (“Quebec 25 and i3 International”); 2026 Loss Prevention & In-Store Privacy Guide (Bamboo Data Consulting, Sharon Bauer) — four-part test, OPC biometric guidance; SIA Guide to U.S. State & Local Facial Recognition Laws (2023). Reference only — not legal advice; confirm with counsel and the privacy officer.</div>`;
+}
+
+/* Excel-ready PIA workbook (deck slide 23: "Excel compliance documents for PIA") */
+function csvCell(s){ return `"${(''+s).replace(/"/g,'""')}"`; }
+function downloadPIA(){
+  const a=state.answers, r=compute();
+  const rows=[], add=(...c)=>rows.push(c.map(csvCell).join(','));
+  add("i3 Privacy Impact Assessment (PIA) — generated by V-Guard");
+  add("Decision-support only — not legal advice. Confirm with counsel and the i3 Privacy Officer.");
+  add("");
+  add("Section","Item","Value / Detail","Status / Owner / Evidence");
+  const dc=[["Jurisdiction",r.j],["Applicable law(s)",r.laws.join("; ")],
+    ["i3 applications in scope",(a.apps||[]).join("; ")],["System integration",a.integration||""],
+    ["Primary purpose",a.purpose||""],["Evidence of a real problem",a.evidence||""],
+    ["Less-intrusive alternatives",a.alternative||""],["Who is monitored",a.subjects||""],
+    ["Privacy-expectation zones",a.privacyZones||""],["Signage status",a.signage||""],
+    ["Data residency",a.residency||""],["PIA completed",a.pia||""],["Privacy officer",a.officer||""]];
+  dc.forEach(x=>add("Deal Context",x[0],x[1],""));
+  add("Risk Assessment","Risk level",r.level,"");
+  add("Risk Assessment","Risk points",r.score,"");
+  add("Risk Assessment","Decision",r.decision,"");
+  add("Risk Assessment","Sales positioning",r.positioning,"");
+  fourPartTest.forEach(s=>s.pts.forEach(p=>add("Four-Part Necessity Test",s.t,p,"")));
+  r.warn.forEach(w=>add("Warnings","Flag",w,""));
+  r.signage.forEach(s=>add("Signage & Notice","Requirement",s,""));
+  add("Signage & Notice","Recommended wording",signageTemplate.replace(/\s+/g,' ').trim(),"");
+  r.docs.forEach(d=>add("Documentation","To generate",d,""));
+  r.steps.forEach(s=>add("Action Checklist","Action",s,""));
+  ownership.forEach(o=>add("Ownership",o[0],o[1],""));
+  add("Sources","Reference","i3 Q25 deck; 2026 LP & Privacy Guide (Bamboo Data Consulting); SIA State FRT Guide","Not legal advice");
+  const blob=new Blob(["﻿"+rows.join("\r\n")],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob), link=document.createElement('a');
+  link.href=url; link.download="VGuard-PIA-"+r.j.replace(/[^a-z0-9]/gi,'_')+".csv";
+  document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+}
+function restart(){ state.step=0; state.answers={apps:[]}; state.done=false; transcript=[]; boot(); }
+function boot(){ pushV(questions[0].v); renderChat(); renderInput(); renderBrief(); }
+boot();
+</script>
+</body>
+</html>
