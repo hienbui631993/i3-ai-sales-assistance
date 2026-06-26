@@ -7,6 +7,15 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/v-vision-sales-engine.html` · deeper V-Reach / V-Guide
+- **V-Reach** grounded in the onboarding doc's marketing model — hand-off to
+  marketing, segment value narrative, social campaign (new lead source), nurture,
+  and VAR/partner-network activation.
+- **V-Guide** grounded in the agentic-sales verification layer — proves email,
+  phone, mobile and meeting activity, runs anti-gaming checks, and counts only
+  verified activity toward progression.
+- All 9 V agents now grounded in the loaded documents.
+
 ### Added — `v2/portal.html` (unified Vision Portal landing page)
 - New hub tying everything together: cards linking to **V · Vision Sales Engine**,
   **Magenta Privacy Co-Pilot**, **Privacy Compliance Agent**, and the **Manager
