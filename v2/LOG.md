@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Fixed — Portal card navigation under htmlpreview
+- Portal cards used relative links, which the htmlpreview proxy doesn't rewrite
+  for navigation (clicking just appended the hash to `portal.html`). Cards now
+  carry `data-target`/`data-hash`, and a boot script rewrites them to full
+  htmlpreview proxy URLs when running on `htmlpreview.github.io`, while keeping
+  plain relative links when self-hosted (e.g. iHost). The Manager card now lands
+  on the working `…/v-vision-sales-engine.html#manager` proxy URL.
+
 ### Fixed — Manager Dashboard deep-link from the portal
 - The portal's **Manager Dashboard** card opened the engine on the default view
   because preview proxies (htmlpreview) drop the `#manager` URL fragment. The
