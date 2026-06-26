@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vision · i3 Sales Agent</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 · Helvetica Neue */
+  :root{
+    --brand:#00588F;--brand-700:#024d7c;--brand-900:#002447;
+    --pink:#DF1E71;--green:#00A661;--yellow:#FFC107;--red:#C8102E;
+    --ink:#0d1b2a;--ink2:#33424f;--muted:#69788a;--line:#dfe6ee;--bg:#eef2f6;--panel:#fff;
+    --inbg:#e8f1f8;--inbd:#bcd9ee;--okbg:#e7f8f0;--okbd:#a6e8c8;--wnbg:#fff7e0;--wnbd:#ffe39c;--hibg:#fdebef;--hibd:#f4b8c3;
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 22px;position:sticky;top:0;z-index:10}
+  .topbar .ilogo{height:24px}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.4px}.topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;gap:9px;align-items:center}
+  .roleSel{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:9px;overflow:hidden}
+  .roleSel button{background:transparent;color:#cfe3f1;border:none;padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .roleSel button.on{background:var(--brand);color:#fff}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 22px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  /* ----- start ----- */
+  .vhead{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+  .vorb{flex:none;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#0e6fb0,var(--brand-900));display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:800;box-shadow:0 0 26px rgba(0,88,143,.4)}
+  h1{font-size:30px;margin:6px 0 4px;font-weight:800;letter-spacing:-.4px}
+  .lede{color:var(--ink2);font-size:15px;line-height:1.55;max-width:640px}
+  .qprompt{margin:26px 0 12px;font-size:18px;font-weight:800}
+  .stages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.stages{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.stages{grid-template-columns:1fr}}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:16px;cursor:pointer;transition:.14s;position:relative}
+  .stage:hover{border-color:var(--brand);box-shadow:0 8px 22px rgba(0,40,75,.1);transform:translateY(-2px)}
+  .stage .ic{width:42px;height:42px;border-radius:11px;background:var(--inbg);border:1px solid var(--inbd);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:11px}
+  .stage h3{margin:0 0 4px;font-size:16px;font-weight:800}
+  .stage p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .stage .step{position:absolute;top:14px;right:15px;font-size:11px;font-weight:800;color:#9fb8cf}
+  .stage.locked{opacity:.55;cursor:not-allowed}
+  .stage.locked:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .lock{position:absolute;top:14px;right:15px;font-size:11px;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+
+  /* ----- stage view ----- */
+  .back{background:none;border:none;color:var(--brand);font-weight:700;font-size:13.5px;cursor:pointer;padding:0;margin-bottom:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
+  .card .h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .card .h .ic{width:38px;height:38px;border-radius:10px;background:var(--inbg);border:1px solid var(--inbd);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .card .h h2{margin:0;font-size:17px;font-weight:800}.card .h .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .body{padding:18px}
+  .vsay{display:flex;gap:11px;align-items:flex-start;margin-bottom:14px}
+  .vsay .av{flex:none;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#0e6fb0,var(--brand-900));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+  .vsay .bub{background:#f1f6fa;border:1px solid var(--line);border-radius:12px;border-top-left-radius:4px;padding:11px 14px;font-size:14px;line-height:1.5}
+  label.f{display:block;margin-bottom:13px}
+  label.f .l{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin-bottom:6px;display:block}
+  select,input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit}
+  textarea{min-height:90px;resize:vertical}
+  select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,88,143,.12)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chk{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer}
+  .chk.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .btn{border:none;border-radius:11px;padding:11px 18px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  .btn.p{background:var(--brand);color:#fff}.btn.p:hover{background:var(--brand-700)}
+  .btn.g{background:#eef2f7;color:var(--ink2)}
+  .upload{border:1.5px dashed var(--line);border-radius:12px;padding:18px;text-align:center;background:#fafcfe}
+  .upload .di{font-size:26px}.upload .dt{font-size:13px;color:var(--muted);margin:7px auto 12px;max-width:420px;line-height:1.5}
+
+  .thinking{display:flex;align-items:center;gap:11px;color:var(--brand);font-weight:700;font-size:14px;padding:6px 0}
+  .sp{width:20px;height:20px;border-radius:50%;border:2.5px solid #cfe0ee;border-top-color:var(--brand);animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .out{margin-top:6px}
+  .osec{margin-bottom:16px}
+  .osec h4{margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .kv{background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .kv .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  .kv .v{font-size:13.5px;font-weight:700;margin-top:2px}
+  ol.steps,ul.steps{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6}
+  ol.steps li,ul.steps li{margin-bottom:5px}
+  .doc{white-space:pre-wrap;background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:13px;font-size:12.8px;line-height:1.55;color:var(--ink2)}
+  .badge{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:3px 10px}
+  .badge.ok{background:var(--okbg);color:#0a7d4f;border:1px solid var(--okbd)}
+  .badge.warn{background:var(--wnbg);color:#8a5d05;border:1px solid var(--wnbd)}
+  .badge.hi{background:var(--hibg);color:var(--red);border:1px solid var(--hibd)}
+  .chip{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 10px;margin:0 5px 5px 0;background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo"></div>
+  <div class="sep"></div>
+  <div class="prod">Vision<small>i3 Sales Agent</small></div>
+  <div class="right">
+    <div class="roleSel">
+      <button class="on" id="ro-rep" onclick="setRole('rep')">i3 Rep</button>
+      <button id="ro-integ" onclick="setRole('integ')">Integrator</button>
+      <button id="ro-partner" onclick="setRole('partner')">Partner</button>
+    </div>
+    <span class="pill" id="segPill">Segment: Retail</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- START -->
+  <div id="view-start">
+    <div class="vhead">
+      <div class="vorb">V</div>
+      <div>
+        <div class="eyebrow">i3 · inside iHost</div>
+        <h1>Hi, I'm Vision — your sales agent</h1>
+      </div>
+    </div>
+    <p class="lede">I help you get <b>more leads</b>, <b>close faster</b>, and drive <b>greater revenue</b> in your
+    core segment. Tell me where you are and load in what you've got — I'll take it from there.</p>
+
+    <label class="f" style="max-width:260px;margin-top:16px"><span class="l">Your core segment</span>
+      <select id="segSel" onchange="setSeg(this.value)">
+        <option>Retail</option><option>Grocery</option><option>QSR</option><option>Commercial</option><option>School</option><option>Integrator</option>
+      </select>
+    </label>
+
+    <div class="qprompt">What stage of sales are you in?</div>
+    <div class="stages" id="stages"></div>
+    <div class="foot" style="margin-top:20px" id="roleNote"></div>
+  </div>
+
+  <!-- STAGE -->
+  <div id="view-stage" class="hidden">
+    <button class="back" onclick="goStart()">← Change stage</button>
+    <div class="card">
+      <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div></div>
+      <div class="body">
+        <div class="vsay"><div class="av">V</div><div class="bub" id="stIntro"></div></div>
+        <div id="stInputs"></div>
+        <div id="stRun" style="margin-top:6px"></div>
+        <div id="stOut" class="out"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Working model / simulation — outputs are illustrative. Runs inside iHost; not public. © 2026 i3 International Inc.</div>
+</div>
+
+<script>
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+
+/* ===== state ===== */
+var S={role:'rep', seg:'Retail'};
+
+/* ===== stages (chronological) ===== */
+var STAGES=[
+  {id:"onboard", n:1, ic:"🚀", nm:"Onboarding & Ramp", sub:"New to i3 or a new territory",
+    blurb:"Build my ramp from my onboarding plan", partner:false,
+    intro:"Welcome aboard. Load your onboarding plan and I'll turn it into your ramp — profile, mentors, training, and your first actions."},
+  {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"Find and prioritize accounts",
+    blurb:"Surface high-intent leads in my segment", partner:false,
+    intro:"Let's fill your pipeline. Confirm your segment and I'll surface high-intent accounts, map the buying group, and draft your first touch."},
+  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Prep and capture the meeting",
+    blurb:"Prep my deck and capture the meeting", partner:true,
+    intro:"Paste your meeting notes or transcript. I'll pull the customer's drivers, outline the deck, and tell you when to bring your manager in."},
+  {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Scope and document the POC",
+    blurb:"Build my POC with success metrics", partner:false,
+    intro:"Tell me what we're proving and where. I'll scaffold the POC from our template with a 45-day plan and success metrics."},
+  {id:"legal", n:5, ic:"🛡️", nm:"Legal & Privacy", sub:"Run the privacy review (Magenta)",
+    blurb:"Check privacy and generate signage", partner:true,
+    intro:"Which i3 solutions, and where? I'll run the privacy review (Law 25 / GDPR), give you a decision, and draft customer signage."},
+  {id:"close", n:6, ic:"🤝", nm:"Closing", sub:"Out-position and close",
+    blurb:"Out-position the incumbent and close", partner:false,
+    intro:"Who are we up against? I'll pull the battlecard, position our price, and give you a close checklist."}
+];
+function stage(id){return STAGES.find(function(s){return s.id===id})}
+
+/* ===== role / segment ===== */
+function setRole(r){
+  S.role=r;
+  ['rep','integ','partner'].forEach(function(x){document.getElementById('ro-'+x).classList.toggle('on',x===r)});
+  renderStages();
+}
+function setSeg(v){ S.seg=v; document.getElementById('segPill').textContent='Segment: '+v; }
+function allowed(st){ return S.role==='partner' ? st.partner : true; }
+
+/* ===== start view ===== */
+function renderStages(){
+  document.getElementById('stages').innerHTML=STAGES.map(function(s){
+    var ok=allowed(s);
+    return '<div class="stage '+(ok?'':'locked')+'" '+(ok?'onclick="openStage(\''+s.id+'\')"':'')+'>'+
+      (ok?'<div class="step">Stage '+s.n+'</div>':'<div class="lock">i3 / integrator</div>')+
+      '<div class="ic">'+s.ic+'</div><h3>'+s.nm+'</h3><p>'+s.blurb+'</p></div>';
+  }).join('');
+  var note={rep:"You're signed in as an i3 rep — full access to every stage.",
+            integ:"You're an integrator linked through iHost — full access to run the engine for your deals.",
+            partner:"You're a channel partner — you have the Presentation and Legal & Privacy agents. Want the rest? You can host your own Vision — ask your i3 channel manager."};
+  document.getElementById('roleNote').textContent=note[S.role];
+}
+function goStart(){ document.getElementById('view-stage').classList.add('hidden'); document.getElementById('view-start').classList.remove('hidden'); window.scrollTo(0,0); }
+
+/* ===== open a stage ===== */
+function openStage(id){
+  var s=stage(id); if(!allowed(s)) return;
+  document.getElementById('view-start').classList.add('hidden');
+  document.getElementById('view-stage').classList.remove('hidden');
+  document.getElementById('stIc').textContent=s.ic;
+  document.getElementById('stName').textContent=s.nm;
+  document.getElementById('stSub').textContent='Stage '+s.n+' · '+s.sub;
+  document.getElementById('stIntro').textContent=s.intro;
+  document.getElementById('stOut').innerHTML='';
+  document.getElementById('stRun').innerHTML='';
+  renderInputs(id);
+  window.scrollTo(0,0);
+}
+
+/* ===== per-stage inputs ===== */
+function renderInputs(id){
+  var box=document.getElementById('stInputs'), h='';
+  if(id==='onboard'){
+    h='<div class="upload"><div class="di">📄</div><div class="dt">Load your onboarding plan and I\'ll parse it into your ramp.</div>'+
+      '<button class="btn p" onclick="runStage(\'onboard\')">Load onboarding plan</button></div>';
+  } else if(id==='prospect'){
+    h='<label class="f"><span class="l">Core segment</span><select id="i_seg">'+
+      ['Retail','Grocery','QSR','Commercial','School'].map(function(x){return '<option'+(x===S.seg?' selected':'')+'>'+x+'</option>'}).join('')+'</select></label>'+
+      '<button class="btn p" onclick="runStage(\'prospect\')">Find &amp; prioritize leads</button>';
+  } else if(id==='present'){
+    h='<label class="f"><span class="l">Meeting notes or transcript</span><textarea id="i_tx" placeholder="Paste what the customer said — drivers, concerns, who was in the room…">Customer wants fewer disconnected systems, better loss-prevention visibility, and a pilot that proves value before rollout. IT cares about integration and data residency. Ops wants reporting managers will actually use.</textarea></label>'+
+      '<button class="btn p" onclick="runStage(\'present\')">Analyze &amp; prep deck</button>';
+  } else if(id==='poc'){
+    h='<label class="f"><span class="l">What are we trying to prove?</span><input id="i_goal" value="Reduce shrink and prove usable safety reporting at one site"></label>'+
+      '<label class="f"><span class="l">Pilot site</span><input id="i_site" value="Toronto terminal"></label>'+
+      '<button class="btn p" onclick="runStage(\'poc\')">Build the POC</button>';
+  } else if(id==='legal'){
+    h='<label class="f"><span class="l">Where will it operate?</span><select id="i_juris"><option>Quebec</option><option>Other Canada</option><option>California</option><option>Europe / UK</option></select></label>'+
+      '<label class="f"><span class="l">i3 solutions on the quote</span><div class="chips" id="i_tools"></div></label>'+
+      '<button class="btn p" onclick="runStage(\'legal\')">Run privacy review</button>';
+    setTimeout(function(){renderTools()},0);
+  } else if(id==='close'){
+    h='<label class="f"><span class="l">Incumbent / competitor</span><select id="i_comp">'+
+      ['Eagle Eye','Verkada','Solink','DTiQ','OpenEye','HME (drive-thru)'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
+      '<button class="btn p" onclick="runStage(\'close\')">Build close plan</button>';
+  }
+  box.innerHTML=h;
+}
+var LEGAL_TOOLS=["Facial Recognition","i3 AI Loyalty","Audio Monitoring","AI Sentry","LPR","Heat Mapping","POS+Video","Door Count"];
+var legalSel=["Facial Recognition","POS+Video"];
+function renderTools(){
+  var el=document.getElementById('i_tools'); if(!el)return;
+  el.innerHTML=LEGAL_TOOLS.map(function(t){return '<span class="chk '+(legalSel.indexOf(t)>-1?'on':'')+'" onclick="toggleTool(\''+t+'\')">'+t+'</span>'}).join('');
+}
+function toggleTool(t){var i=legalSel.indexOf(t);if(i>-1)legalSel.splice(i,1);else legalSel.push(t);renderTools();}
+
+/* ===== run a stage (think -> output) ===== */
+function runStage(id){
+  var run=document.getElementById('stRun'), out=document.getElementById('stOut');
+  run.innerHTML='<div class="thinking"><span class="sp"></span><span id="thinkTxt">Vision is thinking…</span></div>';
+  out.innerHTML='';
+  var lines=THINK[id]||["Working…"]; var i=0;
+  var t=setInterval(function(){
+    i++; var el=document.getElementById('thinkTxt'); if(el&&i<lines.length) el.textContent=lines[i];
+    if(i>=lines.length){ clearInterval(t); run.innerHTML=''; out.innerHTML=OUTPUT[id](); out.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  }, 620);
+}
+var THINK={
+  onboard:["parsing onboarding plan…","extracting role, territory, mentors","mapping training path","scheduling reflections"],
+  prospect:["pulling 6sense intent…","scanning ZoomInfo for "+'{SEG}'+" accounts","mapping buying group","drafting first touch"],
+  present:["reading the transcript…","extracting customer drivers","outlining the deck","checking manager involvement"],
+  poc:["loading Gardewine POC template…","scoping site + equipment","setting 45-day metrics","drafting commitments"],
+  legal:["checking jurisdiction…","classifying solutions","applying Law 25 / GDPR","drafting signage + PIA"],
+  close:["matching the competitor…","loading battlecard","benchmarking price","building close checklist"]
+};
+
+/* ===== outputs ===== */
+function kv(k,v){return '<div class="kv"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>';}
+function sec(t,inner){return '<div class="osec"><h4>'+t+'</h4>'+inner+'</div>';}
+var OUTPUT={
+  onboard:function(){
+    return sec("Your profile (parsed)",'<div class="grid2">'+kv("Role","Business Development Mgr")+kv("Territory / segment",S.seg)+kv("Manager","David Crook")+kv("Acclimation","4–6 weeks incl. NSM")+'</div>')+
+      sec("Mentor team",'<div>'+["Hal Wever","Paul Leiba","George Karaolis","Steven Middleton"].map(function(m){return '<span class="chip">'+m+'</span>'}).join('')+'</div>')+
+      sec("Your first actions",'<ol class="steps"><li>Share your calendar with your mentors; book 12–15 shadow meetings.</li><li>Start the NSM tracks: Sales Mastery + Sales Ops (Salesforce, quoting, forecasting).</li><li>Submit your weekly Friday reflection form.</li><li>Draft your 30-day business plan + SWOT.</li></ol>')+
+      sec("Cadence",'<span class="badge ok">Weekly Friday reflection</span> &nbsp; <span class="badge ok">Mentor reviews</span> &nbsp; <span class="badge warn">Probation reviews to 6-month</span>');
+  },
+  prospect:function(){
+    var seg=(document.getElementById('i_seg')||{}).value||S.seg;
+    var accts=[["Metro "+seg+" Group","High","IT Dir · Ops VP · CFO"],["Northline "+seg,"Medium","Loss Prevention · IT"],["Harbour "+seg+" Co.","High","Ops VP · Store Ops"]];
+    return sec("Top accounts in "+seg,'<div class="grid2">'+accts.map(function(a){return kv(a[0]+' · '+(a[1]==='High'?'<span class="badge hi" style="font-size:9px">HIGH INTENT</span>':'<span class="badge warn" style="font-size:9px">MEDIUM</span>'), a[2])}).join('')+'</div>')+
+      sec("Drafted first touch",'<div class="doc">Subject: cutting shrink without adding 5 disconnected systems\n\nHi {first name} — teams in '+seg+' are telling us the same thing: too many tools, not enough usable insight. i3 brings POS + video + AI into one place so your managers actually act on it. Worth a 20-min look at what we did for a similar '+seg+' operator?\n\n— {your name}, i3 International</div>')+
+      sec("Next",'<ul class="steps"><li>Vision queued these into your action list; outreach is verified before it counts.</li><li>Marketing (V-Reach) is warming these accounts via social + nurture.</li></ul>');
+  },
+  present:function(){
+    var tx=((document.getElementById('i_tx')||{}).value||'').toLowerCase();
+    var drivers=[]; if(/shrink|loss|theft/.test(tx))drivers.push("Loss prevention / shrink");
+    if(/integrat|system|disconnect/.test(tx))drivers.push("Fewer disconnected systems"); if(/report|manager|ops/.test(tx))drivers.push("Reporting managers will use");
+    if(/residen|data|it/.test(tx))drivers.push("Data residency / IT comfort"); if(/pilot|prove|poc/.test(tx))drivers.push("Prove value before rollout");
+    if(!drivers.length)drivers.push("Operational visibility");
+    return sec("Customer drivers",'<div>'+drivers.map(function(d){return '<span class="chip">'+d+'</span>'}).join('')+'</div>')+
+      sec("Deck outline",'<ol class="steps"><li>The problem in their words ('+drivers[0]+')</li><li>i3 integrated solution — POS + video + AI in one</li><li>Proof: similar '+S.seg+' outcome + how a pilot works</li><li>Next step: scoped POC with success metrics</li></ol>')+
+      sec("Recommendation",'<span class="badge warn">Bring your manager</span> This shows multi-stakeholder + pilot intent — loop your manager into the presentation. Vision will capture the transcript for the POC handoff.');
+  },
+  poc:function(){
+    var goal=(document.getElementById('i_goal')||{}).value||"Prove value at one site";
+    var site=(document.getElementById('i_site')||{}).value||"Pilot site";
+    return sec("POC objective",'<div class="kv"><div class="k">Goal · '+site+'</div><div class="v" style="font-weight:600;font-size:13px">'+goal+'</div></div>')+
+      sec("Plan (from Gardewine template)",'<ol class="steps"><li>Site walkthrough &amp; scope with the PM team</li><li>Install &amp; configure (with SI / integrator)</li><li>45-day data collection &amp; validation</li><li>Executive review → Go / No-Go</li></ol>')+
+      sec("Success metrics",'<div class="grid2">'+kv("Primary","Quantifiable shrink / safety incidents")+kv("Reporting","Clear, actionable for leadership")+kv("Duration","45 days")+kv("Decision","Go-forward or No-Go")+'</div>')+
+      sec("Commitments",'<span class="badge ok">i3: platform + support</span> &nbsp; <span class="badge ok">Customer: access + feedback</span> &nbsp; <span class="badge warn">Privacy review required →</span> run the Legal &amp; Privacy stage before approval.');
+  },
+  legal:function(){
+    var juris=(document.getElementById('i_juris')||{}).value||"Quebec";
+    var laws = juris==='Quebec'?["Quebec Law 25","PIPEDA"]:juris==='Other Canada'?["PIPEDA"]:juris==='California'?["CCPA / CPRA"]:["GDPR"];
+    var hi=legalSel.some(function(t){return ["Facial Recognition","i3 AI Loyalty","Audio Monitoring"].indexOf(t)>-1});
+    var risk=hi?"High":legalSel.length>1?"Medium":"Low"; var rb=risk==='High'?'hi':risk==='Medium'?'warn':'ok';
+    var decision=risk==='High'?"Escalate to the i3 Privacy team before POC approval.":risk==='Medium'?"Proceed with a privacy checkpoint.":"Proceed with standard notice & retention controls.";
+    return sec("Applicable laws",'<div>'+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+'</div>')+
+      sec("Decision",'<span class="badge '+rb+'">'+risk+' risk</span> &nbsp; '+decision)+
+      sec("Customer-ready signage (draft)",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.'+(hi?'\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.':'')+'\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
+      sec("Next steps",'<ul class="steps">'+(hi?'<li>Biometrics need <b>express opt-in</b> consent — signage alone is not enough.</li>':'')+'<li>Issue purpose-specific signage (generic wording was rejected by the OPC).</li><li>Complete a PIA before final approval.</li></ul>');
+  },
+  close:function(){
+    var comp=(document.getElementById('i_comp')||{}).value||"the incumbent";
+    var BC={"Eagle Eye":"Weak Linux video bridge, little AI/POS for retail. Win on retail + specific AI applications.","Verkada":"Slick cloud but premium-priced and limited POS/AI retail depth. Win on value + data integration.","Solink":"Good POS-video but lighter analytics. Win on AI depth + predictive.","DTiQ":"Service-heavy/managed model. Win on price-to-own + platform control.","OpenEye":"Cloud VMS, limited retail AI. Win on integrated AI + insight.","HME (drive-thru)":"Timer-only. Win on full operational insight beyond the timer."};
+    return sec("Battlecard · "+comp,'<div class="kv"><div class="k">How to pitch against</div><div class="v" style="font-weight:600;font-size:13px">'+(BC[comp]||"Position i3 on integrated POS + AI and price-to-own.")+'</div></div>')+
+      sec("i3 value position",'<ul class="steps"><li>Most advanced smart, cloud, data-driven solution in our segment.</li><li>Strong POS + AI integration; 9 patents; 35+ years.</li><li>Affordable price-to-own that scales company-wide.</li></ul>')+
+      sec("Price stance",'<span class="badge ok">Benchmarked vs '+comp+' (Cost Matrix)</span> Lead with total value &amp; scalability, not lowest sticker.')+
+      sec("Close checklist",'<ol class="steps"><li>Privacy review cleared (Legal &amp; Privacy stage)</li><li>POC success metrics met → Go</li><li>Contract + commercials assembled</li><li>Sync Salesforce / Automatica, send DocuSign</li></ol>');
+  }
+};
+
+/* boot */
+setRole('rep'); setSeg('Retail');
+</script>
+</body>
+</html>

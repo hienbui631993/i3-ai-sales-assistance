@@ -113,3 +113,37 @@ onboarding process:
 - Deepened **V-Start** (acclimation plan, mentors, reflection cadence) and
   **V-Coach** (Sales Mastery, Sales Ops on Salesforce/Quoting/Forecasting/DocuSign,
   i3 Technology Center, production) reasoning, grounded in the 30-90 schedule.
+
+---
+
+## Request 5 — 2026-06-26 · Vision sales agent: working model + architecture  `#reqlog`
+> "Question number one, all of it. It's going to be on the inside of i3 host because we
+> don't make this public. Also within our i3 host, our integrators also have access to
+> it, so they can actually linked into it. Partners will have the ability to use the
+> certain agents, like the presentation agent or the legal agent, based on that
+> information. But if they want, they can host their own, so we can show them how. Yeah,
+> I'd like to create the architecture diagram so that I can show my engineers how to put
+> it together. But what I want you to also do is create me a mock setup of this so I can
+> critique it and then maybe simplify it. Keep the color to i3 international color that we
+> have on our website so you can refer to that. We can look at similar to that with the
+> fonts. Again, call it vision and have it named vision. And it's going to be their sales
+> agent to help them get better, more leads, close sales quicker and drive greater revenue
+> in their core segment. So let's see if you can document this out logically and
+> chronologically. So, you know, maybe the first question it asks is what stage of sales
+> are you in? And then they can start just putting in the information that they need. So if
+> they need to put on their onboarding plan, they can just load it in. I want this to be a
+> working model so I can show my team and then your architecture and write-up will help
+> them create together. begin!."
+
+**Delivered:**
+- `v2/vision-sales-agent.html` — **working model**, stage-first ("What stage of sales are
+  you in?"), 6 stages (Onboarding, Prospecting, Presentation, POC, Legal & Privacy,
+  Closing), each a guided mini-agent with load/paste/select inputs → a "thinking" pass →
+  useful output. Role switch (i3 Rep / Integrator / Partner) with partner scoping
+  (Presentation + Legal only) + a self-host note. i3 Brand Kit colours + Helvetica Neue.
+- `v2/vision-architecture.html` — **visual architecture diagram** for engineers (access
+  tiers → iHost → orchestrator + LLM → agents → tools → knowledge base + cross-cutting).
+- `v2/ARCHITECTURE.md` — **write-up** (access model, partner self-host, layers, tool
+  contracts, build order, residency/guardrails).
+- Added both to `portal.html`.
+

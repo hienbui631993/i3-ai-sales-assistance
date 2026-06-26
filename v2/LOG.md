@@ -7,6 +7,20 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — Vision sales agent (working model) + architecture
+- `v2/vision-sales-agent.html` — **stage-first working model** named Vision. First
+  question: "What stage of sales are you in?" 6 stages (Onboarding, Prospecting,
+  Presentation, POC, Legal & Privacy, Closing), each a guided mini-agent with
+  load/paste/select inputs, a thinking pass, and grounded output. Role switch
+  (i3 Rep / Integrator / Partner) with partner scoping (Presentation + Legal) and a
+  self-host note. i3 Brand Kit colours + Helvetica Neue; runs "inside iHost".
+- `v2/vision-architecture.html` — **visual architecture diagram** for engineers:
+  access tiers → iHost → orchestrator + LLM → agents → tools → knowledge base,
+  plus cross-cutting (residency, verification-first, human checkpoints).
+- `v2/ARCHITECTURE.md` — engineering write-up (access model + partner self-host,
+  layers, tool contracts, build order, guardrails).
+- Added Vision Sales Agent and Architecture cards to `portal.html`.
+
 ### Fixed — Portal card navigation under htmlpreview
 - Portal cards used relative links, which the htmlpreview proxy doesn't rewrite
   for navigation (clicking just appended the hash to `portal.html`). Cards now

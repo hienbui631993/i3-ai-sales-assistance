@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vision · Architecture</title>
+<style>
+  :root{--brand:#00588F;--brand-900:#002447;--pink:#DF1E71;--green:#00A661;--yellow:#FFC107;
+    --ink:#0d1b2a;--muted:#69788a;--line:#dfe6ee;--bg:#eef2f6;--panel:#fff;--inbg:#e8f1f8;--inbd:#bcd9ee;}
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 22px}
+  .topbar .ilogo{height:24px}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.4px}.topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .pill{margin-left:auto;font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 22px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:26px;margin:6px 0 4px;font-weight:800}
+  .lede{color:var(--muted);font-size:13.5px;max-width:760px;line-height:1.55;margin-bottom:18px}
+
+  .layer{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:14px;position:relative}
+  .layer .lh{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:12px}
+  .row{display:grid;gap:12px}
+  .r4{grid-template-columns:repeat(4,1fr)}.r3{grid-template-columns:repeat(3,1fr)}.r5{grid-template-columns:repeat(5,1fr)}.r2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.r4,.r3,.r5{grid-template-columns:1fr 1fr}.r2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:#fafcfe}
+  .box .t{font-weight:800;font-size:13.5px;display:flex;align-items:center;gap:7px}
+  .box .d{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+  .box .ic{font-size:16px}
+  .box.brand{background:var(--inbg);border-color:var(--inbd)}
+  .box.dark{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border:none}
+  .box.dark .d{color:#cfe3f1}
+  .box.green{background:#e7f8f0;border-color:#a6e8c8}
+  .box.tag{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:12.5px}
+  .access .box{position:relative}
+  .badge{display:inline-block;font-size:9.5px;font-weight:800;border-radius:999px;padding:2px 7px;margin-top:7px}
+  .badge.full{background:#e7f8f0;color:#0a7d4f;border:1px solid #a6e8c8}
+  .badge.some{background:#fff7e0;color:#8a5d05;border:1px solid #ffe39c}
+  .badge.self{background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+  .arrow{text-align:center;color:var(--brand);font-size:20px;font-weight:800;margin:-4px 0 8px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;font-weight:700;color:var(--ink)}
+  .flow .s{background:#fafcfe;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+  .flow .a{color:var(--brand);font-weight:800}
+  .note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:6px}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6}
+  a.btn{display:inline-block;text-decoration:none;background:var(--brand);color:#fff;font-weight:700;font-size:13px;border-radius:10px;padding:9px 15px;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo"></div><div class="sep"></div>
+  <div class="prod">Vision<small>System Architecture</small></div>
+  <span class="pill">Inside iHost · not public · NA v1</span>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">For engineering</div>
+  <h1>How Vision is put together</h1>
+  <p class="lede">Vision is an agentic sales assistant that lives <b>inside iHost</b> (never public). i3 reps and
+  integrators access it through iHost; channel partners get a limited set of agents, or can host their own. This is the
+  build map — top to bottom, who talks to what.</p>
+
+  <!-- ACCESS -->
+  <div class="layer access">
+    <div class="lh">1 · Access tiers (who can use Vision)</div>
+    <div class="row r4">
+      <div class="box"><div class="t"><span class="ic">🧑‍💼</span>i3 Sales Reps</div><div class="d">Inside iHost. Every stage / agent.</div><span class="badge full">Full access</span></div>
+      <div class="box"><div class="t"><span class="ic">🔧</span>Integrators</div><div class="d">Linked into iHost; run Vision on their own deals.</div><span class="badge full">Full access</span></div>
+      <div class="box"><div class="t"><span class="ic">🤝</span>Channel Partners</div><div class="d">Scoped to certain agents (e.g. Presentation, Legal &amp; Privacy) based on their tier.</div><span class="badge some">Selected agents</span></div>
+      <div class="box"><div class="t"><span class="ic">🏠</span>Partner self-host</div><div class="d">Partners can deploy their own Vision instance — we provide the package + setup guide.</div><span class="badge self">Own deployment</span></div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; authenticated via iHost SSO + role/tier scoping</div>
+
+  <!-- HOST -->
+  <div class="layer">
+    <div class="lh">2 · Host application</div>
+    <div class="row r2">
+      <div class="box brand"><div class="t"><span class="ic">🖥️</span>iHost (web app)</div><div class="d">The UI Vision runs inside — quoting tools, calls, Teams &amp; GoToMeeting transcripts. Hosts the Vision UI and enforces who sees which agent.</div></div>
+      <div class="box"><div class="t"><span class="ic">🔐</span>Identity &amp; access</div><div class="d">SSO + role (rep / integrator / partner-tier). Tier decides agent visibility. Partner self-host = same code, partner-scoped config.</div></div>
+    </div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <!-- ORCHESTRATOR -->
+  <div class="layer">
+    <div class="lh">3 · Vision orchestrator + reasoning</div>
+    <div class="row r2">
+      <div class="box dark"><div class="t"><span class="ic">🧠</span>Vision Orchestrator</div><div class="d">Detects the sales stage, picks the agent, enforces stage rules, and decides what runs next. Rules control progression; the LLM guides quality.</div></div>
+      <div class="box"><div class="t"><span class="ic">✨</span>LLM (function calling)</div><div class="d">OpenAI or Claude. Same architecture either way — system prompt + tools + retrieval. Keep tool definitions provider-agnostic.</div></div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; orchestrator invokes the right agent</div>
+
+  <!-- AGENTS -->
+  <div class="layer">
+    <div class="lh">4 · The agents (one per sales stage)</div>
+    <div class="row r3">
+      <div class="box"><div class="t">🚀 Onboarding</div><div class="d">Parse onboarding plan → ramp, mentors, training.</div></div>
+      <div class="box"><div class="t">🎯 Prospecting</div><div class="d">6sense/ZoomInfo intent → accounts + outreach.</div></div>
+      <div class="box"><div class="t">📣 Marketing</div><div class="d">Hand-off, social, nurture, VAR network.</div></div>
+      <div class="box"><div class="t">🖥️ Presentation</div><div class="d">Transcript → drivers, deck, manager loop. <span class="badge some">partner</span></div></div>
+      <div class="box"><div class="t">🧪 Proof of Concept</div><div class="d">Gardewine template, 45-day metrics.</div></div>
+      <div class="box"><div class="t">🛡️ Legal &amp; Privacy (Magenta)</div><div class="d">Law 25/GDPR, signage, PIA. <span class="badge some">partner</span></div></div>
+    </div>
+    <div class="row r3" style="margin-top:12px">
+      <div class="box"><div class="t">🤝 Closing</div><div class="d">Cost-matrix battlecards, price, contract.</div></div>
+      <div class="box"><div class="t">🧭 Verification</div><div class="d">Email/call/meeting proof + anti-gaming.</div></div>
+      <div class="box"><div class="t">📊 Manager / Leadership</div><div class="d">Readiness, pipeline, reflections, scoring.</div></div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; agents call tools &amp; read the knowledge base</div>
+
+  <!-- TOOLS -->
+  <div class="layer">
+    <div class="lh">5 · Tool / integration layer (the function calls)</div>
+    <div class="row r5">
+      <div class="box tag">Salesforce<br><span style="color:var(--muted);font-weight:400">CRM · read/write</span></div>
+      <div class="box tag">Automatica<br><span style="color:var(--muted);font-weight:400">ERP · pricing</span></div>
+      <div class="box tag">iHost<br><span style="color:var(--muted);font-weight:400">quoting · records</span></div>
+      <div class="box tag">6sense / ZoomInfo<br><span style="color:var(--muted);font-weight:400">intent · contacts</span></div>
+      <div class="box tag">GoToMeeting / Teams<br><span style="color:var(--muted);font-weight:400">transcripts</span></div>
+      <div class="box tag">Email · Calling<br><span style="color:var(--muted);font-weight:400">verification</span></div>
+      <div class="box tag">Calendar<br><span style="color:var(--muted);font-weight:400">meetings</span></div>
+      <div class="box tag">DocuSign<br><span style="color:var(--muted);font-weight:400">contracts</span></div>
+      <div class="box tag">Marketing / Social<br><span style="color:var(--muted);font-weight:400">nurture</span></div>
+      <div class="box tag">HubSpot<br><span style="color:var(--muted);font-weight:400">marketing</span></div>
+    </div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <!-- KNOWLEDGE -->
+  <div class="layer">
+    <div class="lh">6 · Knowledge base (retrieval)</div>
+    <div class="row r5">
+      <div class="box green tag">Q25 / Law 25 deck</div>
+      <div class="box green tag">LP &amp; Privacy Guide</div>
+      <div class="box green tag">FRT state laws</div>
+      <div class="box green tag">Competitor Cost Matrix</div>
+      <div class="box green tag">Gardewine POC template</div>
+      <div class="box green tag">Onboarding docs + 30-90</div>
+      <div class="box green tag">Sales process</div>
+      <div class="box green tag">Segment playbooks</div>
+      <div class="box green tag">Product / pricing kits</div>
+      <div class="box green tag">Reflection forms</div>
+    </div>
+  </div>
+
+  <!-- CROSS-CUTTING -->
+  <div class="layer">
+    <div class="lh">Cross-cutting</div>
+    <div class="row r3">
+      <div class="box"><div class="t">📍 Data residency</div><div class="d">Canada-for-Canada where required; cross-border access documented (this is what the Legal agent checks). NA first, then GDPR/PIPA regions.</div></div>
+      <div class="box"><div class="t">✅ Verification-first</div><div class="d">Only verified activity advances a stage — build the verification layer before UI polish.</div></div>
+      <div class="box"><div class="t">🧑‍⚖️ Human checkpoints</div><div class="d">AI guides; managers + the Privacy Officer approve high-risk steps. Not legal advice.</div></div>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="lh">End-to-end chronological flow</div>
+    <div class="flow">
+      <span class="s">Onboard</span><span class="a">→</span><span class="s">Prospect</span><span class="a">→</span>
+      <span class="s">Train</span><span class="a">→</span><span class="s">Outreach (verified)</span><span class="a">→</span>
+      <span class="s">Present</span><span class="a">→</span><span class="s">POC</span><span class="a">→</span>
+      <span class="s">Legal/Privacy</span><span class="a">→</span><span class="s">Close</span><span class="a">→</span><span class="s">Salesforce sync</span>
+    </div>
+    <div class="note">Reps can start at <b>any</b> stage (new hire → veteran → straight to POC) and in any <b>segment</b> (Retail, Grocery, QSR, Commercial, School, Integrator). See the working model and <code>BUILD_PLAN.md</code> / <code>ARCHITECTURE.md</code>.</div>
+    <a class="btn" href="vision-sales-agent.html" data-target="vision-sales-agent.html">Open the working model →</a>
+  </div>
+
+  <div class="foot">Architecture diagram — pairs with <code>v2/ARCHITECTURE.md</code> (write-up) and <code>v2/BUILD_PLAN.md</code>.<br>© 2026 i3 International Inc. &amp; i3 America Nevada Inc.</div>
+</div>
+
+<script>
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+/* htmlpreview-aware links */
+(function(){var hp=location.hostname==='htmlpreview.github.io';var bd='';if(hp){var inner=location.search.slice(1);try{inner=decodeURIComponent(inner)}catch(e){}bd=inner.replace(/[^\/]*$/,'')}var els=document.querySelectorAll('[data-target]');for(var i=0;i<els.length;i++){var a=els[i],t=a.getAttribute('data-target');a.setAttribute('href',hp?('https://htmlpreview.github.io/?'+bd+t):t)}})();
+</script>
+</body>
+</html>
