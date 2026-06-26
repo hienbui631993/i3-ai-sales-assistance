@@ -65,6 +65,7 @@
   .muted{color:var(--muted)}
   .progress{height:6px;background:#eef2f4;border-radius:999px;overflow:hidden;margin-top:10px}
   .progress > div{height:100%;background:#be123c;transition:width .3s}
+  .disclaimer{margin-top:14px;background:var(--warn-bg);border:1px solid var(--warn-bd);color:#854d0e;border-radius:14px;padding:12px 16px;font-size:13px;line-height:1.5}
   @media(max-width:980px){.grid{grid-template-columns:1fr}}
   @media print{.no-print{display:none}body{background:#fff}.card{break-inside:avoid}}
 </style>
@@ -79,6 +80,8 @@
       <div style="opacity:.92;font-size:14px;margin-top:4px">The privacy expert your reps bring into every POC. Built on the i3 Q25 deck: the four-part necessity test, the i3 application risk map, OPC signage guidance, and the bills that apply by province, state, and country — before the pilot launches.</div>
     </div>
   </div>
+
+  <div class="disclaimer">⚠️ <b>Not legal advice.</b> V-Guard is a decision-support tool for i3 sales due diligence. Its output is a starting point — confirm every requirement with qualified counsel and the i3 Privacy Officer before relying on it.</div>
 
   <div class="grid">
     <div class="card">
@@ -240,6 +243,7 @@ function renderInput(){
   const box=document.getElementById('input');
   if(state.done){ bar.style.width="100%";
     box.innerHTML=`<button class="btn red" onclick="window.print()">Export brief (print / PDF)</button>
+      <button class="btn ghost" onclick="downloadPIA()">Download PIA workbook (CSV)</button>
       <button class="btn ghost" onclick="restart()">Start over</button>`; return; }
   const q=questions[state.step];
   if(q.type==="apps"){
@@ -348,13 +352,18 @@ function compute(){
     signage.push("Article 13 transparency notice at entry: controller identity, purposes, lawful basis, retention, and data-subject rights.");
     if(f.biometric){score+=2; warn.push("EU/UK: biometrics that uniquely identify are special-category data (GDPR Art. 9)."); docs.push("DPIA (GDPR Art. 35) — mandatory for biometrics / large-scale monitoring.");}
   }
-  if(j==="California, USA"){ signage.push("CCPA/CPRA 'Notice at Collection' at the point of capture."); if(f.biometric){steps.push("Offer a 'Limit the Use of My Sensitive Personal Information' option.");} }
+  if(j==="California, USA"){ signage.push("CCPA/CPRA 'Notice at Collection' at the point of capture."); if(f.biometric){steps.push("Offer a 'Limit the Use of My Sensitive Personal Information' option; biometrics are sensitive PI under CPRA.");} }
   if(j==="Illinois, USA" && f.biometric){
-    score+=3; warn.push("Illinois BIPA — strictest US biometric law, private right of action.");
-    steps.push("Obtain prior written release before any biometric capture; publish a retention/destruction schedule; never sell biometric data.");
+    score+=3; warn.push("Illinois BIPA — strictest US biometric law, with a private right of action (statutory damages $1,000–$5,000 per violation).");
+    steps.push("Obtain prior written release before any biometric capture; publish a retention/destruction schedule; never sell or profit from biometric data.");
     docs.push("BIPA written consent + public retention/destruction policy.");
   }
-  if(j==="Texas, USA" && f.biometric){ score+=1; steps.push("Texas CUBI: notice + consent before biometric capture."); docs.push("CUBI notice + consent record."); }
+  if(j==="Texas, USA" && f.biometric){ score+=1; steps.push("Texas CUBI: notice + consent before biometric capture for a commercial purpose (enforced by the Texas AG)."); docs.push("CUBI notice + consent record."); }
+  // US facial-recognition landscape (SIA Guide to State & Local FRT Laws)
+  if(j.indexOf("USA")>=0 && f.biometric){
+    steps.push("Per the SIA guide: commercial facial recognition is legal in all 50 states, but biometrics are increasingly governed by state data-privacy laws — confirm the deployment state's biometric rules (IL BIPA, CA CCPA/CPRA, TX CUBI lead).");
+    warn.push("Note: the dedicated state FRT statutes (Maine, Washington, Utah, Colorado, Montana) restrict GOVERNMENT / law-enforcement use, not commercial — but several states are extending biometric guardrails to commercial use.");
+  }
 
   // cross-border / residency
   if((a.residency||"").indexOf("Cross-border")===0){score+=1; warn.push("Cross-border / U.S. support access — needs documented controls."); steps.push("Document cross-border access and support roles; add transfer safeguards (SCCs for EU/UK). Privacy prefers Canada-for-Canada storage.");}
@@ -412,9 +421,43 @@ function renderBrief(){
     <h4>Sales positioning</h4><div class="soft">${r.positioning}</div>
     <h4>Who owns each step (deck slide 5)</h4>
     <div class="soft"><ul>${ownership.map(o=>`<li><b>${o[0]}</b> → ${o[1]}</li>`).join('')}</ul></div>
-    ${r.level==='High'?`<h4>Escalation</h4><div class="soft">Route to the <b>i3 Privacy Team</b> — Grace Hoang (lead), with Steve M, Kishan P, and Sharon Bauer (Bamboo Data Consulting) — before POC approval.</div>`:''}`;
+    ${r.level==='High'?`<h4>Escalation</h4><div class="soft">Route to the <b>i3 Privacy Team</b> — Grace Hoang (lead), with Steve M, Kishan P, and Sharon Bauer (Bamboo Data Consulting) — before POC approval.</div>`:''}
+    <h4>Sources</h4><div class="muted" style="font-size:12px">Grounded in: i3 Q25 deck (“Quebec 25 and i3 International”); 2026 Loss Prevention & In-Store Privacy Guide (Bamboo Data Consulting, Sharon Bauer) — four-part test, OPC biometric guidance; SIA Guide to U.S. State & Local Facial Recognition Laws (2023). Reference only — not legal advice; confirm with counsel and the privacy officer.</div>`;
 }
 
+/* Excel-ready PIA workbook (deck slide 23: "Excel compliance documents for PIA") */
+function csvCell(s){ return `"${(''+s).replace(/"/g,'""')}"`; }
+function downloadPIA(){
+  const a=state.answers, r=compute();
+  const rows=[], add=(...c)=>rows.push(c.map(csvCell).join(','));
+  add("i3 Privacy Impact Assessment (PIA) — generated by V-Guard");
+  add("Decision-support only — not legal advice. Confirm with counsel and the i3 Privacy Officer.");
+  add("");
+  add("Section","Item","Value / Detail","Status / Owner / Evidence");
+  const dc=[["Jurisdiction",r.j],["Applicable law(s)",r.laws.join("; ")],
+    ["i3 applications in scope",(a.apps||[]).join("; ")],["System integration",a.integration||""],
+    ["Primary purpose",a.purpose||""],["Evidence of a real problem",a.evidence||""],
+    ["Less-intrusive alternatives",a.alternative||""],["Who is monitored",a.subjects||""],
+    ["Privacy-expectation zones",a.privacyZones||""],["Signage status",a.signage||""],
+    ["Data residency",a.residency||""],["PIA completed",a.pia||""],["Privacy officer",a.officer||""]];
+  dc.forEach(x=>add("Deal Context",x[0],x[1],""));
+  add("Risk Assessment","Risk level",r.level,"");
+  add("Risk Assessment","Risk points",r.score,"");
+  add("Risk Assessment","Decision",r.decision,"");
+  add("Risk Assessment","Sales positioning",r.positioning,"");
+  fourPartTest.forEach(s=>s.pts.forEach(p=>add("Four-Part Necessity Test",s.t,p,"")));
+  r.warn.forEach(w=>add("Warnings","Flag",w,""));
+  r.signage.forEach(s=>add("Signage & Notice","Requirement",s,""));
+  add("Signage & Notice","Recommended wording",signageTemplate.replace(/\s+/g,' ').trim(),"");
+  r.docs.forEach(d=>add("Documentation","To generate",d,""));
+  r.steps.forEach(s=>add("Action Checklist","Action",s,""));
+  ownership.forEach(o=>add("Ownership",o[0],o[1],""));
+  add("Sources","Reference","i3 Q25 deck; 2026 LP & Privacy Guide (Bamboo Data Consulting); SIA State FRT Guide","Not legal advice");
+  const blob=new Blob(["﻿"+rows.join("\r\n")],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob), link=document.createElement('a');
+  link.href=url; link.download="VGuard-PIA-"+r.j.replace(/[^a-z0-9]/gi,'_')+".csv";
+  document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+}
 function restart(){ state.step=0; state.answers={apps:[]}; state.done=false; transcript=[]; boot(); }
 function boot(){ pushV(questions[0].v); renderChat(); renderInput(); renderBrief(); }
 boot();

@@ -96,7 +96,13 @@ This is a **guided conversation**. V-Guard asks one question at a time on the le
    the **signage wording** to post, the **documents** to generate, sales positioning, and
    who owns each step.
 4. Tap **Export brief (print / PDF)** to save it and attach it to the POC.
-5. **Start over** resets for the next deal.
+5. Tap **Download PIA workbook (CSV)** to get an Excel-ready Privacy Impact Assessment —
+   deal context, risk, the four-part test, signage, documentation, and ownership, each with
+   a blank *Status / Owner / Evidence* column for the assessor to complete.
+6. **Start over** resets for the next deal.
+
+> **Note:** V-Guard is decision-support, **not legal advice** (a banner says so in the app).
+> Always confirm requirements with counsel and the i3 Privacy Officer before relying on them.
 
 **Tip for a demo:** pick *Facial Recognition*, answer *"Yes — integrating multiple systems,"*
 and choose *Quebec* — you'll watch it escalate to **High** with the CAI declaration, express
