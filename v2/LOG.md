@@ -7,6 +7,21 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/DEMO.md` and `v2/BUILD_PLAN.md`
+- **DEMO.md** — click-by-click walkthrough script (~8–10 min) to present the
+  portal/engine/Magenta/manager flow internally, with an honest "is this real?"
+  note and reset tips.
+- **BUILD_PLAN.md** — production plan: real-vs-simulated layers, architecture
+  (one orchestrator, LLM agents, tool/function layer, retrieval KB), the 9
+  agents → real tools mapping, platform choice (OpenAI / Claude / Agentforce),
+  build order (verification before UI), North-America-first pilot, and guardrails.
+
+### Changed — `v2/v-vision-sales-engine.html` · wired agents together
+- **V-Guard** pipeline card now links to the **Magenta portal**
+  (`magenta-portal-simulation.html`).
+- Rep detail modal gained **▶ View this rep in V engine** — switches to the engine
+  pre-set to that rep's stage (entry point) and segment.
+
 ### Changed — `v2/v-vision-sales-engine.html` · deeper V-Reach / V-Guide
 - **V-Reach** grounded in the onboarding doc's marketing model — hand-off to
   marketing, segment value narrative, social campaign (new lead source), nurture,

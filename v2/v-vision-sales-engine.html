@@ -114,6 +114,8 @@
   .st.queued{color:#8aa3ba;background:#0b2030;border:1px solid var(--pline)}
   .st.run{color:#0a1a2b;background:#46b3ff}
   .st.done{color:#bfe6d4;background:rgba(0,166,97,.18);border:1px solid rgba(0,166,97,.4)}
+  .plink{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:800;color:#46b3ff;text-decoration:none;background:rgba(70,179,255,.1);border:1px solid rgba(70,179,255,.3);border-radius:8px;padding:4px 10px}
+  .plink:hover{background:rgba(70,179,255,.22)}
   .pcard.active{border-color:#46b3ff;box-shadow:0 0 0 3px rgba(70,179,255,.12)}
   .pcard.dim{opacity:.5}
   .pcard.done{border-color:rgba(0,166,97,.35)}
@@ -337,6 +339,7 @@ var AGENTS=[
     think:["instantiating POC from Gardewine template","scheduling site walkthrough + scope with PM","setting 45-day data-collection & validation","defining success metrics + commitments","prefilling signature + Go / No-Go block"]},
   {id:"guard", nm:"V-Guard", area:"Legal & Privacy", ic:"🛡️",
     ds:"The Magenta privacy review — triggers on sensitive solutions, applies Law 25 / GDPR, and generates signage + PIA.",
+    link:"magenta-portal-simulation.html", linkLabel:"Open Magenta portal →",
     tools:["Q25 KB","LP & Privacy Guide","FRT laws"],
     think:["scanning quote for sensitive solutions…","privacy trigger: evaluating jurisdiction","applying Law 25 / PIPEDA / FRT laws","generating signage + PIA starter","routing risk decision"]},
   {id:"close", nm:"V-Close", area:"Commercial & Close", ic:"🤝",
@@ -448,7 +451,8 @@ function buildPipe(){
       '<div class="ic">'+a.ic+'</div>'+
       '<div class="tx"><div class="tt">'+a.nm+' <span class="area">'+a.area+'</span></div>'+
       '<div class="ds">'+a.ds+'</div>'+
-      '<div class="tools">'+a.tools.map(function(t){return '<span class="tool">'+t+'</span>';}).join('')+'</div></div>'+
+      '<div class="tools">'+a.tools.map(function(t){return '<span class="tool">'+t+'</span>';}).join('')+'</div>'+
+      (a.link?'<a class="plink" href="'+a.link+'">'+a.linkLabel+'</a>':'')+'</div>'+
       '<div class="st queued" id="st'+i+'">Queued</div></div>';
   }).join('');
   paintStart();
@@ -644,13 +648,21 @@ function openRep(i){
       '<div class="sbox"><div class="k">Direct manager</div><div class="v">'+r.mentor+'</div></div>'+
       '<div style="margin-top:14px"><div class="sbox" style="background:transparent;border:none;padding:0"><div class="k">Acclimation deliverables</div></div>'+
         '<div class="schk">'+deliverables.map(function(d){return '<div class="ci '+(d.done?'done':'')+'"><span class="bx">'+(d.done?'✓':'')+'</span>'+d.t+'</div>';}).join('')+'</div></div>'+
-      '<div class="sbtn"><button class="pr" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in iHost / Salesforce.\')">Open in iHost</button>'+
-        '<button class="gh" onclick="closeRep()">Close</button></div>'+
+      '<div class="sbtn"><button class="pr" onclick="runRepInEngine('+i+')">▶ View this rep in V engine</button>'+
+        '<button class="gh" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in iHost / Salesforce.\')">Open in iHost</button></div>'+
     '</div>';
   document.getElementById('repModal').classList.remove('hidden');
 }
 function sbox(k,v){ return '<div class="sbox"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
 function closeRep(){ document.getElementById('repModal').classList.add('hidden'); }
+function runRepInEngine(i){
+  var r=REPS[i];
+  sel.seg = r.seg.toLowerCase();
+  var st=r.stage;
+  sel.entry = (st==='start'||st==='coach') ? 'newhire' : (['prove','guard','close'].indexOf(st)>-1 ? 'poc' : 'veteran');
+  closeRep(); switchView('engine'); buildChips(); buildPipe();
+  document.getElementById('runNote').scrollIntoView({behavior:'smooth',block:'center'});
+}
 
 /* boot */
 buildChips(); buildOrbit(); buildPipe(); renderIntake(); renderManager();
