@@ -7,6 +7,12 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/DEMO.md` · added Vision Sales Agent 5-min scripted demo
+- Added a short, scripted, voice-on demo path for `vision-sales-agent.html` at the
+  top (admin onboarding → dashboard → LinkedIn + buying group → transcript→POC →
+  PM handoff), with exact clicks and presenter lines. Kept the full portal
+  walkthrough below it.
+
 ### Changed — `v2/vision-sales-agent.html` · admin, dashboard, deeper agents, voice
 - **Admin onboarding** flow: set segment/territory/responsibility/annual goal →
   Vision builds the workflow and auto-starts the rep (saved to Salesforce,

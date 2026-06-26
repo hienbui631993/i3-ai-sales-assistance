@@ -1,10 +1,74 @@
-# Demo Walkthrough — i3 Vision Portal (V + Magenta)
+# Demo Walkthrough — i3 Vision
 
-A click-by-click script to present the prototype internally (leadership, sales,
-partners). ~8–10 minutes. Everything is a self-contained simulation — no login,
-no install. Open the links in a browser.
+Scripts to present the prototype internally (leadership, sales, partners).
+Self-contained simulations — no login, no install. Present from the
+**always-latest** branch links so you never show a stale build.
 
-> Tip: present from the **always-latest** branch links so you never show a stale build.
+---
+
+# ⭐ Vision Sales Agent — 5-minute scripted demo (voice ON)
+
+The headline demo. One file: `v2/vision-sales-agent.html`
+Preview: `https://htmlpreview.github.io/?https://github.com/hienbui631993/i3-ai-sales-assistance/blob/claude/v2/v2/vision-sales-agent.html`
+
+> Open in **Chrome** (best speech support) with **sound on**. Each **▸** is a click;
+> each **“…”** is your line. Total ~5 min.
+
+### 0 · Turn Vision on (15 sec)
+▸ Click **🔊 Talk to me** (top-right).
+“This is Vision — the sales agent that lives inside iHost. It actually talks to
+the rep. Listen.” *(Vision greets you out loud.)*
+
+### 1 · The admin sets a rep up (45 sec)
+▸ Top-right role **Admin** → ▸ **Build workflow & start with Vision**.
+“An i3 admin onboards a salesperson — segment, territory, responsibility, and
+their number for the year. Vision builds the workflow and **starts the engine for
+them automatically.** Notice it’s **saved to Salesforce and proprietary to i3** —
+if the rep leaves, the company keeps everything.”
+▸ **Start → open their dashboard.**
+
+### 2 · The rep’s morning (45 sec)
+“This is the first thing the rep sees every day.” *(point to widgets)*
+“What to do today, their monthly goal, commitment, pipeline, orders — fed from
+Salesforce and Automatica.”
+▸ Click the **Today** widget → “It drills straight into the pipeline.”
+▸ On the to-do list, click **Leads →** to jump into the work.
+
+### 3 · Smarter targeting + the ‘get-relevant’ coach (75 sec)
+On **Prospecting** ▸ **Assess me & find the buying group**.
+“Two things. One — Vision read my **LinkedIn**: it scores how relevant I am to my
+segment and tells me how to fix it, and **books me a session with Marketing** plus
+the **associations** to join. Two — it doesn’t chase one contact. From 6sense and
+ZoomInfo it lays out the **whole buying group** — who decides, their **intent**, and
+exactly **what to do tomorrow.**”
+
+### 4 · Presentation → POC, nothing forgotten (90 sec)
+▸ Back to dashboard → **Presentation** → ▸ **Use sample transcript**.
+“The rep just drops the meeting transcript in. Vision pulls the drivers and
+**captures everyone who was in the room.**”
+▸ **Build POC from this →** (or open **Proof of Concept** → **Generate POC from transcript**).
+“It builds the POC in our Gardewine format. It **pushes the rep to add everyone on
+the email — title and position — and flags who’s a supporter.** It recommends the
+**solution and the equipment** to quote. And it won’t let key info get forgotten.”
+▸ **Contact PM & create the official POC →**
+“One click hands it to the **PM agent**, which keeps the PM on the **timeline** and
+the **cybersecurity forms** — all interconnected.”
+
+### 5 · Close the loop (20 sec)
+“Lead to close, one agent, inside iHost — for our reps, our integrators, and the
+agents we choose to give partners. Everything the rep enters stays with i3.”
+
+**If asked “is this real?”** → “Working prototype. The flow, logic and i3 content
+are real; the system connections are simulated to show the experience. It’s the
+spec for the build — see `ARCHITECTURE.md` and `BUILD_PLAN.md`.”
+
+**Reset:** reload the tab.
+
+---
+
+# Full Portal Walkthrough (V + Magenta) — ~8–10 min
+
+A click-by-click script for the whole portal (engine, Magenta, manager view).
 
 ## Open these tabs first
 1. **Portal** — `v2/portal.html`
