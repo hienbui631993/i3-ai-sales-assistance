@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/magenta-portal-simulation.html`
+- Gave catalog product cards more room: title on its own line with spacing,
+  price + risk tag on a clean second line, larger tag padding, and the Add
+  button aligned top so it no longer crowds the text.
+
 ### Fixed — `v2/magenta-portal-simulation.html`
 - Login sign-in form was pushed off the card because the inline logo SVG
   rendered at its native 800px width; constrained `.ilogo svg` to `width:auto`
