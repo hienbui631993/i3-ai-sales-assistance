@@ -666,7 +666,12 @@ function runRepInEngine(i){
 
 /* boot */
 buildChips(); buildOrbit(); buildPipe(); renderIntake(); renderManager();
-if(location.hash==='#manager') switchView('manager');
+// open Manager view via #manager hash OR a localStorage flag set by the portal
+// (the flag survives preview proxies that drop the URL fragment)
+var wantManager = location.hash==='#manager';
+try{ if(localStorage.getItem('v_view')==='manager'){ wantManager=true; localStorage.removeItem('v_view'); } }catch(e){}
+if(wantManager) switchView('manager');
+window.addEventListener('hashchange', function(){ switchView(location.hash==='#manager'?'manager':'engine'); });
 </script>
 </body>
 </html>

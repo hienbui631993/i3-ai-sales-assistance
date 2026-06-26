@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Fixed — Manager Dashboard deep-link from the portal
+- The portal's **Manager Dashboard** card opened the engine on the default view
+  because preview proxies (htmlpreview) drop the `#manager` URL fragment. The
+  portal now also sets a `localStorage` flag the engine reads on boot (cleared
+  after use), so the dashboard opens reliably regardless of fragment handling.
+  Also added a live `hashchange` handler. The in-engine ▦ Manager toggle was
+  unaffected and continues to work.
+
 ### Added — `v2/DEMO.md` and `v2/BUILD_PLAN.md`
 - **DEMO.md** — click-by-click walkthrough script (~8–10 min) to present the
   portal/engine/Magenta/manager flow internally, with an honest "is this real?"
