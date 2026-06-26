@@ -121,7 +121,7 @@
   .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:14px;justify-content:center}
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .legend i{width:9px;height:9px;border-radius:50%}
-  .hidden{display:none}
+  .hidden{display:none!important}
   .vtoggle{display:inline-flex;border:1px solid var(--pline);border-radius:10px;overflow:hidden}
   .vt{background:transparent;color:#bcd2e6;border:none;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
   .vt.on{background:var(--brand);color:#fff}
@@ -140,7 +140,8 @@
   .mcols{display:grid;grid-template-columns:1.55fr .9fr;gap:18px}
   @media(max-width:940px){.mcols{grid-template-columns:1fr}}
   .roster{display:flex;flex-direction:column;gap:10px;padding:12px}
-  .rrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:12px;align-items:center;border:1px solid var(--pline);border-radius:12px;padding:11px 13px;background:var(--panel2)}
+  .rrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:12px;align-items:center;border:1px solid var(--pline);border-radius:12px;padding:11px 13px;background:var(--panel2);cursor:pointer;transition:.14s}
+  .rrow:hover{border-color:#46b3ff;background:#143251}
   @media(max-width:720px){.rrow{grid-template-columns:1fr 1fr}}
   .rrow.flag{border-color:rgba(255,193,7,.5);box-shadow:inset 3px 0 0 var(--yellow)}
   .rrow .who .nm{font-weight:800;font-size:13.5px}
@@ -159,6 +160,28 @@
   .fbar .ft{flex:1;height:22px;background:#0b2030;border-radius:7px;overflow:hidden;position:relative}
   .fbar .ft>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#46b3ff)}
   .fbar .fc{position:absolute;right:8px;top:3px;font-size:11px;font-weight:800;color:#eaf2f9}
+
+  /* rep detail modal */
+  .modal{position:fixed;inset:0;background:rgba(4,14,24,.72);backdrop-filter:blur(3px);z-index:50;display:flex;align-items:center;justify-content:center;padding:22px}
+  .sheet{background:var(--panel);border:1px solid var(--pline);border-radius:18px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  .sheet .sh{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--pline)}
+  .sheet .sh .nm{font-size:19px;font-weight:800}
+  .sheet .sh .ro{font-size:12.5px;color:#9fb8cf;margin-top:2px}
+  .sheet .x{background:none;border:none;color:#9fb8cf;font-size:20px;cursor:pointer;line-height:1}
+  .sheet .body{padding:18px 20px}
+  .srow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .sbox{background:var(--panel2);border:1px solid var(--pline);border-radius:11px;padding:11px 13px}
+  .sbox .k{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .sbox .v{font-size:13.5px;font-weight:700;margin-top:3px;color:#eaf2f9}
+  .schk{margin-top:6px}
+  .schk .ci{display:flex;align-items:center;gap:9px;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--pline);color:#cfe0ee}
+  .schk .ci:last-child{border-bottom:none}
+  .schk .bx{flex:none;width:18px;height:18px;border-radius:5px;border:1.5px solid var(--pline);display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a1a2b}
+  .schk .ci.done .bx{background:var(--green);border-color:var(--green)}
+  .schk .ci.done{color:#bfe6d4}
+  .sbtn{margin-top:16px;display:flex;gap:9px}
+  .sbtn button{flex:1;border:none;border-radius:10px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+  .sbtn .pr{background:var(--brand);color:#fff}.sbtn .gh{background:var(--panel2);color:#cfe0ee;border:1px solid var(--pline)}
 
   .intake{margin-top:18px}
   .intakeBody{padding:16px}
@@ -263,6 +286,10 @@
 
  <div id="managerView" class="hidden"><div id="mBody"></div></div>
 
+ <div id="repModal" class="modal hidden" onclick="if(event.target===this)closeRep()">
+   <div class="sheet" id="repSheet"></div>
+ </div>
+
   <div class="foot">
     Grounded in your documents:
     <span class="src">i3 Agentic Sales Assistance</span>
@@ -285,9 +312,9 @@ var AGENTS=[
     tools:["Onboarding doc","30-90 schedule","Reflection form","i3host"],
     think:["reading onboarding & acclimation document…","profile: {NAME} · {ROLE} · {TERR}","assigning mentor team ({MENTORS} mentors) + 12–15 shadow meetings","scheduling NSM national sales training week","building 4–6 week plan + 30-day business plan (SWOT)","setting weekly Friday reflection-form cadence"]},
   {id:"target", nm:"V-Target", area:"Lead Intelligence", ic:"🎯",
-    ds:"Pulls intent signals from 6sense & ZoomInfo, finds in-segment accounts and maps the full buying group with role-based pain points.",
+    ds:"Pulls intent signals from 6sense & ZoomInfo, finds in-segment accounts, maps the full buying group with role-based pain points, and checks VAR / integrator coverage.",
     tools:["6sense","ZoomInfo","LinkedIn","HubSpot"],
-    think:["querying 6sense intent surge…","scanning ZoomInfo for {SEG} accounts","ranking by intent + fit","mapping decision makers (IT / Ops / Exec)","inferring role-based pain points"]},
+    think:["querying 6sense intent surge…","scanning ZoomInfo + LinkedIn for {SEG} accounts","ranking by intent + ICP fit","mapping buying group (IT / Ops / Exec)","inferring role-based pain points","checking VAR / integrator coverage"]},
   {id:"reach", nm:"V-Reach", area:"Marketing", ic:"📣",
     ds:"Feeds the target list to marketing, generates segment-specific messaging and warms the market before the rep reaches out.",
     tools:["Marketing automation","Email","Content"],
@@ -305,17 +332,17 @@ var AGENTS=[
     tools:["Zoom","GoToMeeting","Deck"],
     think:["assembling tailored deck…","scheduling presentation + manager invite","capturing GoToMeeting transcript","extracting customer drivers from transcript"]},
   {id:"prove", nm:"V-Prove", area:"Proof of Concept", ic:"🧪",
-    ds:"Builds the POC from the Gardewine template, fills documentation with the PM team and sets the 45-day success metrics.",
-    tools:["POC template","PM team","Success metrics"],
-    think:["instantiating POC from Gardewine template","scoping site + equipment with PM","defining 45-day success metrics","drafting commitments + timeline"]},
+    ds:"Builds the POC from the Gardewine template with the PM team — site walkthrough, scope, 45-day data collection, success metrics, commitments and the Go / No-Go review.",
+    tools:["Gardewine POC template","PM team","45-day plan"],
+    think:["instantiating POC from Gardewine template","scheduling site walkthrough + scope with PM","setting 45-day data-collection & validation","defining success metrics + commitments","prefilling signature + Go / No-Go block"]},
   {id:"guard", nm:"V-Guard", area:"Legal & Privacy", ic:"🛡️",
     ds:"The Magenta privacy review — triggers on sensitive solutions, applies Law 25 / GDPR, and generates signage + PIA.",
     tools:["Q25 KB","LP & Privacy Guide","FRT laws"],
     think:["scanning quote for sensitive solutions…","privacy trigger: evaluating jurisdiction","applying Law 25 / PIPEDA / FRT laws","generating signage + PIA starter","routing risk decision"]},
   {id:"close", nm:"V-Close", area:"Commercial & Close", ic:"🤝",
-    ds:"Prices against the competitor cost matrix, assembles the contract, closes and syncs everything to Salesforce & Automatica.",
-    tools:["Cost Matrix","Salesforce","Automatica"],
-    think:["benchmarking price vs competitor matrix","positioning value vs incumbent","assembling contract + commercials","closing + syncing Salesforce / Automatica"]}
+    ds:"Benchmarks against the competitor cost matrix, loads the 'how to pitch against' battlecard for the incumbent, assembles commercials and closes — syncing Salesforce & Automatica.",
+    tools:["Cost Matrix","Battlecards","Salesforce","Automatica"],
+    think:["identifying incumbent from quote…","benchmarking price vs cost matrix","loading 'how to pitch against' battlecard","positioning i3 value (POS + Ai · 35 yrs)","assembling contract + commercials","closing → sync Salesforce / Automatica"]}
 ];
 
 var ENTRIES=[
@@ -525,11 +552,16 @@ function resetRun(){
 
 /* ===== manager dashboard ===== */
 var REPS=[
-  {nm:"Elie Partamian", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15]},
-  {nm:"Sarah Malik",    ro:"Account Executive",        seg:"Retail",     stage:"guide",   ready:78, refl:[4,5], ment:[11,15]},
-  {nm:"Marcus Tan",     ro:"Sales Rep",                seg:"School",     stage:"present", ready:71, refl:[3,5], ment:[9,15]},
-  {nm:"Priya Rao",      ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15]},
-  {nm:"Devon Klein",    ro:"Sales Rep",                seg:"Commercial", stage:"start",   ready:30, refl:[1,3], ment:[2,15]}
+  {nm:"Elie Partamian", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15],
+    wk:"Week 2 of 4 · NSM training", focus:"Sales Mastery + Sales Ops fundamentals", next:"30-day business plan + SWOT", mentor:"David Crook"},
+  {nm:"Sarah Malik",    ro:"Account Executive",        seg:"Retail",     stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
+    wk:"Week 5 · Guided outreach", focus:"Verified outreach + booking meetings", next:"First booked presentation", mentor:"Paul Leiba"},
+  {nm:"Marcus Tan",     ro:"Sales Rep",                seg:"School",     stage:"present", ready:71, refl:[3,5], ment:[9,15],
+    wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"George Karaolis"},
+  {nm:"Priya Rao",      ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15],
+    wk:"POC · day 20 of 45", focus:"POC validation with PM team", next:"Executive Go / No-Go review", mentor:"Hal Wever"},
+  {nm:"Devon Klein",    ro:"Sales Rep",                seg:"Commercial", stage:"start",   ready:30, refl:[1,3], ment:[2,15],
+    wk:"Week 1 · Onboarding", focus:"i3 culture + systems setup", next:"Meet the mentor team", mentor:"Sales Manager"}
 ];
 function agName(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.nm:id;}
 function agArea(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.area:id;}
@@ -549,9 +581,9 @@ function renderManager(){
     kpi('Reflections on-track', onTrack+'/'+REPS.length,'weekly Friday forms', onTrack>=REPS.length-1?'good':'warn') +
     kpi('Active POCs', pocs,'in proof-of-concept','');
 
-  var rows=REPS.map(function(r){
+  var rows=REPS.map(function(r,ri){
     var pct=Math.round(r.refl[0]/r.refl[1]*100);
-    return '<div class="rrow '+(attention(r)?'flag':'')+'">'+
+    return '<div class="rrow '+(attention(r)?'flag':'')+'" onclick="openRep('+ri+')" title="Open rep detail">'+
       '<div class="who"><div class="nm">'+r.nm+'</div><div class="ro">'+r.ro+'</div><span class="seg">'+r.seg+'</span></div>'+
       '<div><div class="rmini">Stage</div><div class="rval">'+agName(r.stage)+'</div><div class="ro" style="font-size:11px;color:#7f93a8">'+agArea(r.stage)+'</div></div>'+
       '<div><div class="rmini">Readiness</div><div class="rval">'+r.ready+'%</div><div class="rbar"><span style="width:'+r.ready+'%;background:'+readyCol(r.ready)+'"></span></div></div>'+
@@ -587,8 +619,42 @@ function switchView(v){
   window.scrollTo(0,0);
 }
 
+/* ---- rep detail modal ---- */
+function openRep(i){
+  var r=REPS[i];
+  var deliverables=[
+    {t:"Weekly Friday reflection forms", done:reflOk(r)},
+    {t:"12–15 mentor / shadow meetings", done:r.ment[0]>=12},
+    {t:"NSM national sales training", done:["guide","present","prove","guard","close"].indexOf(r.stage)>-1},
+    {t:"30-day business plan + SWOT", done:["present","prove","guard","close"].indexOf(r.stage)>-1},
+    {t:"Mock + live demo (evaluated)", done:["prove","guard","close"].indexOf(r.stage)>-1}
+  ];
+  document.getElementById('repSheet').innerHTML=
+    '<div class="sh"><div><div class="nm">'+r.nm+'</div><div class="ro">'+r.ro+' · '+r.seg+' segment</div></div>'+
+      '<button class="x" onclick="closeRep()">✕</button></div>'+
+    '<div class="body">'+
+      '<div class="srow">'+
+        sbox('Current stage', agName(r.stage)+' · '+agArea(r.stage))+
+        sbox('Acclimation', r.wk)+
+        sbox('Readiness', r.ready+'%')+
+        sbox('Reflections · Mentor', r.refl[0]+'/'+r.refl[1]+' · '+r.ment[0]+'/'+r.ment[1])+
+        sbox('Current focus', r.focus)+
+        sbox('Next milestone', r.next)+
+      '</div>'+
+      '<div class="sbox"><div class="k">Direct manager</div><div class="v">'+r.mentor+'</div></div>'+
+      '<div style="margin-top:14px"><div class="sbox" style="background:transparent;border:none;padding:0"><div class="k">Acclimation deliverables</div></div>'+
+        '<div class="schk">'+deliverables.map(function(d){return '<div class="ci '+(d.done?'done':'')+'"><span class="bx">'+(d.done?'✓':'')+'</span>'+d.t+'</div>';}).join('')+'</div></div>'+
+      '<div class="sbtn"><button class="pr" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in iHost / Salesforce.\')">Open in iHost</button>'+
+        '<button class="gh" onclick="closeRep()">Close</button></div>'+
+    '</div>';
+  document.getElementById('repModal').classList.remove('hidden');
+}
+function sbox(k,v){ return '<div class="sbox"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
+function closeRep(){ document.getElementById('repModal').classList.add('hidden'); }
+
 /* boot */
 buildChips(); buildOrbit(); buildPipe(); renderIntake(); renderManager();
+if(location.hash==='#manager') switchView('manager');
 </script>
 </body>
 </html>

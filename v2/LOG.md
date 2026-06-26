@@ -7,6 +7,26 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/portal.html` (unified Vision Portal landing page)
+- New hub tying everything together: cards linking to **V · Vision Sales Engine**,
+  **Magenta Privacy Co-Pilot**, **Privacy Compliance Agent**, and the **Manager
+  Dashboard** (deep-links to `v-vision-sales-engine.html#manager`). Sales-rep /
+  channel-partner role toggle (partners don't see the Manager card). Includes a
+  "how it fits your sales process" flow line. i3 Brand Kit styling, logo inlined.
+
+### Added — `v2/v-vision-sales-engine.html` · clickable rep detail
+- Roster rows are now clickable → a rep detail modal (stage, acclimation week,
+  readiness, reflections + mentor progress, current focus, next milestone, and an
+  acclimation-deliverables checklist). Added `#manager` URL hash to open the
+  Manager view directly (used by the portal deep-link).
+
+### Changed — `v2/v-vision-sales-engine.html` · deeper V-Target / V-Prove / V-Close
+- **V-Prove** grounded in the Gardewine POC template (site walkthrough, 45-day
+  data collection, success metrics, Go/No-Go, signature block).
+- **V-Close** grounded in the competitor **Cost Matrix** ("how to pitch against"
+  battlecard, price benchmark, i3 value position) → Salesforce/Automatica sync.
+- **V-Target** enriched with VAR / integrator coverage + LinkedIn.
+
 ### Added — `v2/v-vision-sales-engine.html` · Manager dashboard view
 - New **Manager view** (top-bar toggle ▶ Engine / ▦ Manager): team read-out of
   every rep V is guiding — KPI cards (reps onboarding, avg readiness, reflections
