@@ -7,6 +7,23 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/vision-sales-agent.html` · admin, dashboard, deeper agents, voice
+- **Admin onboarding** flow: set segment/territory/responsibility/annual goal →
+  Vision builds the workflow and auto-starts the rep (saved to Salesforce,
+  proprietary to i3).
+- **Rep dashboard** as home: daily tasks, monthly goal, commitment, pipeline,
+  orders; clickable widgets drill in and **nudge** into the right stage.
+- **Prospecting**: LinkedIn presence assessment + marketing meeting + associations;
+  surfaces the **buying group** (multiple decision-makers) with 6sense/ZoomInfo
+  intent and next-day actions (no longer one contact).
+- **Presentation → POC**: upload/sample the transcript → captures attendees →
+  **generates the POC**; POC prompts for **every stakeholder** (title/position,
+  supporter flag), recommends **solution + equipment**, hands off to a **PM agent**
+  (timeline, cybersecurity forms, data).
+- **Vision talks** — "Talk to me" voice toggle (browser speech) for demo "aha".
+- Persistent **proprietary-to-i3 / saved-to-Salesforce** note. Updated
+  `ARCHITECTURE.md` §10.
+
 ### Added — Vision sales agent (working model) + architecture
 - `v2/vision-sales-agent.html` — **stage-first working model** named Vision. First
   question: "What stage of sales are you in?" 6 stages (Onboarding, Prospecting,

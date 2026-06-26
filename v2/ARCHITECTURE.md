@@ -103,6 +103,45 @@ the subset they're licensed for.
 Segment playbooks (Retail/Grocery/QSR/Commercial/School/Integrator), the full
 sales-process doc, real reflection-form data, and Automatica pricing/kit rules.
 
+## 10. Detailed behaviours (from the working-model critique)
+
+These are now in the working model and should carry into production:
+
+- **Admin onboarding (the starting button).** An i3 administrator onboards a
+  salesperson — name, **segment, territory, responsibility, annual goal**,
+  experience. Vision asks for detail, **builds the workflow**, and **auto-starts**
+  the rep's automated processes (lead intel, training, daily plan). Output is saved
+  to Salesforce and is **proprietary to i3**.
+- **Rep dashboard (first thing the rep sees).** Daily tasks, **monthly goal,
+  commitment numbers, pipeline, orders** — fed from Salesforce + Automatica.
+  Widgets are **clickable** and drill into Leads / Presentations / POCs, each with a
+  **nudge** button into the right stage ("call these leads → turn into a
+  presentation").
+- **Prospecting = buying group, not one contact.** From the segment, Vision surfaces
+  the **decision-makers** (Ops VP, IT, Loss Prevention, Finance) with **6sense
+  intent + ZoomInfo** data and a clear **"do this tomorrow"** action list.
+- **LinkedIn / social presence agent.** The rep enters their LinkedIn → Vision
+  **assesses** profile relevance, cadence and connections, recommends fixes,
+  **books a session with Marketing**, and suggests **industry associations** to join
+  to get more engaged with the market.
+- **Presentation → POC.** Upload (or sample) the **presentation transcript**; Vision
+  extracts drivers and **auto-captures the attendees**, then **generates the POC**
+  in the Gardewine format.
+- **Stakeholder capture.** The POC **prompts the rep to add everyone on the email**
+  with **title and position**, tagged **decision / supporter / blocker** — so we know
+  who backs the POC before it kicks off. Missing info is prompted, not assumed.
+- **Solution + equipment recommendation.** Vision maps the discussion to the right
+  i3 solution and **lists the equipment** to quote.
+- **PM agent interconnection.** "Contact PM" hands the POC to a **PM agent** that
+  keeps the PM on the **timeline**, completes **cybersecurity forms**, and collects
+  the right **data** for the 45-day validation.
+- **Data ownership.** Everything the rep enters is **saved to Salesforce and is
+  proprietary to i3** — if the rep leaves, the company keeps the accounts, contacts,
+  stakeholders and POCs. Surface this on every data-entry screen.
+- **Vision talks ("aha").** A voice toggle uses the browser speech engine so Vision
+  **speaks** its guidance during a demo. In production this can be a higher-quality
+  TTS voice.
+
 ---
 
 ## Files in this set
