@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>i3 Magenta · Sales &amp; Partner Privacy Portal (OpenAI simulation)</title>
+<style>
+  /* Styled to the official i3 Brand Kit (Rev. 20260214).
+     Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 */
+  :root{
+    --brand:#00588F; --brand-700:#024d7c; --brand-900:#002447;
+    --pink:#DF1E71; --green:#00A661; --yellow:#FFC107; --red:#C8102E;
+    --openai:#10a37f;
+    --ink:#0d1b2a; --ink2:#33424f; --muted:#69788a; --line:#dfe6ee;
+    --bg:#eef2f6; --panel:#fff;
+    --okbg:#e7f8f0; --okbd:#a6e8c8; --wnbg:#fff7e0; --wnbd:#ffe39c;
+    --hibg:#fdebef; --hibd:#f4b8c3; --inbg:#e8f1f8; --inbd:#bcd9ee;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  /* top bar */
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:16px;padding:12px 22px;position:sticky;top:0;z-index:10}
+  .topbar .ilogo{height:26px}
+  .topbar .ilogo svg{height:100%;width:auto;display:block}
+  .topbar .ilogo svg path{fill:#fff}
+  .topbar .sep{width:1px;height:24px;background:rgba(255,255,255,.22)}
+  .topbar .prod{font-weight:800;letter-spacing:.2px}
+  .topbar .prod small{display:block;font-weight:400;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;border:1px solid transparent;white-space:nowrap}
+  .pill.scope{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.26);color:#dceaf5}
+  .pill.oai{background:rgba(16,163,127,.16);border-color:rgba(16,163,127,.5);color:#7fe9c9;display:inline-flex;align-items:center;gap:6px}
+  .pill.oai .dot{width:7px;height:7px;border-radius:50%;background:var(--openai)}
+  .userchip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px 10px 4px 4px;font-size:12px;color:#eaf3fa}
+  .userchip .ua{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:22px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 16px rgba(13,27,42,.05)}
+  .ph{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .ph h2{margin:0;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  .ph .sub{font-size:12px;color:var(--muted);font-weight:600}
+  .btn{border:none;border-radius:10px;padding:10px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .btn.p{background:var(--brand);color:#fff}.btn.p:hover{background:var(--brand-700)}
+  .btn.pink{background:var(--pink);color:#fff}
+  .btn.g{background:#eef2f7;color:var(--ink2)}
+  .btn.oai{background:var(--openai);color:#fff}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  /* ---- LOGIN ---- */
+  .login{min-height:calc(100vh - 50px);display:flex;align-items:center;justify-content:center;padding:24px;
+    background:radial-gradient(1200px 500px at 50% -10%, #dce9f4, var(--bg))}
+  .loginbox{width:100%;max-width:880px;display:grid;grid-template-columns:1.05fr .95fr;gap:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,36,71,.2);border:1px solid var(--line)}
+  @media(max-width:760px){.loginbox{grid-template-columns:1fr}}
+  .login .left{background:linear-gradient(150deg,var(--brand-900),var(--brand));color:#fff;padding:34px 32px}
+  .login .left .ilogo{height:30px;margin-bottom:22px}.login .left .ilogo svg{height:100%}.login .left .ilogo svg path{fill:#fff}
+  .login .left h1{font-size:24px;margin:0 0 10px;font-weight:800;line-height:1.2}
+  .login .left p{color:#d6e8f4;font-size:13.5px;line-height:1.6;margin:0 0 18px}
+  .login .left ul{margin:0;padding:0;list-style:none;font-size:13px;color:#cfe3f1}
+  .login .left li{padding:6px 0 6px 22px;position:relative}
+  .login .left li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+  .login .right{background:#fff;padding:34px 32px}
+  .login .right h3{margin:0 0 4px;font-size:18px;font-weight:800}
+  .login .right .muted{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .field{display:block;margin-bottom:14px}
+  .field .lab{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);margin-bottom:6px;display:block}
+  .field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:14px;font-family:inherit}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,88,143,.12)}
+  .roletabs{display:flex;gap:8px;margin-bottom:16px}
+  .roletab{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink2)}
+  .roletab.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .oai-note{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.5;border-top:1px dashed var(--line);padding-top:12px}
+  .oai-note b{color:var(--openai)}
+
+  /* ---- QUOTE (iHost) ---- */
+  .grid{display:grid;grid-template-columns:1.5fr .95fr;gap:18px}
+  @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  .oppcard{display:flex;gap:14px;flex-wrap:wrap;padding:16px 18px}
+  .oppcard .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .oppcard .v{font-size:14px;font-weight:800;margin-top:2px}
+  .oppcard .col{min-width:120px}
+  .src{font-size:10.5px;color:var(--brand);font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-top:3px}
+  .catalog{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 18px}
+  @media(max-width:560px){.catalog{grid-template-columns:1fr}}
+  .prodcard{border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .prodcard .nm{font-weight:700;font-size:13.5px}
+  .prodcard .pr{font-size:12px;color:var(--muted);margin-top:1px}
+  .tag{font-size:10px;font-weight:800;border-radius:999px;padding:2px 8px;letter-spacing:.03em}
+  .tag.high{background:var(--hibg);color:var(--red);border:1px solid var(--hibd)}
+  .tag.cau{background:var(--wnbg);color:#9a6a06;border:1px solid var(--wnbd)}
+  .tag.ok{background:var(--okbg);color:#0a7d4f;border:1px solid var(--okbd)}
+  .addbtn{border:1px solid var(--brand);color:var(--brand);background:#fff;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
+  .addbtn.in{background:var(--brand);color:#fff}
+  .lines{padding:14px 18px}
+  .line{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px dashed #eef2f6}
+  .line .x{color:var(--muted);cursor:pointer;font-weight:700;padding:0 6px}
+  .total{display:flex;justify-content:space-between;font-weight:800;font-size:15px;padding-top:10px}
+  .trigger{margin:14px 18px;border-radius:12px;padding:13px 15px;font-size:13.5px;line-height:1.5;display:none}
+  .trigger.show{display:block}
+  .trigger.warn{background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05}
+  .trigger.done.high{background:var(--hibg);border:1px solid var(--hibd);color:var(--red)}
+  .trigger.done.medium{background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05}
+  .trigger.done.low{background:var(--okbg);border:1px solid var(--okbd);color:#0a7d4f}
+  .trigger .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:9px}
+
+  .systems{display:flex;gap:10px;flex-wrap:wrap;padding:14px 18px;border-top:1px solid var(--line)}
+  .syschip{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--ink2);background:#f5f8fb;border:1px solid var(--line);border-radius:10px;padding:7px 11px}
+  .syschip .d{width:8px;height:8px;border-radius:50%;background:var(--green)}
+  .cyc{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .cyc .big{font-size:22px;font-weight:800;color:var(--brand)}
+  .cyc .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---- MAGENTA agent ---- */
+  .magenta-head{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border-radius:16px;padding:18px 22px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .magenta-head .t{font-size:18px;font-weight:800}
+  .magenta-head .s{font-size:12.5px;color:#cfe3f1;margin-top:3px;max-width:560px;line-height:1.5}
+  .mgrid{display:grid;grid-template-columns:1.4fr .9fr;gap:18px}
+  @media(max-width:980px){.mgrid{grid-template-columns:1fr}}
+  .thread{padding:18px;max-height:540px;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
+  .row2{display:flex;gap:10px;align-items:flex-start}.row2.me{flex-direction:row-reverse}
+  .av{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff}
+  .av.bot{background:linear-gradient(135deg,var(--brand-900),var(--pink))}.av.me{background:#46566a}
+  .bub{max-width:82%;padding:10px 13px;border-radius:13px;font-size:13.5px;line-height:1.5}
+  .bot .bub{background:#f1f6fa;border:1px solid var(--line);border-top-left-radius:4px}
+  .me .bub{background:var(--brand);color:#fff;border-top-right-radius:4px}
+  .bub .note{display:block;margin-top:5px;font-size:11.5px;color:var(--muted)}
+  .tool{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;background:#0d1b2a;color:#7fe9c9;border-radius:10px;padding:9px 12px;line-height:1.7;border:1px solid #14304a}
+  .tool .c{color:#9fb3c8}.tool .ok{color:var(--green)}.tool b{color:#fff;font-weight:700}
+  .controls{padding:13px 18px;border-top:1px solid var(--line);background:#f8fbfd;border-radius:0 0 16px 16px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;font-size:13px;font-weight:600;cursor:pointer}
+  .opt:hover{border-color:var(--brand);background:#eef6fc}.opt.go{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .brief{padding:16px 18px;max-height:560px;overflow-y:auto}
+  .bcard{border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin-bottom:12px}
+  .bcard h3{margin:0 0 8px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .chip{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:3px 9px;margin:0 5px 5px 0}
+  .chip.law{background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+  .chip.high{background:var(--hibg);color:var(--red);border:1px solid var(--hibd)}
+  .chip.cau{background:var(--wnbg);color:#9a6a06;border:1px solid var(--wnbd)}
+  .gauge{height:9px;border-radius:999px;background:#e6ecf2;overflow:hidden;margin:6px 0}
+  .gauge>span{display:block;height:100%}
+  .decision{border-radius:11px;padding:12px 14px;font-size:13.5px;font-weight:700;line-height:1.5;margin-bottom:10px}
+  .decision.high{background:var(--hibg);border:1px solid var(--hibd);color:var(--red)}
+  .decision.medium{background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05}
+  .decision.low{background:var(--okbg);border:1px solid var(--okbd);color:#0a7d4f}
+  ol.steps{margin:8px 0 0;padding-left:18px;font-size:12.8px;line-height:1.55}
+  ol.steps li{margin-bottom:5px}
+  .back{background:none;border:none;color:#cfe3f1;font-size:13px;cursor:pointer;font-weight:700}
+
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="ilogo" id="logoSlot"></div>
+  <div class="sep"></div>
+  <div class="prod">Magenta<small>Privacy Co-Pilot</small></div>
+  <div class="right">
+    <span class="pill scope">North America · v1</span>
+    <span class="pill oai"><span class="dot"></span>Powered by OpenAI</span>
+    <span id="userSlot"></span>
+  </div>
+</div>
+
+<!-- ============ LOGIN ============ -->
+<div id="view-login">
+  <div class="login">
+    <div class="loginbox">
+      <div class="left">
+        <div class="ilogo" id="logoLogin"></div>
+        <h1>Sales &amp; Partner Privacy Portal</h1>
+        <p>One agent in your sales process. Magenta rides inside iHost quoting — the moment a
+        privacy-sensitive solution lands on a quote, it runs the review so the deal keeps moving.</p>
+        <ul>
+          <li>Built for i3 sales reps and channel partners</li>
+          <li>Triggered automatically from the iHost quote</li>
+          <li>Reads Salesforce, Automatica &amp; meeting transcripts</li>
+          <li>Shortens the privacy step from days to minutes</li>
+        </ul>
+      </div>
+      <div class="right">
+        <h3>Sign in</h3>
+        <div class="muted">Use your i3 or partner credentials.</div>
+        <div class="roletabs">
+          <div class="roletab on" id="rt-rep" onclick="setRole('rep')">i3 Sales Rep</div>
+          <div class="roletab" id="rt-partner" onclick="setRole('partner')">Channel Partner</div>
+        </div>
+        <label class="field"><span class="lab">Work email</span><input id="email" value="marketing@i3international.com"></label>
+        <label class="field"><span class="lab">Password</span><input id="pw" type="password" value="demo-access"></label>
+        <button class="btn p" style="width:100%" onclick="signIn()">Sign in to portal</button>
+        <div class="oai-note">Under the hood, this simulates an <b>OpenAI</b> agent (GPT-4o with
+        function calling / Assistants API) that calls tools in Salesforce, Automatica, iHost and
+        GoToMeeting, and reasons over the Quebec Law 25 knowledge base. Buttons here are simulated.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ QUOTE (iHost) ============ -->
+<div id="view-quote" class="hidden">
+  <div class="wrap">
+    <div class="grid">
+      <!-- left: opportunity + catalog -->
+      <div>
+        <div class="panel" style="margin-bottom:18px">
+          <div class="ph"><h2>iHost · Quote builder</h2><span class="sub">Opportunity synced from Salesforce</span></div>
+          <div class="oppcard">
+            <div class="col"><div class="k">Account</div><div class="v">Metro Grocery — QC Pilot</div><div class="src">◆ Salesforce</div></div>
+            <div class="col"><div class="k">Stage</div><div class="v">POC Qualification</div><div class="src">◆ Salesforce</div></div>
+            <div class="col"><div class="k">Region</div><div class="v">Quebec, Canada</div><div class="src">◆ North America</div></div>
+            <div class="col"><div class="k">Rep</div><div class="v" id="repName">—</div><div class="src">◆ iHost</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><h2>Add i3 solutions to the quote</h2><span class="sub">Privacy tag shown per product</span></div>
+          <div class="catalog" id="catalog"></div>
+        </div>
+      </div>
+      <!-- right: quote + compliance + systems -->
+      <div>
+        <div class="panel">
+          <div class="ph"><h2>Quote summary</h2><span class="sub" id="qcount">0 items</span></div>
+          <div class="lines" id="lines"><div class="muted" style="color:var(--muted);font-size:13px">No items yet. Add solutions on the left.</div></div>
+
+          <div class="trigger warn" id="trigWarn">
+            ⚠ <b>Privacy review required.</b> A privacy-sensitive solution is on this quote, so Magenta must
+            sign off before it can advance to proposal.
+            <div class="row"><span style="font-size:12px">Est. manual review: ~3–5 days</span>
+              <button class="btn pink" onclick="openMagenta()">Open Magenta review →</button></div>
+          </div>
+          <div class="trigger done" id="trigDone"></div>
+
+          <div class="cyc">
+            <div><div class="big" id="cycVal">—</div><div class="lab">Privacy step turnaround</div></div>
+            <div style="text-align:right"><div class="lab">Sales-cycle impact</div><div style="font-weight:700;font-size:13px" id="cycNote">Add a flagged item to see it</div></div>
+          </div>
+
+          <div class="systems">
+            <span class="syschip"><span class="d"></span>Salesforce · CRM</span>
+            <span class="syschip"><span class="d"></span>Automatica · ERP</span>
+            <span class="syschip"><span class="d"></span>iHost · Quoting</span>
+            <span class="syschip"><span class="d"></span>GoToMeeting · Transcripts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAGENTA ============ -->
+<div id="view-magenta" class="hidden">
+  <div class="wrap">
+    <div class="magenta-head">
+      <div>
+        <div class="t">Magenta privacy review</div>
+        <div class="s">Triggered from the Metro Grocery quote. I've pulled the context I need from your systems —
+        let me ask a few questions, then I'll give you the decision and the documents.</div>
+      </div>
+      <button class="back" onclick="show('quote')">← Back to quote</button>
+    </div>
+    <div class="mgrid">
+      <div class="panel">
+        <div class="ph"><h2>Agent</h2><span class="sub" id="mprog">Working…</span></div>
+        <div class="thread" id="thread"></div>
+        <div class="controls" id="controls"></div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h2>Live compliance brief</h2></div>
+        <div class="brief" id="brief"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== official i3 logo (inline SVG, recoloured white by CSS) ===== */
+var LOGO='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+document.getElementById('logoSlot').innerHTML=LOGO;
+document.getElementById('logoLogin').innerHTML=LOGO;
+
+/* ===== product catalogue (i3 solutions, privacy-tagged) ===== */
+var CATALOG=[
+  {id:"sentry", nm:"i3Ai Sentry", price:"$/site", tier:"high", w:2, profiling:true},
+  {id:"loyalty",nm:"i3 AI Loyalty (facial)", price:"$/site", tier:"high", w:3, biometric:true, profiling:true},
+  {id:"audio",  nm:"Audio Monitoring", price:"$/cam", tier:"high", w:3},
+  {id:"lpr",    nm:"LPR / Gate Control", price:"$/lane", tier:"cau", w:2},
+  {id:"heat",   nm:"i3Ai Heat Mapping", price:"$/site", tier:"cau", w:1, profiling:true},
+  {id:"engage", nm:"Employee Engagement", price:"$/site", tier:"cau", w:2, employee:true, profiling:true},
+  {id:"pos",    nm:"POS + Video Integration", price:"$/lane", tier:"cau", w:2},
+  {id:"trueview",nm:"i3 True View", price:"$/cam", tier:"ok", w:0},
+  {id:"alert",  nm:"Alert Center", price:"$/site", tier:"ok", w:0},
+  {id:"door",   nm:"Door Count", price:"$/door", tier:"ok", w:0},
+  {id:"velocity",nm:"Velocity Drive-thru Timer", price:"$/lane", tier:"ok", w:0},
+  {id:"smarter",nm:"i3Ai Smart-ER (incidents)", price:"$/site", tier:"ok", w:0}
+];
+function prod(id){return CATALOG.find(function(p){return p.id===id});}
+var TAGTXT={high:"HIGH SENSITIVITY",cau:"REVIEW",ok:"LOW RISK"};
+
+/* ===== state ===== */
+var state={role:'rep', quote:[], assessed:null};
+function setRole(r){state.role=r;
+  document.getElementById('rt-rep').classList.toggle('on',r==='rep');
+  document.getElementById('rt-partner').classList.toggle('on',r==='partner');
+  document.getElementById('email').value = r==='rep'?'marketing@i3international.com':'partner@horizon-si.com';
+}
+function signIn(){
+  var name = state.role==='rep' ? 'A. Rep (i3)' : 'Horizon SI (Partner)';
+  var ini = state.role==='rep' ? 'AR' : 'HP';
+  document.getElementById('userSlot').innerHTML='<span class="userchip"><span class="ua">'+ini+'</span>'+name+'</span>';
+  document.getElementById('repName').textContent=name;
+  renderCatalog(); renderQuote(); show('quote');
+}
+
+function show(v){
+  ['login','quote','magenta'].forEach(function(x){
+    document.getElementById('view-'+x).classList.toggle('hidden', x!==v);
+  });
+  window.scrollTo(0,0);
+}
+
+/* ===== quote ===== */
+function renderCatalog(){
+  document.getElementById('catalog').innerHTML=CATALOG.map(function(p){
+    var inq=state.quote.indexOf(p.id)>-1;
+    return '<div class="prodcard"><div><div class="nm">'+p.nm+'</div>'+
+      '<div class="pr">'+p.price+' &nbsp;·&nbsp; <span class="tag '+p.tier+'">'+TAGTXT[p.tier]+'</span></div></div>'+
+      '<button class="addbtn '+(inq?'in':'')+'" onclick="toggleItem(\''+p.id+'\')">'+(inq?'✓ Added':'+ Add')+'</button></div>';
+  }).join('');
+}
+function toggleItem(id){
+  var i=state.quote.indexOf(id);
+  if(i>-1) state.quote.splice(i,1); else state.quote.push(id);
+  state.assessed=null;            // any quote change invalidates prior review
+  renderCatalog(); renderQuote();
+}
+function flaggedItems(){return state.quote.map(prod).filter(function(p){return p.tier!=='ok'});}
+function renderQuote(){
+  var L=document.getElementById('lines');
+  document.getElementById('qcount').textContent=state.quote.length+' item'+(state.quote.length===1?'':'s');
+  if(!state.quote.length){ L.innerHTML='<div style="color:var(--muted);font-size:13px">No items yet. Add solutions on the left.</div>'; }
+  else{
+    L.innerHTML=state.quote.map(function(id){var p=prod(id);
+      return '<div class="line"><span>'+p.nm+' <span class="tag '+p.tier+'" style="margin-left:4px">'+TAGTXT[p.tier]+'</span></span>'+
+        '<span class="x" onclick="toggleItem(\''+id+'\')">remove ✕</span></div>';
+    }).join('')+'<div class="total"><span>Quote status</span><span>'+(flaggedItems().length?'Privacy gate':'Clear')+'</span></div>';
+  }
+  // trigger logic
+  var warn=document.getElementById('trigWarn'), done=document.getElementById('trigDone');
+  warn.classList.remove('show'); done.classList.remove('show');
+  if(state.assessed){
+    done.className='trigger done show '+state.assessed.lvlClass;
+    done.innerHTML='✓ <b>Magenta review complete — '+state.assessed.lvl+' risk.</b> '+state.assessed.decision+
+      '<div class="row"><span style="font-size:12px">Pushed to Salesforce opportunity</span>'+
+      '<button class="btn g" onclick="openMagenta()">View review</button></div>';
+  } else if(flaggedItems().length){
+    warn.classList.add('show');
+  }
+  // cycle metric
+  var cv=document.getElementById('cycVal'), cn=document.getElementById('cycNote');
+  if(!flaggedItems().length){ cv.textContent='—'; cn.textContent='No flagged item on quote'; }
+  else if(state.assessed){ cv.textContent='~8 min'; cn.innerHTML='<span style="color:var(--green)">▼ from ~3–5 days manual</span>'; }
+  else { cv.textContent='~3–5 days'; cn.innerHTML='<span style="color:var(--red)">manual review (today)</span>'; }
+}
+
+/* ===== Magenta agent (OpenAI-style) ===== */
+var Q=[
+  {id:"purpose",bot:"What's the primary business problem driving this for Metro Grocery?",opts:["Loss Prevention","Workplace Safety","Operational Analytics","Customer Experience"]},
+  {id:"evidence",bot:"Is there evidence of a real, current problem — shrink data, incident logs, audits?",opts:["Yes — documented","Some / anecdotal","No — speculative"]},
+  {id:"alt",bot:"Have less-intrusive alternatives been considered and ruled out?",opts:["Yes — ruled out","In progress","Not yet"]},
+  {id:"consent",bot:"How will end users be notified and consent captured?",opts:["Express opt-in (signed)","Implied — signage only","Nothing yet"]}
+];
+var ans={}, qi=0;
+var thread=document.getElementById('thread');
+function bub(side,html){var r=document.createElement('div');r.className='row2 '+side;
+  r.innerHTML='<div class="av '+(side==='bot'?'bot':'me')+'">'+(side==='bot'?'M':'•')+'</div><div class="bub">'+html+'</div>';
+  thread.appendChild(r);thread.scrollTop=thread.scrollHeight;}
+function toolblock(html){var r=document.createElement('div');r.className='row2 bot';
+  r.innerHTML='<div class="av bot">M</div><div class="tool">'+html+'</div>';
+  thread.appendChild(r);thread.scrollTop=thread.scrollHeight;}
+
+function openMagenta(){
+  show('magenta'); thread.innerHTML=''; ans={}; qi=0;
+  document.getElementById('controls').innerHTML='';
+  document.getElementById('mprog').textContent='Gathering context…';
+  var fl=flaggedItems().map(function(p){return p.nm;}).join(', ');
+  // simulated OpenAI function-calling trace
+  var steps=[
+    '<span class="c">// OpenAI function calls</span>',
+    '→ <b>Salesforce.getOpportunity</b>(<span class="c">"Metro QC Pilot"</span>) <span class="ok">✓ Quebec · POC</span>',
+    '→ <b>iHost.getQuote</b>() <span class="ok">✓ flagged: '+fl+'</span>',
+    '→ <b>Automatica.getResidency</b>() <span class="ok">✓ Canada cloud + US support</span>',
+    '→ <b>GoToMeeting.getTranscript</b>() <span class="ok">✓ customer asked re: facial &amp; signage</span>',
+    '→ <b>KB.lookupLaw</b>(<span class="c">"Quebec"</span>) <span class="ok">✓ Law 25 + PIPEDA</span>'
+  ];
+  var i=0;
+  toolblock(steps[0]);
+  var box=thread.lastChild.querySelector('.tool');
+  var t=setInterval(function(){
+    i++; if(i>=steps.length){clearInterval(t); afterContext(fl); return;}
+    box.innerHTML+='<br>'+steps[i]; thread.scrollTop=thread.scrollHeight;
+  },520);
+}
+function afterContext(fl){
+  bub('bot','I pulled the context. This quote includes <b>'+fl+'</b> in <b>Quebec</b>, so <b>Law 25 + PIPEDA</b> apply, '+
+    'and the meeting transcript shows the customer already raised facial recognition and signage. '+
+    'A few questions and I\'ll have your decision.');
+  renderBrief(); askQ();
+}
+function askQ(){
+  var c=document.getElementById('controls');
+  if(qi>=Q.length){ c.innerHTML=''; finish(); return; }
+  document.getElementById('mprog').textContent='Question '+(qi+1)+' of '+Q.length;
+  var q=Q[qi]; bub('bot',q.bot);
+  c.innerHTML='<div class="opts">'+q.opts.map(function(o){return '<button class="opt" onclick="ansQ(\''+o.replace(/'/g,"\\'")+'\')">'+o+'</button>';}).join('')+'</div>';
+}
+function ansQ(v){ ans[Q[qi].id]=v; bub('me',v); qi++; renderBrief(); askQ(); }
+
+function assess(){
+  var risk=0,flags={},act=[];
+  flaggedItems().forEach(function(p){ risk+=p.w; if(p.biometric)flags.bio=true; if(p.profiling)flags.prof=true; if(p.employee)flags.emp=true; });
+  if(state.quote.indexOf('pos')>-1 && state.quote.length>1) risk+=2;
+  if(flags.bio){risk+=2;act.push("Obtain EXPRESS opt-in consent for biometrics — signage alone is not enough (Law 25).");}
+  if(flags.prof){risk+=1;act.push("Disclose profiling and confirm it isn't a prohibited use (e.g. theft prediction).");}
+  if(flags.emp){risk+=2;act.push("Run an employee-privacy review for staff monitoring.");}
+  if(ans.evidence==='No — speculative'){risk+=2;act.push("Gather evidence of a real problem — speculative purposes fail the necessity test.");}
+  else if(ans.evidence==='Some / anecdotal') risk+=1;
+  if(ans.alt!=='Yes — ruled out'){risk+=1;act.push("Document the less-intrusive alternatives considered and why they're insufficient.");}
+  if(ans.consent==='Implied — signage only' && flags.bio){risk+=2;}
+  if(ans.consent==='Nothing yet'){risk+=1;act.push("Define notice & consent approach with the customer.");}
+  act.push("Issue purpose-specific signage (OPC rejected generic 'may include biometric technologies' wording).");
+  act.push("Launch a PIA before final POC approval.");
+  var lvl='Low',cls='low'; if(risk>=6){lvl='Medium';cls='medium';} if(risk>=11){lvl='High';cls='high';}
+  var decision = lvl==='High' ? 'Escalate to the i3 Privacy team before POC approval.'
+               : lvl==='Medium' ? 'Proceed with a privacy checkpoint — conditions must be met during the POC.'
+               : 'Proceed with standard security positioning, notice and retention controls.';
+  return {risk:risk,lvl:lvl,lvlClass:cls,decision:decision,act:act,flags:flags};
+}
+function renderBrief(){
+  var r=assess(); var laws=['Quebec Law 25','PIPEDA'];
+  var b=document.getElementById('brief');
+  var f=[]; if(r.flags.bio)f.push(['high','Biometric']); if(r.flags.prof)f.push(['cau','Profiling']); if(r.flags.emp)f.push(['cau','Employee monitoring']);
+  b.innerHTML=
+    '<div class="bcard"><h3>Applicable laws</h3>'+laws.map(function(l){return '<span class="chip law">'+l+'</span>';}).join('')+'</div>'+
+    '<div class="bcard"><h3>Risk</h3><div class="gauge"><span style="width:'+Math.min(100,r.risk*8)+'%;background:'+(r.lvlClass==='high'?'var(--red)':r.lvlClass==='medium'?'var(--yellow)':'var(--green)')+'"></span></div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:13px"><span>Score</span><b>'+r.risk+'</b></div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:13px"><span>Level</span><b>'+r.lvl+'</b></div></div>'+
+    '<div class="bcard"><h3>Flags</h3>'+(f.length?f.map(function(x){return '<span class="chip '+x[0]+'">'+x[1]+'</span>';}).join(''):'<span style="font-size:12px;color:var(--muted)">none</span>')+'</div>'+
+    '<div class="bcard"><h3>Flagged items</h3>'+(flaggedItems().map(function(p){return '<span class="chip '+(p.tier==='high'?'high':'cau')+'">'+p.nm+'</span>';}).join('')||'<span style="font-size:12px;color:var(--muted)">none</span>')+'</div>';
+}
+function finish(){
+  document.getElementById('mprog').textContent='Review complete';
+  var r=assess();
+  bub('bot','Done. Here\'s my decision and the kit. I\'ll write it back to the Salesforce opportunity so the quote can advance.');
+  var html='<div class="decision '+r.lvlClass+'">'+r.lvl+' risk — '+r.decision+'</div>'+
+    '<b style="font-size:12.5px;color:var(--pink);text-transform:uppercase;letter-spacing:.08em">Required next steps</b>'+
+    '<ol class="steps">'+r.act.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ol>';
+  var r2=document.createElement('div');r2.className='row2 bot';
+  r2.innerHTML='<div class="av bot">M</div><div class="bub" style="max-width:92%">'+html+'</div>';
+  thread.appendChild(r2);thread.scrollTop=thread.scrollHeight;
+  document.getElementById('controls').innerHTML='<button class="btn p" onclick="applyToQuote()">Apply to quote &amp; write back to Salesforce →</button>';
+}
+function applyToQuote(){
+  state.assessed=assess();
+  renderQuote(); show('quote');
+}
+</script>
+</body>
+</html>

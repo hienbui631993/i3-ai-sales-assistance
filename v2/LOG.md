@@ -7,6 +7,22 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/magenta-portal-simulation.html` (OpenAI portal demo)
+- Clickable, self-contained simulation of the **internal Sales & Partner portal**
+  with the **Magenta** privacy agent embedded in the iHost quoting flow —
+  framed as an **OpenAI** (GPT-4o / function-calling) build, per request.
+- Flow: **login** (i3 Sales Rep *or* Channel Partner) → **iHost quote builder**
+  (opportunity synced from Salesforce; i3 solution catalog with privacy tags) →
+  adding a flagged solution **triggers Magenta** → agent shows a simulated
+  **OpenAI function-call trace** (Salesforce.getOpportunity, iHost.getQuote,
+  Automatica.getResidency, GoToMeeting.getTranscript, KB.lookupLaw) → asks 4
+  questions → decision + next steps → **writes back to Salesforce** and the
+  quote advances.
+- Sales-cycle framing: privacy step shown dropping from **~3–5 days (manual)
+  to ~8 min**. Scope badge: **North America · v1**. Systems strip: Salesforce
+  (CRM), Automatica (ERP), iHost (quoting), GoToMeeting (transcripts).
+- i3 Brand Kit styling; official logo inlined. Verified end-to-end headless.
+
 ### Added — `v2/LOG.md`
 - Created this change log to track work on the `v2/` agent.
 
