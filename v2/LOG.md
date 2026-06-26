@@ -7,6 +7,12 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Fixed — `v2/magenta-portal-simulation.html`
+- Login sign-in form was pushed off the card because the inline logo SVG
+  rendered at its native 800px width; constrained `.ilogo svg` to `width:auto`
+  so both panels (intro + sign-in) show correctly.
+- Removed the "Powered by OpenAI" badge from the top bar (per request).
+
 ### Added — `v2/magenta-portal-simulation.html` (OpenAI portal demo)
 - Clickable, self-contained simulation of the **internal Sales & Partner portal**
   with the **Magenta** privacy agent embedded in the iHost quoting flow —
