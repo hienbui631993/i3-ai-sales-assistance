@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/v-vision-sales-engine.html` · Manager dashboard view
+- New **Manager view** (top-bar toggle ▶ Engine / ▦ Manager): team read-out of
+  every rep V is guiding — KPI cards (reps onboarding, avg readiness, reflections
+  on-track, active POCs), a rep roster (stage, readiness bar, weekly-reflection +
+  mentor-meeting progress, On-track / Needs-attention flag), and a "where reps sit
+  in V" stage distribution. Sample roster of 5 reps across segments/stages.
+
 ### Changed — `v2/v-vision-sales-engine.html` (onboarding intake + deeper agents)
 - Added an **Onboarding intake** area: load an onboarding document and V-Start
   parses it into a rep profile, mentor team, acclimation plan and the weekly
