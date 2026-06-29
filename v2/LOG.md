@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — i3 logo links back to the portal
+- Clicking the i3 logo now returns to `portal.html` on every page (Vision agent,
+  V engine, Architecture, Magenta, Privacy agent). Uses an htmlpreview-aware
+  handler so it works both self-hosted and through the preview proxy.
+
 ### Fixed — Manager dashboard roster column alignment
 - Roster columns now top-align (`align-items:start`) and labels share a fixed
   height, so STAGE / READINESS / REFLECTIONS·MENTOR labels, their values, and the
