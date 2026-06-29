@@ -367,12 +367,11 @@ function renderQuote(){
 }
 
 /* ===== Magenta agent (OpenAI-style) ===== */
+/* One question only — I default the rest and tell the rep what to do. */
 var Q=[
-  {id:"purpose",bot:"What's the primary business problem driving this for Metro Grocery?",opts:["Loss Prevention","Workplace Safety","Operational Analytics","Customer Experience"]},
-  {id:"evidence",bot:"Is there evidence of a real, current problem — shrink data, incident logs, audits?",opts:["Yes — documented","Some / anecdotal","No — speculative"]},
-  {id:"alt",bot:"Have less-intrusive alternatives been considered and ruled out?",opts:["Yes — ruled out","In progress","Not yet"]},
-  {id:"consent",bot:"How will end users be notified and consent captured?",opts:["Express opt-in (signed)","Implied — signage only","Nothing yet"]}
+  {id:"purpose",bot:"One thing: what's the primary business problem here? I'll handle the rest with safe defaults and tell you exactly what to do.",opts:["Loss Prevention","Workplace Safety","Operational Analytics","Customer Experience"]}
 ];
+var ansDefaults={evidence:'Some / anecdotal', alt:'In progress', consent:'Implied — signage only'};
 var ans={}, qi=0;
 var thread=document.getElementById('thread');
 function bub(side,html){var r=document.createElement('div');r.className='row2 '+side;
@@ -383,7 +382,7 @@ function toolblock(html){var r=document.createElement('div');r.className='row2 b
   thread.appendChild(r);thread.scrollTop=thread.scrollHeight;}
 
 function openMagenta(){
-  show('magenta'); thread.innerHTML=''; ans={}; qi=0;
+  show('magenta'); thread.innerHTML=''; ans=Object.assign({},ansDefaults); qi=0;
   document.getElementById('controls').innerHTML='';
   document.getElementById('mprog').textContent='Gathering context…';
   var fl=flaggedItems().map(function(p){return p.nm;}).join(', ');
@@ -407,7 +406,7 @@ function openMagenta(){
 function afterContext(fl){
   bub('bot','I pulled the context. This quote includes <b>'+fl+'</b> in <b>Quebec</b>, so <b>Law 25 + PIPEDA</b> apply, '+
     'and the meeting transcript shows the customer already raised facial recognition and signage. '+
-    'A few questions and I\'ll have your decision.');
+    'One quick confirmation and I\'ll tell you exactly what to do — privacy and cybersecurity.');
   renderBrief(); askQ();
 }
 function askQ(){
@@ -454,10 +453,18 @@ function renderBrief(){
 function finish(){
   document.getElementById('mprog').textContent='Review complete';
   var r=assess();
-  bub('bot','Done. Here\'s my decision and the kit. I\'ll write it back to the Salesforce opportunity so the quote can advance.');
+  bub('bot','Done. Here\'s exactly what to do — privacy and cybersecurity. I\'ll write it back to the Salesforce opportunity so the quote can advance.');
+  var cyber=["Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.",
+    "Keep the data in Canada (Canada-for-Canada); document any U.S. / cross-border support access.",
+    "Turn on access control + MFA on the iHost / VMS accounts.",
+    "Encrypt data at rest and in transit.",
+    "Run the vendor security / SOC 2 check; set retention to the minimum needed."];
+  var lbl='font-size:12.5px;color:var(--pink);text-transform:uppercase;letter-spacing:.08em';
   var html='<div class="decision '+r.lvlClass+'">'+r.lvl+' risk — '+r.decision+'</div>'+
-    '<b style="font-size:12.5px;color:var(--pink);text-transform:uppercase;letter-spacing:.08em">Required next steps</b>'+
-    '<ol class="steps">'+r.act.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ol>';
+    '<b style="'+lbl+'">Do this — privacy</b>'+
+    '<ol class="steps">'+r.act.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ol>'+
+    '<b style="'+lbl+'">Do this — cybersecurity</b>'+
+    '<ol class="steps">'+cyber.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ol>';
   var r2=document.createElement('div');r2.className='row2 bot';
   r2.innerHTML='<div class="av bot">M</div><div class="bub" style="max-width:92%">'+html+'</div>';
   thread.appendChild(r2);thread.scrollTop=thread.scrollHeight;

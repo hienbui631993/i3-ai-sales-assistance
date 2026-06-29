@@ -7,6 +7,17 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — privacy agent + Magenta: directive, fewer questions, +cybersecurity
+- Applied the same treatment to the other privacy pages:
+  - **`i3-privacy-compliance-agent.html`** → renamed **Privacy & Cybersecurity
+    Agent**; trimmed the interview from 11 questions to **4** (account, location,
+    apps, purpose) with the rest defaulted; report is now directive — **"Do this —
+    privacy"** + new **"Do this — cybersecurity"** (cyber intake forms, residency,
+    MFA, encryption, SOC 2, retention).
+  - **`magenta-portal-simulation.html`** → reduced to **one** question (defaults the
+    rest); output is directive with **"Do this — privacy"** and **"Do this —
+    cybersecurity"** lists.
+
 ### Changed — `v2/vision-sales-agent.html` · names + POC address→exact legal doc
 - **PM team names**: PM handoff now assigns a real PM — **Louel / Nissan / Des**.
 - **Salesperson names**: default rep is **David Chen**; admin onboarding defaults to
