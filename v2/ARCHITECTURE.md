@@ -111,6 +111,10 @@ These are now in the working model and should carry into production:
   the rep's territory and the quote) and **tells the rep what to do** — short
   "Do this" action lists — rather than asking lots of questions or offering choices
   to ignore. Defaults mean privacy/cyber steps can't be skipped.
+- **Site address → exact legal requirement.** The POC captures the **site address**;
+  Vision derives the **jurisdiction and the exact legal doc** from it (Quebec → Law 25
+  PIA + bilingual signage; Illinois → BIPA written consent; California → CCPA;
+  EU → GDPR DPIA; etc.) and feeds it straight into the Privacy & Cybersecurity review.
 - **Privacy & Cybersecurity are one gate.** The privacy agent (Magenta) also drives
   the **cybersecurity** checklist: cyber intake forms, Canada-for-Canada data
   residency, access control + MFA, encryption at rest/in transit, SOC 2 / vendor

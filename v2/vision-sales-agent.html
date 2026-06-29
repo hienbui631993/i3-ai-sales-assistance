@@ -161,7 +161,8 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 
 /* ===== state ===== */
 var S={role:'rep', seg:'Retail'};
-var rep={name:"Alex Rivera", seg:"Retail", terr:"Ontario & Atlantic", resp:"New business", goal:"$4.5M", started:true};
+var rep={name:"David Chen", seg:"Retail", terr:"Ontario & Atlantic", resp:"New business", goal:"$4.5M", started:true};
+var PMS=["Louel","Nissan","Des"];          // i3 PM team
 
 /* ===== voice (the 'aha' — Vision actually talks) ===== */
 var voiceOn=false;
@@ -188,7 +189,7 @@ function showAdmin(){
     '<div class="vsay"><div class="av">V</div><div class="bub">Tell me about the new rep and their year. I\'ll build their ramp and start the engine for them.</div></div>'+
     '<div class="card"><div class="body">'+
       '<div class="grid2">'+
-        '<label class="f"><span class="l">Name</span><input id="a_name" value="Jordan Lee"></label>'+
+        '<label class="f"><span class="l">Name</span><input id="a_name" value="Tony Russo"></label>'+
         '<label class="f"><span class="l">Core segment</span><select id="a_seg">'+['Retail','Grocery','QSR','Commercial','School','Integrator'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
         '<label class="f"><span class="l">Territory</span><input id="a_terr" value="Quebec & Atlantic"></label>'+
         '<label class="f"><span class="l">Responsibility</span><select id="a_resp"><option>New business</option><option>Named accounts</option><option>Channel / VAR</option><option>Existing accounts</option></select></label>'+
@@ -320,11 +321,12 @@ function renderInputs(id){
       '<button class="btn p" onclick="runStage(\'present\')">Use sample transcript</button></div>'+
       '<label class="f" style="margin-top:14px"><span class="l">…or paste the transcript</span><textarea id="i_tx" placeholder="Paste the meeting transcript here…"></textarea></label>';
   } else if(id==='poc'){
-    h='<div class="upload"><div class="di">🧪</div><div class="dt">I\'ll generate the POC from your presentation transcript and our template. Click to see it built.</div>'+
-      '<button class="btn p" onclick="runStage(\'poc\')">Generate POC from transcript</button></div>';
+    h='<label class="f"><span class="l">Site address (sets the exact legal &amp; privacy requirement)</span><input id="i_addr" value="1500 Rue Sainte-Catherine, Montréal, Quebec"></label>'+
+      '<div class="upload"><div class="di">🧪</div><div class="dt">I\'ll generate the POC from your transcript and auto-check the exact legal doc for this address.</div>'+
+      '<button class="btn p" onclick="runStage(\'poc\')">Generate POC &amp; check legal</button></div>';
   } else if(id==='legal'){
-    var jdef=/quebec/i.test(rep.terr)?'Quebec (Law 25)':'Canada (PIPEDA)';
-    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">Defaults applied — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
+    var L=window._pocLaw||lawFromAddress(rep.terr); var jdef=L.juris+' · '+L.laws.join(', ');
+    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
       '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
   } else if(id==='close'){
     h='<label class="f"><span class="l">Incumbent / competitor</span><select id="i_comp">'+['Eagle Eye','Verkada','Solink','DTiQ','OpenEye','HME (drive-thru)'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
@@ -363,6 +365,20 @@ function kv(k,v){return '<div class="kv"><div class="k">'+k+'</div><div class="v
 function sec(t,inner){return '<div class="osec"><h4>'+t+'</h4>'+inner+'</div>';}
 function saveBar(extra){return '<div class="saveNote">🔒 Saved to Salesforce · proprietary to i3'+(extra?' — '+extra:'')+'</div>';}
 var ASSOC={Retail:["NRF","RILA"],Grocery:["FMI","NGA"],QSR:["National Restaurant Assoc."],Commercial:["ASIS","SIA"],School:["Campus Safety / NaBITA"]};
+/* address -> exact legal requirement */
+function lawFromAddress(a){a=(a||'').toLowerCase();
+  if(/quebec|québec|montr|\bqc\b/.test(a)) return {juris:'Quebec, Canada', laws:['Quebec Law 25','PIPEDA'], doc:'Law 25 PIA + express biometric consent + bilingual (FR/EN) signage'};
+  if(/alberta|\bab\b|calgary|edmonton/.test(a)) return {juris:'Alberta, Canada', laws:['PIPA (AB)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/british columbia|\bbc\b|vancouver/.test(a)) return {juris:'British Columbia, Canada', laws:['PIPA (BC)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/ontario|toronto|ottawa|\bon\b/.test(a)) return {juris:'Ontario, Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + purpose-specific signage'};
+  if(/illinois|chicago|\bil\b/.test(a)) return {juris:'Illinois, USA', laws:['BIPA'], doc:'BIPA written consent (biometrics) + retention schedule'};
+  if(/california|\bca\b|los angeles|san francisco/.test(a)) return {juris:'California, USA', laws:['CCPA / CPRA'], doc:'CCPA notice at collection + opt-out'};
+  if(/texas|\btx\b|dallas|houston/.test(a)) return {juris:'Texas, USA', laws:['CUBI (TX)'], doc:'Texas CUBI biometric notice + consent'};
+  if(/united kingdom|\buk\b|london|england/.test(a)) return {juris:'United Kingdom', laws:['UK GDPR'], doc:'DPIA + lawful basis + signage'};
+  if(/france|germany|spain|italy|europe|\beu\b|paris|berlin|madrid/.test(a)) return {juris:'European Union', laws:['GDPR'], doc:'DPIA + Art.9 special-category basis + signage'};
+  if(/\busa\b|united states|america|new york|\bny\b|florida|\bfl\b/.test(a)) return {juris:'United States', laws:['State biometric / FRT laws'], doc:'State FRT / biometric notice + consent'};
+  return {juris:'Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + signage'};
+}
 
 /* ===== outputs ===== */
 var OUTPUT={
@@ -399,8 +415,14 @@ var OUTPUT={
       saveBar("transcript + stakeholders captured");
   },
   poc:function(){
+    var addr=val('i_addr')||"1500 Rue Sainte-Catherine, Montréal, Quebec";
+    var L=lawFromAddress(addr); window._pocLaw=L;
     return sec("POC — generated from your transcript (Gardewine format)",
-      '<div class="grid2">'+kv("Account","Metro Retail Group")+kv("Pilot site","Toronto terminal")+kv("Objective","Reduce shrink; prove usable safety reporting")+kv("Duration","45-day data collection")+'</div>')+
+      '<div class="grid2">'+kv("Account","Metro Retail Group")+kv("Pilot site",addr)+kv("Objective","Reduce shrink; prove usable safety reporting")+kv("Duration","45-day data collection")+'</div>')+
+    sec("Site address → exact legal requirement (auto-checked)",
+      '<div><b>Jurisdiction:</b> '+L.juris+' &nbsp; '+L.laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+'</div>'+
+      '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>'+
+      '<div style="font-size:12px;color:var(--muted);margin-top:6px">Set from the site address — run Privacy &amp; Cybersecurity for the full review.</div>')+
     sec("Stakeholders — everyone on the email (add titles so we know our supporters)",
       '<table class="tbl"><tr><th>Name</th><th>Title</th><th>Role in POC</th></tr>'+
       '<tr><td>Chris Lytwyn</td><td>IT Director</td><td><span class="badge hi" style="font-size:9px">DECISION</span></td></tr>'+
@@ -418,9 +440,9 @@ var OUTPUT={
     saveBar("POC, stakeholders & equipment — proprietary to i3");
   },
   legal:function(){
-    var juris=/quebec/i.test(rep.terr)?"Quebec":"Canada";
-    var laws=juris==='Quebec'?["Quebec Law 25","PIPEDA"]:["PIPEDA"];
-    return sec("What applies (set for you)",'<div>'+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+' <span class="badge hi">High risk — sensitive solutions on the quote</span></div>')+
+    var L=window._pocLaw||lawFromAddress(rep.terr); var laws=L.laws;
+    return sec("What applies (from the site address)",'<div><b>'+L.juris+'</b> &nbsp; '+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+' <span class="badge hi">High risk — sensitive solutions</span></div>'+
+      '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>')+
       sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off. Below is exactly what to do.')+
       sec("Do this — privacy",'<ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
       sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the iHost / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
@@ -442,14 +464,16 @@ var OUTPUT={
   }
 };
 function showPM(){
+  var pm=PMS[(rep.name.length)%PMS.length];
   document.getElementById('pmPanel').innerHTML=
-    '<div class="card" style="margin-top:12px"><div class="h"><div class="ic">🛠️</div><div><h2>PM Agent</h2><div class="sub">Keeps the PM on track through implementation</div></div></div>'+
-    '<div class="body"><div class="vsay"><div class="av">P</div><div class="bub">POC received from '+rep.name.split(' ')[0]+'. I\'ll keep us on the timeline and make sure the data &amp; forms are complete.</div></div>'+
+    '<div class="card" style="margin-top:12px"><div class="h"><div class="ic">🛠️</div><div><h2>PM Agent · '+pm+'</h2><div class="sub">Assigned PM keeps the build on track</div></div></div>'+
+    '<div class="body"><div class="vsay"><div class="av">'+pm[0]+'</div><div class="bub">Hi '+rep.name.split(' ')[0]+', '+pm+' here from PM. POC received — I\'ll keep us on the timeline and make sure the data &amp; cybersecurity forms are complete.</div></div>'+
+    '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM",pm)+kv("PM team",PMS.join(" · "))+'</div>'+
     sec("PM checklist",'<ul class="steps"><li>Site walkthrough scheduled with SI / integrator</li><li>Cybersecurity forms — network, data residency, access</li><li>Install &amp; configure to the POC timeline</li><li>Collect the right data for the 45-day validation</li><li>Executive review → Go / No-Go</li></ul>')+
     sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
     '<div class="saveNote">🔒 Synced to Salesforce + iHost · PM agent interconnected with Vision.</div></div></div>';
   document.getElementById('pmPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
-  speak("Project management has the POC. I'll keep the timeline and cybersecurity forms on track.");
+  speak(pm+" from project management has the POC. We'll keep the timeline and cybersecurity forms on track.");
 }
 
 /* boot */

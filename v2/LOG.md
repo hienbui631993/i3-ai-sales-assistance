@@ -7,6 +7,15 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/vision-sales-agent.html` · names + POC address→exact legal doc
+- **PM team names**: PM handoff now assigns a real PM — **Louel / Nissan / Des**.
+- **Salesperson names**: default rep is **David Chen**; admin onboarding defaults to
+  **Tony Russo**.
+- **POC site address**: added an address field; Vision derives the **exact legal
+  requirement** from it (Quebec → Law 25 PIA + bilingual signage, Ontario → PIPEDA,
+  Illinois → BIPA, California → CCPA, EU → GDPR DPIA, …) and the Privacy &
+  Cybersecurity review picks up that jurisdiction + exact doc.
+
 ### Changed — `v2/vision-sales-agent.html` · directive wording + cybersecurity
 - **Privacy stage → "Privacy & Cybersecurity"**: now also tells the rep the
   cybersecurity actions (cyber intake forms, Canada-for-Canada residency, access
