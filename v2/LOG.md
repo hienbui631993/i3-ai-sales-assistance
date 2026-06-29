@@ -215,9 +215,9 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 ---
 
 ## Branch notes
-- Active branch: **`claude/v2`**.
-- `claude/v2` and `claude/bill-25-compliance-agent-uvidrh` share the same agent
-  files; `claude/v2` additionally contains the merge with `main`.
+- **All work lives on `claude/v2`** — this is the single source of truth for the
+  whole project. Every preview/demo link and document references `claude/v2`.
+- `claude/v2` contains the full `v2/` suite plus the merge with `main`.
 
 ## How to update this log
 Add a dated entry at the top under the current date, grouped as
