@@ -142,18 +142,18 @@
   .mcols{display:grid;grid-template-columns:1.55fr .9fr;gap:18px}
   @media(max-width:940px){.mcols{grid-template-columns:1fr}}
   .roster{display:flex;flex-direction:column;gap:10px;padding:12px}
-  .rrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:12px;align-items:center;border:1px solid var(--pline);border-radius:12px;padding:11px 13px;background:var(--panel2);cursor:pointer;transition:.14s}
+  .rrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.05fr auto;gap:12px;align-items:start;border:1px solid var(--pline);border-radius:12px;padding:13px;background:var(--panel2);cursor:pointer;transition:.14s}
   .rrow:hover{border-color:#46b3ff;background:#143251}
   @media(max-width:720px){.rrow{grid-template-columns:1fr 1fr}}
   .rrow.flag{border-color:rgba(255,193,7,.5);box-shadow:inset 3px 0 0 var(--yellow)}
   .rrow .who .nm{font-weight:800;font-size:13.5px}
   .rrow .who .ro{font-size:11.5px;color:#9fb8cf}
   .seg{font-size:11px;font-weight:700;color:#9fd0ec;background:rgba(70,179,255,.1);border:1px solid rgba(70,179,255,.25);border-radius:999px;padding:2px 9px;display:inline-block;margin-top:4px}
-  .rmini{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+  .rmini{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700;line-height:1.25;min-height:28px}
   .rval{font-size:13px;font-weight:700;color:#dbe8f4;margin-top:2px}
   .rbar{height:7px;border-radius:999px;background:#0b2030;overflow:hidden;margin-top:5px}
   .rbar>span{display:block;height:100%}
-  .badge2{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .badge2{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:999px;white-space:nowrap;align-self:center}
   .badge2.ok{color:#bfe6d4;background:rgba(0,166,97,.16);border:1px solid rgba(0,166,97,.4)}
   .badge2.att{color:#0a1a2b;background:var(--yellow)}
   .funnel{padding:14px 16px;display:flex;flex-direction:column;gap:8px}

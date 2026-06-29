@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Fixed — Manager dashboard roster column alignment
+- Roster columns now top-align (`align-items:start`) and labels share a fixed
+  height, so STAGE / READINESS / REFLECTIONS·MENTOR labels, their values, and the
+  progress bars line up across every row. Status badge stays vertically centered.
+
 ### Changed — Manager dashboard roster names
 - Manager dashboard (`v-vision-sales-engine.html`) roster now uses the real names:
   George Karaolis, Paul Kerling, Tony Thomas, Rajiv Patel, Andrew Ioannou,
