@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — Manager dashboard roster names
+- Manager dashboard (`v-vision-sales-engine.html`) roster now uses the real names:
+  George Karaolis, Paul Kerling, Tony Thomas, Rajiv Patel, Andrew Ioannou,
+  Christian Combes (6 reps across stages/segments).
+
 ### Changed — address→legal in Privacy agent + PM-by-territory in Vision
 - **`i3-privacy-compliance-agent.html`**: the location question is now a **site
   address**; Vision derives the **jurisdiction + exact legal doc** from it (same

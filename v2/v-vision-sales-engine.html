@@ -556,16 +556,18 @@ function resetRun(){
 
 /* ===== manager dashboard ===== */
 var REPS=[
-  {nm:"Elie Partamian", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15],
+  {nm:"George Karaolis", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15],
     wk:"Week 2 of 4 · NSM training", focus:"Sales Mastery + Sales Ops fundamentals", next:"30-day business plan + SWOT", mentor:"David Crook"},
-  {nm:"Sarah Malik",    ro:"Account Executive",        seg:"Retail",     stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
+  {nm:"Paul Kerling",    ro:"Account Executive",        seg:"Retail",     stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
     wk:"Week 5 · Guided outreach", focus:"Verified outreach + booking meetings", next:"First booked presentation", mentor:"Paul Leiba"},
-  {nm:"Marcus Tan",     ro:"Sales Rep",                seg:"School",     stage:"present", ready:71, refl:[3,5], ment:[9,15],
-    wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"George Karaolis"},
-  {nm:"Priya Rao",      ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15],
+  {nm:"Tony Thomas",     ro:"Sales Rep",                seg:"School",     stage:"present", ready:71, refl:[3,5], ment:[9,15],
+    wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"Hal Wever"},
+  {nm:"Rajiv Patel",     ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15],
     wk:"POC · day 20 of 45", focus:"POC validation with PM team", next:"Executive Go / No-Go review", mentor:"Hal Wever"},
-  {nm:"Devon Klein",    ro:"Sales Rep",                seg:"Commercial", stage:"start",   ready:30, refl:[1,3], ment:[2,15],
-    wk:"Week 1 · Onboarding", focus:"i3 culture + systems setup", next:"Meet the mentor team", mentor:"Sales Manager"}
+  {nm:"Andrew Ioannou",  ro:"Sales Rep",                seg:"Commercial", stage:"start",   ready:30, refl:[1,3], ment:[2,15],
+    wk:"Week 1 · Onboarding", focus:"i3 culture + systems setup", next:"Meet the mentor team", mentor:"David Crook"},
+  {nm:"Christian Combes",ro:"Account Executive",        seg:"Grocery",    stage:"close",   ready:90, refl:[5,5], ment:[13,15],
+    wk:"Closing", focus:"Out-position the incumbent + close", next:"Contract + DocuSign", mentor:"David Crook"}
 ];
 function agName(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.nm:id;}
 function agArea(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.area:id;}
