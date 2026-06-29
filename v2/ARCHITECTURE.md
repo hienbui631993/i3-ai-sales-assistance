@@ -54,7 +54,7 @@ Onboard → Prospect → Train → Outreach(verified) → Present → POC → Le
 | Marketing | Hand-off, social, nurture, VAR network | Target list | Marketing, social, HubSpot |
 | Presentation* | Transcript → drivers, deck, manager loop | Notes/transcript | GoToMeeting/Teams |
 | POC | Scaffold from Gardewine template, 45-day metrics | Goal + site | iHost, PM tooling |
-| Legal & Privacy* (Magenta) | Law 25/GDPR review, signage, PIA | Tools + jurisdiction | Q25 KB, Salesforce |
+| Privacy & Cybersecurity* (Magenta) | Law 25/GDPR **+ cybersecurity** (cyber intake forms, Canada-for-Canada residency, access control + MFA, encryption, SOC 2 / vendor review, retention), signage, PIA | (defaults applied) | Q25 KB, Salesforce |
 | Closing | Cost-matrix battlecard, price, contract | Competitor | Cost Matrix, Automatica, DocuSign |
 | Verification | Prove email/call/meeting; anti-gaming | (background) | Email, calling, calendar |
 | Manager/Leadership | Readiness, pipeline, reflections, scoring | (roll-up) | Salesforce, LMS |
@@ -106,6 +106,16 @@ sales-process doc, real reflection-form data, and Automatica pricing/kit rules.
 ## 10. Detailed behaviours (from the working-model critique)
 
 These are now in the working model and should carry into production:
+
+- **Directive, not interrogative.** The agent applies sensible **defaults** (from
+  the rep's territory and the quote) and **tells the rep what to do** — short
+  "Do this" action lists — rather than asking lots of questions or offering choices
+  to ignore. Defaults mean privacy/cyber steps can't be skipped.
+- **Privacy & Cybersecurity are one gate.** The privacy agent (Magenta) also drives
+  the **cybersecurity** checklist: cyber intake forms, Canada-for-Canada data
+  residency, access control + MFA, encryption at rest/in transit, SOC 2 / vendor
+  review, minimal retention. High-risk = no POC approval until the i3 Privacy team
+  signs off.
 
 - **Admin onboarding (the starting button).** An i3 administrator onboards a
   salesperson — name, **segment, territory, responsibility, annual goal**,

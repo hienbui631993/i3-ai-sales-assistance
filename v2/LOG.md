@@ -7,6 +7,16 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — `v2/vision-sales-agent.html` · directive wording + cybersecurity
+- **Privacy stage → "Privacy & Cybersecurity"**: now also tells the rep the
+  cybersecurity actions (cyber intake forms, Canada-for-Canada residency, access
+  control + MFA, encryption, SOC 2 / vendor review, retention).
+- **Directive, fewer questions**: the agent applies defaults (jurisdiction from
+  territory, sensitive solutions assumed) and **tells the rep what to do** with
+  "Do this — privacy / cybersecurity" action lists — no required choices to ignore.
+- Removed the jurisdiction/tools and segment pickers (now defaulted); single
+  "Run" button per stage. Updated `ARCHITECTURE.md` accordingly.
+
 ### Changed — `v2/DEMO.md` · added Vision Sales Agent 5-min scripted demo
 - Added a short, scripted, voice-on demo path for `vision-sales-agent.html` at the
   top (admin onboarding → dashboard → LinkedIn + buying group → transcript→POC →

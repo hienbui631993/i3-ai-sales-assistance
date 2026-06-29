@@ -278,17 +278,17 @@ function renderPartnerHome(){
 /* ===== stages ===== */
 var STAGES=[
   {id:"prospect", n:1, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
-    intro:"Let's fill your pipeline. First, drop your LinkedIn so I can sharpen your presence — then I'll surface the decision-makers in your segment and what to do tomorrow."},
+    intro:"I've already got your segment and your LinkedIn. Run it — I'll tell you who to call first, in what order, and how to sharpen your presence."},
   {id:"present", n:2, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
-    intro:"Paste or upload your presentation transcript. I'll pull the drivers, capture who was in the room, and get you ready to build the POC."},
+    intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
   {id:"poc", n:3, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
-    intro:"I'll build the POC from your presentation transcript using our template — stakeholders, the right solution, equipment, and the PM handoff."},
-  {id:"legal", n:4, ic:"🛡️", nm:"Legal & Privacy", sub:"Privacy review (Magenta)", partner:true,
-    intro:"Which i3 solutions, and where? I'll run the privacy review (Law 25 / GDPR), give you a decision, and draft customer signage."},
+    intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
+  {id:"legal", n:4, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
+    intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
   {id:"close", n:5, ic:"🤝", nm:"Closing", sub:"Out-position & close", partner:false,
-    intro:"Who are we up against? I'll pull the battlecard, position our price, and give you a close checklist."},
+    intro:"Pick who we're up against. I'll tell you how to beat them and what to do to close."},
   {id:"onboard", n:6, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
-    intro:"Here's your ramp from your onboarding plan — training, mentors and your weekly cadence."}
+    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
@@ -313,9 +313,8 @@ function openStage(id){
 function renderInputs(id){
   var box=document.getElementById('stInputs'),h='';
   if(id==='prospect'){
-    h='<label class="f"><span class="l">Your LinkedIn (for a presence assessment)</span><input id="i_li" value="linkedin.com/in/'+rep.name.toLowerCase().replace(/[^a-z]/g,'')+'"></label>'+
-      '<label class="f"><span class="l">Core segment</span><select id="i_seg">'+['Retail','Grocery','QSR','Commercial','School'].map(function(x){return '<option'+(x===rep.seg?' selected':'')+'>'+x+'</option>'}).join('')+'</select></label>'+
-      '<button class="btn p" onclick="runStage(\'prospect\')">Assess me &amp; find the buying group</button>';
+    h='<div class="saveNote">Using your segment <b>'+rep.seg+'</b> and your LinkedIn. I\'ll assess your presence and map the buying group — just run it.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'prospect\')">Assess me &amp; find the buying group</button>';
   } else if(id==='present'){
     h='<div class="upload"><div class="di">📄</div><div class="dt">Upload the transcript of your presentation (Teams / GoToMeeting). No file handy? Use a sample so you can see what Vision does.</div>'+
       '<button class="btn p" onclick="runStage(\'present\')">Use sample transcript</button></div>'+
@@ -324,10 +323,9 @@ function renderInputs(id){
     h='<div class="upload"><div class="di">🧪</div><div class="dt">I\'ll generate the POC from your presentation transcript and our template. Click to see it built.</div>'+
       '<button class="btn p" onclick="runStage(\'poc\')">Generate POC from transcript</button></div>';
   } else if(id==='legal'){
-    h='<label class="f"><span class="l">Where will it operate?</span><select id="i_juris"><option>Quebec</option><option>Other Canada</option><option>California</option><option>Europe / UK</option></select></label>'+
-      '<label class="f"><span class="l">i3 solutions on the quote</span><div class="chips" id="i_tools"></div></label>'+
-      '<button class="btn p" onclick="runStage(\'legal\')">Run privacy review</button>';
-    setTimeout(renderTools,0);
+    var jdef=/quebec/i.test(rep.terr)?'Quebec (Law 25)':'Canada (PIPEDA)';
+    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">Defaults applied — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
   } else if(id==='close'){
     h='<label class="f"><span class="l">Incumbent / competitor</span><select id="i_comp">'+['Eagle Eye','Verkada','Solink','DTiQ','OpenEye','HME (drive-thru)'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
       '<button class="btn p" onclick="runStage(\'close\')">Build close plan</button>';
@@ -369,7 +367,7 @@ var ASSOC={Retail:["NRF","RILA"],Grocery:["FMI","NGA"],QSR:["National Restaurant
 /* ===== outputs ===== */
 var OUTPUT={
   prospect:function(){
-    var seg=val('i_seg')||rep.seg;
+    var seg=rep.seg;
     var assoc=ASSOC[seg]||["industry associations"];
     var bg=[
       ["Operations VP","High","researching loss-prevention & ops visibility","Lead with shrink + reporting managers will use"],
@@ -414,20 +412,19 @@ var OUTPUT={
     sec("Recommended solution &amp; equipment (from the discussion)",
       '<ul class="steps"><li><b>Solution:</b> AI Sentry + POS-integrated video (loss prevention + ops insight)</li><li><b>Equipment:</b> i3 AI server, 8× dome cameras, 1× LPR at the dock, iHost analytics</li><li><b>Why:</b> matches "fewer systems" + "reporting managers will use" from the transcript.</li></ul>')+
     sec("Hand off to Project Management",
-      '<span class="badge warn">Privacy review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Legal &amp; Privacy</button>'+
+      '<span class="badge warn">Privacy &amp; cybersecurity review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Privacy &amp; Cybersecurity</button>'+
       '<div style="margin-top:10px"><button class="btn pink" onclick="showPM()">📨 Contact PM &amp; create the official POC →</button></div>'+
       '<div id="pmPanel"></div>')+
     saveBar("POC, stakeholders & equipment — proprietary to i3");
   },
   legal:function(){
-    var juris=val('i_juris')||"Quebec";
-    var laws=juris==='Quebec'?["Quebec Law 25","PIPEDA"]:juris==='Other Canada'?["PIPEDA"]:juris==='California'?["CCPA / CPRA"]:["GDPR"];
-    var hi=legalSel.some(function(t){return ["Facial Recognition","i3 AI Loyalty","Audio Monitoring"].indexOf(t)>-1});
-    var risk=hi?"High":legalSel.length>1?"Medium":"Low",rb=risk==='High'?'hi':risk==='Medium'?'warn':'ok';
-    var dec=risk==='High'?"Escalate to the i3 Privacy team before POC approval.":risk==='Medium'?"Proceed with a privacy checkpoint.":"Proceed with standard notice & retention controls.";
-    return sec("Applicable laws",'<div>'+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+'</div>')+
-      sec("Decision",'<span class="badge '+rb+'">'+risk+' risk</span> &nbsp; '+dec)+
-      sec("Customer-ready signage (draft)",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.'+(hi?'\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.':'')+'\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
+    var juris=/quebec/i.test(rep.terr)?"Quebec":"Canada";
+    var laws=juris==='Quebec'?["Quebec Law 25","PIPEDA"]:["PIPEDA"];
+    return sec("What applies (set for you)",'<div>'+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+' <span class="badge hi">High risk — sensitive solutions on the quote</span></div>')+
+      sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off. Below is exactly what to do.')+
+      sec("Do this — privacy",'<ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
+      sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the iHost / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
+      sec("Post this signage",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
       saveBar();
   },
   close:function(){
