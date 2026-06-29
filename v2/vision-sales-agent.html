@@ -32,8 +32,6 @@
   .lede{color:var(--ink2);font-size:14.5px;line-height:1.55;max-width:660px}
   .vsay{display:flex;gap:11px;align-items:flex-start;margin:14px 0}
   .vsay .av{flex:none;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#0e6fb0,var(--brand-900));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;position:relative}
-  .vsay .av.talk:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--pink);animation:ring 1.1s infinite}
-  @keyframes ring{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
   .vsay .bub{background:#f1f6fa;border:1px solid var(--line);border-radius:13px;border-top-left-radius:4px;padding:11px 14px;font-size:14px;line-height:1.5}
 
   .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
@@ -123,7 +121,6 @@
   <div class="ilogo" id="logo"></div><div class="sep"></div>
   <div class="prod">Vision<small>i3 Sales Agent</small></div>
   <div class="right">
-    <button class="vbtn" id="voiceBtn" onclick="toggleVoice()">🔊 Talk to me</button>
     <div class="roleSel">
       <button id="ro-admin" onclick="setRole('admin')">Admin</button>
       <button class="on" id="ro-rep" onclick="setRole('rep')">i3 Rep</button>
@@ -143,8 +140,7 @@
   <div id="view-stage" class="hidden">
     <button class="back" onclick="goHome()">← Back to dashboard</button>
     <div class="card">
-      <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div>
-        <button class="vbtn" style="margin-left:auto;background:var(--inbg);color:var(--brand);border-color:var(--inbd)" onclick="speak(document.getElementById('stIntro').textContent)">🔊 Hear Vision</button></div>
+      <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div></div>
       <div class="body">
         <div class="vsay"><div class="av" id="stAv">V</div><div class="bub" id="stIntro"></div></div>
         <div id="stInputs"></div>
@@ -165,12 +161,6 @@ var rep={name:"David Chen", seg:"Retail", terr:"Ontario & Atlantic", resp:"New b
 var PMS=["Louel","Nissan","Des"];          // i3 PM team
 
 /* ===== voice (the 'aha' — Vision actually talks) ===== */
-var voiceOn=false;
-function speak(t){ if(!voiceOn||!('speechSynthesis' in window)||!t)return; try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.rate=1.03; u.pitch=1; speechSynthesis.speak(u); }catch(e){} }
-function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('voiceBtn').classList.toggle('on',voiceOn);
-  if(voiceOn){ document.getElementById('voiceBtn').textContent='🔊 Voice on'; speak("Hi, I'm Vision. I'll talk you through your day."); }
-  else { document.getElementById('voiceBtn').textContent='🔊 Talk to me'; if('speechSynthesis' in window) speechSynthesis.cancel(); } }
-
 /* ===== role / segment ===== */
 function setRole(r){ S.role=r;
   ['admin','rep','integ','partner'].forEach(function(x){document.getElementById('ro-'+x).classList.toggle('on',x===r)});
@@ -211,7 +201,6 @@ function runAdmin(){
       out.innerHTML='<div class="saveNote">🔒 Saved to Salesforce · proprietary to i3 — '+n+'\'s profile and workflow belong to the company.</div>'+
         '<div class="osec" style="margin-top:14px"><h4>Workflow created</h4><div class="grid2">'+kv("Rep",n)+kv("Segment / territory",sg+" · "+tr)+kv("Responsibility",rs)+kv("Annual goal",gl)+kv("Ramp",ex==='Veteran'?'Fast-track · straight to pipeline':'4–6 wk acclimation + NSM')+kv("Automations started","Lead intel · training · daily plan")+'</div></div>'+
         '<button class="btn p" onclick="setRole(\'rep\')">Start '+n+' → open their dashboard</button>';
-      speak(n+"'s workflow is built. I've started their lead intelligence, training and daily plan.");
     }},560);
 }
 function val(id){var e=document.getElementById(id);return e?(e.value||'').trim():'';}
@@ -220,12 +209,10 @@ function val(id){var e=document.getElementById(id);return e?(e.value||'').trim()
 function goHome(){ show('home'); renderHome(); }
 function renderHome(){
   if(S.role==='partner'){ renderPartnerHome(); return; }
-  var greetTxt="Good morning, "+rep.name.split(' ')[0]+". Here's your day.";
   document.getElementById('view-home').innerHTML=
     '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via iHost':'Your dashboard')+'</div>'+
       '<h1>Good morning, '+rep.name.split(' ')[0]+'</h1>'+
-      '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div>'+
-      '<button class="btn g sm" onclick="speak(\''+greetTxt.replace(/'/g,"")+'\')">🔊 Hear my plan</button></div>'+
+      '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div></div>'+
     '<div class="adminbar"><div class="t">👤 <b>Admin?</b> Onboard a new salesperson and Vision starts their workflow automatically.</div><button class="btn pink sm" onclick="setRole(\'admin\')">Onboard a rep →</button></div>'+
     '<div class="widgets">'+
       wdg('today','Today','5 tasks','3 calls · 1 prep · 1 POC','','act')+
@@ -243,7 +230,6 @@ function renderHome(){
     '<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:6px 0 10px">Jump to a stage</div>'+
     '<div class="stages" id="stages"></div>';
   renderStages();
-  if(voiceOn) speak(greetTxt);
 }
 function wdg(id,k,v,s,cls,extra){ return '<div class="wdg '+(extra||'')+'" onclick="drill(\''+id+'\')"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="s">'+s+'</div></div>'; }
 function ti(color,txt,label,stage){ return '<div class="ti"><span class="dot" style="background:'+color+'"></span>'+txt+'<button class="btn p sm nudge" onclick="openStage(\''+stage+'\')">'+label+' →</button></div>'; }
@@ -307,7 +293,6 @@ function openStage(id){
   document.getElementById('stSub').textContent=s.sub; document.getElementById('stIntro').textContent=s.intro;
   document.getElementById('stOut').innerHTML=''; document.getElementById('stRun').innerHTML='';
   renderInputs(id); window.scrollTo(0,0);
-  var av=document.getElementById('stAv'); av.classList.toggle('talk',voiceOn); speak(s.intro);
 }
 
 /* ===== inputs ===== */
@@ -395,7 +380,7 @@ var OUTPUT={
       '<div class="grid2">'+kv("Relevance to "+seg,"62 / 100 · room to grow")+kv("Posting cadence","Low — 1 post / 6 wks")+kv("Connections in "+seg,"~9% of network")+kv("Headline","Generic — not segment-specific")+'</div>'+
       '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week — reshare i3 '+seg+' wins; comment on '+assoc[0]+' threads.</li><li>Grow '+seg+' connections: target the buying-group roles below.</li></ul>'+
       '<div style="margin-top:10px"><span class="badge warn">Action</span> Book a session with Marketing (Edward\'s team) to clean up your profile &amp; plan social outreach. '+
-      '<button class="btn p sm" onclick="speak(\'I booked a session with marketing to sharpen your LinkedIn and social outreach.\');this.outerHTML=\'<span class=&quot;badge ok&quot;>Requested ✓</span>\'">Book with Marketing</button></div>')+
+      '<button class="btn p sm" onclick="this.outerHTML=\'<span class=&quot;badge ok&quot;>Requested ✓</span>\'">Book with Marketing</button></div>')+
     sec("Get more engaged with your market",
       '<ul class="steps"><li>Join / engage: '+assoc.map(function(a){return '<b>'+a+'</b>'}).join(', ')+' — comment, attend, get invited to the right rooms.</li><li>Follow target accounts &amp; their execs; warm them before outreach.</li></ul>')+
     sec("The buying group in "+seg+" (don't chase just one)",
@@ -473,7 +458,6 @@ function showPM(){
     sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
     '<div class="saveNote">🔒 Synced to Salesforce + iHost · PM agent interconnected with Vision.</div></div></div>';
   document.getElementById('pmPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
-  speak(pm+" from project management has the POC. We'll keep the timeline and cybersecurity forms on track.");
 }
 
 /* boot */

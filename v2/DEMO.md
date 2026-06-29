@@ -6,18 +6,16 @@ Self-contained simulations — no login, no install. Present from the
 
 ---
 
-# ⭐ Vision Sales Agent — 5-minute scripted demo (voice ON)
+# ⭐ Vision Sales Agent — 5-minute scripted demo
 
 The headline demo. One file: `v2/vision-sales-agent.html`
 Preview: `https://htmlpreview.github.io/?https://github.com/hienbui631993/i3-ai-sales-assistance/blob/claude/v2/v2/vision-sales-agent.html`
 
-> Open in **Chrome** (best speech support) with **sound on**. Each **▸** is a click;
-> each **“…”** is your line. Total ~5 min.
+> Each **▸** is a click; each **“…”** is your line. Total ~5 min.
 
-### 0 · Turn Vision on (15 sec)
-▸ Click **🔊 Talk to me** (top-right).
-“This is Vision — the sales agent that lives inside iHost. It actually talks to
-the rep. Listen.” *(Vision greets you out loud.)*
+### 0 · Open with the pitch (15 sec)
+“This is Vision — the sales agent that lives inside iHost. It tells the rep what to
+do at every stage, from onboarding to close.”
 
 ### 1 · The admin sets a rep up (45 sec)
 ▸ Top-right role **Admin** → ▸ **Build workflow & start with Vision**.
