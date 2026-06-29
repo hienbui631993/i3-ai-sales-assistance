@@ -211,15 +211,19 @@ var APPS = [
 ];
 function app(id){ for(var i=0;i<APPS.length;i++) if(APPS[i].id===id) return APPS[i]; }
 
-function laws(place){
-  var L=[];
-  if(place==="Quebec"){ L.push("Quebec Law 25"); L.push("PIPEDA"); }
-  else if(place==="Alberta"||place==="British Columbia"){ L.push("PIPA"); L.push("PIPEDA"); }
-  else if(place==="Other Canada"){ L.push("PIPEDA"); }
-  else if(place==="California"){ L.push("CCPA / CPRA"); }
-  else if(place==="Other US"){ L.push("State biometric / privacy laws"); }
-  else if(place==="Europe / UK"){ L.push("GDPR"); }
-  return L;
+/* site address -> jurisdiction, applicable laws, and the exact legal document */
+function lawFromAddress(a){a=(a||'').toLowerCase();
+  if(/quebec|québec|montr|\bqc\b/.test(a)) return {juris:'Quebec, Canada', laws:['Quebec Law 25','PIPEDA'], doc:'Law 25 PIA + express biometric consent + bilingual (FR/EN) signage'};
+  if(/alberta|\bab\b|calgary|edmonton/.test(a)) return {juris:'Alberta, Canada', laws:['PIPA (AB)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/british columbia|\bbc\b|vancouver/.test(a)) return {juris:'British Columbia, Canada', laws:['PIPA (BC)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/ontario|toronto|ottawa|\bon\b/.test(a)) return {juris:'Ontario, Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + purpose-specific signage'};
+  if(/illinois|chicago|\bil\b/.test(a)) return {juris:'Illinois, USA', laws:['BIPA'], doc:'BIPA written consent (biometrics) + retention schedule'};
+  if(/california|\bca\b|los angeles|san francisco/.test(a)) return {juris:'California, USA', laws:['CCPA / CPRA'], doc:'CCPA notice at collection + opt-out'};
+  if(/texas|\btx\b|dallas|houston/.test(a)) return {juris:'Texas, USA', laws:['CUBI (TX)'], doc:'Texas CUBI biometric notice + consent'};
+  if(/united kingdom|\buk\b|london|england/.test(a)) return {juris:'United Kingdom', laws:['UK GDPR'], doc:'DPIA + lawful basis + signage'};
+  if(/france|germany|spain|italy|europe|\beu\b|paris|berlin|madrid/.test(a)) return {juris:'European Union', laws:['GDPR'], doc:'DPIA + Art.9 special-category basis + signage'};
+  if(/\busa\b|united states|america|new york|\bny\b|florida|\bfl\b/.test(a)) return {juris:'United States', laws:['State biometric / FRT laws'], doc:'State FRT / biometric notice + consent'};
+  return {juris:'Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + signage'};
 }
 
 /* Kept short and directive: just the few questions that change the answer.
@@ -229,10 +233,9 @@ var Q = [
   {id:"account", type:"text", ph:"e.g. Metro Quebec Pilot",
    bot:"Let's run the privacy & cybersecurity review. What's the account or project name?",
    note:"Goes on the customer-ready documents I'll generate."},
-  {id:"place", type:"single",
-   bot:"Where will this system operate? Location sets the exact law and documents.",
-   note:"Quebec → Law 25 · Europe → GDPR · California → CCPA · elsewhere in Canada → PIPEDA / PIPA.",
-   opts:["Quebec","Alberta","British Columbia","Other Canada","California","Other US","Europe / UK"]},
+  {id:"place", type:"text", ph:"e.g. 1500 Rue Sainte-Catherine, Montréal, Quebec",
+   bot:"What's the site address? I'll set the exact law and documents from the location.",
+   note:"Quebec → Law 25 · Illinois → BIPA · California → CCPA · EU → GDPR · elsewhere in Canada → PIPEDA / PIPA."},
   {id:"apps", type:"multi",
    bot:"Which i3 applications are on the quote? I'll flag the ones that carry privacy weight.",
    note:"Tap to toggle. Red = high sensitivity, amber = needs scoping, green = lower-risk.",
@@ -307,7 +310,8 @@ function assess(){
   var sc={pass:1,part:.5,fail:0}; var test={p1:p1,p2:p2,p3:p3,p4:p4,score:sc[p1]+sc[p2]+sc[p3]+sc[p4]};
 
   var seen={}; act=act.filter(function(a){return seen[a]?false:(seen[a]=1,true);});
-  return {risk:risk,lvl:lvl,laws:laws(S.place),warn:warn,act:act,flags:flags,decision:decision,posture:posture,test:test,selApps:selApps};
+  var L=lawFromAddress(S.place);
+  return {risk:risk,lvl:lvl,laws:L.laws,juris:L.juris,exactDoc:L.doc,warn:warn,act:act,flags:flags,decision:decision,posture:posture,test:test,selApps:selApps};
 }
 
 function cyberSteps(r){
@@ -316,7 +320,7 @@ function cyberSteps(r){
          "Encrypt data at rest and in transit.",
          "Run the vendor security / SOC 2 check; set retention to the minimum needed."];
   if(S.residency.indexOf("U.S.")>-1 || S.residency.indexOf("US")>-1)
-    s.splice(1,0,"Keep the data in "+(S.place.indexOf("Canada")>-1||["Quebec","Alberta","British Columbia","Other Canada"].indexOf(S.place)>-1?"Canada (Canada-for-Canada)":"-region")+"; document the cross-border / U.S. support access.");
+    s.splice(1,0,"Keep the data in "+(lawFromAddress(S.place).juris.indexOf("Canada")>-1?"Canada (Canada-for-Canada)":"region")+"; document the cross-border / U.S. support access.");
   else s.splice(1,0,"Confirm data residency and document any cross-border support access.");
   return s;
 }
@@ -379,7 +383,9 @@ function renderBrief(){
   var r=assess(); var b=document.getElementById('brief'); b.className='brief lvl-'+r.lvl;
   var html='';
   html+='<div class="briefcard"><h3>Applicable laws</h3>';
-  html+= r.laws.length? r.laws.map(function(l){return '<span class="chip law">'+l+'</span>';}).join('') : '<div class="empty">Set the location to load the rulebook.</div>';
+  if(S.place){ html+='<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+r.juris+'</div>'; }
+  html+= r.laws.length? r.laws.map(function(l){return '<span class="chip law">'+l+'</span>';}).join('') : '<div class="empty">Enter the site address to load the rulebook.</div>';
+  if(S.place){ html+='<div style="margin-top:8px;font-size:12px"><b>Exact legal doc:</b> '+r.exactDoc+'</div>'; }
   html+='</div>';
   html+='<div class="briefcard lvl-'+r.lvl+'"><h3>Risk</h3>'+
         '<div class="gauge"><span style="width:'+Math.min(100,r.risk*7)+'%"></span></div>'+
@@ -447,6 +453,7 @@ function finish(){
   var tlabel={pass:"Satisfied",part:"Partial",fail:"Gap"};
   rep.innerHTML =
     '<div class="decision lvl-'+r.lvl+'">'+r.decision+'</div>'+
+    '<div class="sec"><h3>Site &amp; exact legal requirement</h3><div class="doc"><b>'+r.juris+'</b> — '+r.laws.join(", ")+'<br>Exact legal doc: '+r.exactDoc+'</div></div>'+
     '<div class="sec"><h3>Four-Part Necessity &amp; Proportionality Test — '+r.test.score+' / 4</h3>'+
       '<div class="testgrid">'+
         tcell("1 · Purpose & evidence",r.test.p1,tlabel)+

@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — address→legal in Privacy agent + PM-by-territory in Vision
+- **`i3-privacy-compliance-agent.html`**: the location question is now a **site
+  address**; Vision derives the **jurisdiction + exact legal doc** from it (same
+  logic as the Vision agent — Quebec → Law 25 + bilingual signage, Illinois → BIPA,
+  California → CCPA, EU → GDPR DPIA, …) and shows it in the brief and the report.
+- **`vision-sales-agent.html`**: the PM handoff now **assigns by territory** —
+  Quebec → Nissan, Ontario → Louel, West/Other → Des (was auto-rotating).
+
 ### Removed — voice / speech features from the Vision sales agent
 - Removed all text-to-speech: the "🔊 Talk to me" toggle, "🔊 Hear my plan",
   "🔊 Hear Vision", the per-action speech, and the `speak()`/`toggleVoice()` code

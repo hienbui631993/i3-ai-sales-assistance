@@ -146,6 +146,7 @@ These are now in the working model and should carry into production:
   who backs the POC before it kicks off. Missing info is prompted, not assumed.
 - **Solution + equipment recommendation.** Vision maps the discussion to the right
   i3 solution and **lists the equipment** to quote.
+- **PM assigned by territory.** Vision routes the POC to the right PM — **Quebec → Nissan, Ontario → Louel, West/Other → Des** (mapping configurable).
 - **PM agent interconnection.** "Contact PM" hands the POC to a **PM agent** that
   keeps the PM on the **timeline**, completes **cybersecurity forms**, and collects
   the right **data** for the 45-day validation.

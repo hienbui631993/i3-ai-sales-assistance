@@ -448,12 +448,18 @@ var OUTPUT={
       saveBar();
   }
 };
+function assignPM(){              // PM assigned by territory
+  var t=(rep.terr||'').toLowerCase();
+  if(/quebec|québec/.test(t)) return "Nissan";
+  if(/ontario|toronto/.test(t)) return "Louel";
+  return "Des";                  // West / Atlantic-only / other
+}
 function showPM(){
-  var pm=PMS[(rep.name.length)%PMS.length];
+  var pm=assignPM();
   document.getElementById('pmPanel').innerHTML=
     '<div class="card" style="margin-top:12px"><div class="h"><div class="ic">🛠️</div><div><h2>PM Agent · '+pm+'</h2><div class="sub">Assigned PM keeps the build on track</div></div></div>'+
     '<div class="body"><div class="vsay"><div class="av">'+pm[0]+'</div><div class="bub">Hi '+rep.name.split(' ')[0]+', '+pm+' here from PM. POC received — I\'ll keep us on the timeline and make sure the data &amp; cybersecurity forms are complete.</div></div>'+
-    '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM",pm)+kv("PM team",PMS.join(" · "))+'</div>'+
+    '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM (by territory)",pm+" · "+rep.terr)+kv("PM coverage","Quebec → Nissan · Ontario → Louel · West/Other → Des")+'</div>'+
     sec("PM checklist",'<ul class="steps"><li>Site walkthrough scheduled with SI / integrator</li><li>Cybersecurity forms — network, data residency, access</li><li>Install &amp; configure to the POC timeline</li><li>Collect the right data for the 45-day validation</li><li>Executive review → Go / No-Go</li></ul>')+
     sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
     '<div class="saveNote">🔒 Synced to Salesforce + iHost · PM agent interconnected with Vision.</div></div></div>';
