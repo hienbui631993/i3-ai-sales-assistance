@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>V · Vision — i3 Agentic Sales Engine</title>
+<title>Vision — i3 Agentic Sales Engine</title>
 <style>
   /* i3 Brand Kit (Rev. 20260214): Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 */
   :root{
@@ -36,7 +36,8 @@
   @media(max-width:940px){.hero{grid-template-columns:1fr}}
   .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--pink);font-weight:700}
   h1.big{font-size:40px;margin:8px 0 6px;font-weight:800;letter-spacing:-.5px;line-height:1.05}
-  h1.big .v{color:#46b3ff}
+  h1.big .v{color:var(--pink);font-weight:800}
+  .prod .vhi{color:var(--pink)}
   .lede{color:#bcd2e6;font-size:14.5px;line-height:1.6;max-width:520px}
 
   .entry{margin-top:20px}
@@ -214,7 +215,7 @@
 <div class="topbar">
   <div class="ilogo" id="logo" onclick="goPortal()" style="cursor:pointer" title="Back to portal"></div>
   <div class="sep"></div>
-  <div class="prod">V · Vision<small>Agentic Sales Engine</small></div>
+  <div class="prod"><span class="vhi">V</span>ision<small>Agentic Sales Engine</small></div>
   <div class="right">
     <span class="vtoggle"><button class="vt on" id="vt-engine" onclick="switchView('engine')">▶ Engine</button><button class="vt" id="vt-manager" onclick="switchView('manager')">▦ Manager</button></span>
     <span class="pill">North America · v1</span>
@@ -227,8 +228,8 @@
   <div class="hero">
     <div>
       <div class="eyebrow">i3 Future Revenue System</div>
-      <h1 class="big">Meet <span class="v">V</span> — your<br>Vision sales engine</h1>
-      <p class="lede">V is a team of specialized AI agents that runs your whole sales motion —
+      <h1 class="big">Meet <span class="v">V</span>ision — your<br>sales engine</h1>
+      <p class="lede"><span class="v" style="color:var(--pink);font-weight:800">V</span>ision is a team of specialized AI agents that runs your whole sales motion —
       from onboarding a new rep to closing the deal. Pick where to start, hit run, and watch each
       agent think through its part of the pipeline.</p>
 
@@ -507,8 +508,8 @@ async function run(){
   document.getElementById('console').innerHTML='';
   var segNm=SEGMENTS.find(function(x){return x.id===sel.seg}).nm;
   var s=startIdx(), total=AGENTS.length;
-  log('<span class="c">// V boot · entry='+sel.entry+' · segment='+segNm+'</span>');
-  log('<span class="ag">V</span> orchestrating '+(total-s)+' agents…',''); await sleep(500);
+  log('<span class="c">// Vision boot · entry='+sel.entry+' · segment='+segNm+'</span>');
+  log('<span class="ag">Vision</span> orchestrating '+(total-s)+' agents…',''); await sleep(500);
 
   for(var i=s;i<total;i++){
     var a=AGENTS[i];

@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — "V · Vision" → "Vision" with a standout V (i3 brand)
+- Renamed the product from "V · Vision" / "V Vision" to **Vision** across the UI
+  (portal hero + cards, V engine topbar/hero/lede, Vision agent + Architecture
+  topbars). The leading **V** is styled in i3 **pink (#DF1E71)** to stand out.
+  The engine's central orbit mark keeps the bold **V** as the brand symbol; the
+  agents keep their V- names.
+
 ### Changed — i3 logo links back to the portal
 - Clicking the i3 logo now returns to `portal.html` on every page (Vision agent,
   V engine, Architecture, Magenta, Privacy agent). Uses an htmlpreview-aware
