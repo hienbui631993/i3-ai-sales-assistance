@@ -7,6 +7,15 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — defer Channel Partners + Partner self-host (not decided yet)
+- Per feedback these are too far out to commit to now. In `ARCHITECTURE.md` and
+  `vision-architecture.html` the access model is scoped to **v1: i3 Sales Reps +
+  Integrators**; **Channel Partners** (scoped agent subsets) and **Partner
+  self-host** are moved to a clearly-marked **"Future — not decided yet"** note
+  (dimmed "Future · TBD" tiles in the diagram). Removed the partner asterisks on
+  the Presentation/Legal agents and the "1–2 partners" pilot line. The working
+  demo still shows a Partner role as an illustrative preview (can be removed on request).
+
 ### Changed — iHost → i3Host; training platform → i3Live
 - Renamed **iHost → i3Host** everywhere in the UI and docs (portal, all agents,
   Magenta trace, BUILD_PLAN, DEMO, ARCHITECTURE).

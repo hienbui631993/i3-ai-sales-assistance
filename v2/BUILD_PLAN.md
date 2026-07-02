@@ -21,7 +21,7 @@ logic are the requirements. Production swaps the simulated layer for real calls.
 ## 2. Architecture (one agent engine, many tools)
 
 ```
-            i3Host (web UI — reps & partners)
+            i3Host (web UI — reps & integrators)
                        │
             ┌──────────┴───────────┐
             │   V orchestrator      │   ← decides which agent runs, enforces stage rules
@@ -80,7 +80,7 @@ model later without rebuilding integrations.
 
 ## 6. Pilot scope (North America first)
 - **Region:** North America v1 (Quebec/Law 25 in scope for the privacy gate).
-- **Users:** a small group of disciplined reps + leadership + 1–2 partners.
+- **Users:** a small group of disciplined reps + leadership.
 - **Segment:** one to start (e.g. Retail or Commercial).
 - **Success proof:** V delivers a lead → rep presents → activity *verified* →
   privacy gate clears → deal advances → Salesforce shows the full validated trail.

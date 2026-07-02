@@ -38,6 +38,7 @@
   .badge.full{background:#e7f8f0;color:#0a7d4f;border:1px solid #a6e8c8}
   .badge.some{background:#fff7e0;color:#8a5d05;border:1px solid #ffe39c}
   .badge.self{background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+  .badge.future{background:#eef2f7;color:#69788a;border:1px solid #dfe6ee}
   .arrow{text-align:center;color:var(--brand);font-size:20px;font-weight:800;margin:-4px 0 8px}
   .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
   .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -59,28 +60,28 @@
 <div class="wrap">
   <div class="eyebrow">For engineering</div>
   <h1>How Vision is put together</h1>
-  <p class="lede">Vision is an agentic sales assistant that lives <b>inside i3Host</b> (never public). i3 reps and
-  integrators access it through i3Host; channel partners get a limited set of agents, or can host their own. This is the
-  build map — top to bottom, who talks to what.</p>
+  <p class="lede">Vision is an agentic sales assistant that lives <b>inside i3Host</b> (never public). For v1,
+  <b>i3 reps and integrators</b> access it through i3Host. (Channel-partner access and partner self-host are a
+  <b>future consideration — not decided yet</b>.) This is the build map — top to bottom, who talks to what.</p>
 
   <!-- ACCESS -->
   <div class="layer access">
     <div class="lh">1 · Access tiers (who can use Vision)</div>
     <div class="row r4">
-      <div class="box"><div class="t"><span class="ic">🧑‍💼</span>i3 Sales Reps</div><div class="d">Inside i3Host. Every stage / agent.</div><span class="badge full">Full access</span></div>
-      <div class="box"><div class="t"><span class="ic">🔧</span>Integrators</div><div class="d">Linked into i3Host; run Vision on their own deals.</div><span class="badge full">Full access</span></div>
-      <div class="box"><div class="t"><span class="ic">🤝</span>Channel Partners</div><div class="d">Scoped to certain agents (e.g. Presentation, Legal &amp; Privacy) based on their tier.</div><span class="badge some">Selected agents</span></div>
-      <div class="box"><div class="t"><span class="ic">🏠</span>Partner self-host</div><div class="d">Partners can deploy their own Vision instance — we provide the package + setup guide.</div><span class="badge self">Own deployment</span></div>
+      <div class="box"><div class="t"><span class="ic">🧑‍💼</span>i3 Sales Reps</div><div class="d">Inside i3Host. Every stage / agent.</div><span class="badge full">Full access · v1</span></div>
+      <div class="box"><div class="t"><span class="ic">🔧</span>Integrators</div><div class="d">Linked into i3Host; run Vision on their own deals.</div><span class="badge full">Full access · v1</span></div>
+      <div class="box" style="opacity:.55"><div class="t"><span class="ic">🤝</span>Channel Partners</div><div class="d">A possible later direction — a scoped subset of agents. <b>Not decided yet.</b></div><span class="badge future">Future · TBD</span></div>
+      <div class="box" style="opacity:.55"><div class="t"><span class="ic">🏠</span>Partner self-host</div><div class="d">Partners running their own instance — possible later. <b>Not decided yet.</b></div><span class="badge future">Future · TBD</span></div>
     </div>
   </div>
-  <div class="arrow">▼ &nbsp; authenticated via i3Host SSO + role/tier scoping</div>
+  <div class="arrow">▼ &nbsp; authenticated via i3Host SSO + role scoping</div>
 
   <!-- HOST -->
   <div class="layer">
     <div class="lh">2 · Host application</div>
     <div class="row r2">
       <div class="box brand"><div class="t"><span class="ic">🖥️</span>i3Host (web app)</div><div class="d">The UI Vision runs inside — quoting tools, calls, Teams &amp; GoToMeeting transcripts. Hosts the Vision UI and enforces who sees which agent.</div></div>
-      <div class="box"><div class="t"><span class="ic">🔐</span>Identity &amp; access</div><div class="d">SSO + role (rep / integrator / partner-tier). Tier decides agent visibility. Partner self-host = same code, partner-scoped config.</div></div>
+      <div class="box"><div class="t"><span class="ic">🔐</span>Identity &amp; access</div><div class="d">SSO + role (rep / integrator). Role decides agent visibility.</div></div>
     </div>
   </div>
   <div class="arrow">▼</div>
@@ -102,9 +103,9 @@
       <div class="box"><div class="t">🚀 Onboarding</div><div class="d">Parse onboarding plan → ramp, mentors, training.</div></div>
       <div class="box"><div class="t">🎯 Prospecting</div><div class="d">6sense/ZoomInfo intent → accounts + outreach.</div></div>
       <div class="box"><div class="t">📣 Marketing</div><div class="d">Hand-off, social, nurture, VAR network.</div></div>
-      <div class="box"><div class="t">🖥️ Presentation</div><div class="d">Transcript → drivers, deck, manager loop. <span class="badge some">partner</span></div></div>
+      <div class="box"><div class="t">🖥️ Presentation</div><div class="d">Transcript → drivers, deck, manager loop.</div></div>
       <div class="box"><div class="t">🧪 Proof of Concept</div><div class="d">Gardewine template, 45-day metrics.</div></div>
-      <div class="box"><div class="t">🛡️ Legal &amp; Privacy (Magenta)</div><div class="d">Law 25/GDPR, signage, PIA. <span class="badge some">partner</span></div></div>
+      <div class="box"><div class="t">🛡️ Legal &amp; Privacy (Magenta)</div><div class="d">Law 25/GDPR, signage, PIA.</div></div>
     </div>
     <div class="row r3" style="margin-top:12px">
       <div class="box"><div class="t">🤝 Closing</div><div class="d">Cost-matrix battlecards, price, contract.</div></div>
