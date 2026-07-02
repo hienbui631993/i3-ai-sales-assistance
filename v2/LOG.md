@@ -7,6 +7,12 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Changed — iHost → i3Host; training platform → i3Live
+- Renamed **iHost → i3Host** everywhere in the UI and docs (portal, all agents,
+  Magenta trace, BUILD_PLAN, DEMO, ARCHITECTURE).
+- Standardized the training platform name to **i3Live** (was "i3i" / "i3 Live") —
+  V-Coach description + tools, and the BUILD_PLAN agent-to-tool table.
+
 ### Changed — "V · Vision" → "Vision" with a standout V (i3 brand)
 - Renamed the product from "V · Vision" / "V Vision" to **Vision** across the UI
   (portal hero + cards, V engine topbar/hero/lede, Vision agent + Architecture

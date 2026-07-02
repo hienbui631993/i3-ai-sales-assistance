@@ -9,10 +9,10 @@ into a live system wired to i3's real stack. North America first, then global.
 
 | Layer | Prototype (today) | Production (to build) |
 |---|---|---|
-| UI / UX | Self-contained HTML, i3 Brand Kit | Same screens, served from iHost (web app) |
+| UI / UX | Self-contained HTML, i3 Brand Kit | Same screens, served from i3Host (web app) |
 | Agent reasoning | Scripted "thinking" stream | Real LLM agents (function calling) |
 | Knowledge | Embedded from your docs | Retrieval over a maintained knowledge base |
-| System data | Simulated (Salesforce/iHost/etc.) | Live API calls + auth |
+| System data | Simulated (Salesforce/i3Host/etc.) | Live API calls + auth |
 | Verification | Simulated anti-gaming | Real email/call/calendar/mobile signals |
 
 The prototype **is the spec** — the screens, flows, agent roster and decision
@@ -21,7 +21,7 @@ logic are the requirements. Production swaps the simulated layer for real calls.
 ## 2. Architecture (one agent engine, many tools)
 
 ```
-            iHost (web UI — reps & partners)
+            i3Host (web UI — reps & partners)
                        │
             ┌──────────┴───────────┐
             │   V orchestrator      │   ← decides which agent runs, enforces stage rules
@@ -29,7 +29,7 @@ logic are the requirements. Production swaps the simulated layer for real calls.
         ┌──────────────┼───────────────────────────┐
    LLM agents     Tool / function layer        Knowledge base (retrieval)
   (V-Start …      get_opportunity (Salesforce)   Q25 / Law 25 deck
-   V-Close)       get_quote (iHost)              LP & Privacy Guide, FRT laws
+   V-Close)       get_quote (i3Host)              LP & Privacy Guide, FRT laws
                   get_pricing (Automatica/Matrix) Gardewine POC template
                   get_transcript (GoToMeeting)    Onboarding docs + 30-90 schedule
                   get_intent (6sense/ZoomInfo)    Competitor cost matrix / battlecards
@@ -44,13 +44,13 @@ control progression; only *verified* activity advances a stage.
 
 | Agent | Real tools to wire | Notes |
 |---|---|---|
-| V-Start | HR feed, onboarding doc store, iHost | Parse doc → profile, plan, reflection cadence |
+| V-Start | HR feed, onboarding doc store, i3Host | Parse doc → profile, plan, reflection cadence |
 | V-Target | 6sense, ZoomInfo, LinkedIn, HubSpot | Intent + buying-group mapping |
 | V-Reach | Marketing automation, social, VAR CRM | Hand-off + nurture + partner activation |
-| V-Coach | i3i / i3 Live LMS, Salesforce | Module completion, test scores, readiness |
+| V-Coach | i3Live (LMS), Salesforce | Module completion, test scores, readiness |
 | V-Guide | Email, calling, calendar, mobile/MDM | **Verification layer — build before UI** |
 | V-Present | GoToMeeting/Zoom, deck system | Transcript capture, manager invite |
-| V-Prove | iHost POC docs, PM tooling | Gardewine template, 45-day metrics |
+| V-Prove | i3Host POC docs, PM tooling | Gardewine template, 45-day metrics |
 | V-Guard (Magenta) | Q25 KB, signage/PIA generator, Salesforce | Privacy gate; jurisdiction rules |
 | V-Close | Automatica (ERP), cost matrix, Salesforce, DocuSign | Pricing, battlecards, contract, sync |
 
@@ -70,11 +70,11 @@ model later without rebuilding integrations.
 
 ## 5. Build order (do verification before UI polish)
 1. **Map stages + required proof** at each stage (done — it's the V engine).
-2. **Integrate the systems that create truth:** Salesforce, iHost, Automatica,
+2. **Integrate the systems that create truth:** Salesforce, i3Host, Automatica,
    email, calling, calendar, GoToMeeting.
 3. **Build the verification layer** (V-Guide) — email/call/meeting/mobile proof +
    anti-gaming. This is the trust foundation; build it first.
-4. **Wire the privacy gate** (V-Guard/Magenta) into iHost quoting triggers.
+4. **Wire the privacy gate** (V-Guard/Magenta) into i3Host quoting triggers.
 5. **Rep action screen + Manager dashboard** on live data.
 6. **Scoring + leadership intelligence** last.
 

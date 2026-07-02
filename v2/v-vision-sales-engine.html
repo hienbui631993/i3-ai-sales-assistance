@@ -315,7 +315,7 @@ function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){va
 var AGENTS=[
   {id:"start", nm:"V-Start", area:"Onboarding", ic:"🚀",
     ds:"Parses the onboarding & acclimation document into a rep profile, assigns the mentor team, schedules NSM training and the 30-day business plan, and sets the weekly reflection cadence.",
-    tools:["Onboarding doc","30-90 schedule","Reflection form","i3host"],
+    tools:["Onboarding doc","30-90 schedule","Reflection form","i3Host"],
     think:["reading onboarding & acclimation document…","profile: {NAME} · {ROLE} · {TERR}","assigning mentor team ({MENTORS} mentors) + 12–15 shadow meetings","scheduling NSM national sales training week","building 4–6 week plan + 30-day business plan (SWOT)","setting weekly Friday reflection-form cadence"]},
   {id:"target", nm:"V-Target", area:"Lead Intelligence", ic:"🎯",
     ds:"Pulls intent signals from 6sense & ZoomInfo, finds in-segment accounts, maps the full buying group with role-based pain points, and checks VAR / integrator coverage.",
@@ -326,8 +326,8 @@ var AGENTS=[
     tools:["Marketing team","Social media","Nurture / email","VAR network"],
     think:["handing target accounts to marketing…","building {SEG} value narrative + assets","launching social campaign (new lead source)","spinning up nurture sequence","activating VAR / partner network","scoring warmed accounts back to the rep"]},
   {id:"coach", nm:"V-Coach", area:"Training & Enablement", ic:"🎓",
-    ds:"Routes the rep through i3i / NSM training — Sales Mastery, Sales Ops fundamentals, the i3 Technology Center and production — tracks tests and certifies readiness.",
-    tools:["i3i","NSM training","Salesforce","Quoting tool"],
+    ds:"Routes the rep through i3Live / NSM training — Sales Mastery, Sales Ops fundamentals, the i3 Technology Center and production — tracks tests and certifies readiness.",
+    tools:["i3Live","NSM training","Salesforce","Quoting tool"],
     think:["loading {SEG} training path…","Sales Mastery: market shift, go-to-market, sales process","Sales Ops: Salesforce, quoting, forecasting, DocuSign","i3 Technology Center: hardware + solution offering","tracking completion + test scores","readiness score computed — certified"]},
   {id:"guide", nm:"V-Guide", area:"Guided Outreach", ic:"🧭",
     ds:"Drafts the outreach, then proves the work happened — verifying email, phone, mobile and meeting activity against the source systems, with anti-gaming checks before anything counts toward progression.",
@@ -655,7 +655,7 @@ function openRep(i){
       '<div style="margin-top:14px"><div class="sbox" style="background:transparent;border:none;padding:0"><div class="k">Acclimation deliverables</div></div>'+
         '<div class="schk">'+deliverables.map(function(d){return '<div class="ci '+(d.done?'done':'')+'"><span class="bx">'+(d.done?'✓':'')+'</span>'+d.t+'</div>';}).join('')+'</div></div>'+
       '<div class="sbtn"><button class="pr" onclick="runRepInEngine('+i+')">▶ View this rep in V engine</button>'+
-        '<button class="gh" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in iHost / Salesforce.\')">Open in iHost</button></div>'+
+        '<button class="gh" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in i3Host / Salesforce.\')">Open in i3Host</button></div>'+
     '</div>';
   document.getElementById('repModal').classList.remove('hidden');
 }

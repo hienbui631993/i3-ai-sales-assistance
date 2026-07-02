@@ -149,7 +149,7 @@
       </div>
     </div>
   </div>
-  <div class="foot">Working model / simulation — outputs are illustrative. Runs inside iHost; not public. Data entered is saved to Salesforce and is proprietary to i3. © 2026 i3 International Inc.</div>
+  <div class="foot">Working model / simulation — outputs are illustrative. Runs inside i3Host; not public. Data entered is saved to Salesforce and is proprietary to i3. © 2026 i3 International Inc.</div>
 </div>
 
 <script>
@@ -213,7 +213,7 @@ function goHome(){ show('home'); renderHome(); }
 function renderHome(){
   if(S.role==='partner'){ renderPartnerHome(); return; }
   document.getElementById('view-home').innerHTML=
-    '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via iHost':'Your dashboard')+'</div>'+
+    '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via i3Host':'Your dashboard')+'</div>'+
       '<h1>Good morning, '+rep.name.split(' ')[0]+'</h1>'+
       '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div></div>'+
     '<div class="adminbar"><div class="t">👤 <b>Admin?</b> Onboard a new salesperson and Vision starts their workflow automatically.</div><button class="btn pink sm" onclick="setRole(\'admin\')">Onboard a rep →</button></div>'+
@@ -420,7 +420,7 @@ var OUTPUT={
       '<div class="ent" style="margin-top:10px"><input placeholder="Name"><input placeholder="Title"><input placeholder="Position / role"><button class="btn p sm" onclick="this.parentNode.previousSibling;alert(\'Simulated: stakeholder added + saved to Salesforce.\')">+ Add</button></div>'+
       '<div style="font-size:12px;color:#8a5d05;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:8px;padding:8px 10px"><b>Vision prompt:</b> add <b>everyone</b> who was on the email with their title — so we know who supports the POC before it kicks off. Don\'t leave anyone out.</div>')+
     sec("Recommended solution &amp; equipment (from the discussion)",
-      '<ul class="steps"><li><b>Solution:</b> AI Sentry + POS-integrated video (loss prevention + ops insight)</li><li><b>Equipment:</b> i3 AI server, 8× dome cameras, 1× LPR at the dock, iHost analytics</li><li><b>Why:</b> matches "fewer systems" + "reporting managers will use" from the transcript.</li></ul>')+
+      '<ul class="steps"><li><b>Solution:</b> AI Sentry + POS-integrated video (loss prevention + ops insight)</li><li><b>Equipment:</b> i3 AI server, 8× dome cameras, 1× LPR at the dock, i3Host analytics</li><li><b>Why:</b> matches "fewer systems" + "reporting managers will use" from the transcript.</li></ul>')+
     sec("Hand off to Project Management",
       '<span class="badge warn">Privacy &amp; cybersecurity review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Privacy &amp; Cybersecurity</button>'+
       '<div style="margin-top:10px"><button class="btn pink" onclick="showPM()">📨 Contact PM &amp; create the official POC →</button></div>'+
@@ -433,7 +433,7 @@ var OUTPUT={
       '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>')+
       sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off. Below is exactly what to do.')+
       sec("Do this — privacy",'<ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
-      sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the iHost / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
+      sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the i3Host / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
       sec("Post this signage",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
       saveBar();
   },
@@ -465,7 +465,7 @@ function showPM(){
     '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM (by territory)",pm+" · "+rep.terr)+kv("PM coverage","Quebec → Nissan · Ontario → Louel · West/Other → Des")+'</div>'+
     sec("PM checklist",'<ul class="steps"><li>Site walkthrough scheduled with SI / integrator</li><li>Cybersecurity forms — network, data residency, access</li><li>Install &amp; configure to the POC timeline</li><li>Collect the right data for the 45-day validation</li><li>Executive review → Go / No-Go</li></ul>')+
     sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
-    '<div class="saveNote">🔒 Synced to Salesforce + iHost · PM agent interconnected with Vision.</div></div></div>';
+    '<div class="saveNote">🔒 Synced to Salesforce + i3Host · PM agent interconnected with Vision.</div></div></div>';
   document.getElementById('pmPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
