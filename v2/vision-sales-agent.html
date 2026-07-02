@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vision · i3 Sales Agent</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 · Helvetica Neue */
+  :root{
+    --brand:#00588F;--brand-700:#024d7c;--brand-900:#002447;
+    --pink:#DF1E71;--green:#00A661;--yellow:#FFC107;--red:#C8102E;
+    --ink:#0d1b2a;--ink2:#33424f;--muted:#69788a;--line:#dfe6ee;--bg:#eef2f6;--panel:#fff;
+    --inbg:#e8f1f8;--inbd:#bcd9ee;--okbg:#e7f8f0;--okbd:#a6e8c8;--wnbg:#fff7e0;--wnbd:#ffe39c;--hibg:#fdebef;--hibd:#f4b8c3;
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:12px;padding:11px 20px;position:sticky;top:0;z-index:10;flex-wrap:wrap}
+  .topbar .ilogo{height:23px}.topbar .sep{width:1px;height:20px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.4px}.topbar .prod small{display:block;font-weight:400;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .roleSel{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:9px;overflow:hidden}
+  .roleSel button{background:transparent;color:#cfe3f1;border:none;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+  .roleSel button.on{background:var(--brand);color:#fff}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5}
+  .vbtn{font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5;cursor:pointer}
+  .vbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:22px}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:26px;margin:6px 0 4px;font-weight:800;letter-spacing:-.3px}
+  .lede{color:var(--ink2);font-size:14.5px;line-height:1.55;max-width:660px}
+  .vsay{display:flex;gap:11px;align-items:flex-start;margin:14px 0}
+  .vsay .av{flex:none;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#0e6fb0,var(--brand-900));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;position:relative}
+  .vsay .bub{background:#f1f6fa;border:1px solid var(--line);border-radius:13px;border-top-left-radius:4px;padding:11px 14px;font-size:14px;line-height:1.5}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
+  .card .h{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .card .h .ic{width:38px;height:38px;border-radius:10px;background:var(--inbg);border:1px solid var(--inbd);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .card .h h2{margin:0;font-size:16px;font-weight:800}.card .h .sub{font-size:12px;color:var(--muted);margin-top:1px}
+  .body{padding:18px}
+  label.f{display:block;margin-bottom:13px}
+  label.f .l{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin-bottom:6px;display:block}
+  select,input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit}
+  textarea{min-height:90px;resize:vertical}
+  select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,88,143,.12)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chk{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer}
+  .chk.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .btn{border:none;border-radius:11px;padding:11px 17px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  .btn.p{background:var(--brand);color:#fff}.btn.p:hover{background:var(--brand-700)}
+  .btn.pink{background:var(--pink);color:#fff}.btn.g{background:#eef2f7;color:var(--ink2)}
+  .btn.sm{padding:7px 12px;font-size:12.5px;border-radius:9px}
+  .upload{border:1.5px dashed var(--line);border-radius:12px;padding:16px;text-align:center;background:#fafcfe}
+  .upload .di{font-size:24px}.upload .dt{font-size:13px;color:var(--muted);margin:7px auto 12px;max-width:440px;line-height:1.5}
+
+  .thinking{display:flex;align-items:center;gap:11px;color:var(--brand);font-weight:700;font-size:14px;padding:6px 0}
+  .sp{width:20px;height:20px;border-radius:50%;border:2.5px solid #cfe0ee;border-top-color:var(--brand);animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .osec{margin-bottom:16px}
+  .osec h4{margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  .kv{background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .kv .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  .kv .v{font-size:13.5px;font-weight:700;margin-top:2px}
+  ol.steps,ul.steps{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6}ol.steps li,ul.steps li{margin-bottom:5px}
+  .doc{white-space:pre-wrap;background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:13px;font-size:12.8px;line-height:1.55;color:var(--ink2)}
+  .badge{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:3px 10px}
+  .badge.ok{background:var(--okbg);color:#0a7d4f;border:1px solid var(--okbd)}
+  .badge.warn{background:var(--wnbg);color:#8a5d05;border:1px solid var(--wnbd)}
+  .badge.hi{background:var(--hibg);color:var(--red);border:1px solid var(--hibd)}
+  .badge.lock{background:#eef2f7;color:var(--ink2);border:1px solid var(--line)}
+  .chip{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 10px;margin:0 5px 5px 0;background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+  table.tbl{width:100%;border-collapse:collapse;font-size:13px}
+  table.tbl th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:7px 9px;border-bottom:1px solid var(--line)}
+  table.tbl td{padding:8px 9px;border-bottom:1px solid #eef2f6}
+  table.tbl tr:last-child td{border-bottom:none}
+  .ent{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}
+  @media(max-width:640px){.ent{grid-template-columns:1fr 1fr}}
+
+  /* dashboard */
+  .greet{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .adminbar{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border-radius:14px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}
+  .adminbar .t{font-size:13.5px}.adminbar b{font-weight:800}
+  .widgets{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:12px 0}
+  @media(max-width:860px){.widgets{grid-template-columns:1fr 1fr}}
+  .wdg{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.14s}
+  .wdg:hover{border-color:var(--brand);box-shadow:0 8px 20px rgba(0,40,75,.08);transform:translateY(-2px)}
+  .wdg .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  .wdg .v{font-size:23px;font-weight:800;margin-top:5px}
+  .wdg .s{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .wdg .v.good{color:var(--green)}.wdg .v.warn{color:#b9770b}
+  .wdg.act{border-left:3px solid var(--pink)}
+  .today{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px 16px;margin-bottom:14px}
+  .ti{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px dashed #eef2f6;font-size:13.5px}
+  .ti:last-child{border-bottom:none}
+  .ti .dot{flex:none;width:9px;height:9px;border-radius:50%}
+  .ti .nudge{margin-left:auto}
+  .drill{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0;margin-bottom:16px;overflow:hidden;display:none}
+  .drill.show{display:block}
+  .drill .dh{padding:13px 16px;border-bottom:1px solid var(--line);font-weight:800;display:flex;justify-content:space-between;align-items:center}
+
+  .stages{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  @media(max-width:820px){.stages{grid-template-columns:1fr 1fr}}@media(max-width:520px){.stages{grid-template-columns:1fr}}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px;cursor:pointer;transition:.14s;position:relative}
+  .stage:hover{border-color:var(--brand);box-shadow:0 8px 22px rgba(0,40,75,.1);transform:translateY(-2px)}
+  .stage .ic{width:40px;height:40px;border-radius:11px;background:var(--inbg);border:1px solid var(--inbd);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:10px}
+  .stage h3{margin:0 0 3px;font-size:15px;font-weight:800}.stage p{margin:0;font-size:12px;color:var(--muted);line-height:1.4}
+  .stage .step{position:absolute;top:13px;right:14px;font-size:11px;font-weight:800;color:#9fb8cf}
+  .stage.locked{opacity:.55;cursor:not-allowed}.stage.locked:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .lock{position:absolute;top:13px;right:14px;font-size:10.5px;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+  .back{background:none;border:none;color:var(--brand);font-weight:700;font-size:13.5px;cursor:pointer;padding:0;margin-bottom:14px}
+  .saveNote{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);background:var(--inbg);border:1px solid var(--inbd);border-radius:10px;padding:9px 12px;margin-top:14px}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo" onclick="goPortal()" style="cursor:pointer" title="Back to portal"></div><div class="sep"></div>
+  <div class="prod"><span style="color:var(--pink)">V</span>ision<small>i3 Sales Agent</small></div>
+  <div class="right">
+    <div class="roleSel">
+      <button id="ro-admin" onclick="setRole('admin')">Admin</button>
+      <button class="on" id="ro-rep" onclick="setRole('rep')">i3 Rep</button>
+      <button id="ro-integ" onclick="setRole('integ')">Integrator</button>
+      <button id="ro-partner" onclick="setRole('partner')">Partner</button>
+    </div>
+    <span class="pill" id="segPill">Retail</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- ADMIN -->
+  <div id="view-admin" class="hidden"></div>
+  <!-- DASHBOARD (home) -->
+  <div id="view-home"></div>
+  <!-- STAGE -->
+  <div id="view-stage" class="hidden">
+    <button class="back" onclick="goHome()">← Back to dashboard</button>
+    <div class="card">
+      <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div></div>
+      <div class="body">
+        <div class="vsay"><div class="av" id="stAv">V</div><div class="bub" id="stIntro"></div></div>
+        <div id="stInputs"></div>
+        <div id="stRun" style="margin-top:6px"></div>
+        <div id="stOut"></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Working model / simulation — outputs are illustrative. Runs inside iHost; not public. Data entered is saved to Salesforce and is proprietary to i3. © 2026 i3 International Inc.</div>
+</div>
+
+<script>
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+
+/* click the i3 logo -> back to the portal (works self-hosted and via htmlpreview) */
+function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'portal.html';}else{location.href='portal.html';}}
+
+/* ===== state ===== */
+var S={role:'rep', seg:'Retail'};
+var rep={name:"David Chen", seg:"Retail", terr:"Ontario & Atlantic", resp:"New business", goal:"$4.5M", started:true};
+var PMS=["Louel","Nissan","Des"];          // i3 PM team
+
+/* ===== voice (the 'aha' — Vision actually talks) ===== */
+/* ===== role / segment ===== */
+function setRole(r){ S.role=r;
+  ['admin','rep','integ','partner'].forEach(function(x){document.getElementById('ro-'+x).classList.toggle('on',x===r)});
+  if(r==='admin'){ showAdmin(); } else { goHome(); }
+}
+function setSeg(v){ S.seg=v; rep.seg=v; document.getElementById('segPill').textContent=v; }
+function allowed(st){ return S.role==='partner' ? st.partner : true; }
+function show(id){ ['admin','home','stage'].forEach(function(v){document.getElementById('view-'+v).classList.toggle('hidden',v!==id)}); window.scrollTo(0,0); }
+
+/* ========================================================= ADMIN ONBOARDING ========================================================= */
+function showAdmin(){
+  show('admin');
+  document.getElementById('view-admin').innerHTML=
+    '<div class="eyebrow">Administrator</div><h1>Onboard a salesperson</h1>'+
+    '<p class="lede">Set them up and Vision builds their workflow and kicks off the automated process — lead intelligence, training, and their daily plan.</p>'+
+    '<div class="vsay"><div class="av">V</div><div class="bub">Tell me about the new rep and their year. I\'ll build their ramp and start the engine for them.</div></div>'+
+    '<div class="card"><div class="body">'+
+      '<div class="grid2">'+
+        '<label class="f"><span class="l">Name</span><input id="a_name" value="Tony Russo"></label>'+
+        '<label class="f"><span class="l">Core segment</span><select id="a_seg">'+['Retail','Grocery','QSR','Commercial','School','Integrator'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
+        '<label class="f"><span class="l">Territory</span><input id="a_terr" value="Quebec & Atlantic"></label>'+
+        '<label class="f"><span class="l">Responsibility</span><select id="a_resp"><option>New business</option><option>Named accounts</option><option>Channel / VAR</option><option>Existing accounts</option></select></label>'+
+        '<label class="f"><span class="l">Annual goal</span><input id="a_goal" value="$3.5M"></label>'+
+        '<label class="f"><span class="l">Experience</span><select id="a_exp"><option>New hire</option><option>Mid-level</option><option>Veteran</option></select></label>'+
+      '</div>'+
+      '<button class="btn p" onclick="runAdmin()">Build workflow &amp; start with Vision</button>'+
+      '<div id="adminOut" style="margin-top:14px"></div>'+
+    '</div></div>';
+}
+function runAdmin(){
+  var n=val('a_name'),sg=val('a_seg'),tr=val('a_terr'),rs=val('a_resp'),gl=val('a_goal'),ex=val('a_exp');
+  var out=document.getElementById('adminOut');
+  out.innerHTML='<div class="thinking"><span class="sp"></span><span id="aTxt">Vision is building '+n+'\'s workflow…</span></div>';
+  var lines=["assigning segment + territory…","mapping the buying group in "+sg+"…","scheduling NSM training + mentors","kicking off 6sense / ZoomInfo intelligence","building the daily plan to hit "+gl];
+  var i=0,t=setInterval(function(){ i++; var e=document.getElementById('aTxt'); if(e&&i<lines.length)e.textContent=lines[i];
+    if(i>=lines.length){clearInterval(t);
+      rep={name:n,seg:sg,terr:tr,resp:rs,goal:gl,started:true}; setSeg(sg);
+      out.innerHTML='<div class="saveNote">🔒 Saved to Salesforce · proprietary to i3 — '+n+'\'s profile and workflow belong to the company.</div>'+
+        '<div class="osec" style="margin-top:14px"><h4>Workflow created</h4><div class="grid2">'+kv("Rep",n)+kv("Segment / territory",sg+" · "+tr)+kv("Responsibility",rs)+kv("Annual goal",gl)+kv("Ramp",ex==='Veteran'?'Fast-track · straight to pipeline':'4–6 wk acclimation + NSM')+kv("Automations started","Lead intel · training · daily plan")+'</div></div>'+
+        '<button class="btn p" onclick="setRole(\'rep\')">Start '+n+' → open their dashboard</button>';
+    }},560);
+}
+function val(id){var e=document.getElementById(id);return e?(e.value||'').trim():'';}
+
+/* ========================================================= REP DASHBOARD (home) ========================================================= */
+function goHome(){ show('home'); renderHome(); }
+function renderHome(){
+  if(S.role==='partner'){ renderPartnerHome(); return; }
+  document.getElementById('view-home').innerHTML=
+    '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via iHost':'Your dashboard')+'</div>'+
+      '<h1>Good morning, '+rep.name.split(' ')[0]+'</h1>'+
+      '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div></div>'+
+    '<div class="adminbar"><div class="t">👤 <b>Admin?</b> Onboard a new salesperson and Vision starts their workflow automatically.</div><button class="btn pink sm" onclick="setRole(\'admin\')">Onboard a rep →</button></div>'+
+    '<div class="widgets">'+
+      wdg('today','Today','5 tasks','3 calls · 1 prep · 1 POC','','act')+
+      wdg('goal','This month','$210K','of '+rep.goal.replace("M","M ÷12 ≈ $375K")+' target','warn')+
+      wdg('commit','Commitment','$280K','quarter committed','good')+
+      wdg('pipeline','Pipeline','12','leads → 3 POCs','')+
+      wdg('orders','Orders won','$96K','this quarter','good')+
+    '</div>'+
+    '<div class="today"><div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 0 2px">What you need to do today</div>'+
+      ti('var(--red)','Call 3 leads showing intent (Metro, Northline, Harbour)','Leads','prospect')+
+      ti('var(--yellow)','Prep the Metro deck — manager invited 2pm','Present','present')+
+      ti('var(--green)','Review the Gardewine POC — day 20 of 45','POC','poc')+
+    '</div>'+
+    '<div class="drill" id="drill"></div>'+
+    '<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:6px 0 10px">Jump to a stage</div>'+
+    '<div class="stages" id="stages"></div>';
+  renderStages();
+}
+function wdg(id,k,v,s,cls,extra){ return '<div class="wdg '+(extra||'')+'" onclick="drill(\''+id+'\')"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="s">'+s+'</div></div>'; }
+function ti(color,txt,label,stage){ return '<div class="ti"><span class="dot" style="background:'+color+'"></span>'+txt+'<button class="btn p sm nudge" onclick="openStage(\''+stage+'\')">'+label+' →</button></div>'; }
+
+function drill(type){
+  var d=document.getElementById('drill'); var html='';
+  if(type==='today'||type==='pipeline'){
+    html='<div class="dh">Your pipeline <button class="btn g sm" onclick="closeDrill()">✕</button></div><div class="body">'+
+      '<table class="tbl"><tr><th>Account</th><th>Stage</th><th>Intent / status</th><th></th></tr>'+
+      row2('Metro Retail Group','Lead','High intent','Call now','prospect')+
+      row2('Northline Stores','Presentation','Manager invited','Prep deck','present')+
+      row2('Harbour Retail Co.','POC','Day 20 / 45','Review','poc')+
+      '</table></div>';
+  } else if(type==='goal'||type==='commit'||type==='orders'){
+    html='<div class="dh">Numbers <button class="btn g sm" onclick="closeDrill()">✕</button></div><div class="body"><div class="grid2">'+
+      kv('Monthly goal','~$375K')+kv('Booked this month','$210K')+kv('Committed (qtr)','$280K')+kv('Orders won (qtr)','$96K')+
+      '</div><div class="saveNote" style="margin-top:12px">🔒 Fed from Salesforce + Automatica · proprietary to i3.</div></div>';
+  }
+  d.innerHTML=html; d.classList.add('show'); d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function row2(a,s,st,act,stage){ return '<tr><td><b>'+a+'</b></td><td>'+s+'</td><td>'+st+'</td><td style="text-align:right"><button class="btn p sm" onclick="openStage(\''+stage+'\')">'+act+' →</button></td></tr>'; }
+function closeDrill(){ document.getElementById('drill').classList.remove('show'); }
+
+function renderPartnerHome(){
+  document.getElementById('view-home').innerHTML=
+    '<div class="eyebrow">Channel partner</div><h1>Welcome — your Vision tools</h1>'+
+    '<p class="lede">You have the Presentation and Legal &amp; Privacy agents. Want the full sales engine? You can host your own Vision — ask your i3 channel manager.</p>'+
+    '<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:12px 0 10px">Your agents</div>'+
+    '<div class="stages" id="stages"></div>';
+  renderStages();
+}
+
+/* ===== stages ===== */
+var STAGES=[
+  {id:"prospect", n:1, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
+    intro:"I've already got your segment and your LinkedIn. Run it — I'll tell you who to call first, in what order, and how to sharpen your presence."},
+  {id:"present", n:2, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
+    intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
+  {id:"poc", n:3, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
+    intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
+  {id:"legal", n:4, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
+    intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
+  {id:"close", n:5, ic:"🤝", nm:"Closing", sub:"Out-position & close", partner:false,
+    intro:"Pick who we're up against. I'll tell you how to beat them and what to do to close."},
+  {id:"onboard", n:6, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
+    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."}
+];
+function stage(id){return STAGES.find(function(s){return s.id===id})}
+function renderStages(){
+  document.getElementById('stages').innerHTML=STAGES.map(function(s){
+    var ok=allowed(s);
+    return '<div class="stage '+(ok?'':'locked')+'" '+(ok?'onclick="openStage(\''+s.id+'\')"':'')+'>'+
+      (ok?'<div class="step">'+s.n+'</div>':'<div class="lock">i3 / integrator</div>')+
+      '<div class="ic">'+s.ic+'</div><h3>'+s.nm+'</h3><p>'+s.sub+'</p></div>';
+  }).join('');
+}
+function openStage(id){
+  var s=stage(id); if(!allowed(s)) return;
+  show('stage');
+  document.getElementById('stIc').textContent=s.ic; document.getElementById('stName').textContent=s.nm;
+  document.getElementById('stSub').textContent=s.sub; document.getElementById('stIntro').textContent=s.intro;
+  document.getElementById('stOut').innerHTML=''; document.getElementById('stRun').innerHTML='';
+  renderInputs(id); window.scrollTo(0,0);
+}
+
+/* ===== inputs ===== */
+function renderInputs(id){
+  var box=document.getElementById('stInputs'),h='';
+  if(id==='prospect'){
+    h='<div class="saveNote">Using your segment <b>'+rep.seg+'</b> and your LinkedIn. I\'ll assess your presence and map the buying group — just run it.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'prospect\')">Assess me &amp; find the buying group</button>';
+  } else if(id==='present'){
+    h='<div class="upload"><div class="di">📄</div><div class="dt">Upload the transcript of your presentation (Teams / GoToMeeting). No file handy? Use a sample so you can see what Vision does.</div>'+
+      '<button class="btn p" onclick="runStage(\'present\')">Use sample transcript</button></div>'+
+      '<label class="f" style="margin-top:14px"><span class="l">…or paste the transcript</span><textarea id="i_tx" placeholder="Paste the meeting transcript here…"></textarea></label>';
+  } else if(id==='poc'){
+    h='<label class="f"><span class="l">Site address (sets the exact legal &amp; privacy requirement)</span><input id="i_addr" value="1500 Rue Sainte-Catherine, Montréal, Quebec"></label>'+
+      '<div class="upload"><div class="di">🧪</div><div class="dt">I\'ll generate the POC from your transcript and auto-check the exact legal doc for this address.</div>'+
+      '<button class="btn p" onclick="runStage(\'poc\')">Generate POC &amp; check legal</button></div>';
+  } else if(id==='legal'){
+    var L=window._pocLaw||lawFromAddress(rep.terr); var jdef=L.juris+' · '+L.laws.join(', ');
+    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
+  } else if(id==='close'){
+    h='<label class="f"><span class="l">Incumbent / competitor</span><select id="i_comp">'+['Eagle Eye','Verkada','Solink','DTiQ','OpenEye','HME (drive-thru)'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
+      '<button class="btn p" onclick="runStage(\'close\')">Build close plan</button>';
+  } else if(id==='onboard'){
+    h='<div class="upload"><div class="di">🚀</div><div class="dt">Load your onboarding plan and I\'ll turn it into your ramp.</div>'+
+      '<button class="btn p" onclick="runStage(\'onboard\')">Load onboarding plan</button></div>';
+  }
+  box.innerHTML=h;
+}
+var LEGAL_TOOLS=["Facial Recognition","i3 AI Loyalty","Audio Monitoring","AI Sentry","LPR","Heat Mapping","POS+Video","Door Count"];
+var legalSel=["Facial Recognition","POS+Video"];
+function renderTools(){var el=document.getElementById('i_tools');if(!el)return;el.innerHTML=LEGAL_TOOLS.map(function(t){return '<span class="chk '+(legalSel.indexOf(t)>-1?'on':'')+'" onclick="toggleTool(\''+t+'\')">'+t+'</span>'}).join('');}
+function toggleTool(t){var i=legalSel.indexOf(t);if(i>-1)legalSel.splice(i,1);else legalSel.push(t);renderTools();}
+
+/* ===== run ===== */
+function runStage(id){
+  var run=document.getElementById('stRun'),out=document.getElementById('stOut');
+  run.innerHTML='<div class="thinking"><span class="sp"></span><span id="thinkTxt">Vision is thinking…</span></div>'; out.innerHTML='';
+  var lines=THINK[id]||["Working…"]; var i=0;
+  var t=setInterval(function(){ i++; var e=document.getElementById('thinkTxt'); if(e&&i<lines.length)e.textContent=lines[i];
+    if(i>=lines.length){ clearInterval(t); run.innerHTML=''; out.innerHTML=OUTPUT[id](); out.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  },560);
+}
+var THINK={
+  prospect:["reading your LinkedIn presence…","scanning 6sense intent + ZoomInfo contacts","mapping the buying group","building your next-day actions"],
+  present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
+  poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
+  legal:["checking jurisdiction…","classifying solutions","applying Law 25 / GDPR","drafting signage + PIA"],
+  close:["matching the competitor…","loading battlecard","benchmarking price","building close checklist"],
+  onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
+};
+
+/* ===== helpers ===== */
+function kv(k,v){return '<div class="kv"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>';}
+function sec(t,inner){return '<div class="osec"><h4>'+t+'</h4>'+inner+'</div>';}
+function saveBar(extra){return '<div class="saveNote">🔒 Saved to Salesforce · proprietary to i3'+(extra?' — '+extra:'')+'</div>';}
+var ASSOC={Retail:["NRF","RILA"],Grocery:["FMI","NGA"],QSR:["National Restaurant Assoc."],Commercial:["ASIS","SIA"],School:["Campus Safety / NaBITA"]};
+/* address -> exact legal requirement */
+function lawFromAddress(a){a=(a||'').toLowerCase();
+  if(/quebec|québec|montr|\bqc\b/.test(a)) return {juris:'Quebec, Canada', laws:['Quebec Law 25','PIPEDA'], doc:'Law 25 PIA + express biometric consent + bilingual (FR/EN) signage'};
+  if(/alberta|\bab\b|calgary|edmonton/.test(a)) return {juris:'Alberta, Canada', laws:['PIPA (AB)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/british columbia|\bbc\b|vancouver/.test(a)) return {juris:'British Columbia, Canada', laws:['PIPA (BC)','PIPEDA'], doc:'PIPA / PIPEDA PIA + signage'};
+  if(/ontario|toronto|ottawa|\bon\b/.test(a)) return {juris:'Ontario, Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + purpose-specific signage'};
+  if(/illinois|chicago|\bil\b/.test(a)) return {juris:'Illinois, USA', laws:['BIPA'], doc:'BIPA written consent (biometrics) + retention schedule'};
+  if(/california|\bca\b|los angeles|san francisco/.test(a)) return {juris:'California, USA', laws:['CCPA / CPRA'], doc:'CCPA notice at collection + opt-out'};
+  if(/texas|\btx\b|dallas|houston/.test(a)) return {juris:'Texas, USA', laws:['CUBI (TX)'], doc:'Texas CUBI biometric notice + consent'};
+  if(/united kingdom|\buk\b|london|england/.test(a)) return {juris:'United Kingdom', laws:['UK GDPR'], doc:'DPIA + lawful basis + signage'};
+  if(/france|germany|spain|italy|europe|\beu\b|paris|berlin|madrid/.test(a)) return {juris:'European Union', laws:['GDPR'], doc:'DPIA + Art.9 special-category basis + signage'};
+  if(/\busa\b|united states|america|new york|\bny\b|florida|\bfl\b/.test(a)) return {juris:'United States', laws:['State biometric / FRT laws'], doc:'State FRT / biometric notice + consent'};
+  return {juris:'Canada', laws:['PIPEDA'], doc:'PIPEDA PIA + signage'};
+}
+
+/* ===== outputs ===== */
+var OUTPUT={
+  prospect:function(){
+    var seg=rep.seg;
+    var assoc=ASSOC[seg]||["industry associations"];
+    var bg=[
+      ["Operations VP","High","researching loss-prevention & ops visibility","Lead with shrink + reporting managers will use"],
+      ["IT Director","Medium","comparing cloud VMS + integration","Integration + data residency story"],
+      ["Loss Prevention Mgr","High","incidents up YoY","Bring incident-reduction proof from a similar "+seg],
+      ["CFO / Finance","Low","budget owner","ROI + price-to-own that scales company-wide"]
+    ];
+    return sec("Your LinkedIn — presence assessment",
+      '<div class="grid2">'+kv("Relevance to "+seg,"62 / 100 · room to grow")+kv("Posting cadence","Low — 1 post / 6 wks")+kv("Connections in "+seg,"~9% of network")+kv("Headline","Generic — not segment-specific")+'</div>'+
+      '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week — reshare i3 '+seg+' wins; comment on '+assoc[0]+' threads.</li><li>Grow '+seg+' connections: target the buying-group roles below.</li></ul>'+
+      '<div style="margin-top:10px"><span class="badge warn">Action</span> Book a session with Marketing (Edward\'s team) to clean up your profile &amp; plan social outreach. '+
+      '<button class="btn p sm" onclick="this.outerHTML=\'<span class=&quot;badge ok&quot;>Requested ✓</span>\'">Book with Marketing</button></div>')+
+    sec("Get more engaged with your market",
+      '<ul class="steps"><li>Join / engage: '+assoc.map(function(a){return '<b>'+a+'</b>'}).join(', ')+' — comment, attend, get invited to the right rooms.</li><li>Follow target accounts &amp; their execs; warm them before outreach.</li></ul>')+
+    sec("The buying group in "+seg+" (don't chase just one)",
+      '<table class="tbl"><tr><th>Decision maker</th><th>Intent</th><th>Why now</th><th>How to approach</th></tr>'+
+      bg.map(function(r){var b=r[1]==='High'?'hi':r[1]==='Medium'?'warn':'lock';return '<tr><td><b>'+r[0]+'</b></td><td><span class="badge '+b+'" style="font-size:9px">'+r[1].toUpperCase()+'</span></td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>'}).join('')+'</table>'+
+      '<div style="font-size:12px;color:var(--muted);margin-top:7px">Pulled from 6sense intent + ZoomInfo contacts.</div>')+
+    sec("Do this tomorrow",'<ol class="steps"><li>Call the Operations VP + Loss Prevention Mgr (highest intent) first.</li><li>Send the IT Director the integration + data-residency one-pager.</li><li>Log every touch here — Vision verifies it before it counts.</li></ol>')+
+    saveBar("your accounts & contacts stay with i3");
+  },
+  present:function(){
+    window._lastTranscript=(val('i_tx')||'')||"SAMPLE";
+    var attendees=[["Chris Lytwyn","IT Director","Customer","Decision maker"],["Dana Roy","Ops VP","Customer","Supporter"],["Sam Patel","Loss Prevention","Customer","Supporter"],["Vy Hoang","CCO","i3","Sponsor"]];
+    return sec("What I heard (drivers)",'<div>'+["Fewer disconnected systems","Loss-prevention visibility","Reporting managers will use","Prove value before rollout"].map(function(d){return '<span class="chip">'+d+'</span>'}).join('')+'</div>')+
+      sec("Who was in the room (auto-captured)",'<table class="tbl"><tr><th>Name</th><th>Title</th><th>Org</th><th>Role</th></tr>'+attendees.map(function(a){return '<tr><td><b>'+a[0]+'</b></td><td>'+a[1]+'</td><td>'+a[2]+'</td><td>'+a[3]+'</td></tr>'}).join('')+'</table>')+
+      sec("Next",'<span class="badge warn">Build the POC</span> I\'ll carry these drivers and stakeholders straight into the proof of concept. '+
+        '<button class="btn p sm" onclick="openStage(\'poc\')">Build POC from this →</button>')+
+      saveBar("transcript + stakeholders captured");
+  },
+  poc:function(){
+    var addr=val('i_addr')||"1500 Rue Sainte-Catherine, Montréal, Quebec";
+    var L=lawFromAddress(addr); window._pocLaw=L;
+    return sec("POC — generated from your transcript (Gardewine format)",
+      '<div class="grid2">'+kv("Account","Metro Retail Group")+kv("Pilot site",addr)+kv("Objective","Reduce shrink; prove usable safety reporting")+kv("Duration","45-day data collection")+'</div>')+
+    sec("Site address → exact legal requirement (auto-checked)",
+      '<div><b>Jurisdiction:</b> '+L.juris+' &nbsp; '+L.laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+'</div>'+
+      '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>'+
+      '<div style="font-size:12px;color:var(--muted);margin-top:6px">Set from the site address — run Privacy &amp; Cybersecurity for the full review.</div>')+
+    sec("Stakeholders — everyone on the email (add titles so we know our supporters)",
+      '<table class="tbl"><tr><th>Name</th><th>Title</th><th>Role in POC</th></tr>'+
+      '<tr><td>Chris Lytwyn</td><td>IT Director</td><td><span class="badge hi" style="font-size:9px">DECISION</span></td></tr>'+
+      '<tr><td>Dana Roy</td><td>Operations VP</td><td><span class="badge ok" style="font-size:9px">SUPPORTER</span></td></tr>'+
+      '<tr><td>Sam Patel</td><td>Loss Prevention</td><td><span class="badge ok" style="font-size:9px">SUPPORTER</span></td></tr>'+
+      '</table>'+
+      '<div class="ent" style="margin-top:10px"><input placeholder="Name"><input placeholder="Title"><input placeholder="Position / role"><button class="btn p sm" onclick="this.parentNode.previousSibling;alert(\'Simulated: stakeholder added + saved to Salesforce.\')">+ Add</button></div>'+
+      '<div style="font-size:12px;color:#8a5d05;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:8px;padding:8px 10px"><b>Vision prompt:</b> add <b>everyone</b> who was on the email with their title — so we know who supports the POC before it kicks off. Don\'t leave anyone out.</div>')+
+    sec("Recommended solution &amp; equipment (from the discussion)",
+      '<ul class="steps"><li><b>Solution:</b> AI Sentry + POS-integrated video (loss prevention + ops insight)</li><li><b>Equipment:</b> i3 AI server, 8× dome cameras, 1× LPR at the dock, iHost analytics</li><li><b>Why:</b> matches "fewer systems" + "reporting managers will use" from the transcript.</li></ul>')+
+    sec("Hand off to Project Management",
+      '<span class="badge warn">Privacy &amp; cybersecurity review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Privacy &amp; Cybersecurity</button>'+
+      '<div style="margin-top:10px"><button class="btn pink" onclick="showPM()">📨 Contact PM &amp; create the official POC →</button></div>'+
+      '<div id="pmPanel"></div>')+
+    saveBar("POC, stakeholders & equipment — proprietary to i3");
+  },
+  legal:function(){
+    var L=window._pocLaw||lawFromAddress(rep.terr); var laws=L.laws;
+    return sec("What applies (from the site address)",'<div><b>'+L.juris+'</b> &nbsp; '+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+' <span class="badge hi">High risk — sensitive solutions</span></div>'+
+      '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>')+
+      sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off. Below is exactly what to do.')+
+      sec("Do this — privacy",'<ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
+      sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the iHost / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
+      sec("Post this signage",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
+      saveBar();
+  },
+  close:function(){
+    var comp=val('i_comp')||"the incumbent";
+    var BC={"Eagle Eye":"Weak Linux video bridge, little AI/POS for retail. Win on retail + specific AI applications.","Verkada":"Slick cloud but premium-priced and limited POS/AI retail depth. Win on value + data integration.","Solink":"Good POS-video but lighter analytics. Win on AI depth + predictive.","DTiQ":"Service-heavy/managed model. Win on price-to-own + platform control.","OpenEye":"Cloud VMS, limited retail AI. Win on integrated AI + insight.","HME (drive-thru)":"Timer-only. Win on full operational insight beyond the timer."};
+    return sec("Battlecard · "+comp,'<div class="kv"><div class="k">How to pitch against</div><div class="v" style="font-weight:600;font-size:13px">'+(BC[comp]||"Position i3 on integrated POS + AI and price-to-own.")+'</div></div>')+
+      sec("i3 value position",'<ul class="steps"><li>Most advanced smart, cloud, data-driven solution in our segment.</li><li>Strong POS + AI integration; 9 patents; 35+ years.</li><li>Affordable price-to-own that scales company-wide.</li></ul>')+
+      sec("Close checklist",'<ol class="steps"><li>Privacy review cleared</li><li>POC success metrics met → Go</li><li>Contract + commercials assembled</li><li>Sync Salesforce / Automatica, send DocuSign</li></ol>')+
+      saveBar();
+  },
+  onboard:function(){
+    return sec("Your ramp",'<div class="grid2">'+kv("Role / segment",rep.resp+" · "+rep.seg)+kv("Territory",rep.terr)+kv("Goal",rep.goal)+kv("Acclimation","4–6 weeks incl. NSM")+'</div>')+
+      sec("First actions",'<ol class="steps"><li>Share your calendar; book 12–15 shadow meetings.</li><li>NSM tracks: Sales Mastery + Sales Ops (Salesforce, quoting, forecasting).</li><li>Weekly Friday reflection form.</li><li>30-day business plan + SWOT.</li></ol>')+
+      saveBar();
+  }
+};
+function assignPM(){              // PM assigned by territory
+  var t=(rep.terr||'').toLowerCase();
+  if(/quebec|québec/.test(t)) return "Nissan";
+  if(/ontario|toronto/.test(t)) return "Louel";
+  return "Des";                  // West / Atlantic-only / other
+}
+function showPM(){
+  var pm=assignPM();
+  document.getElementById('pmPanel').innerHTML=
+    '<div class="card" style="margin-top:12px"><div class="h"><div class="ic">🛠️</div><div><h2>PM Agent · '+pm+'</h2><div class="sub">Assigned PM keeps the build on track</div></div></div>'+
+    '<div class="body"><div class="vsay"><div class="av">'+pm[0]+'</div><div class="bub">Hi '+rep.name.split(' ')[0]+', '+pm+' here from PM. POC received — I\'ll keep us on the timeline and make sure the data &amp; cybersecurity forms are complete.</div></div>'+
+    '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM (by territory)",pm+" · "+rep.terr)+kv("PM coverage","Quebec → Nissan · Ontario → Louel · West/Other → Des")+'</div>'+
+    sec("PM checklist",'<ul class="steps"><li>Site walkthrough scheduled with SI / integrator</li><li>Cybersecurity forms — network, data residency, access</li><li>Install &amp; configure to the POC timeline</li><li>Collect the right data for the 45-day validation</li><li>Executive review → Go / No-Go</li></ul>')+
+    sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
+    '<div class="saveNote">🔒 Synced to Salesforce + iHost · PM agent interconnected with Vision.</div></div></div>';
+  document.getElementById('pmPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* boot */
+setRole('rep');
+</script>
+</body>
+</html>

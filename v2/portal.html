@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>i3 Vision Portal · Sales &amp; Partner</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 */
+  :root{--brand:#00588F;--brand-900:#002447;--pink:#DF1E71;--green:#00A661;--yellow:#FFC107;
+    --bg:#0a1a2b;--panel:#0f2438;--pline:#1d3c59;--muted:#7f93a8;}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;min-height:100vh;color:#eaf2f9;
+    background:radial-gradient(1100px 620px at 80% -8%, #103a5c 0%, transparent 55%),
+      radial-gradient(900px 520px at -5% 105%, #0d2f4a 0%, transparent 50%), var(--bg);-webkit-font-smoothing:antialiased}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{display:flex;align-items:center;gap:14px;padding:14px 26px;border-bottom:1px solid var(--pline);background:rgba(0,36,71,.5)}
+  .topbar .ilogo{height:26px}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.3px}
+  .topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;gap:9px}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:6px 12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:#cfe3f1}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 24px}
+  .hero{text-align:center;max-width:720px;margin:0 auto 8px}
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:38px;margin:10px 0 12px;font-weight:800;letter-spacing:-.5px}
+  h1 .v{color:var(--pink);font-weight:800}
+  .app h3 .vhi{color:var(--pink)}
+  .lede{color:#bcd2e6;font-size:15px;line-height:1.6}
+  .role{display:inline-flex;margin-top:18px;border:1px solid var(--pline);border-radius:11px;overflow:hidden}
+  .role button{background:transparent;color:#bcd2e6;border:none;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+  .role button.on{background:var(--brand);color:#fff}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .app{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--pline);border-radius:18px;padding:22px;transition:.16s;position:relative;overflow:hidden}
+  .app:hover{border-color:#46b3ff;transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,40,75,.5)}
+  .app .ico{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:25px;background:#0b2237;border:1px solid var(--pline);margin-bottom:14px}
+  .app h3{margin:0 0 6px;font-size:19px;font-weight:800}
+  .app p{margin:0;color:#aec4d8;font-size:13.5px;line-height:1.55}
+  .app .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:10.5px;font-weight:700;border-radius:999px;padding:3px 9px;color:#9fd0ec;background:rgba(70,179,255,.1);border:1px solid rgba(70,179,255,.25)}
+  .app .go{position:absolute;top:22px;right:22px;color:#46b3ff;font-size:20px;font-weight:800}
+  .app .accent{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .app.v .accent{background:#46b3ff}.app.mag .accent{background:var(--pink)}
+  .app.priv .accent{background:var(--green)}.app.mgr .accent{background:var(--yellow)}
+  .app.partner-hide{display:none}
+
+  .flowline{margin:34px auto 0;max-width:920px;background:var(--panel);border:1px solid var(--pline);border-radius:16px;padding:18px 20px}
+  .flowline .ft{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:12px}
+  .steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+  .step{font-size:11.5px;font-weight:700;color:#cfe0ee;background:#0b2237;border:1px solid var(--pline);border-radius:999px;padding:6px 12px}
+  .step.priv{border-color:rgba(0,166,97,.45);color:#bfe6d4}
+  .arr{color:#46b3ff;font-weight:800}
+  .foot{margin-top:30px;text-align:center;font-size:11.5px;color:#6f87a0;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo"></div>
+  <div class="sep"></div>
+  <div class="prod"><span class="vhi" style="color:var(--pink)">V</span>ision Portal<small>Sales &amp; Partner</small></div>
+  <div class="right"><span class="pill">North America · v1</span></div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">i3 Future Revenue System</div>
+    <h1>The <span class="v">V</span>ision portal</h1>
+    <p class="lede">One place for i3 sales reps and channel partners. The agentic engine guides the deal,
+    the privacy co-pilot keeps it compliant, and managers see the truth — all in your sales process.</p>
+    <div class="role">
+      <button class="on" id="r-rep" onclick="setRole('rep')">i3 Sales Rep</button>
+      <button id="r-partner" onclick="setRole('partner')">Channel Partner</button>
+    </div>
+  </div>
+
+  <div class="grid" id="apps">
+    <a class="app v" href="vision-sales-agent.html" data-target="vision-sales-agent.html">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">💬</div>
+      <h3><span class="vhi">V</span>ision · Sales Agent</h3>
+      <p>Your stage-first sales agent. Pick where you are — onboarding to close — load what you've got, and Vision guides the next move. More leads, faster closes, more revenue in your segment.</p>
+      <div class="tags"><span class="tag">Stage-first</span><span class="tag">Start anywhere</span><span class="tag">Inside iHost</span></div>
+    </a>
+
+    <a class="app v" href="v-vision-sales-engine.html" data-target="v-vision-sales-engine.html">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">🧠</div>
+      <h3><span class="vhi">V</span>ision Sales Engine</h3>
+      <p>The agentic engine — 9 specialized agents run your motion from onboarding to close. Load an onboarding doc and watch Vision think through the pipeline.</p>
+      <div class="tags"><span class="tag">Onboarding → Close</span><span class="tag">9 agents</span><span class="tag">Segments</span></div>
+    </a>
+
+    <a class="app mag" href="magenta-portal-simulation.html" data-target="magenta-portal-simulation.html">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">🛡️</div>
+      <h3>Magenta · Privacy Co-Pilot</h3>
+      <p>Rides inside iHost quoting. The moment a privacy-sensitive solution lands on a quote, Magenta runs the Law 25 / GDPR review so the deal keeps moving.</p>
+      <div class="tags"><span class="tag">Triggered in quoting</span><span class="tag">Law 25 · GDPR</span><span class="tag">Signage + PIA</span></div>
+    </a>
+
+    <a class="app priv" href="i3-privacy-compliance-agent.html" data-target="i3-privacy-compliance-agent.html">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">⚖️</div>
+      <h3>Privacy Compliance Agent</h3>
+      <p>The conversational deep-dive. Interviews the rep, runs the Four-Part Necessity &amp; Proportionality Test, and generates the signage and PIA starter.</p>
+      <div class="tags"><span class="tag">Conversational</span><span class="tag">4-Part Test</span><span class="tag">POC due diligence</span></div>
+    </a>
+
+    <a class="app mgr partner-can-hide" href="v-vision-sales-engine.html#manager" id="mgrCard" data-target="v-vision-sales-engine.html" data-hash="#manager" onclick="try{localStorage.setItem('v_view','manager')}catch(e){}">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">📊</div>
+      <h3>Manager Dashboard</h3>
+      <p>Team read-out: who's onboarding, readiness scores, weekly reflection status, mentor progress, and where every rep sits in the pipeline.</p>
+      <div class="tags"><span class="tag">Team KPIs</span><span class="tag">Rep roster</span><span class="tag">Reflections</span></div>
+    </a>
+
+    <a class="app v" href="vision-architecture.html" data-target="vision-architecture.html">
+      <div class="accent"></div><div class="go">→</div>
+      <div class="ico">🗺️</div>
+      <h3>Architecture (for engineers)</h3>
+      <p>How Vision is put together — access tiers, the iHost host, orchestrator + LLM, the agents, tools and knowledge base. Pairs with ARCHITECTURE.md and BUILD_PLAN.md.</p>
+      <div class="tags"><span class="tag">Build map</span><span class="tag">Access model</span><span class="tag">Self-host</span></div>
+    </a>
+  </div>
+
+  <div class="flowline">
+    <div class="ft">How it fits your sales process</div>
+    <div class="steps">
+      <span class="step">Onboard</span><span class="arr">→</span>
+      <span class="step">Lead intel</span><span class="arr">→</span>
+      <span class="step">Train</span><span class="arr">→</span>
+      <span class="step">Outreach</span><span class="arr">→</span>
+      <span class="step">Present</span><span class="arr">→</span>
+      <span class="step">POC</span><span class="arr">→</span>
+      <span class="step priv">Privacy review (Magenta)</span><span class="arr">→</span>
+      <span class="step">Close</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    Working prototype / simulation — agent reasoning is illustrative.<br>
+    © 2026 i3 International Inc. &amp; i3 America Nevada Inc. All rights reserved.
+  </div>
+</div>
+
+<script>
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+
+/* Make card links work both when self-hosted (relative) and when viewed through
+   the htmlpreview proxy (which doesn't rewrite relative navigation links).
+   Links are driven from data-target/data-hash so the proxy's own href rewriting
+   can't interfere. */
+(function(){
+  var hp = location.hostname==='htmlpreview.github.io';
+  var baseDir='';
+  if(hp){
+    var inner=location.search.slice(1);
+    try{ inner=decodeURIComponent(inner); }catch(e){}
+    baseDir=inner.replace(/[^\/]*$/,'');          // .../v2/portal.html -> .../v2/
+  }
+  var cards=document.querySelectorAll('a.app[data-target]');
+  for(var i=0;i<cards.length;i++){
+    var a=cards[i], t=a.getAttribute('data-target'), h=a.getAttribute('data-hash')||'';
+    a.setAttribute('href', hp ? ('https://htmlpreview.github.io/?'+baseDir+t+h) : (t+h));
+  }
+})();
+
+/* role toggle — partners don't see the manager dashboard */
+function setRole(role){
+  document.getElementById('r-rep').classList.toggle('on',role==='rep');
+  document.getElementById('r-partner').classList.toggle('on',role==='partner');
+  document.getElementById('mgrCard').style.display = role==='partner' ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
