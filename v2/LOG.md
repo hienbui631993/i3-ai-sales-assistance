@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-06-26
 
+### Added — `v2/sop.html` (SOP page — Revenue Operating System)
+- New **SOP** page following the **i3 Revenue Generation SOP v1 (Draft)** and the
+  **i3 Sales Process (2021)**: ROS vision + guiding principles, the enterprise
+  revenue architecture, the standard SOP template, the full **SOP catalog
+  (100–1300)** (expandable, each mapped to a Vision agent), the worked example
+  **SOP 200**, the AI-agent specification pattern, and the **7-stage i3 sales
+  cycle**. i3 Brand Kit styling; logo → portal. Added an SOP card to the portal.
+
 ### Changed — defer Channel Partners + Partner self-host (not decided yet)
 - Per feedback these are too far out to commit to now. In `ARCHITECTURE.md` and
   `vision-architecture.html` the access model is scoped to **v1: i3 Sales Reps +
