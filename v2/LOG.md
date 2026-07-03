@@ -5,6 +5,23 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ---
 
+## 2026-07-03
+
+### Added — `v2/process.html` (Sales Process — Rep · AI · Manager)
+- New **Sales Process** page answering "how a salesperson does this from
+  beginning to end, how AI helps, and how the manager takes part." One card per
+  stage with **three lanes** — 🧑 Salesperson / ✨ Vision (AI) / 👔 Manager —
+  across the full 8-stage motion: Onboarding & Ramp (V-Start), Prospecting &
+  Lead Intelligence (V-Target), Outreach & Qualification (V-Reach / V-Guide),
+  Presentation (V-Present), Proof of Concept (V-Prove), Privacy &
+  Cybersecurity (V-Guard / Magenta), Proposal & Close (V-Close), and Customer
+  Success & Reference. Each stage names its trigger and Vision agent; closes
+  with a "The loop" summary (Vision guides, rep executes, manager coaches; all
+  activity proprietary to i3 via Salesforce; only verified activity advances).
+  i3 Brand Kit styling; logo → portal. Added a **Sales Process** card to the portal.
+
+---
+
 ## 2026-06-26
 
 ### Added — `v2/sop.html` (SOP page — Revenue Operating System)
