@@ -7,6 +7,26 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — replaced the vendor widget with our own `v2/chat-widget.js`
+- Built a **custom Vision chat widget** on the ClaudeChat **client SDK**
+  (`client.js`) instead of the vendor's pre-built floating widget. New
+  self-contained `v2/chat-widget.js`: injects a brand-styled floating launcher
+  and a chat panel, **streams replies** (`chat.send` → `onText`/`onDone`/
+  `onError`), with quick-start prompt chips, **Stop** (aborts the stream via the
+  send handle), **New conversation** (`chat.reset()`), and optional admin
+  branding (`chat.getBranding()`). Theme-aware (follows `<html data-theme>`),
+  Esc-to-close, mobile full-screen. Exposes `window.i3Chat = { open, close,
+  toggle, send, reset }` and fires an `i3chat:ready` event.
+- Swapped the include on **every page** from the vendor `loader.js` to
+  `client.js` + `chat-widget.js` (self-guards against double init). The **Chat
+  with Me** page now drives the widget directly — the CTA opens it, the prompt
+  chips send a question, and it **auto-opens** on that page.
+- Degrades gracefully: if the SDK can't load (e.g. served from a
+  non-allow-listed origin) the launcher still renders and the panel shows a
+  clear "can't reach the chat service" message instead of erroring. Verified in
+  both themes with a streaming mock: launcher → open → send → streamed reply,
+  Stop/New chat, auto-open, and prompt-chip send — no JS errors.
+
 ### Added — `v2/chat.html` (Chat with Me) + site-wide Claude chat widget
 - New **Chat with Me** page: a branded landing for **Vision**, the sales AI
   assistant — hero with an online status, an "Open the chat" CTA, tap-to-copy
