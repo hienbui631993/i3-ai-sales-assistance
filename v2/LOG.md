@@ -7,6 +7,22 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — `v2/journey.html` artifacts (a deliverable per stage)
+- Every one of the 8 journey stages now carries the concrete **artifact /
+  deliverable** the rep produces at that step, shown as a **"Deliverable ·
+  artifact"** bar under the three lanes. Clicking **Preview** opens a branded
+  document modal (dark-blue i3 header, meta chips, sectioned content).
+- The artifacts: 30-Day Business Plan + SWOT (V-Start) · Buying-Group Map +
+  Intent Brief (V-Target) · Outreach Sequence + Qualification (V-Reach/V-Guide)
+  · Presentation Deck + Transcript (V-Present) · POC Document, Gardewine
+  template (V-Prove) · Signage + PIA + Cyber Intake (V-Guard/Magenta) ·
+  Proposal + Contract via DocuSign (V-Close) · Customer Story + Reference
+  (Success). Content is grounded in the real i3 process (site address → exact
+  legal doc, PM names, Salesforce/i3Host data ownership).
+- Modal closes on backdrop click or Esc; opening pauses autoplay. Theme-aware
+  (light/dark). Verified in both themes: per-stage artifact renders, preview
+  opens with the right content, no JS errors.
+
 ### Added — Light / dark mode on every page (i3 Brand Kit)
 - Every page in the project now supports **both light and dark mode** with a
   sun/moon **toggle in the topbar**. The choice persists in a shared

@@ -116,6 +116,38 @@
   .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:20px;line-height:1.6}
   .kicker{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:2px 0 0}
   .kicker span{display:inline-flex;align-items:center;gap:6px}.kicker i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  /* ---- deliverable / artifact bar ---- */
+  .artifact{display:flex;align-items:center;gap:14px;padding:15px 18px;border-top:1px solid var(--pline);
+    background:linear-gradient(90deg,rgba(223,30,113,.06),transparent 60%),var(--panel2)}
+  .artifact .aic{flex:none;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:rgba(0,88,143,.12);border:1px solid var(--pline)}
+  .artifact .atx{flex:1;min-width:0}
+  .artifact .alab{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--pink);display:flex;align-items:center;gap:6px}
+  .artifact .anm{font-weight:800;font-size:14.5px;color:var(--ink);margin-top:2px}
+  .artifact .awhat{font-size:12px;color:var(--muted);margin-top:1px}
+  .aview{flex:none;border:none;border-radius:10px;padding:9px 15px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer;
+    background:var(--pink);color:#fff;transition:.15s;white-space:nowrap}
+  .aview:hover{background:#c81862}
+  @media(max-width:560px){.artifact{flex-wrap:wrap}.aview{width:100%}}
+
+  /* ---- artifact preview modal ---- */
+  .amodal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,12,22,.62)}
+  .amodal.open{display:flex}
+  .asheet{background:var(--panel);border:1px solid var(--pline);border-radius:16px;max-width:640px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 30px 70px rgba(0,10,25,.55)}
+  .asheet .ah{display:flex;align-items:center;gap:13px;padding:16px 20px;border-bottom:1px solid var(--pline);background:var(--brand-900);position:sticky;top:0;z-index:2}
+  .asheet .ah .di{flex:none;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+  .asheet .ah .dt{font-weight:800;font-size:15.5px;color:#fff;line-height:1.25}
+  .asheet .ah .dt small{display:block;font-weight:400;font-size:11px;letter-spacing:.02em;color:#9fd0ec;margin-top:2px}
+  .asheet .ah .x{margin-left:auto;cursor:pointer;font-size:15px;color:#cfe3f1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;width:30px;height:30px;line-height:1}
+  .asheet .ab{padding:18px 20px 4px}
+  .ameta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .ameta span{font-size:11.5px;font-weight:700;color:var(--ink-soft);background:var(--panel2);border:1px solid var(--pline);border-radius:8px;padding:5px 10px}
+  .asec{margin-bottom:15px}
+  .asec h4{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);font-weight:800}
+  .asec ul{margin:0;padding-left:18px}
+  .asec li{font-size:13px;color:var(--laneli);margin-bottom:6px;line-height:1.5}
+  .awm{text-align:center;font-size:10.5px;color:var(--muted);padding:6px 20px 18px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -166,6 +198,18 @@
   </div>
 </div>
 
+<div class="amodal" id="amodal" onclick="if(event.target===this)closeArt()">
+  <div class="asheet" role="dialog" aria-modal="true" aria-label="Artifact preview">
+    <div class="ah">
+      <span class="di" id="amIcon">📄</span>
+      <div class="dt" id="amTitle"></div>
+      <button class="x" type="button" onclick="closeArt()" aria-label="Close">✕</button>
+    </div>
+    <div class="ab" id="amBody"></div>
+    <div class="awm">Sample artifact — Vision generates it from Salesforce / i3Host data and saves it to the account. Illustrative.</div>
+  </div>
+</div>
+
 <script>
 function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
 (function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
@@ -176,35 +220,67 @@ var STAGES=[
  {name:"Onboarding & Ramp",short:"Onboard",agent:"V-Start",meta:"Trigger: new hire / new territory",
   rep:["Complete onboarding & shadow meetings","Run i3Live training tracks","Draft the 30-day plan + SWOT"],
   ai:["Builds the ramp plan from the onboarding doc","Assigns training; scores readiness","Auto-starts lead intelligence"],
-  mgr:["Onboards the rep (Admin): segment, territory, goal","Approves training logs & tests"]},
+  mgr:["Onboards the rep (Admin): segment, territory, goal","Approves training logs & tests"],
+  art:{icon:"📋",name:"30-Day Business Plan + SWOT",what:"The rep's ramp plan — milestones, SWOT, first targets",
+   meta:["Rep: David Chen","Segment: Retail","Territory: Ontario & Atlantic","Goal: $4.5M"],
+   body:[{h:"30-day milestones",lines:["Wk 1 — i3Live core certs · shadow 4 calls","Wk 2 — product training · load 12 target accounts","Wk 3 — first outreach · mentor ride-alongs","Wk 4 — business-plan review with manager"]},
+    {h:"SWOT",lines:["Strengths — retail network, CCTV background","Weaknesses — new to the i3 catalog","Opportunities — live 6sense intent in region","Threats — entrenched incumbent integrators"]}]}},
  {name:"Prospecting & Lead Intelligence",short:"Lead intel",agent:"V-Target",meta:"Trigger: daily · 6sense intent · referrals",
   rep:["Confirm the core segment","Call the highest-intent contacts first","Sharpen LinkedIn presence"],
   ai:["Pulls 6sense / ZoomInfo intent; scores opps","Maps the full buying committee","Assesses LinkedIn; recommends fixes"],
-  mgr:["Checks pipeline coverage per rep","Coaches on ICP fit"]},
+  mgr:["Checks pipeline coverage per rep","Coaches on ICP fit"],
+  art:{icon:"🎯",name:"Buying-Group Map + Intent Brief",what:"The committee, scored by intent, with the first move",
+   meta:["Account: Metro Retail Group","Segment: Retail","Intent score: 87 · high"],
+   body:[{h:"Buying committee",lines:["Ops — Dana R., VP Loss Prevention  ★ supporter","IT — Sam K., Director, Infrastructure","Finance — Priya M., Controller","Legal / LP — Marc T., Privacy Officer"]},
+    {h:"Intent signals & next move",lines:["Researching 'retail video analytics' (6sense)","Visited the pricing page ×3 this week","Recommended first contact: Dana R.","LinkedIn: connect + share the analytics one-pager"]}]}},
  {name:"Outreach & Qualification",short:"Outreach",agent:"V-Reach / V-Guide",meta:"Trigger: prioritized action queue",
   rep:["Send the drafted outreach","Qualify against ICP; book the meeting"],
   ai:["Drafts first-touch outreach & action queue","Marketing warms the accounts","Verifies real activity — only verified advances"],
-  mgr:["Sees who is actually working (verified)","Flags low activity; reallocates leads"]},
+  mgr:["Sees who is actually working (verified)","Flags low activity; reallocates leads"],
+  art:{icon:"✉️",name:"Outreach Sequence + Qualification",what:"A 3-touch sequence and the ICP qualification record",
+   meta:["Contact: Dana R.","Channel: Email → Call → LinkedIn"],
+   body:[{h:"3-touch sequence (drafted)",lines:["T1 Email — loss-prevention ROI angle","T2 Call — reference a peer retailer's result","T3 LinkedIn — share the analytics one-pager"]},
+    {h:"Qualification (ICP)",lines:["Budget — capital cycle opens Q3  ✓","Authority — Dana R. + IT sign-off  ✓","Need — shrinkage & staff safety  ✓","Timeline — 90 days  ✓  → meeting booked"]}]}},
  {name:"Presentation",short:"Present",agent:"V-Present",meta:"Trigger: qualified opportunity",
   rep:["Deliver the presentation","Capture the transcript; invite the manager"],
   ai:["Preps the deck from the customer's drivers","Captures the Teams / GoToMeeting transcript","Extracts drivers; flags manager invite"],
-  mgr:["Joins high-value presentations","Coaches the pitch — most solid opps close"]},
+  mgr:["Joins high-value presentations","Coaches the pitch — most solid opps close"],
+  art:{icon:"🖥️",name:"Presentation Deck + Transcript",what:"A tailored deck plus the captured transcript & drivers",
+   meta:["Opportunity: Metro Retail — 40 sites","Attendees: Dana R., Sam K., + manager"],
+   body:[{h:"Deck outline (tailored to drivers)",lines:["Their driver: shrinkage & staff safety","i3 solution: video analytics on i3Host","Proof: a peer retailer's 18% result","Ask: a 45-day proof of concept"]},
+    {h:"Transcript highlights (auto-captured)",lines:["“We'd need to see it in our Toronto store”","“Privacy is a board-level concern for us”","Drivers extracted → POC + Privacy flagged","Manager invite sent for the next session"]}]}},
  {name:"Proof of Concept",short:"POC",agent:"V-Prove",meta:"Trigger: presentation → POC",
   rep:["Enter the site address","Add every stakeholder on the email (title + role)","Scope the POC; contact PM"],
   ai:["Generates the POC from the transcript","Prompts for stakeholders; flags supporters","Recommends solution + equipment; hands off to PM"],
-  mgr:["Approves the POC scope & success metrics","Ensures the PM handoff & 45-day plan"]},
+  mgr:["Approves the POC scope & success metrics","Ensures the PM handoff & 45-day plan"],
+  art:{icon:"🧪",name:"POC Document (Gardewine template)",what:"Scope, success metrics, stakeholders and the equipment list",
+   meta:["Site: 120 King St W, Toronto ON","Duration: 45 days","PM: Louel"],
+   body:[{h:"Stakeholders (all on the email)",lines:["Dana R. — VP Loss Prevention  ★ supporter","Sam K. — IT Director","Priya M. — Controller","Marc T. — Privacy Officer"]},
+    {h:"Scope, solution & handoff",lines:["Success metric: 15% shrinkage ↓ in 45 days","Recommended: 8× analytics cameras + i3Host","Equipment list generated → quote","Handoff to the PM agent (timeline + forms)"]}]}},
  {name:"Privacy & Cybersecurity",short:"Privacy",agent:"V-Guard · Magenta",meta:"Trigger: sensitive solution on the quote",
   rep:["Run the privacy & cybersecurity review","Post signage; complete PIA + cyber intake"],
   ai:["Derives the exact legal doc from the site address","Tells the rep what to do — privacy AND cyber","Drafts signage + PIA; escalates high-risk"],
-  mgr:["Privacy Officer signs off high-risk before POC approval"]},
+  mgr:["Privacy Officer signs off high-risk before POC approval"],
+  art:{icon:"🛡️",name:"Signage + PIA + Cyber Intake",what:"The exact legal doc for the site, plus the cyber checklist",
+   meta:["Jurisdiction: Ontario, Canada","Law: PIPEDA (Quebec site → Law 25)","Risk: Medium"],
+   body:[{h:"Customer signage (draft)",lines:["“This area is under video surveillance for loss prevention. Questions: privacy@metro…”","Bilingual EN/FR variant auto-added for a Quebec site"]},
+    {h:"PIA starter + cyber intake",lines:["Necessity & proportionality test — passed","Retention 30 days; access log required","Cyber: network segmentation · encrypted at rest","High-risk items → Privacy Officer sign-off"]}]}},
  {name:"Proposal & Close",short:"Close",agent:"V-Close",meta:"Trigger: POC success → Go",
   rep:["Position against the incumbent","Send the proposal; secure the signature"],
   ai:["Pulls the cost-matrix battlecard","Assembles the contract; sends DocuSign","Syncs Salesforce / Automatica on close"],
-  mgr:["Approves pricing / discount; forecasts","Final sign-off"]},
+  mgr:["Approves pricing / discount; forecasts","Final sign-off"],
+  art:{icon:"📝",name:"Proposal + Contract (DocuSign)",what:"The battlecard, pricing and contract — sent for signature",
+   meta:["Deal: $312K","Incumbent: legacy DVR vendor"],
+   body:[{h:"Cost-matrix battlecard",lines:["i3 total cost of ownership vs incumbent, 3 yrs","Analytics included (incumbent bills it extra)","i3Host support SLA advantage"]},
+    {h:"Contract",lines:["Pricing approved by the manager","Terms: 36-month + support","DocuSign sent → awaiting signature","Salesforce / Automatica synced on close"]}]}},
  {name:"Customer Success & Reference",short:"Success",agent:"Success agent",meta:"Trigger: closed-won",
   rep:["Hand off to Customer Success","Ask for references, referrals & a story"],
   ai:["Monitors adoption & risk; prompts references","Feeds win/loss into the learning loop"],
-  mgr:["Reviews account health","Leadership gets real-time revenue visibility"]}
+  mgr:["Reviews account health","Leadership gets real-time revenue visibility"],
+  art:{icon:"⭐",name:"Customer Story + Reference",what:"A reference, a case-study outline and referrals — into the loop",
+   meta:["Account: Metro Retail Group","Outcome: 18% shrinkage ↓"],
+   body:[{h:"Reference & story",lines:["“It paid for itself in one quarter.” — Dana R.","Case-study outline drafted for marketing","Referrals: 2 sister banners requested"]},
+    {h:"Learning loop",lines:["Win reasons logged (the retail play)","Playbook updated for the next Retail deal","Reference added to the i3 library"]}]}}
 ];
 
 var cur=0, playing=false, timer=null, ticker=null, DUR=5200;
@@ -245,10 +321,28 @@ function render(){
       '<div class="lane rep" style="animation-delay:.02s"><div class="lh"><span class="ic">🧑</span>Salesperson</div><ul>'+bullets('rep',s.rep)+'</ul><div class="flowtag">→</div></div>'+
       '<div class="lane ai"  style="animation-delay:.12s"><div class="lh"><span class="ic">✨</span>Vision (AI)</div><ul>'+bullets('ai',s.ai,true)+'</ul><div class="flowtag">→</div></div>'+
       '<div class="lane mgr" style="animation-delay:.22s"><div class="lh"><span class="ic">👔</span>Manager</div><ul>'+bullets('mgr',s.mgr)+'</ul></div>'+
-    '</div>';
+    '</div>'+
+    '<div class="artifact"><div class="aic">'+s.art.icon+'</div>'+
+      '<div class="atx"><div class="alab">📎 Deliverable · artifact</div>'+
+        '<div class="anm">'+s.art.name+'</div><div class="awhat">'+s.art.what+'</div></div>'+
+      '<button class="aview" type="button" onclick="openArt('+cur+')">Preview ▸</button></div>';
   document.getElementById('prev').disabled=false;
   document.getElementById('next').disabled=false;
 }
+function openArt(idx){
+  pause();
+  var a=STAGES[idx].art;
+  document.getElementById('amIcon').textContent=a.icon;
+  document.getElementById('amTitle').innerHTML=a.name+'<small>Stage '+(idx+1)+' · '+STAGES[idx].agent+' · sample artifact</small>';
+  var meta=a.meta.map(function(m){return '<span>'+m+'</span>';}).join('');
+  var secs=a.body.map(function(sec){
+    return '<div class="asec"><h4>'+sec.h+'</h4><ul>'+sec.lines.map(function(l){return '<li>'+l+'</li>';}).join('')+'</ul></div>';
+  }).join('');
+  document.getElementById('amBody').innerHTML='<div class="ameta">'+meta+'</div>'+secs;
+  document.getElementById('amodal').classList.add('open');
+}
+function closeArt(){document.getElementById('amodal').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeArt();});
 function go(i){cur=(i+STAGES.length)%STAGES.length;render();resetTick();}
 function step(d){go(cur+d); if(playing)resetTick();}
 function resetTick(){
