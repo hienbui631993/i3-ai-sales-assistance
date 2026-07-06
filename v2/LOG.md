@@ -7,6 +7,27 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — Light / dark mode on every page (i3 Brand Kit)
+- Every page in the project now supports **both light and dark mode** with a
+  sun/moon **toggle in the topbar**. The choice persists in a shared
+  `localStorage` key (`i3_theme`) so it **follows the user across all pages**,
+  and defaults from the OS `prefers-color-scheme` on first visit. A pre-paint
+  boot script sets the theme before first render (no flash).
+- Implemented as a token contract: **brand colors stay constant** in both
+  themes (Brand Blue #00588F, Dark Blue #002447, Pink #DF1E71, Green #00A661,
+  Yellow #FFC107); only **surface** tokens flip via `:root[data-theme=...]`
+  overrides. Topbars stay dark-blue in both themes so the white i3 logo and the
+  toggle always read.
+- Light-first pages (process, sop, privacy & cybersecurity agent, Magenta
+  simulation, architecture, Vision sales agent) gained a **dark** override;
+  dark-first flagships (portal, journey, sales engine) keep their rich dark
+  design as the base with a **light** override. On the sales engine the glowing
+  **orbit infographic and reasoning console stay on an always-dark canvas** in
+  both themes (a deliberate embedded "screen"), while the surrounding chrome and
+  the Manager dashboard fully theme to light.
+- Verified each page in both themes (headless): boot honours OS preference, the
+  toggle flips and persists, brand colors intact, no invisible text, no JS errors.
+
 ### Added — `v2/journey.html` (The Deal Journey — animated follow-along)
 - New **animated visualization** so people can *watch* a deal move through the
   process. A glowing puck glides along a roadmap rail of the 8 stages; a
