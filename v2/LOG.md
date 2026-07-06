@@ -7,6 +7,24 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — `v2/chat.html` (Chat with Me) + site-wide Claude chat widget
+- New **Chat with Me** page: a branded landing for **Vision**, the sales AI
+  assistant — hero with an online status, an "Open the chat" CTA, tap-to-copy
+  suggested prompts (privacy-by-address, a stage, a deliverable, prospecting,
+  manager view, outreach), and "what I can help with" cards. Light/dark aware;
+  logo → portal. Added a **Chat with Me** card to the portal.
+- Integrated the **Claude chat widget** (i3 hub) on **every page** — the loader
+  `<script src="https://hub.i3international.com/loader.js" data-app-key="cw_…"
+  data-position="bottom-right">` is injected immediately before `</body>` on all
+  10 pages (loader self-guards against duplicate loads). Renders as a floating
+  launcher in an isolated iframe; no host styling touched.
+- No Content-Security-Policy is set on these pages, so no CSP changes were
+  needed. **Allowed-origins note:** the widget is configured for
+  `https://i3-ai-sales-assistance.vercel.app/` — it will only render when the
+  page is served from an allow-listed origin. Add the actual serving origin
+  (e.g. the GitHub Pages / htmlpreview host used for previews) in the widget
+  admin panel if the launcher doesn't appear there.
+
 ### Added — `v2/journey.html` artifacts (a deliverable per stage)
 - Every one of the 8 journey stages now carries the concrete **artifact /
   deliverable** the rep produces at that step, shown **inline as a section**
