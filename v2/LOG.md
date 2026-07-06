@@ -5,6 +5,22 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ---
 
+## 2026-07-06
+
+### Added — `v2/journey.html` (The Deal Journey — animated follow-along)
+- New **animated visualization** so people can *watch* a deal move through the
+  process. A glowing puck glides along a roadmap rail of the 8 stages; a
+  gradient progress fill trails behind it and the stage nodes light up as it
+  passes. As the puck lands on each stage, the stage panel swaps in with its
+  three lanes rising in sequence — 🧑 Salesperson / ✨ Vision (AI) / 👔 Manager —
+  with animated "thinking" dots on the Vision lane and handoff arrows between
+  lanes. **Auto-plays** (Play/Pause, Prev/Next, Restart, per-stage timer bar)
+  and every node is clickable to jump. Puck + fill are measured to the actual
+  node centres so they stay aligned on any width; realigns on resize. Dark i3
+  Brand Kit theme; logo → portal. Added a **Deal Journey** card to the portal.
+
+---
+
 ## 2026-07-03
 
 ### Added — `v2/process.html` (Sales Process — Rep · AI · Manager)
