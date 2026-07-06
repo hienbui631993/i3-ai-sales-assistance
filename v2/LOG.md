@@ -5,7 +5,101 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ---
 
+## 2026-07-06
+
+### Added — `v2/journey.html` artifacts (a deliverable per stage)
+- Every one of the 8 journey stages now carries the concrete **artifact /
+  deliverable** the rep produces at that step, shown **inline as a section**
+  under the three lanes: a "Deliverable · artifact" header plus the embedded
+  document (meta chips + two-column sectioned content). Always visible, no
+  popup — it updates with the active stage.
+- The artifacts: 30-Day Business Plan + SWOT (V-Start) · Buying-Group Map +
+  Intent Brief (V-Target) · Outreach Sequence + Qualification (V-Reach/V-Guide)
+  · Presentation Deck + Transcript (V-Present) · POC Document, Gardewine
+  template (V-Prove) · Signage + PIA + Cyber Intake (V-Guard/Magenta) ·
+  Proposal + Contract via DocuSign (V-Close) · Customer Story + Reference
+  (Success). Content is grounded in the real i3 process (site address → exact
+  legal doc, PM names, Salesforce/i3Host data ownership).
+- Modal closes on backdrop click or Esc; opening pauses autoplay. Theme-aware
+  (light/dark). Verified in both themes: per-stage artifact renders, preview
+  opens with the right content, no JS errors.
+
+### Added — Light / dark mode on every page (i3 Brand Kit)
+- Every page in the project now supports **both light and dark mode** with a
+  sun/moon **toggle in the topbar**. The choice persists in a shared
+  `localStorage` key (`i3_theme`) so it **follows the user across all pages**,
+  and defaults from the OS `prefers-color-scheme` on first visit. A pre-paint
+  boot script sets the theme before first render (no flash).
+- Implemented as a token contract: **brand colors stay constant** in both
+  themes (Brand Blue #00588F, Dark Blue #002447, Pink #DF1E71, Green #00A661,
+  Yellow #FFC107); only **surface** tokens flip via `:root[data-theme=...]`
+  overrides. Topbars stay dark-blue in both themes so the white i3 logo and the
+  toggle always read.
+- Light-first pages (process, sop, privacy & cybersecurity agent, Magenta
+  simulation, architecture, Vision sales agent) gained a **dark** override;
+  dark-first flagships (portal, journey, sales engine) keep their rich dark
+  design as the base with a **light** override. On the sales engine the glowing
+  **orbit infographic and reasoning console stay on an always-dark canvas** in
+  both themes (a deliberate embedded "screen"), while the surrounding chrome and
+  the Manager dashboard fully theme to light.
+- Verified each page in both themes (headless): boot honours OS preference, the
+  toggle flips and persists, brand colors intact, no invisible text, no JS errors.
+
+### Added — `v2/journey.html` (The Deal Journey — animated follow-along)
+- New **animated visualization** so people can *watch* a deal move through the
+  process. A glowing puck glides along a roadmap rail of the 8 stages; a
+  gradient progress fill trails behind it and the stage nodes light up as it
+  passes. As the puck lands on each stage, the stage panel swaps in with its
+  three lanes rising in sequence — 🧑 Salesperson / ✨ Vision (AI) / 👔 Manager —
+  with animated "thinking" dots on the Vision lane and handoff arrows between
+  lanes. **Auto-plays** (Play/Pause, Prev/Next, Restart, per-stage timer bar)
+  and every node is clickable to jump. Puck + fill are measured to the actual
+  node centres so they stay aligned on any width; realigns on resize. Dark i3
+  Brand Kit theme; logo → portal. Added a **Deal Journey** card to the portal.
+
+---
+
+## 2026-07-03
+
+### Added — `v2/process.html` (Sales Process — Rep · AI · Manager)
+- New **Sales Process** page answering "how a salesperson does this from
+  beginning to end, how AI helps, and how the manager takes part." One card per
+  stage with **three lanes** — 🧑 Salesperson / ✨ Vision (AI) / 👔 Manager —
+  across the full 8-stage motion: Onboarding & Ramp (V-Start), Prospecting &
+  Lead Intelligence (V-Target), Outreach & Qualification (V-Reach / V-Guide),
+  Presentation (V-Present), Proof of Concept (V-Prove), Privacy &
+  Cybersecurity (V-Guard / Magenta), Proposal & Close (V-Close), and Customer
+  Success & Reference. Each stage names its trigger and Vision agent; closes
+  with a "The loop" summary (Vision guides, rep executes, manager coaches; all
+  activity proprietary to i3 via Salesforce; only verified activity advances).
+  i3 Brand Kit styling; logo → portal. Added a **Sales Process** card to the portal.
+
+---
+
 ## 2026-06-26
+
+### Added — `v2/sop.html` (SOP page — Revenue Operating System)
+- New **SOP** page following the **i3 Revenue Generation SOP v1 (Draft)** and the
+  **i3 Sales Process (2021)**: ROS vision + guiding principles, the enterprise
+  revenue architecture, the standard SOP template, the full **SOP catalog
+  (100–1300)** (expandable, each mapped to a Vision agent), the worked example
+  **SOP 200**, the AI-agent specification pattern, and the **7-stage i3 sales
+  cycle**. i3 Brand Kit styling; logo → portal. Added an SOP card to the portal.
+
+### Changed — defer Channel Partners + Partner self-host (not decided yet)
+- Per feedback these are too far out to commit to now. In `ARCHITECTURE.md` and
+  `vision-architecture.html` the access model is scoped to **v1: i3 Sales Reps +
+  Integrators**; **Channel Partners** (scoped agent subsets) and **Partner
+  self-host** are moved to a clearly-marked **"Future — not decided yet"** note
+  (dimmed "Future · TBD" tiles in the diagram). Removed the partner asterisks on
+  the Presentation/Legal agents and the "1–2 partners" pilot line. The working
+  demo still shows a Partner role as an illustrative preview (can be removed on request).
+
+### Changed — iHost → i3Host; training platform → i3Live
+- Renamed **iHost → i3Host** everywhere in the UI and docs (portal, all agents,
+  Magenta trace, BUILD_PLAN, DEMO, ARCHITECTURE).
+- Standardized the training platform name to **i3Live** (was "i3i" / "i3 Live") —
+  V-Coach description + tools, and the BUILD_PLAN agent-to-tool table.
 
 ### Changed — "V · Vision" → "Vision" with a standout V (i3 brand)
 - Renamed the product from "V · Vision" / "V Vision" to **Vision** across the UI

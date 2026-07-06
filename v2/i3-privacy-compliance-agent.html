@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{var t=localStorage.getItem('i3_theme');if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <title>i3 Privacy &amp; Cybersecurity Agent · Q25</title>
 <style>
   /* ============================================================
@@ -27,10 +28,32 @@
     --wnbg:#fff7e0; --wnbd:#ffe39c;
     --hibg:#fdebef; --hibd:#f4b8c3;
     --inbg:#e8f1f8; --inbd:#bcd9ee;
+    color-scheme:light;
   }
+  :root[data-theme="dark"]{--ink:#eaf2f9;--ink2:#c8dbec;--muted:#8298ad;--line:#1d3c59;--bg:#0a1a2b;--panel:#0f2438;--inbg:#12314c;--inbd:#26496c;--okbg:rgba(0,166,97,.12);--okbd:rgba(0,166,97,.34);--wnbg:rgba(255,193,7,.13);--wnbd:rgba(255,193,7,.36);--hibg:rgba(223,30,113,.13);--hibd:rgba(223,30,113,.4);color-scheme:dark;}
+  /* dark-mode surface remaps (brand accents stay constant) */
+  [data-theme="dark"] .bot .bubble{background:#152d47;border-color:var(--line);color:var(--ink)}
+  [data-theme="dark"] .controls{background:#0d2033}
+  [data-theme="dark"] .opt{background:#12314c;color:var(--ink);border-color:var(--line)}
+  [data-theme="dark"] .opt:hover{background:#16385a;border-color:var(--brand)}
+  [data-theme="dark"] .freerow input{background:#12314c;color:var(--ink)}
+  [data-theme="dark"] .restart{background:#12314c;color:var(--ink2);border-color:var(--line)}
+  [data-theme="dark"] .briefcard{background:#12314c}
+  [data-theme="dark"] .kv{border-bottom-color:#1d3c59}
+  [data-theme="dark"] .chip.law{color:#6cc0f5}
+  [data-theme="dark"] .chip.cau{color:#ffd574}
+  [data-theme="dark"] .chip.ok{color:#5fd6a0}
+  [data-theme="dark"] .gauge{background:#12314c}
+  [data-theme="dark"] .decision.lvl-Medium{color:#ffd574}
+  [data-theme="dark"] .decision.lvl-Low{color:#5fd6a0}
+  [data-theme="dark"] .doc{background:#0d2033;color:var(--ink2)}
+  [data-theme="dark"] .tcell{background:#12314c;border-color:var(--line)}
+  [data-theme="dark"] .tcell.pass .st{color:#5fd6a0}
+  [data-theme="dark"] .tcell.part .st{color:#ffd574}
+  [data-theme="dark"] .btn.g{background:#16385a;color:var(--ink2)}
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;transition:background .25s,color .25s;}
   .wrap{max-width:1240px;margin:0 auto;padding:22px;}
 
   /* official logo (inline SVG recoloured by context) */
@@ -39,11 +62,14 @@
   .ilogo.white svg path{fill:#fff}
   .ilogo.brand svg path{fill:var(--brand)}
 
+  .themebtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s;font-family:inherit}
+  .themebtn:hover{background:rgba(255,255,255,.2)}
+
   /* ---- hero: Dark Blue premium anchor ---- */
   header.top{
     background:linear-gradient(120deg,var(--brand-900),var(--brand));
     color:#fff;border-radius:18px;padding:24px 28px;box-shadow:0 12px 32px rgba(0,36,71,.28);
-    display:grid;grid-template-columns:1.6fr .9fr;gap:22px;align-items:center;
+    display:grid;grid-template-columns:1.6fr .9fr;gap:22px;align-items:center;position:relative;
   }
   header.top .ilogo{height:34px;margin-bottom:14px;opacity:.97}
   header.top .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#7fc4ef;margin:0 0 7px;font-weight:700}
@@ -161,6 +187,7 @@
       exactly what to do (privacy <i>and</i> cyber) before the deal moves forward.</p>
     </div>
     <div class="statwrap" id="stats"></div>
+    <button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode" style="position:absolute;top:18px;right:24px">🌙</button>
   </header>
 
   <div class="layout">
@@ -184,6 +211,8 @@
 </div>
 
 <script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
+(function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
 /* =====================================================================
    i3 PRIVACY COMPLIANCE AGENT
    Knowledge base derived from the Q25 (Quebec Law 25 / Bill 25) deck.
@@ -318,7 +347,7 @@ function assess(){
 
 function cyberSteps(r){
   var s=["Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.",
-         "Turn on access control + MFA on the iHost / VMS accounts.",
+         "Turn on access control + MFA on the i3Host / VMS accounts.",
          "Encrypt data at rest and in transit.",
          "Run the vendor security / SOC 2 check; set retention to the minimum needed."];
   if(S.residency.indexOf("U.S.")>-1 || S.residency.indexOf("US")>-1)

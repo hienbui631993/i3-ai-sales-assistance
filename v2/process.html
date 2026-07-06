@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{var t=localStorage.getItem('i3_theme');if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<title>Vision — Sales Process (Rep · AI · Manager)</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 · Helvetica Neue */
+  :root{--brand:#00588F;--brand-700:#024d7c;--brand-900:#002447;--pink:#DF1E71;--green:#00A661;--yellow:#FFC107;
+    --ink:#0d1b2a;--ink2:#33424f;--muted:#69788a;--line:#dfe6ee;--bg:#eef2f6;--panel:#fff;--inbg:#e8f1f8;--inbd:#bcd9ee;--shbg:#fafcfe;color-scheme:light;}
+  :root[data-theme="dark"]{--ink:#eaf2f9;--ink2:#c8dbec;--muted:#8298ad;--line:#1d3c59;--bg:#0a1a2b;--panel:#0f2438;--inbg:#12314c;--inbd:#26496c;--shbg:#0b2338;color-scheme:dark;}
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;transition:background .25s,color .25s}
+  .themebtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s;font-family:inherit}
+  .themebtn:hover{background:rgba(255,255,255,.2)}
+  /* dark-mode surface remaps (brand accents stay constant) */
+  [data-theme="dark"] .role.rep{background:rgba(47,155,222,.12);border-color:rgba(47,155,222,.32)}
+  [data-theme="dark"] .role.rep .rt{color:#6cc0f5}
+  [data-theme="dark"] .role.ai{background:rgba(223,30,113,.12);border-color:rgba(223,30,113,.34)}
+  [data-theme="dark"] .role.mgr{background:rgba(0,166,97,.12);border-color:rgba(0,166,97,.34)}
+  [data-theme="dark"] .role.mgr .rt{color:#5fd6a0}
+  [data-theme="dark"] .stage .agent{background:rgba(223,30,113,.16);border-color:rgba(223,30,113,.42);color:#ffd0e3}
+  [data-theme="dark"] .lane.rep{background:rgba(47,155,222,.05)}
+  [data-theme="dark"] .lane.ai{background:rgba(223,30,113,.05)}
+  [data-theme="dark"] .lane.mgr{background:rgba(0,166,97,.05)}
+  [data-theme="dark"] .lane.rep .lh{color:#6cc0f5}
+  [data-theme="dark"] .lane.mgr .lh{color:#5fd6a0}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 22px;position:sticky;top:0;z-index:20}
+  .topbar .ilogo{height:24px}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.3px}.topbar .prod .vhi{color:var(--pink)}
+  .topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:26px 22px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:30px;margin:8px 0 6px;font-weight:800;letter-spacing:-.3px}
+  .lede{color:var(--ink2);font-size:15px;max-width:800px}
+
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 8px}
+  @media(max-width:760px){.roles{grid-template-columns:1fr}}
+  .role{border-radius:13px;padding:14px 16px;border:1px solid}
+  .role .rt{font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px}
+  .role .rd{font-size:13px;margin-top:4px}
+  .role.rep{background:#eef6fc;border-color:var(--inbd)}.role.rep .rt{color:var(--brand)}
+  .role.ai{background:#fdeef4;border-color:#f6c3da}.role.ai .rt{color:var(--pink)}
+  .role.mgr{background:#eafaf2;border-color:#a6e8c8}.role.mgr .rt{color:#0a7d4f}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:6px 0 18px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
+  .stage .sh{display:flex;align-items:center;gap:13px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--shbg)}
+  .stage .sn{flex:none;width:34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .stage .st{font-weight:800;font-size:17px}
+  .stage .sm{font-size:12px;color:var(--muted);margin-top:1px}
+  .stage .agent{margin-left:auto;font-size:11px;font-weight:700;color:var(--pink);background:#fdeef4;border:1px solid #f6c3da;border-radius:999px;padding:4px 11px;white-space:nowrap}
+  .lanes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+  @media(max-width:820px){.lanes{grid-template-columns:1fr}}
+  .lane{padding:14px 16px;border-right:1px solid var(--line)}
+  .lane:last-child{border-right:none}
+  @media(max-width:820px){.lane{border-right:none;border-bottom:1px solid var(--line)}.lane:last-child{border-bottom:none}}
+  .lane .lh{font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;display:flex;align-items:center;gap:7px;margin-bottom:9px}
+  .lane.rep .lh{color:var(--brand)}.lane.ai .lh{color:var(--pink)}.lane.mgr .lh{color:#0a7d4f}
+  .lane ul{margin:0;padding-left:17px}.lane li{font-size:13px;color:var(--ink2);margin-bottom:6px;line-height:1.45}
+  .lane.rep{background:#f7fbfe}.lane.ai{background:#fdf6fa}.lane.mgr{background:#f4fcf8}
+
+  .loop{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border-radius:16px;padding:20px 22px;margin-top:6px}
+  .loop h2{margin:0 0 8px;font-size:18px}.loop p{margin:0;color:#dceaf5;font-size:14px;line-height:1.6}
+  .loop b{color:#fff}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:16px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo" onclick="goPortal()" style="cursor:pointer" title="Back to portal"></div>
+  <div class="sep"></div>
+  <div class="prod"><span class="vhi">V</span>ision · Sales Process<small>Rep · AI · Manager</small></div>
+  <div class="right" style="display:flex;align-items:center;gap:10px"><span class="pill">Beginning → end</span><button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button></div>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">i3 Revenue Operating System</div>
+  <h1>How a salesperson runs a deal — with Vision &amp; the manager</h1>
+  <p class="lede">The full motion from a brand-new rep to a closed deal. At every stage you'll see three lanes:
+  what the <b>salesperson</b> does, how <b>Vision (AI)</b> helps, and how the <b>manager</b> takes part.</p>
+
+  <div class="roles">
+    <div class="role rep"><div class="rt">🧑 Salesperson</div><div class="rd">Executes the deal — talks to customers, enters what happened, moves it forward.</div></div>
+    <div class="role ai"><div class="rt">✨ Vision (AI)</div><div class="rd">Guides the next move, does the research &amp; drafting, verifies the work, generates the documents.</div></div>
+    <div class="role mgr"><div class="rt">👔 Manager</div><div class="rd">Sets the rep up, coaches from live insight, and approves the key gates.</div></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--brand)"></i>Salesperson</span>
+    <span><i style="background:var(--pink)"></i>Vision (AI)</span>
+    <span><i style="background:var(--green)"></i>Manager</span>
+  </div>
+
+  <div id="stages"></div>
+
+  <div class="loop">
+    <h2>The loop</h2>
+    <p><b>Vision guides, the rep executes, the manager coaches.</b> Everything the rep enters is saved to Salesforce and
+    is proprietary to i3 — so the pipeline is never lost. Only <b>verified</b> activity advances a stage, the manager sees
+    the truth in real time, and every closed deal feeds the learning loop so the next one is easier. That's how the cycle
+    shortens: less trial-and-error, more repeatable execution.</p>
+  </div>
+
+  <div class="foot">
+    Follows the i3 Sales Process (2021) + i3 Revenue Generation SOP, mapped to the Vision agents.
+    See the <b>SOP</b>, the <b>working model</b>, and the <b>Manager dashboard</b> from the portal.<br>© 2026 i3 International Inc.
+  </div>
+</div>
+
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
+(function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'portal.html';}else{location.href='portal.html';}}
+
+var STAGES=[
+ {n:1,name:"Onboarding & Ramp",agent:"V-Start",meta:"Trigger: new hire / new territory",
+  rep:["Complete onboarding; load the onboarding plan","Meet the mentor team; book 12–15 shadow meetings","Run i3Live / NSM training tracks","Submit the weekly Friday reflection form","Draft the 30-day business plan + SWOT"],
+  ai:["Parses the onboarding doc → profile, mentors, plan","Assigns training path; tracks tests; scores readiness","Sets the reflection cadence","Auto-starts lead intelligence for the rep"],
+  mgr:["Onboards the rep (Admin): sets segment, territory, responsibility, annual goal","Approves training logs & test completions","Reviews progress weekly through the probation period"]},
+ {n:2,name:"Prospecting & Lead Intelligence",agent:"V-Target",meta:"Trigger: daily · 6sense intent · referrals",
+  rep:["Confirm the core segment","Review the buying group; call the highest-intent contacts first","Sharpen LinkedIn presence"],
+  ai:["Pulls 6sense / ZoomInfo intent; scores opportunities","Maps the full buying committee (Ops / IT / LP / Finance)","Assesses the rep's LinkedIn; recommends fixes + associations","Lays out 'do this tomorrow' with the intent in plain view"],
+  mgr:["Checks pipeline coverage per rep","Ensures reps target ICP accounts; coaches on fit"]},
+ {n:3,name:"Outreach & Qualification",agent:"V-Reach / V-Guide",meta:"Trigger: prioritized action queue",
+  rep:["Send the drafted outreach (email / call / LinkedIn)","Qualify against the ICP; book the meeting"],
+  ai:["Drafts first-touch outreach; pushes the action queue","Marketing warms the accounts (social + nurture)","Verifies real activity — email, call, meeting proof","Anti-gaming: only verified activity advances the stage"],
+  mgr:["Sees who is actually working (verified, not claimed)","Flags low activity; reallocates leads; coaches"]},
+ {n:4,name:"Presentation",agent:"V-Present",meta:"Trigger: qualified opportunity",
+  rep:["Deliver the presentation","Capture the transcript; invite the manager"],
+  ai:["Preps the deck from the customer's drivers","Captures the GoToMeeting / Teams transcript","Extracts drivers; flags the manager invite"],
+  mgr:["Joins high-value presentations (anchor / seasoned BDM)","Coaches the pitch — done right, 70–90% of solid opps close"]},
+ {n:5,name:"Proof of Concept",agent:"V-Prove",meta:"Trigger: presentation → POC",
+  rep:["Enter the site address","Add every stakeholder on the email (title + role)","Scope the POC; contact PM"],
+  ai:["Generates the POC from the transcript (Gardewine template)","Prompts for stakeholders; flags supporters","Recommends the solution + equipment to quote","Hands off to the PM agent (timeline, cyber forms, data)"],
+  mgr:["Approves the POC scope & success metrics","Ensures the PM handoff and 45-day plan are set"]},
+ {n:6,name:"Privacy & Cybersecurity",agent:"V-Guard (Magenta)",meta:"Trigger: sensitive solution on the quote",
+  rep:["Run the privacy & cybersecurity review","Post the signage; complete the PIA + cyber intake forms"],
+  ai:["Derives the exact legal doc from the site address (Law 25 / GDPR / BIPA / CCPA…)","Tells the rep what to do — privacy AND cybersecurity","Drafts customer signage + PIA starter","Escalates high-risk before POC approval"],
+  mgr:["Manager / Privacy Officer signs off high-risk before the POC is approved"]},
+ {n:7,name:"Proposal & Close",agent:"V-Close",meta:"Trigger: POC success → Go",
+  rep:["Position against the incumbent","Send the proposal; secure the signature"],
+  ai:["Pulls the cost-matrix battlecard; positions price","Assembles the contract; sends DocuSign","Syncs Salesforce / Automatica on close"],
+  mgr:["Approves pricing / discount; forecasts the deal","Final sign-off"]},
+ {n:8,name:"Customer Success & Reference",agent:"Success agent",meta:"Trigger: closed-won",
+  rep:["Hand off to Customer Success; keep comms open","Ask for references, referrals & a customer story"],
+  ai:["Monitors adoption & risk; prompts reference generation","Feeds win/loss + outcomes into the learning loop"],
+  mgr:["Reviews account health; leadership gets real-time revenue visibility"]}
+];
+
+document.getElementById('stages').innerHTML=STAGES.map(function(s){
+  function lane(cls,icon,label,items){
+    return '<div class="lane '+cls+'"><div class="lh">'+icon+' '+label+'</div><ul>'+items.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ul></div>';
+  }
+  return '<div class="stage"><div class="sh"><div class="sn">'+s.n+'</div>'+
+    '<div><div class="st">'+s.name+'</div><div class="sm">'+s.meta+'</div></div>'+
+    '<span class="agent">'+s.agent+'</span></div>'+
+    '<div class="lanes">'+
+      lane('rep','🧑','Salesperson',s.rep)+
+      lane('ai','✨','Vision (AI)',s.ai)+
+      lane('mgr','👔','Manager',s.mgr)+
+    '</div></div>';
+}).join('');
+</script>
+</body>
+</html>

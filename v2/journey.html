@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{var t=localStorage.getItem('i3_theme');if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<title>Vision — The Deal Journey</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 · Helvetica Neue */
+  :root{--brand:#00588F;--brand-lt:#2f9bde;--brand-900:#002447;--pink:#DF1E71;--green:#00A661;--yellow:#FFC107;
+    /* dark (default) surfaces */
+    --bg:#0a1a2b;--panel:#0f2438;--panel2:#0b2036;--pline:#1d3c59;--muted:#7f93a8;--ink:#eaf2f9;
+    --ink-soft:#bcd2e6;--glow1:#103a5c;--glow2:#0d2f4a;--track:#12314c;
+    --dotbg:#0e2740;--dotbd:#26496c;--dotc:#89a6c2;--capactive:#ffffff;--cnt:#cfe3f1;
+    --smeta:#8fb0cc;--laneli:#d6e5f2;--flowc:#8fb0cc;
+    --lhblue:#6cc0f5;--lhpink:#ff8cbc;--lhgreen:#5fd6a0;--agentc:#ffd0e3;
+    color-scheme:dark;}
+  :root[data-theme="light"]{
+    --bg:#eef2f6;--panel:#ffffff;--panel2:#f4f8fb;--pline:#dfe6ee;--muted:#69788a;--ink:#0d1b2a;
+    --ink-soft:#33424f;--glow1:#d6e8f6;--glow2:#e7eff7;--track:#dce6ef;
+    --dotbg:#eef4fa;--dotbd:#cdddec;--dotc:#6b7f92;--capactive:#0d1b2a;--cnt:#33424f;
+    --smeta:#69788a;--laneli:#33424f;--flowc:#8093a6;
+    --lhblue:#00588F;--lhpink:#DF1E71;--lhgreen:#0a7d4f;--agentc:#b3195e;
+    color-scheme:light;}
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;min-height:100vh;color:var(--ink);
+    background:radial-gradient(1100px 620px at 82% -8%,var(--glow1) 0%,transparent 55%),
+      radial-gradient(900px 560px at -6% 108%,var(--glow2) 0%,transparent 52%),var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;transition:background .25s,color .25s}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+
+  .topbar{display:flex;align-items:center;gap:14px;padding:13px 24px;border-bottom:1px solid rgba(255,255,255,.10);background:var(--brand-900);position:sticky;top:0;z-index:30;backdrop-filter:blur(6px)}
+  .topbar .ilogo{height:24px;cursor:pointer}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.3px;color:#fff}.topbar .prod .vhi{color:var(--pink)}
+  .topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .themebtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s;font-family:inherit}
+  .themebtn:hover{background:rgba(255,255,255,.2)}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:6px 12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:#cfe3f1}
+
+  .wrap{max-width:1160px;margin:0 auto;padding:26px 22px 46px}
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:30px;margin:8px 0 6px;font-weight:800;letter-spacing:-.4px}
+  .lede{color:var(--ink-soft);font-size:14.5px;max-width:760px}
+
+  /* ---- roadmap rail ---- */
+  .rail{position:relative;margin:30px 4px 12px;height:96px}
+  .rail .track{position:absolute;left:0;right:0;top:46px;height:6px;border-radius:6px;background:var(--track);overflow:hidden}
+  .rail .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:6px;
+    background:linear-gradient(90deg,var(--brand),var(--brand-lt),var(--pink));transition:width .7s cubic-bezier(.6,.02,.2,1);box-shadow:0 0 16px rgba(47,155,222,.6)}
+  .puck{position:absolute;top:36px;width:26px;height:26px;margin-left:-13px;border-radius:50%;z-index:5;
+    background:radial-gradient(circle at 35% 30%,#fff,var(--pink) 62%);box-shadow:0 0 0 6px rgba(223,30,113,.22),0 0 22px 4px rgba(223,30,113,.7);
+    transition:left .7s cubic-bezier(.6,.02,.2,1)}
+  .puck::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:ring 1.6s ease-out infinite}
+  @keyframes ring{0%{transform:scale(.7);opacity:.9}100%{transform:scale(2.1);opacity:0}}
+  .nodes{position:absolute;left:0;right:0;top:0;height:100%;display:flex;justify-content:space-between}
+  .node{position:relative;width:34px;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+  .node .dot{margin-top:33px;width:32px;height:32px;border-radius:50%;background:var(--dotbg);border:2px solid var(--dotbd);color:var(--dotc);
+    font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;transition:.25s;z-index:2}
+  .node .cap{position:absolute;top:74px;font-size:9.5px;letter-spacing:.02em;color:var(--muted);white-space:nowrap;text-align:center;transition:.2s}
+  .node.done .dot{background:var(--brand);border-color:var(--brand-lt);color:#fff}
+  .node.active .dot{background:var(--pink);border-color:#ff7fb2;color:#fff;transform:scale(1.18);box-shadow:0 0 18px rgba(223,30,113,.7)}
+  .node.active .cap{color:var(--capactive);font-weight:800}
+  .node:hover .dot{border-color:var(--brand-lt)}
+  @media(max-width:720px){.node .cap{display:none}}
+
+  /* ---- controls ---- */
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 2px 22px}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--pline);color:var(--ink);
+    font-family:inherit;font-size:13px;font-weight:700;border-radius:10px;padding:9px 15px;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--brand-lt)}
+  .btn.play{background:var(--pink);border-color:#ff7fb2;color:#fff}
+  .btn.play:hover{background:#c81862}
+  .prog{display:flex;align-items:center;gap:8px;margin-left:auto;font-size:12px;color:var(--muted)}
+  .prog .cnt{color:var(--cnt);font-weight:800}
+  .autobar{width:120px;height:5px;border-radius:5px;background:var(--track);overflow:hidden}
+  .autobar > i{display:block;height:100%;width:0;background:var(--brand-lt);border-radius:5px}
+
+  /* ---- stage panel ---- */
+  .stage{background:linear-gradient(160deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--pline);border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,20,45,.22)}
+  .shead{display:flex;align-items:center;gap:14px;padding:20px 24px;border-bottom:1px solid var(--pline);
+    background:linear-gradient(90deg,rgba(0,88,143,.28),transparent)}
+  .shead .num{flex:none;width:44px;height:44px;border-radius:12px;background:var(--pink);color:#fff;font-weight:800;font-size:19px;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(223,30,113,.45)}
+  .shead .stt{font-size:21px;font-weight:800;letter-spacing:-.2px}
+  .shead .smeta{font-size:12px;color:var(--smeta);margin-top:2px}
+  .shead .agent{margin-left:auto;font-size:12px;font-weight:800;color:var(--agentc);background:rgba(223,30,113,.16);border:1px solid rgba(223,30,113,.45);border-radius:999px;padding:6px 14px;white-space:nowrap}
+
+  .lanes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;position:relative}
+  @media(max-width:840px){.lanes{grid-template-columns:1fr}}
+  .lane{padding:20px 22px;border-right:1px solid var(--pline);position:relative;opacity:0;transform:translateY(14px);animation:rise .5s forwards}
+  .lane:last-child{border-right:none}
+  @media(max-width:840px){.lane{border-right:none;border-bottom:1px solid var(--pline)}.lane:last-child{border-bottom:none}}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .lane .lh{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:13px}
+  .lane .lh .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .lane.rep .lh{color:var(--lhblue)}.lane.rep .lh .ic{background:rgba(47,155,222,.16);border:1px solid rgba(47,155,222,.4)}
+  .lane.ai  .lh{color:var(--lhpink)}.lane.ai  .lh .ic{background:rgba(223,30,113,.16);border:1px solid rgba(223,30,113,.42)}
+  .lane.mgr .lh{color:var(--lhgreen)}.lane.mgr .lh .ic{background:rgba(0,166,97,.16);border:1px solid rgba(0,166,97,.42)}
+  .lane ul{margin:0;padding:0;list-style:none}
+  .lane li{font-size:13.5px;color:var(--laneli);padding:7px 0 7px 20px;position:relative;line-height:1.45}
+  .lane li::before{content:"";position:absolute;left:2px;top:12px;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.85}
+  .lane.rep li::before{color:var(--lhblue)}.lane.ai li::before{color:var(--lhpink)}.lane.mgr li::before{color:var(--lhgreen)}
+  /* thinking dots on the AI lane */
+  .think{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle}
+  .think i{width:5px;height:5px;border-radius:50%;background:#ff8cbc;display:inline-block;animation:bl 1.1s infinite}
+  .think i:nth-child(2){animation-delay:.18s}.think i:nth-child(3){animation-delay:.36s}
+  @keyframes bl{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+  .aihdr{display:flex;align-items:center}
+  /* handoff arrows between lanes */
+  .flowtag{position:absolute;top:16px;right:-11px;z-index:4;width:22px;height:22px;border-radius:50%;background:var(--panel2);border:1px solid var(--pline);
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--flowc)}
+  @media(max-width:840px){.flowtag{display:none}}
+
+  .loop{display:flex;align-items:center;gap:14px;background:linear-gradient(120deg,var(--brand-900),var(--brand));border-radius:16px;padding:16px 20px;margin-top:18px}
+  .loop .lz{font-size:22px}.loop p{margin:0;font-size:13.5px;color:#dceaf5;line-height:1.55}.loop b{color:#fff}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:20px;line-height:1.6}
+  .kicker{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:2px 0 0}
+  .kicker span{display:inline-flex;align-items:center;gap:6px}.kicker i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  /* ---- deliverable / artifact section (inline) ---- */
+  .artifact{border-top:1px solid var(--pline);background:linear-gradient(90deg,rgba(223,30,113,.05),transparent 55%),var(--panel2)}
+  .ahead{display:flex;align-items:center;gap:14px;padding:15px 20px 12px}
+  .ahead .aic{flex:none;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:rgba(0,88,143,.12);border:1px solid var(--pline)}
+  .ahead .atx{flex:1;min-width:0}
+  .ahead .alab{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--pink)}
+  .ahead .anm{font-weight:800;font-size:15px;color:var(--ink);margin-top:2px}
+  .ahead .awhat{font-size:12px;color:var(--muted);margin-top:1px}
+  /* the document itself, embedded like a sheet */
+  .adoc{margin:0 20px 18px;background:var(--panel);border:1px solid var(--pline);border-radius:13px;padding:16px 18px}
+  .ameta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+  .ameta span{font-size:11.5px;font-weight:700;color:var(--ink-soft);background:var(--panel2);border:1px solid var(--pline);border-radius:8px;padding:5px 10px}
+  .asecs{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px}
+  @media(max-width:680px){.asecs{grid-template-columns:1fr}}
+  .asec h4{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);font-weight:800}
+  .asec ul{margin:0;padding-left:17px}
+  .asec li{font-size:13px;color:var(--laneli);margin-bottom:6px;line-height:1.5}
+  .anote{font-size:10.5px;color:var(--muted);margin:2px 20px 16px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo" onclick="goPortal()" title="Back to portal"></div>
+  <div class="sep"></div>
+  <div class="prod"><span class="vhi">V</span>ision · The Deal Journey<small>Follow a deal, stage by stage</small></div>
+  <div class="right"><span class="pill">Live walkthrough</span><button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button></div>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">i3 Revenue Operating System</div>
+  <h1>Watch a deal move — from a brand-new rep to closed-won</h1>
+  <p class="lede">Press play and follow the deal down the track. At each stage you'll see the three lanes light up:
+  what the <b style="color:#6cc0f5">salesperson</b> does, how <b style="color:#ff8cbc">Vision (AI)</b> helps, and how the <b style="color:#5fd6a0">manager</b> takes part.</p>
+  <div class="kicker">
+    <span><i style="background:#2f9bde"></i>Salesperson</span>
+    <span><i style="background:var(--pink)"></i>Vision (AI)</span>
+    <span><i style="background:var(--green)"></i>Manager</span>
+  </div>
+
+  <div class="rail">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="puck" id="puck"></div>
+    <div class="nodes" id="nodes"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="prev" onclick="step(-1)">◀ Prev</button>
+    <button class="btn play" id="play" onclick="toggle()">▶ Play</button>
+    <button class="btn" id="next" onclick="step(1)">Next ▶</button>
+    <button class="btn" onclick="restart()">↻ Restart</button>
+    <div class="prog"><span class="cnt" id="cnt">1 / 8</span><div class="autobar"><i id="auto"></i></div></div>
+  </div>
+
+  <div class="stage" id="stage"></div>
+
+  <div class="loop">
+    <div class="lz">🔄</div>
+    <p><b>Vision guides, the rep executes, the manager coaches.</b> Everything the rep enters is saved to Salesforce and is
+    proprietary to i3, so the pipeline is never lost — only <b>verified</b> activity advances a stage, and every closed deal
+    feeds the learning loop so the next one is faster.</p>
+  </div>
+
+  <div class="foot">
+    Follows the i3 Sales Process (2021) + i3 Revenue Generation SOP, mapped to the Vision agents.<br>
+    Prefer the side-by-side view? Open <b>Sales Process</b> from the portal. © 2026 i3 International Inc.
+  </div>
+</div>
+
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
+(function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'portal.html';}else{location.href='portal.html';}}
+
+var STAGES=[
+ {name:"Onboarding & Ramp",short:"Onboard",agent:"V-Start",meta:"Trigger: new hire / new territory",
+  rep:["Complete onboarding & shadow meetings","Run i3Live training tracks","Draft the 30-day plan + SWOT"],
+  ai:["Builds the ramp plan from the onboarding doc","Assigns training; scores readiness","Auto-starts lead intelligence"],
+  mgr:["Onboards the rep (Admin): segment, territory, goal","Approves training logs & tests"],
+  art:{icon:"📋",name:"30-Day Business Plan + SWOT",what:"The rep's ramp plan — milestones, SWOT, first targets",
+   meta:["Rep: David Chen","Segment: Retail","Territory: Ontario & Atlantic","Goal: $4.5M"],
+   body:[{h:"30-day milestones",lines:["Wk 1 — i3Live core certs · shadow 4 calls","Wk 2 — product training · load 12 target accounts","Wk 3 — first outreach · mentor ride-alongs","Wk 4 — business-plan review with manager"]},
+    {h:"SWOT",lines:["Strengths — retail network, CCTV background","Weaknesses — new to the i3 catalog","Opportunities — live 6sense intent in region","Threats — entrenched incumbent integrators"]}]}},
+ {name:"Prospecting & Lead Intelligence",short:"Lead intel",agent:"V-Target",meta:"Trigger: daily · 6sense intent · referrals",
+  rep:["Confirm the core segment","Call the highest-intent contacts first","Sharpen LinkedIn presence"],
+  ai:["Pulls 6sense / ZoomInfo intent; scores opps","Maps the full buying committee","Assesses LinkedIn; recommends fixes"],
+  mgr:["Checks pipeline coverage per rep","Coaches on ICP fit"],
+  art:{icon:"🎯",name:"Buying-Group Map + Intent Brief",what:"The committee, scored by intent, with the first move",
+   meta:["Account: Metro Retail Group","Segment: Retail","Intent score: 87 · high"],
+   body:[{h:"Buying committee",lines:["Ops — Dana R., VP Loss Prevention  ★ supporter","IT — Sam K., Director, Infrastructure","Finance — Priya M., Controller","Legal / LP — Marc T., Privacy Officer"]},
+    {h:"Intent signals & next move",lines:["Researching 'retail video analytics' (6sense)","Visited the pricing page ×3 this week","Recommended first contact: Dana R.","LinkedIn: connect + share the analytics one-pager"]}]}},
+ {name:"Outreach & Qualification",short:"Outreach",agent:"V-Reach / V-Guide",meta:"Trigger: prioritized action queue",
+  rep:["Send the drafted outreach","Qualify against ICP; book the meeting"],
+  ai:["Drafts first-touch outreach & action queue","Marketing warms the accounts","Verifies real activity — only verified advances"],
+  mgr:["Sees who is actually working (verified)","Flags low activity; reallocates leads"],
+  art:{icon:"✉️",name:"Outreach Sequence + Qualification",what:"A 3-touch sequence and the ICP qualification record",
+   meta:["Contact: Dana R.","Channel: Email → Call → LinkedIn"],
+   body:[{h:"3-touch sequence (drafted)",lines:["T1 Email — loss-prevention ROI angle","T2 Call — reference a peer retailer's result","T3 LinkedIn — share the analytics one-pager"]},
+    {h:"Qualification (ICP)",lines:["Budget — capital cycle opens Q3  ✓","Authority — Dana R. + IT sign-off  ✓","Need — shrinkage & staff safety  ✓","Timeline — 90 days  ✓  → meeting booked"]}]}},
+ {name:"Presentation",short:"Present",agent:"V-Present",meta:"Trigger: qualified opportunity",
+  rep:["Deliver the presentation","Capture the transcript; invite the manager"],
+  ai:["Preps the deck from the customer's drivers","Captures the Teams / GoToMeeting transcript","Extracts drivers; flags manager invite"],
+  mgr:["Joins high-value presentations","Coaches the pitch — most solid opps close"],
+  art:{icon:"🖥️",name:"Presentation Deck + Transcript",what:"A tailored deck plus the captured transcript & drivers",
+   meta:["Opportunity: Metro Retail — 40 sites","Attendees: Dana R., Sam K., + manager"],
+   body:[{h:"Deck outline (tailored to drivers)",lines:["Their driver: shrinkage & staff safety","i3 solution: video analytics on i3Host","Proof: a peer retailer's 18% result","Ask: a 45-day proof of concept"]},
+    {h:"Transcript highlights (auto-captured)",lines:["“We'd need to see it in our Toronto store”","“Privacy is a board-level concern for us”","Drivers extracted → POC + Privacy flagged","Manager invite sent for the next session"]}]}},
+ {name:"Proof of Concept",short:"POC",agent:"V-Prove",meta:"Trigger: presentation → POC",
+  rep:["Enter the site address","Add every stakeholder on the email (title + role)","Scope the POC; contact PM"],
+  ai:["Generates the POC from the transcript","Prompts for stakeholders; flags supporters","Recommends solution + equipment; hands off to PM"],
+  mgr:["Approves the POC scope & success metrics","Ensures the PM handoff & 45-day plan"],
+  art:{icon:"🧪",name:"POC Document (Gardewine template)",what:"Scope, success metrics, stakeholders and the equipment list",
+   meta:["Site: 120 King St W, Toronto ON","Duration: 45 days","PM: Louel"],
+   body:[{h:"Stakeholders (all on the email)",lines:["Dana R. — VP Loss Prevention  ★ supporter","Sam K. — IT Director","Priya M. — Controller","Marc T. — Privacy Officer"]},
+    {h:"Scope, solution & handoff",lines:["Success metric: 15% shrinkage ↓ in 45 days","Recommended: 8× analytics cameras + i3Host","Equipment list generated → quote","Handoff to the PM agent (timeline + forms)"]}]}},
+ {name:"Privacy & Cybersecurity",short:"Privacy",agent:"V-Guard · Magenta",meta:"Trigger: sensitive solution on the quote",
+  rep:["Run the privacy & cybersecurity review","Post signage; complete PIA + cyber intake"],
+  ai:["Derives the exact legal doc from the site address","Tells the rep what to do — privacy AND cyber","Drafts signage + PIA; escalates high-risk"],
+  mgr:["Privacy Officer signs off high-risk before POC approval"],
+  art:{icon:"🛡️",name:"Signage + PIA + Cyber Intake",what:"The exact legal doc for the site, plus the cyber checklist",
+   meta:["Jurisdiction: Ontario, Canada","Law: PIPEDA (Quebec site → Law 25)","Risk: Medium"],
+   body:[{h:"Customer signage (draft)",lines:["“This area is under video surveillance for loss prevention. Questions: privacy@metro…”","Bilingual EN/FR variant auto-added for a Quebec site"]},
+    {h:"PIA starter + cyber intake",lines:["Necessity & proportionality test — passed","Retention 30 days; access log required","Cyber: network segmentation · encrypted at rest","High-risk items → Privacy Officer sign-off"]}]}},
+ {name:"Proposal & Close",short:"Close",agent:"V-Close",meta:"Trigger: POC success → Go",
+  rep:["Position against the incumbent","Send the proposal; secure the signature"],
+  ai:["Pulls the cost-matrix battlecard","Assembles the contract; sends DocuSign","Syncs Salesforce / Automatica on close"],
+  mgr:["Approves pricing / discount; forecasts","Final sign-off"],
+  art:{icon:"📝",name:"Proposal + Contract (DocuSign)",what:"The battlecard, pricing and contract — sent for signature",
+   meta:["Deal: $312K","Incumbent: legacy DVR vendor"],
+   body:[{h:"Cost-matrix battlecard",lines:["i3 total cost of ownership vs incumbent, 3 yrs","Analytics included (incumbent bills it extra)","i3Host support SLA advantage"]},
+    {h:"Contract",lines:["Pricing approved by the manager","Terms: 36-month + support","DocuSign sent → awaiting signature","Salesforce / Automatica synced on close"]}]}},
+ {name:"Customer Success & Reference",short:"Success",agent:"Success agent",meta:"Trigger: closed-won",
+  rep:["Hand off to Customer Success","Ask for references, referrals & a story"],
+  ai:["Monitors adoption & risk; prompts references","Feeds win/loss into the learning loop"],
+  mgr:["Reviews account health","Leadership gets real-time revenue visibility"],
+  art:{icon:"⭐",name:"Customer Story + Reference",what:"A reference, a case-study outline and referrals — into the loop",
+   meta:["Account: Metro Retail Group","Outcome: 18% shrinkage ↓"],
+   body:[{h:"Reference & story",lines:["“It paid for itself in one quarter.” — Dana R.","Case-study outline drafted for marketing","Referrals: 2 sister banners requested"]},
+    {h:"Learning loop",lines:["Win reasons logged (the retail play)","Playbook updated for the next Retail deal","Reference added to the i3 library"]}]}}
+];
+
+var cur=0, playing=false, timer=null, ticker=null, DUR=5200;
+var nodesEl=document.getElementById('nodes');
+STAGES.forEach(function(s,i){
+  var n=document.createElement('div');n.className='node';n.setAttribute('data-i',i);
+  n.innerHTML='<div class="dot">'+(i+1)+'</div><div class="cap">'+s.short+'</div>';
+  n.onclick=function(){go(i);pause();};
+  nodesEl.appendChild(n);
+});
+
+function bullets(cls,arr,ai){
+  return arr.map(function(t,idx){
+    var think=(ai&&idx===0)?'<span class="think"><i></i><i></i><i></i></span>':'';
+    return '<li>'+t+think+'</li>';
+  }).join('');
+}
+function place(){
+  // align the puck + fill to the actual centre of the active node (nodes use justify-between)
+  var ns=nodesEl.children, node=ns[cur];
+  if(!node)return;
+  var x=node.offsetLeft+node.offsetWidth/2;
+  document.getElementById('fill').style.width=x+'px';
+  document.getElementById('puck').style.left=x+'px';
+}
+function render(){
+  var s=STAGES[cur];
+  document.getElementById('cnt').textContent=(cur+1)+' / '+STAGES.length;
+  var ns=nodesEl.children;
+  for(var i=0;i<ns.length;i++){ns[i].className='node'+(i<cur?' done':'')+(i===cur?' active':'');}
+  place();
+  var st=document.getElementById('stage');
+  st.innerHTML=
+    '<div class="shead"><div class="num">'+(cur+1)+'</div>'+
+      '<div><div class="stt">'+s.name+'</div><div class="smeta">'+s.meta+'</div></div>'+
+      '<span class="agent">'+s.agent+'</span></div>'+
+    '<div class="lanes">'+
+      '<div class="lane rep" style="animation-delay:.02s"><div class="lh"><span class="ic">🧑</span>Salesperson</div><ul>'+bullets('rep',s.rep)+'</ul><div class="flowtag">→</div></div>'+
+      '<div class="lane ai"  style="animation-delay:.12s"><div class="lh"><span class="ic">✨</span>Vision (AI)</div><ul>'+bullets('ai',s.ai,true)+'</ul><div class="flowtag">→</div></div>'+
+      '<div class="lane mgr" style="animation-delay:.22s"><div class="lh"><span class="ic">👔</span>Manager</div><ul>'+bullets('mgr',s.mgr)+'</ul></div>'+
+    '</div>'+artHTML(s);
+  document.getElementById('prev').disabled=false;
+  document.getElementById('next').disabled=false;
+}
+function artHTML(s){
+  var a=s.art;
+  var meta=a.meta.map(function(m){return '<span>'+m+'</span>';}).join('');
+  var secs=a.body.map(function(sec){
+    return '<div class="asec"><h4>'+sec.h+'</h4><ul>'+sec.lines.map(function(l){return '<li>'+l+'</li>';}).join('')+'</ul></div>';
+  }).join('');
+  return '<div class="artifact">'+
+    '<div class="ahead"><div class="aic">'+a.icon+'</div>'+
+      '<div class="atx"><div class="alab">📎 Deliverable · artifact — generated by '+s.agent+'</div>'+
+        '<div class="anm">'+a.name+'</div><div class="awhat">'+a.what+'</div></div></div>'+
+    '<div class="adoc"><div class="ameta">'+meta+'</div><div class="asecs">'+secs+'</div></div>'+
+    '<div class="anote">Sample artifact — Vision generates it from Salesforce / i3Host data and saves it to the account. Illustrative.</div>'+
+  '</div>';
+}
+function go(i){cur=(i+STAGES.length)%STAGES.length;render();resetTick();}
+function step(d){go(cur+d); if(playing)resetTick();}
+function resetTick(){
+  var bar=document.getElementById('auto');bar.style.transition='none';bar.style.width='0%';
+  if(!playing){void bar.offsetWidth;return;}
+  void bar.offsetWidth;bar.style.transition='width '+DUR+'ms linear';bar.style.width='100%';
+}
+function play(){playing=true;document.getElementById('play').innerHTML='⏸ Pause';document.getElementById('play').classList.remove('play');
+  resetTick();timer=setInterval(function(){ if(cur===STAGES.length-1){pause();return;} go(cur+1); },DUR);}
+function pause(){playing=false;clearInterval(timer);document.getElementById('play').innerHTML='▶ Play';document.getElementById('play').classList.add('play');
+  var bar=document.getElementById('auto');bar.style.transition='none';bar.style.width='0%';}
+function toggle(){playing?pause():play();}
+function restart(){go(0);if(!playing)play();else resetTick();}
+
+render();
+window.addEventListener('resize',place);
+</script>
+</body>
+</html>

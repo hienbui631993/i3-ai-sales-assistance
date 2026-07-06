@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{var t=localStorage.getItem('i3_theme');if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<title>Vision — Revenue Operating System · SOP</title>
+<style>
+  /* i3 Brand Kit: Brand Blue #00588F · Dark Blue #002447 · Pink #DF1E71 · Green #00A661 · Yellow #FFC107 · Helvetica Neue */
+  :root{--brand:#00588F;--brand-700:#024d7c;--brand-900:#002447;--pink:#DF1E71;--green:#00A661;--yellow:#FFC107;
+    --ink:#0d1b2a;--ink2:#33424f;--muted:#69788a;--line:#dfe6ee;--bg:#eef2f6;--panel:#fff;--inbg:#e8f1f8;--inbd:#bcd9ee;
+    --okbg:#e7f8f0;--okbd:#a6e8c8;color-scheme:light;}
+  :root[data-theme="dark"]{--ink:#eaf2f9;--ink2:#c8dbec;--muted:#8298ad;--line:#1d3c59;--bg:#0a1a2b;--panel:#0f2438;--inbg:#12314c;--inbd:#26496c;--okbg:rgba(0,166,97,.12);--okbd:rgba(0,166,97,.34);color-scheme:dark;}
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55;transition:background .25s,color .25s}
+  .themebtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s;font-family:inherit}
+  .themebtn:hover{background:rgba(255,255,255,.2)}
+  /* dark-mode surface remaps (brand accents stay constant) */
+  [data-theme="dark"] section h2{color:#6cc0f5}
+  [data-theme="dark"] .toc a{color:#6cc0f5}
+  [data-theme="dark"] .chip{color:#6cc0f5}
+  [data-theme="dark"] .sop .no{color:#6cc0f5}
+  [data-theme="dark"] a.inl{color:#6cc0f5}
+  [data-theme="dark"] .sop .ag{color:#5fd6a0}
+  [data-theme="dark"] .card2{background:rgba(255,255,255,.05)}
+  [data-theme="dark"] .pr{background:rgba(255,255,255,.05)}
+  [data-theme="dark"] .sop{background:#12314c}
+  [data-theme="dark"] .sop .hd:hover{background:rgba(255,255,255,.06)}
+  [data-theme="dark"] .tmpl span{background:rgba(255,255,255,.07)}
+  [data-theme="dark"] .stagerow{border-bottom-color:rgba(255,255,255,.1)}
+  .ilogo svg{height:100%;width:auto;display:block}.ilogo svg path{fill:#fff}
+  .topbar{background:var(--brand-900);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 22px;position:sticky;top:0;z-index:20}
+  .topbar .ilogo{height:24px}.topbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2)}
+  .topbar .prod{font-weight:800;letter-spacing:.3px}
+  .topbar .prod .vhi{color:var(--pink)}
+  .topbar .prod small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7fc4ef}
+  .topbar .right{margin-left:auto;display:flex;gap:9px;align-items:center}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:5px 11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#dceaf5}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 22px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);font-weight:700}
+  h1{font-size:30px;margin:8px 0 6px;font-weight:800;letter-spacing:-.3px}
+  .lede{color:var(--ink2);font-size:15px;max-width:760px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px;background:var(--inbg);color:var(--brand);border:1px solid var(--inbd)}
+
+  .toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:22px 0}
+  .toc h3{margin:0 0 8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .toc a{display:inline-block;color:var(--brand);text-decoration:none;font-weight:600;font-size:13px;margin:0 14px 6px 0}
+  .toc a:hover{text-decoration:underline}
+
+  section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px;scroll-margin-top:70px}
+  section h2{margin:0 0 4px;font-size:20px;font-weight:800;color:var(--brand)}
+  section .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  h3.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);font-weight:700;margin:18px 0 8px;border-left:3px solid var(--pink);padding-left:9px}
+  p{margin:0 0 12px}
+  ul,ol{margin:0 0 12px;padding-left:20px}li{margin-bottom:5px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card2{background:#f6f9fc;border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .card2 b{color:var(--ink)}
+  .flow{background:#0f2438;color:#dbe8f4;border-radius:12px;padding:16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.9;white-space:pre-wrap;overflow-x:auto}
+  .flow .hl{color:#7fc4ef;font-weight:700}
+  .principles{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:640px){.principles{grid-template-columns:1fr}}
+  .pr{display:flex;gap:10px;align-items:flex-start;background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px}
+  .pr .n{flex:none;width:22px;height:22px;border-radius:6px;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+  /* SOP catalog accordion */
+  .sop{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden;background:#fff}
+  .sop .hd{display:grid;grid-template-columns:66px 1fr auto;gap:12px;align-items:center;padding:12px 15px;cursor:pointer}
+  .sop .hd:hover{background:#f6f9fc}
+  .sop .no{font-weight:800;color:var(--brand);font-size:14px}
+  .sop .nm{font-weight:700;font-size:14px}
+  .sop .ag{font-size:11px;font-weight:700;color:#0a7d4f;background:var(--okbg);border:1px solid var(--okbd);border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .sop .bd{display:none;padding:0 15px 14px 15px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2)}
+  .sop.open .bd{display:block}
+  .sop .bd .obj{margin-top:12px}
+  .sop .car{transition:.2s;color:var(--muted);font-weight:800}
+  .sop.open .car{transform:rotate(90deg)}
+  .tmpl{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tmpl span{font-size:11px;font-weight:600;color:var(--ink2);background:#eef2f7;border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+
+  /* worked example */
+  .ex .grid2 .card2 .k2{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  .stagerow{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:11px 0;border-bottom:1px dashed #eef2f6}
+  .stagerow:last-child{border-bottom:none}
+  .stagerow .sn{flex:none;width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .stagerow .st{font-weight:800;font-size:14px}
+  .stagerow .sd{font-size:13px;color:var(--ink2)}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+  a.inl{color:var(--brand);font-weight:600}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ilogo" id="logo" onclick="goPortal()" style="cursor:pointer" title="Back to portal"></div>
+  <div class="sep"></div>
+  <div class="prod"><span class="vhi">V</span>ision · SOP<small>Revenue Operating System</small></div>
+  <div class="right"><button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button><span class="pill">v1 Draft</span></div>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">i3 Revenue Operating System (ROS)</div>
+  <h1>Standard Operating Procedures</h1>
+  <p class="lede">The standardized revenue-generation playbook for i3. The <b>Revenue Operating System (ROS)</b>
+  is the AI orchestration layer — <b>Vision</b> — that connects Salesforce, ERP, the quoting platform, 6sense,
+  marketing, meeting intelligence and AI into one workflow. This page follows the i3 Revenue Generation SOP and the
+  i3 Sales Process, and maps each SOP to a Vision agent.</p>
+  <div class="meta">
+    <span class="chip">Version 1.0 Draft</span>
+    <span class="chip">Audience: Leadership · PM · Dev · AI · Sales · SE · CS</span>
+  </div>
+
+  <div class="toc">
+    <h3>On this page</h3>
+    <a href="#vision">Vision &amp; principles</a>
+    <a href="#arch">Revenue architecture</a>
+    <a href="#template">SOP template</a>
+    <a href="#catalog">SOP catalog (100–1300)</a>
+    <a href="#example">Worked example · SOP 200</a>
+    <a href="#agentspec">AI agent spec</a>
+    <a href="#salescycle">The 7-stage sales cycle</a>
+  </div>
+
+  <!-- VISION -->
+  <section id="vision">
+    <h2>Vision &amp; guiding principles</h2>
+    <div class="sub">Why the ROS exists and the rules it runs by.</div>
+    <p>Each i3 system performs its own function well, but they operate as independent applications that require
+    employees to manually connect information and decide the next action. ROS is the AI layer that <b>gathers
+    information, recommends actions, automates repetitive work, identifies risk, and learns from every interaction</b> —
+    without replacing existing investments.</p>
+    <h3 class="k">The vision</h3>
+    <ul>
+      <li>Every employee begins each day knowing exactly what to do next.</li>
+      <li>Every customer interaction improves organizational intelligence.</li>
+      <li>Every proposal reflects i3 best practices.</li>
+      <li>Every manager coaches from predictive insights instead of historical reports.</li>
+      <li>Every executive has real-time visibility into revenue health.</li>
+    </ul>
+    <h3 class="k">Guiding principles</h3>
+    <div class="principles">
+      <div class="pr"><span class="n">1</span><div><b>People first.</b> AI augments human decision-making.</div></div>
+      <div class="pr"><span class="n">2</span><div><b>One source of truth.</b> Enter once, share securely.</div></div>
+      <div class="pr"><span class="n">3</span><div><b>AI before manual.</b> Automate first; require human approval where judgment is needed.</div></div>
+      <div class="pr"><span class="n">4</span><div><b>Standardized execution.</b> Every team follows the same workflow.</div></div>
+      <div class="pr"><span class="n">5</span><div><b>Continuous learning.</b> Every opportunity improves the platform.</div></div>
+      <div class="pr"><span class="n">6</span><div><b>Privacy &amp; compliance by design.</b></div></div>
+      <div class="pr"><span class="n">7</span><div><b>Business-outcome focused.</b></div></div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="arch">
+    <h2>Enterprise revenue architecture</h2>
+    <div class="sub">Market signals in, standardized action out — orchestrated by Vision.</div>
+    <div class="flow"><span class="hl">Market Intelligence</span>
+      │
+Intent Data | CRM | ERP | Website | Marketing | Meetings | Support
+      │
+<span class="hl">AI Revenue Operating System (ROS) — Vision</span>
+      │
+Prospect · Research · Solution · Proposal · Risk · Success · Manager · Learning agents
+      │
+Sales | Solutions Engineering | PM | Customer Success | Executives</div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted)">The ROS agents above map directly to the Vision
+    engine agents (V-Target, V-Reach, V-Prove, V-Guard, V-Close, Manager, Learning). See the
+    <a class="inl" href="vision-architecture.html" data-target="vision-architecture.html">architecture diagram</a>.</p>
+  </section>
+
+  <!-- TEMPLATE -->
+  <section id="template">
+    <h2>Standard SOP template</h2>
+    <div class="sub">Every SOP is authored to the same structure so they're consistent and buildable.</div>
+    <div class="tmpl">
+      <span>Business Objective</span><span>Trigger</span><span>Inputs</span><span>AI Responsibilities</span>
+      <span>Human Responsibilities</span><span>Workflow</span><span>Outputs</span><span>System Integrations</span>
+      <span>Exception Handling</span><span>KPIs</span><span>Future Enhancements</span><span>AI Agent Specification</span>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section id="catalog">
+    <h2>SOP catalog</h2>
+    <div class="sub">The full revenue-generation workflow, SOP 100–1300. Click any SOP to expand. Each is authored to the standard template above; SOP 200 is the worked example.</div>
+    <div id="sopList"></div>
+  </section>
+
+  <!-- EXAMPLE -->
+  <section id="example" class="ex">
+    <h2>Worked example · SOP 200 — Market Intelligence &amp; Opportunity Creation</h2>
+    <div class="sub">The template, filled in (from the i3 Revenue Generation SOP).</div>
+    <div class="grid2">
+      <div class="card2"><div class="k2">Business objective</div>Identify high-probability opportunities before competitors using AI-driven market intelligence.</div>
+      <div class="card2"><div class="k2">Trigger</div>Daily execution · 6sense intent · website activity · referrals · marketing campaigns · customer expansion.</div>
+      <div class="card2"><div class="k2">Inputs</div>Salesforce, ERP, 6sense, ZoomInfo, LinkedIn, Outlook, Marketing Automation, Customer Success.</div>
+      <div class="card2"><div class="k2">Outputs</div>Executive summary · buying-committee map · opportunity score · messaging recommendations · CRM opportunity.</div>
+      <div class="card2"><div class="k2">AI responsibilities</div>Research accounts, identify buying signals, build the buying committee, score the opportunity, generate an executive summary, recommend next actions.</div>
+      <div class="card2"><div class="k2">Human responsibilities</div>Approve, modify, assign account ownership.</div>
+      <div class="card2"><div class="k2">System integrations</div>Salesforce, ERP, 6sense, ZoomInfo, Outlook, Teams.</div>
+      <div class="card2"><div class="k2">Exception handling</div>Duplicate accounts, missing contacts, low confidence, incomplete intent.</div>
+      <div class="card2"><div class="k2">KPIs</div>Pipeline created · meetings booked · response rate · opportunity conversion.</div>
+      <div class="card2"><div class="k2">Future enhancements</div>Budget prediction · executive relationship mapping · automatic scheduling.</div>
+    </div>
+    <h3 class="k">Workflow</h3>
+    <div class="flow">Intent → Research → Buying Committee → Opportunity Score → CRM Opportunity → Outreach Campaign</div>
+  </section>
+
+  <!-- AGENT SPEC -->
+  <section id="agentspec">
+    <h2>AI agent specification (example)</h2>
+    <div class="sub">Market Intelligence Agent — the spec pattern every Vision agent follows.</div>
+    <div class="grid2">
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Mission</div>Continuously discover and prioritize revenue opportunities.</div>
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Consumes</div>Salesforce, ERP, 6sense, ZoomInfo, Website Analytics, Meeting History.</div>
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Produces</div>Opportunity score · buying-committee map · executive summary · recommended messaging · CRM updates · tasks.</div>
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Autonomous actions</div>Research · score · generate outreach · create tasks · notify manager.</div>
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Requires human approval</div>Pricing · contracts · external communications (configurable).</div>
+      <div class="card2"><div class="k2" style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700">Learning loop</div>Win/loss · email engagement · meeting conversion · proposal acceptance · closed revenue.</div>
+    </div>
+  </section>
+
+  <!-- SALES CYCLE -->
+  <section id="salescycle">
+    <h2>The 7-stage i3 sales cycle</h2>
+    <div class="sub">From the i3 Sales Process (2021). The operational backbone the SOPs standardize.</div>
+    <div id="cycle"></div>
+    <h3 class="k">Sales pipeline (prospect → close)</h3>
+    <p style="font-size:13.5px">Most pipelines run four stages: <b>Prospecting → Meeting → Proposal → Closing</b>.
+    Nurture it (set deadlines, always reach the decision-maker), and <b>audit</b> it regularly — remove unqualified
+    leads and reinforce the trends that close (financing, company size, budget). In the i3 SSP program the anchor or a
+    seasoned BDM joins at <b>Stage 4</b>; done right, <b>70–90%</b> of solid opportunities close.</p>
+  </section>
+
+  <div class="foot">
+    Follows: <b>i3 Revenue Generation SOP v1 (Draft)</b> and <b>i3 Sales Process (2021)</b>. Living document —
+    intended to evolve into the master engineering spec (BPMN, sequence diagrams, API specs, data dictionary,
+    prompt library, security architecture).<br>© 2026 i3 International Inc.
+  </div>
+</div>
+
+<script>
+function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
+(function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
+document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox="0 0 800 339" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M176.526 84.0395C291.927 22.8794 447.867 12.2292 574.621 16.8037C700.519 21.3467 797.636 40.8933 797.636 40.8933C797.636 40.8933 634.842 -1.28912 445.374 0.0303203C445.316 0.0303203 445.256 0.0283439 445.195 0.0263677C445.135 0.0243914 445.075 0.022415 445.017 0.022415C199.238 0.022415 0 75.7832 0 169.25C0 169.531 0.0283259 170.152 0.0519035 170.669C0.0687116 171.037 0.0831061 171.352 0.0831061 171.454C1.53747 214.545 45.3012 253.741 116.348 283.322L99.7603 236.944C107.382 244.79 116.299 252.295 126.379 259.477C166.678 288.133 225.55 310.975 295.451 324.572C341.317 333.492 391.87 338.462 445.017 338.462C454.305 338.462 463.469 338.134 472.559 337.81C476.945 337.653 481.314 337.497 485.672 337.379C505.086 336.834 534.597 333.792 534.597 333.792C534.597 333.792 474.769 334.242 399.915 320.613C88.0758 259.303 140.134 119.696 228.6 69.1779C85.8899 130.638 104.149 192.068 129.679 224.619C82.9152 182.081 85.5913 132.227 176.526 84.0395ZM291.57 139.471H262.931V247.27H291.57V139.471ZM262.939 110.468H291.57V84.3557H262.939V110.468ZM326.017 145.01V147.412L326.067 149.846C326.225 154.68 328.709 157.075 333.571 157.027C338.666 157.075 341.309 154.301 341.517 148.802L341.549 144.71V141.02C341.549 139.385 341.491 137.852 341.283 136.414C341.051 134.581 340.419 133.08 339.43 131.903C337.868 130.196 334.635 129.343 329.799 129.343H324.089V118.179H329.3C334.852 118.298 338.533 117.223 340.294 114.924C341.101 113.826 341.525 112.522 341.558 110.95V107.26V102.243C341.558 97.2182 339.156 94.7532 334.303 94.8244C329.3 94.9112 326.815 97.2972 326.881 102.014V104.645H307.958V102.591C307.925 100.283 308.191 98.0555 308.814 95.8749C310.318 89.9255 314.515 86.2596 321.305 84.9007C325.303 84.0868 329.499 83.6604 333.879 83.6604C338.458 83.6604 342.455 83.9683 345.946 84.5611C353.11 85.7937 357.597 89.5146 359.359 95.6934C360.082 98.3243 360.464 100.765 360.498 103.057V106.225C360.456 115.026 357.722 120.407 352.287 122.382L348.597 123.623C355.852 125.092 359.775 129.224 360.34 135.995L360.498 141.075V144.702C360.456 149.134 360.248 152.271 359.933 154.096C359.293 157.596 357.755 160.393 355.287 162.51C350.891 166.287 343.827 168.175 334.028 168.175C330.106 168.199 326.399 167.899 322.892 167.235C319.028 166.619 315.861 165.458 313.435 163.798C310.958 162.115 309.346 159.974 308.531 157.367C307.792 155.384 307.327 153.164 307.244 150.715L307.102 147.546V145.002H326.017V145.01ZM317.44 199.439H324.305V246.836H317.44V199.439ZM342.613 199.439L355.561 240.279V199.439H361.993V246.828H351.231L338.308 206.431V246.828H331.876V199.439H342.613ZM397.322 204.788V199.439H367.404V204.788H378.93V246.828H385.795V204.788H397.322ZM403.048 199.439H425.503V204.788H409.912V219.807H424.556V225.157H409.912V241.487H425.952V246.828H403.048V199.439ZM440.778 219.965V204.787H446.097C449.147 204.795 451.225 205.198 452.355 205.957C453.876 206.976 454.648 208.825 454.648 211.471C454.648 213.913 454.374 215.651 453.859 216.71C453.07 218.297 451.599 219.293 449.48 219.656C448.391 219.87 447.144 219.965 445.698 219.965H440.778ZM449.454 199.438H445.349V199.43H433.922V246.828H440.778V225.314H445.523C446.853 225.314 448.058 225.44 449.122 225.709C451.591 226.396 452.978 228.427 453.302 231.84L453.535 236.28L453.784 240.546C453.851 241.866 453.984 242.956 454.166 243.801L454.848 246.828H461.995C461.463 245.168 461.139 243.896 460.998 243.035C460.757 241.834 460.549 240.167 460.441 238.018L460.159 232.448C460.084 230.749 459.934 229.311 459.693 228.047C459.344 226.167 458.422 224.8 456.943 223.955C455.928 223.362 454.241 222.951 451.923 222.706C455.663 222.098 458.198 220.936 459.502 219.19C460.823 217.366 461.497 214.703 461.497 211.234C461.439 204.59 458.854 200.813 453.793 199.881C452.479 199.604 451.025 199.454 449.454 199.438ZM480.536 199.439L493.476 240.279V199.439H499.908V246.828H489.154L476.223 206.431V246.828H469.774V199.439H480.536ZM526.743 230.663H515.856L521.474 205.42L526.743 230.663ZM526.112 199.439H517.095L505.601 246.836H512.249L514.677 236.02H528.015L530.383 246.836H537.597L526.112 199.439ZM571.33 199.439V204.788H559.803V246.828H552.946V204.788H541.42V199.439H571.33ZM578.419 199.439H585.267V246.836H578.419V199.439ZM599.836 230.568C599.86 234.55 600.117 237.141 600.574 238.326C601.054 239.528 601.956 240.476 603.244 241.163C604.538 241.842 605.868 242.198 607.232 242.159C608.479 242.198 609.686 241.914 610.827 241.321C613.006 240.286 614.189 238.484 614.405 235.885C614.511 234.416 614.587 232.63 614.61 230.576V214.703C614.634 211.274 614.306 208.864 613.621 207.474C612.526 205.206 610.406 204.1 607.214 204.108C605.991 204.108 604.837 204.353 603.748 204.819C601.505 205.736 600.269 207.584 599.994 210.326C599.854 211.582 599.784 213.036 599.819 214.695V230.568H599.836ZM592.985 214.727C593.003 210.847 593.319 208.011 593.898 206.186C594.818 203.35 596.844 201.319 599.971 200.102C602.219 199.194 604.65 198.759 607.25 198.759C609.814 198.759 612.25 199.194 614.528 200.102C617.585 201.319 619.605 203.35 620.536 206.186C621.128 207.98 621.444 210.832 621.491 214.727V230.607C621.491 233.483 621.362 235.964 621.104 238.018C620.331 244.292 615.775 247.468 607.449 247.515C601.388 247.515 597.342 246.045 595.292 243.107C593.735 240.894 592.962 236.73 592.997 230.615V214.727H592.985ZM652.631 240.279L639.702 199.439H628.945V246.828H635.386V206.431L648.327 246.828H659.084V199.439H652.631V240.279ZM675.029 230.663H685.927L680.663 205.42L675.029 230.663ZM676.253 199.439H685.277L696.778 246.836H689.557L687.186 236.02H673.858L671.422 246.836H664.764L676.253 199.439ZM709.719 199.439H702.862V246.828H724.247V241.487H709.719V199.439Z" fill="#00588F"/><path d="M776.124 23.8475V0H779.781L788.14 21.0471H788.197L796.384 0H800V23.8475H797.633V2.58921H797.543L789.208 23.8475H786.948L778.581 2.58921H778.515V23.8475H776.124Z" fill="#00588F"/><path d="M754.286 0.0108071H772.795V1.93329H764.748V23.8471H762.373V1.93329H754.286V0.0108071Z" fill="#00588F"/></svg>';
+function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'portal.html';}else{location.href='portal.html';}}
+
+/* SOP catalog (from the i3 Revenue Generation SOP) mapped to Vision agents */
+var SOPS=[
+  ["100","Platform Integration & Data Sources","Foundation","Connect Salesforce, ERP, quoting, 6sense, marketing, meetings and support into one governed data layer."],
+  ["200","Market Intelligence & Opportunity Creation","V-Target","Identify high-probability opportunities before competitors using AI market intelligence. (Worked example below.)"],
+  ["300","Buying Committee Discovery","V-Target","Map the full buying committee for each opportunity — roles, influence, and pain points."],
+  ["400","Customer Engagement","V-Reach / V-Guide","Engage the right people with the right message on the right channel; warm the market."],
+  ["500","Discovery & Qualification","V-Guide","Discover needs and qualify against the Ideal Customer Profile; separate prospects from dead-ends."],
+  ["600","Solution Design","V-Prove","Design the solution and the equipment that fits the customer's problem."],
+  ["700","Proposal Generation","V-Prove / V-Close","Generate a best-practice proposal automatically (terms, pricing, scope)."],
+  ["800","Privacy & Compliance","V-Guard (Magenta)","Embed privacy & cybersecurity (Law 25 / GDPR) by design; signage + PIA before POC approval."],
+  ["900","Deal Management","V-Close","Manage the deal to close — pricing, battlecards, contract, signatures, Salesforce/Automatica sync."],
+  ["1000","Customer Success","Success agent","Onboard and grow the customer; reference and referral generation."],
+  ["1100","Organizational Learning","Learning agent","Learn from every win/loss and interaction to improve the platform."],
+  ["1200","Performance Management","Manager agent","Coach and manage performance from predictive insights, not historical reports."],
+  ["1300","AI Governance","Governance","Govern the AI — approvals, guardrails, auditability, human-in-the-loop."]
+];
+var TMPL=["Business Objective","Trigger","Inputs","AI Responsibilities","Human Responsibilities","Workflow","Outputs","System Integrations","Exception Handling","KPIs","Future Enhancements","AI Agent Spec"];
+document.getElementById('sopList').innerHTML=SOPS.map(function(s,i){
+  return '<div class="sop" id="sop'+i+'"><div class="hd" onclick="document.getElementById(\'sop'+i+'\').classList.toggle(\'open\')">'+
+    '<div class="no">SOP '+s[0]+'</div><div class="nm">'+s[1]+'</div>'+
+    '<div style="display:flex;gap:10px;align-items:center"><span class="ag">'+s[2]+'</span><span class="car">›</span></div></div>'+
+    '<div class="bd"><div class="obj"><b>Objective:</b> '+s[3]+'</div>'+
+    '<div style="margin-top:8px;font-size:12px;color:var(--muted)">Authored to the standard SOP template:</div>'+
+    '<div class="tmpl">'+TMPL.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div></div>';
+}).join('');
+
+/* 7-stage sales cycle (from the i3 Sales Process 2021) */
+var CYCLE=[
+  ["1","Sales Prospecting","Research and pursue potential customers that match the ICP; build the pipeline."],
+  ["2","Lead Generation","Marketing + sales introduce prospects to i3 to generate authentic interest (content, social, ads, ABS)."],
+  ["3","Prospect Qualification","Separate MQLs from SQLs; qualify against ICP and readiness to buy."],
+  ["4","Sales Presentation","Pitch the solution to a qualified opportunity; anchor / seasoned BDM + SE join to close."],
+  ["5","Objection Handling","Answer questions, alleviate concerns, and move the buyer to the next stage."],
+  ["6","Closing the Deal","Handle final questions and secure commitment to purchase."],
+  ["7","Reference Generation","Onboard via CS, keep communication open, and earn references, referrals and customer stories."]
+];
+document.getElementById('cycle').innerHTML=CYCLE.map(function(c){
+  return '<div class="stagerow"><div class="sn">'+c[0]+'</div><div><div class="st">'+c[1]+'</div><div class="sd">'+c[2]+'</div></div></div>';
+}).join('');
+</script>
+</body>
+</html>

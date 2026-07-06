@@ -14,7 +14,7 @@ Preview: `https://htmlpreview.github.io/?https://github.com/hienbui631993/i3-ai-
 > Each **▸** is a click; each **“…”** is your line. Total ~5 min.
 
 ### 0 · Open with the pitch (15 sec)
-“This is Vision — the sales agent that lives inside iHost. It tells the rep what to
+“This is Vision — the sales agent that lives inside i3Host. It tells the rep what to
 do at every stage, from onboarding to close.”
 
 ### 1 · The admin sets a rep up (45 sec)
@@ -53,7 +53,7 @@ the email — title and position — and flags who’s a supporter.** It recomme
 the **cybersecurity forms** — all interconnected.”
 
 ### 5 · Close the loop (20 sec)
-“Lead to close, one agent, inside iHost — for our reps, our integrators, and the
+“Lead to close, one agent, inside i3Host — for our reps, our integrators, and the
 agents we choose to give partners. Everything the rep enters stays with i3.”
 
 **If asked “is this real?”** → “Working prototype. The flow, logic and i3 content
@@ -115,7 +115,7 @@ Click **Open Magenta portal →** (or the Magenta tab).
   > "The moment a privacy-sensitive solution lands on the quote, Magenta triggers —
   > this is the gate in our POC due diligence."
 - Click **Open Magenta review** → watch the **function-call trace** pull from
-  Salesforce, iHost, Automatica and the GoToMeeting transcript.
+  Salesforce, i3Host, Automatica and the GoToMeeting transcript.
 - Answer the 4 questions → show the **decision + signage + PIA**, then **Apply to
   quote**.
   > "Privacy step just went from ~3–5 days to ~8 minutes — and it's written back to
@@ -147,7 +147,7 @@ Open the **Privacy Compliance Agent** tab.
 > "Same nine-agent system, one portal. It captures what our best people do,
 > applies it consistently, proves the work, and shortens the cycle. This is a
 > working prototype — the next step is wiring these agents to Salesforce,
-> Automatica, iHost, 6sense and GoToMeeting for real. See `BUILD_PLAN.md`."
+> Automatica, i3Host, 6sense and GoToMeeting for real. See `BUILD_PLAN.md`."
 
 ---
 
