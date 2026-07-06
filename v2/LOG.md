@@ -9,9 +9,10 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ### Added — `v2/journey.html` artifacts (a deliverable per stage)
 - Every one of the 8 journey stages now carries the concrete **artifact /
-  deliverable** the rep produces at that step, shown as a **"Deliverable ·
-  artifact"** bar under the three lanes. Clicking **Preview** opens a branded
-  document modal (dark-blue i3 header, meta chips, sectioned content).
+  deliverable** the rep produces at that step, shown **inline as a section**
+  under the three lanes: a "Deliverable · artifact" header plus the embedded
+  document (meta chips + two-column sectioned content). Always visible, no
+  popup — it updates with the active stage.
 - The artifacts: 30-Day Business Plan + SWOT (V-Start) · Buying-Group Map +
   Intent Brief (V-Target) · Outreach Sequence + Qualification (V-Reach/V-Guide)
   · Presentation Deck + Transcript (V-Present) · POC Document, Gardewine
