@@ -69,10 +69,10 @@ spec for the build — see `ARCHITECTURE.md` and `BUILD_PLAN.md`.”
 A click-by-click script for the whole portal (engine, Magenta, manager view).
 
 ## Open these tabs first
-1. **Portal** — `v2/portal.html`
+1. **Portal** — `v2/index.html`
 2. **V engine** — `v2/v-vision-sales-engine.html`
-3. **Magenta** — `v2/magenta-portal-simulation.html`
-4. **Privacy agent** — `v2/i3-privacy-compliance-agent.html`
+3. **Magenta · Privacy & Cybersecurity Agent** — `v2/i3-privacy-compliance-agent.html`
+   (merged; the old `magenta-portal-simulation.html` login/quote sim was retired)
 
 (Branch preview: `https://htmlpreview.github.io/?https://github.com/hienbui631993/i3-ai-sales-assistance/blob/claude/v2/v2/portal.html`)
 

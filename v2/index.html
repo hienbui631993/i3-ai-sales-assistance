@@ -95,8 +95,8 @@
       <div class="accent"></div><div class="go">→</div>
       <div class="ico">🧠</div>
       <h3><span class="vhi">V</span>ision Sales Engine</h3>
-      <p>The agentic engine — 9 specialized agents run your motion from onboarding to close. Load an onboarding doc and watch Vision think through the pipeline.</p>
-      <div class="tags"><span class="tag">Onboarding → Close</span><span class="tag">9 agents</span><span class="tag">Segments</span></div>
+      <p>The agentic engine — 9 specialized agents run your motion from onboarding to close. Load an onboarding doc and watch Vision think through the pipeline. Includes the <b>Manager dashboard</b> (Engine ⇄ Manager toggle).</p>
+      <div class="tags"><span class="tag">Onboarding → Close</span><span class="tag">9 agents</span><span class="tag">Manager dashboard</span></div>
     </a>
 
     <a class="app v" href="vision-sales-agent.html" data-target="vision-sales-agent.html">
@@ -107,28 +107,12 @@
       <div class="tags"><span class="tag">Stage-first</span><span class="tag">Start anywhere</span><span class="tag">Inside i3Host</span></div>
     </a>
 
-    <a class="app mag" href="magenta-portal-simulation.html" data-target="magenta-portal-simulation.html">
+    <a class="app mag" href="i3-privacy-compliance-agent.html" data-target="i3-privacy-compliance-agent.html">
       <div class="accent"></div><div class="go">→</div>
       <div class="ico">🛡️</div>
-      <h3>Magenta · Privacy Co-Pilot</h3>
-      <p>Rides inside i3Host quoting. The moment a privacy-sensitive solution lands on a quote, Magenta runs the Law 25 / GDPR review so the deal keeps moving.</p>
-      <div class="tags"><span class="tag">Triggered in quoting</span><span class="tag">Law 25 · GDPR</span><span class="tag">Signage + PIA</span></div>
-    </a>
-
-    <a class="app priv" href="i3-privacy-compliance-agent.html" data-target="i3-privacy-compliance-agent.html">
-      <div class="accent"></div><div class="go">→</div>
-      <div class="ico">⚖️</div>
-      <h3>Privacy Compliance Agent</h3>
-      <p>The conversational deep-dive. Interviews the rep, runs the Four-Part Necessity &amp; Proportionality Test, and generates the signage and PIA starter.</p>
-      <div class="tags"><span class="tag">Conversational</span><span class="tag">4-Part Test</span><span class="tag">POC due diligence</span></div>
-    </a>
-
-    <a class="app mgr partner-can-hide" href="v-vision-sales-engine.html#manager" id="mgrCard" data-target="v-vision-sales-engine.html" data-hash="#manager" onclick="try{localStorage.setItem('v_view','manager')}catch(e){}">
-      <div class="accent"></div><div class="go">→</div>
-      <div class="ico">📊</div>
-      <h3>Manager Dashboard</h3>
-      <p>Team read-out: who's onboarding, readiness scores, weekly reflection status, mentor progress, and where every rep sits in the pipeline.</p>
-      <div class="tags"><span class="tag">Team KPIs</span><span class="tag">Rep roster</span><span class="tag">Reflections</span></div>
+      <h3>Magenta · Privacy &amp; Cybersecurity Agent</h3>
+      <p>Rides inside i3Host quoting — the moment a privacy-sensitive solution lands on a quote, Magenta runs the review. Interviews the rep, applies Law 25 / GDPR / PIPEDA, and generates the signage, PIA and cyber steps.</p>
+      <div class="tags"><span class="tag">Triggered in quoting</span><span class="tag">Law 25 · GDPR</span><span class="tag">Signage + PIA + cyber</span></div>
     </a>
 
     <!-- SOP card hidden from the portal (sop.html still exists; restore this card to show it again)
@@ -210,11 +194,11 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
   }
 })();
 
-/* role toggle — partners don't see the manager dashboard */
+/* role toggle */
 function setRole(role){
   document.getElementById('r-rep').classList.toggle('on',role==='rep');
   document.getElementById('r-partner').classList.toggle('on',role==='partner');
-  document.getElementById('mgrCard').style.display = role==='partner' ? 'none' : 'block';
+  var m=document.getElementById('mgrCard'); if(m) m.style.display = role==='partner' ? 'none' : 'block';
 }
 </script>
 <!-- i3 custom chat widget (Vision) — built on the ClaudeChat client SDK -->
