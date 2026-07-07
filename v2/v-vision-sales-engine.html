@@ -391,7 +391,7 @@ var ENTRIES=[
 var SEGMENTS=[
   {id:"cstore", nm:"C-Store"},{id:"grocery", nm:"Grocery"},{id:"qsr", nm:"Quick Service Restaurants"},
   {id:"commercial", nm:"Commercial"},
-  {id:"education", nm:"Education"},{id:"hospital", nm:"Hospital"},
+  {id:"education", nm:"Education", note:"Kindergarten–Grade 12 (K–12) only"},{id:"hospital", nm:"Hospital"},
   {id:"integrator", nm:"Integrator"}
 ];
 
@@ -454,7 +454,7 @@ function buildChips(){
     return '<div class="chip '+(sel.entry===e.id?'on':'')+'" onclick="pickEntry(\''+e.id+'\')">'+e.nm+'<small>'+e.sub+'</small></div>';
   }).join('');
   document.getElementById('segChips').innerHTML=SEGMENTS.map(function(s){
-    return '<div class="chip '+(sel.seg===s.id?'on':'')+'" onclick="pickSeg(\''+s.id+'\')">'+s.nm+'</div>';
+    return '<div class="chip '+(sel.seg===s.id?'on':'')+'" onclick="pickSeg(\''+s.id+'\')">'+s.nm+(s.note?'<small>'+s.note+'</small>':'')+'</div>';
   }).join('');
   var e=ENTRIES.find(function(x){return x.id===sel.entry});
   var s=SEGMENTS.find(function(x){return x.id===sel.seg});

@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Education scope note (`v-vision-sales-engine.html`)
+- Added a sub-label under the **Education** segment chip: **"Kindergarten–Grade
+  12 (K–12) only"**, to make the scope explicit. Segment chips now render an
+  optional `note`.
+
 ### Changed — sales-engine segments (`v-vision-sales-engine.html`)
 - Broke **Retail** into **C-Store**, **Grocery**, and **Quick Service
   Restaurants**; renamed **School → Education** and added **Hospital**
