@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Onboarding is the first stage (`vision-sales-agent.html`)
+- Moved **My Onboarding** to the front of the stage list and renumbered so it
+  is step 1 (Onboarding → Prospecting → Presentation → POC → Privacy & Cyber →
+  Closing).
+
 ### Fixed — keep the "i3" brand token lowercase in UPPERCASE labels
 - In uppercase-transformed text (hero eyebrows, section labels, etc.) the brand
   token "i3" was rendering as "I3". Added a small self-contained script on every

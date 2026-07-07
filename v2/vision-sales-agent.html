@@ -288,18 +288,18 @@ function renderPartnerHome(){
 
 /* ===== stages ===== */
 var STAGES=[
-  {id:"prospect", n:1, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
+  {id:"onboard", n:1, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
+    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
+  {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
     intro:"I've already got your segment and your LinkedIn. Run it — I'll tell you who to call first, in what order, and how to sharpen your presence."},
-  {id:"present", n:2, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
+  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
     intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
-  {id:"poc", n:3, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
+  {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
-  {id:"legal", n:4, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
+  {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
     intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
-  {id:"close", n:5, ic:"🤝", nm:"Closing", sub:"Out-position & close", partner:false,
-    intro:"Pick who we're up against. I'll tell you how to beat them and what to do to close."},
-  {id:"onboard", n:6, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
-    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."}
+  {id:"close", n:6, ic:"🤝", nm:"Closing", sub:"Out-position & close", partner:false,
+    intro:"Pick who we're up against. I'll tell you how to beat them and what to do to close."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
