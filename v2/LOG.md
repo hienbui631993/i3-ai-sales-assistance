@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Removed — `v2/chat.html` (Chat with Me page)
+- Deleted the standalone **Chat with Me** page and its portal card. The floating
+  **Vision chat widget** (`chat-widget.js`) still loads on every remaining page,
+  so live chat is unchanged — only the dedicated landing page was removed.
+
 ### Changed — `portal.html` → **`index.html`** (portal is now the site root)
 - Renamed the portal to `index.html` so the site root (`/`) serves it. Repointed
   every "back to portal" reference — `goPortal()` on all pages now navigates to
