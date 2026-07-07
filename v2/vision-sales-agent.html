@@ -292,8 +292,8 @@ function renderPartnerHome(){
 var STAGES=[
   {id:"onboard", n:1, ic:"🚀", nm:"Onboarding", sub:"Ramp & training", partner:false,
     intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
-  {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
-    intro:"I've already got your segment and your LinkedIn. Run it — I'll tell you who to call first, in what order, and how to sharpen your presence."},
+  {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"Marketing agent → 6sense leads → ready to present", partner:false,
+    intro:"After onboarding, my marketing agent goes and finds leads for you — pulled from 6sense and our data. Run it and I'll hand you a short list with what I recommend; mark one Ready to present and I'll carry it into the presentation."},
   {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
     intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
   {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
@@ -325,8 +325,8 @@ function openStage(id){
 function renderInputs(id){
   var box=document.getElementById('stInputs'),h='';
   if(id==='prospect'){
-    h='<div class="saveNote">Using your segment <b>'+rep.seg+'</b> and your LinkedIn. I\'ll assess your presence and map the buying group — just run it.</div>'+
-      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'prospect\')">Assess me &amp; find the buying group</button>';
+    h='<div class="saveNote">Using your territory <b>'+rep.terr+'</b> and segment <b>'+rep.seg+'</b>. My marketing agent pulls your leads from 6sense (following the existing 6-month filter) and recommends who to work first.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'prospect\')">Find my leads</button>';
   } else if(id==='present'){
     h='<div class="upload"><div class="di">📄</div><div class="dt">Upload the transcript of your presentation (Teams / GoToMeeting). No file handy? Use a sample so you can see what Vision does.</div>'+
       '<button class="btn p" onclick="runStage(\'present\')">Use sample transcript</button></div>'+
@@ -364,13 +364,14 @@ function runStage(id){
   },560);
 }
 var THINK={
-  prospect:["reading your LinkedIn presence…","scanning 6sense intent + ZoomInfo contacts","mapping the buying group","building your next-day actions"],
+  prospect:["handing off to the marketing agent…","pulling intent from 6sense (6-month filter)","de-duping against our data + Sales Navigator","scoring & shortlisting your leads","writing the recommendation"],
   present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["running the standard cyber checklist (every deal)…","checking the site's privacy requirement","applying Law 25 / GDPR where it applies","drafting signage + PIA"],
   close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
+function leadReady(b){ b.textContent='Ready ✓'; b.disabled=true; openStage('present'); }
 
 /* ===== helpers ===== */
 function kv(k,v){return '<div class="kv"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>';}
@@ -397,24 +398,28 @@ var OUTPUT={
   prospect:function(){
     var seg=rep.seg;
     var assoc=ASSOC[seg]||["industry associations"];
-    var bg=[
-      ["Operations VP","High","researching loss-prevention & ops visibility","Lead with shrink + reporting managers will use"],
-      ["IT Director","Medium","comparing cloud VMS + integration","Integration + data residency story"],
-      ["Loss Prevention Mgr","High","incidents up YoY","Bring incident-reduction proof from a similar "+seg],
-      ["CFO / Finance","Low","budget owner","ROI + price-to-own that scales company-wide"]
+    var leads=[
+      ["Metro Retail Group","92","surging on 'retail video analytics' (6sense)","Call first — highest intent this week"],
+      ["Northline Grocery","78","pricing page ×3 this week","Warm with the shrink one-pager, then call"],
+      ["Harbour C-Stores","74","just hired an LP director","Lead with loss prevention + ops insight"],
+      ["Parkside QSR","66","comparing cloud VMS vendors","Send the integration + data-residency note"],
+      ["Cedar Pharmacy","61","renewal window in ~90 days","Nurture now; book a Q3 review"]
     ];
-    return sec("Your LinkedIn — presence assessment",
-      '<div class="grid2">'+kv("Relevance to "+seg,"62 / 100 · room to grow")+kv("Posting cadence","Low — 1 post / 6 wks")+kv("Connections in "+seg,"~9% of network")+kv("Headline","Generic — not segment-specific")+'</div>'+
-      '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week — reshare i3 '+seg+' wins; comment on '+assoc[0]+' threads.</li><li>Grow '+seg+' connections: target the buying-group roles below.</li></ul>'+
-      '<div style="margin-top:10px"><span class="badge warn">Action</span> Book a session with Marketing (Edward\'s team) to clean up your profile &amp; plan social outreach. '+
-      '<button class="btn p sm" onclick="this.outerHTML=\'<span class=&quot;badge ok&quot;>Requested ✓</span>\'">Book with Marketing</button></div>')+
-    sec("Get more engaged with your market",
-      '<ul class="steps"><li>Join / engage: '+assoc.map(function(a){return '<b>'+a+'</b>'}).join(', ')+' — comment, attend, get invited to the right rooms.</li><li>Follow target accounts &amp; their execs; warm them before outreach.</li></ul>')+
-    sec("The buying group in "+seg+" (don't chase just one)",
-      '<table class="tbl"><tr><th>Decision maker</th><th>Intent</th><th>Why now</th><th>How to approach</th></tr>'+
-      bg.map(function(r){var b=r[1]==='High'?'hi':r[1]==='Medium'?'warn':'lock';return '<tr><td><b>'+r[0]+'</b></td><td><span class="badge '+b+'" style="font-size:9px">'+r[1].toUpperCase()+'</span></td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>'}).join('')+'</table>'+
-      '<div style="font-size:12px;color:var(--muted);margin-top:7px">Pulled from 6sense intent + ZoomInfo contacts.</div>')+
-    sec("Do this tomorrow",'<ol class="steps"><li>Call the Operations VP + Loss Prevention Mgr (highest intent) first.</li><li>Send the IT Director the integration + data-residency one-pager.</li><li>Log every touch here — Vision verifies it before it counts.</li></ol>')+
+    return sec("Your leads — pulled by the marketing agent",
+      '<div style="font-size:13px;margin-bottom:9px">Here\'s what I got for you in <b>'+seg+'</b> · '+rep.terr+' — <b>5 leads</b> from 6sense + our data, ranked by intent. Mark one <b>Ready to present</b> and I\'ll carry it into the presentation.</div>'+
+      '<table class="tbl"><tr><th>Account</th><th>Intent</th><th>Signal</th><th>What I recommend</th><th></th></tr>'+
+      leads.map(function(l){var b=(+l[1])>=80?'hi':(+l[1])>=70?'warn':'lock';
+        return '<tr><td><b>'+l[0]+'</b></td><td><span class="badge '+b+'" style="font-size:9px">'+l[1]+'</span></td><td>'+l[2]+'</td><td>'+l[3]+'</td>'+
+          '<td><button class="btn p sm" onclick="leadReady(this)">Ready to present →</button></td></tr>';
+      }).join('')+'</table>')+
+    sec("Sharpen your presence (while marketing warms them)",
+      '<div class="grid2">'+kv("LinkedIn relevance to "+seg,"62 / 100 · room to grow")+kv("Posting cadence","Low — 1 / 6 wks")+'</div>'+
+      '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week; engage '+assoc[0]+' threads and follow your 5 accounts before outreach.</li></ul>')+
+    sec("Where leads come from (hardest → easiest)",
+      '<ol class="steps"><li><b>Brand-new</b> — SEO / cold outreach (hardest).</li><li><b>References</b> — people you already know.</li><li><b>Integrators / channel partners</b> — they bring you into their accounts if you make them look good.</li><li><b>Trade shows</b> — handled by marketing.</li></ol>'+
+      '<div style="font-size:12px;color:var(--muted);margin-top:6px">Goal: keep lead-gen <b>systematic and constant</b>, not sporadic — drip campaigns (HubSpot) + Sales Navigator feed the top of the funnel.</div>')+
+    sec("Data &amp; cost — how we pull 6sense",
+      '<div style="font-size:12px;color:#8a5d05;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:8px;padding:9px 11px"><b>Ops note:</b> 6sense API bills <b>credits per query</b> — uncontrolled it can run <b>$10–20K/mo</b>. To start, pull a <b>monthly / bi-monthly manual export</b> (free) using the existing <b>6-month filter</b>, and optimise API calls before automating. Data-pulling can later be a <b>concierge service</b> for integrators who hit their numbers (ZoomInfo + 6sense already cost i3 $100K+/yr combined).</div>')+
     saveBar("your accounts & contacts stay with i3");
   },
   present:function(){

@@ -7,6 +7,17 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Prospecting & Leads per Vy (`vision-sales-agent.html`)
+- Reframed as the **marketing agent** pulling leads from **6sense** + our data:
+  returns a **5-lead recommended shortlist** (intent score, signal, what I
+  recommend); each lead has a **"Ready to present →"** button that hands off to
+  the Presentation stage. Added the **lead-source ranking** (hardest→easiest:
+  SEO/cold · references · integrators/partners · trade shows; goal: systematic &
+  constant, HubSpot drip + Sales Navigator) and a **6sense data/cost ops note**
+  (credits per query, ~$10–20K/mo uncontrolled; start with a monthly/bi-monthly
+  manual export on the existing 6-month filter; later a concierge service for
+  integrators). Kept a condensed LinkedIn-presence section.
+
 ### Changed — merged Magenta into the Privacy & Cybersecurity Agent (removed login)
 - Consolidated the two privacy pages into **one**. Deleted
   `magenta-portal-simulation.html` (its login/quote-builder sim is retired), and
