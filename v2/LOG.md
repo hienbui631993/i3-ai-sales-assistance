@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — `portal.html` → **`index.html`** (portal is now the site root)
+- Renamed the portal to `index.html` so the site root (`/`) serves it. Repointed
+  every "back to portal" reference — `goPortal()` on all pages now navigates to
+  `index.html`. No `portal.html` references remain.
+
 ### Changed — renamed "The Deal Journey" → **ROS** (Revenue Operating System)
 - Renamed `journey.html` → `ros.html` and rebranded the page: topbar now reads
   **Vision · ROS / Revenue Operating System**, the eyebrow is **i3 ROS ·

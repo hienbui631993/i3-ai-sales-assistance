@@ -207,7 +207,7 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
   if(hp){
     var inner=location.search.slice(1);
     try{ inner=decodeURIComponent(inner); }catch(e){}
-    baseDir=inner.replace(/[^\/]*$/,'');          // .../v2/portal.html -> .../v2/
+    baseDir=inner.replace(/[^\/]*$/,'');          // .../v2/index.html -> .../v2/
   }
   var cards=document.querySelectorAll('a.app[data-target]');
   for(var i=0;i<cards.length;i++){
