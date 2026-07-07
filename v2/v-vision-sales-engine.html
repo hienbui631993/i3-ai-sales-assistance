@@ -243,7 +243,7 @@
   <div class="sep"></div>
   <div class="prod"><span class="vhi">V</span>ision<small>Agentic Sales Engine</small></div>
   <div class="right">
-    <span class="vtoggle"><button class="vt on" id="vt-engine" onclick="switchView('engine')">▶ Engine</button><button class="vt" id="vt-manager" onclick="switchView('manager')">▦ Manager</button></span>
+    <span class="vtoggle"><button class="vt on" id="vt-engine" onclick="switchView('engine')">▶ Engine</button><button class="vt" id="vt-manager" onclick="switchView('manager')">▦ Manager</button><button class="vt" id="vt-process" onclick="goProcess()" title="Open the Sales Process (Rep · AI · Manager)">↗ Process</button></span>
     <span class="pill">North America · v1</span>
     <span class="pill live" id="livePill"><span class="d"></span>Engine idle</span>
     <button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button>
@@ -341,6 +341,7 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 
 /* click the i3 logo -> back to the portal (works self-hosted and via htmlpreview) */
 function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'index.html';}else{location.href='index.html';}}
+function goProcess(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'process.html';}else{location.href='process.html';}}
 
 /* ===== agents (areas), grounded in the i3 Agentic Sales Assistance doc ===== */
 var AGENTS=[

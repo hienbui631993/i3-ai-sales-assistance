@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Sales Process reachable from the Sales Engine
+- Removed the separate **Sales Process** portal card and added an **↗ Process**
+  button to the Engine's view switcher (next to Engine / Manager) that opens
+  `process.html`. Noted it on the Sales Engine card. `process.html` is unchanged.
+
 ### Changed — Manager Dashboard folded into the Sales Engine card
 - Removed the separate **Manager Dashboard** portal card — the dashboard already
   lives inside the Sales Engine (Engine ⇄ Manager toggle / `#manager`). Noted it
