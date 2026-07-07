@@ -7,6 +7,18 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — `portal.html` → **`index.html`** (portal is now the site root)
+- Renamed the portal to `index.html` so the site root (`/`) serves it. Repointed
+  every "back to portal" reference — `goPortal()` on all pages now navigates to
+  `index.html`. No `portal.html` references remain.
+
+### Changed — renamed "The Deal Journey" → **ROS** (Revenue Operating System)
+- Renamed `journey.html` → `ros.html` and rebranded the page: topbar now reads
+  **Vision · ROS / Revenue Operating System**, the eyebrow is **i3 ROS ·
+  Revenue Operating System**, and the title/heading use **ROS**. Content
+  (8-stage animation, three lanes, per-stage artifacts) is unchanged. Updated
+  the portal card to **ROS** and pointed it at `ros.html`.
+
 ### Changed — replaced the vendor widget with our own `v2/chat-widget.js`
 - Built a **custom Vision chat widget** on the ClaudeChat **client SDK**
   (`client.js`) instead of the vendor's pre-built floating widget. New
