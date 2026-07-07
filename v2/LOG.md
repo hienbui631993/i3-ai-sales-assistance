@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Removed — the Vision chat widget
+- Removed the floating chat widget from every page (deleted the `client.js` +
+  `chat-widget.js` includes) and deleted `v2/chat-widget.js`. No chat launcher
+  loads anywhere now.
+
 ### Changed — segment "Hospital" → "Institution"
 - Renamed the Hospital segment to **Institution**. Segments: C-Store / QSR ·
   Grocery · Commercial · Education · Institution · Integrator.
