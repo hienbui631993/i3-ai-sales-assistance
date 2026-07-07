@@ -7,6 +7,16 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — sales-engine segments (`v-vision-sales-engine.html`)
+- Broke **Retail** into **C-Store**, **Grocery**, and **Quick Service
+  Restaurants**; renamed **School → Education** and added **Hospital**
+  (Commercial and Integrator kept). Segment list is now C-Store · Grocery · QSR ·
+  Commercial · Education · Hospital · Integrator.
+- Updated the default/New Hire segment to C-Store, the roster reps (Paul Kerling
+  → C-Store, Tony Thomas → Education), and made the rep→segment resolver look up
+  by display name so labels like "C-Store" map to the right id. Verified all 7
+  chips render/select and running a rep resolves a valid segment — no JS errors.
+
 ### Removed — `v2/chat.html` (Chat with Me page)
 - Deleted the standalone **Chat with Me** page and its portal card. The floating
   **Vision chat widget** (`chat-widget.js`) still loads on every remaining page,
