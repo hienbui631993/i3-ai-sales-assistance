@@ -7,6 +7,12 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Manager Dashboard folded into the Sales Engine card
+- Removed the separate **Manager Dashboard** portal card — the dashboard already
+  lives inside the Sales Engine (Engine ⇄ Manager toggle / `#manager`). Noted it
+  on the Sales Engine card (copy + a "Manager dashboard" tag) and null-guarded
+  the portal role toggle that referenced the removed card.
+
 ### Changed — Prospecting & Leads per Vy (`vision-sales-agent.html`)
 - Reframed as the **marketing agent** pulling leads from **6sense** + our data:
   returns a **5-lead recommended shortlist** (intent score, signal, what I
