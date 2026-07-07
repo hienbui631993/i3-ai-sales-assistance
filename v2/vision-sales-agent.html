@@ -128,7 +128,9 @@
   .stage .step{position:absolute;top:13px;right:14px;font-size:11px;font-weight:800;color:#9fb8cf}
   .stage.locked{opacity:.55;cursor:not-allowed}.stage.locked:hover{transform:none;box-shadow:none;border-color:var(--line)}
   .lock{position:absolute;top:13px;right:14px;font-size:10.5px;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
-  .back{background:none;border:none;color:var(--brand);font-weight:700;font-size:13.5px;cursor:pointer;padding:0;margin-bottom:14px}
+  .back{display:inline-flex;align-items:center;gap:8px;background:var(--inbg);border:1px solid var(--inbd);color:var(--brand);font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;padding:9px 15px;border-radius:10px;margin-bottom:16px;transition:.15s;box-shadow:0 1px 2px rgba(0,40,75,.06)}
+  .back:hover{background:var(--brand);border-color:var(--brand);color:#fff;transform:translateX(-2px);box-shadow:0 4px 12px rgba(0,88,143,.28)}
+  .back .ba{font-size:15px;line-height:1}
   .saveNote{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);background:var(--inbg);border:1px solid var(--inbd);border-radius:10px;padding:9px 12px;margin-top:14px}
   .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
   .hidden{display:none}
@@ -157,7 +159,7 @@
   <div id="view-home"></div>
   <!-- STAGE -->
   <div id="view-stage" class="hidden">
-    <button class="back" onclick="goHome()">← Back to dashboard</button>
+    <button class="back" onclick="goHome()"><span class="ba">←</span> Back to dashboard</button>
     <div class="card">
       <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div></div>
       <div class="body">
@@ -298,8 +300,8 @@ var STAGES=[
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
   {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
     intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
-  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Adoption · references · referrals", partner:false,
-    intro:"The deal's won — now let's make it stick. I'll hand off to Customer Success, keep an eye on adoption, and line up references and referrals."}
+  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Timed POC close · follow-through · training · upsell", partner:false,
+    intro:"Closing here is a tight timeline on the POC — the proof of concept is the close. I'll set the decision deadline, then line up the follow-through: follow-up, training, professional services and the right upsells."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
@@ -338,8 +340,9 @@ function renderInputs(id){
     h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
       '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
   } else if(id==='close'){
-    h='<label class="f"><span class="l">Account health</span><select id="i_health"><option>🟢 Green — healthy</option><option>🟡 Yellow — watch</option><option>🔴 Red — at risk</option></select></label>'+
-      '<button class="btn p" onclick="runStage(\'close\')">Build success plan</button>';
+    h='<label class="f"><span class="l">POC decision deadline</span><select id="i_deadline"><option>14 days</option><option selected>30 days</option><option>45 days</option></select></label>'+
+      '<label class="f"><span class="l">Account health</span><select id="i_health"><option>🟢 Green — healthy</option><option>🟡 Yellow — watch</option><option>🔴 Red — at risk</option></select></label>'+
+      '<button class="btn p" onclick="runStage(\'close\')">Build close &amp; success plan</button>';
   } else if(id==='onboard'){
     h='<div class="upload"><div class="di">🚀</div><div class="dt">Load your onboarding plan and I\'ll turn it into your ramp.</div>'+
       '<button class="btn p" onclick="runStage(\'onboard\')">Load onboarding plan</button></div>';
@@ -365,7 +368,7 @@ var THINK={
   present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["checking jurisdiction…","classifying solutions","applying Law 25 / GDPR","drafting signage + PIA"],
-  close:["handing off to Customer Success…","tracking adoption & account health","spotting expansion signals","lining up references & referrals"],
+  close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
 
@@ -459,9 +462,13 @@ var OUTPUT={
       saveBar();
   },
   close:function(){
+    var dl=val('i_deadline')||"30 days";
     var health=val('i_health')||"🟢 Green — healthy";
-    return sec("Account health",'<div class="kv"><div class="k">Signal</div><div class="v" style="font-weight:600;font-size:13px">'+health+' · monitored by Vision</div></div>')+
-      sec("Customer success plan",'<ul class="steps"><li>Hand off to Customer Success; keep comms open.</li><li>Track adoption and time-to-value; flag risk early.</li><li>Confirm the outcome against the POC success metric.</li></ul>')+
+    return sec("Timed POC close",'<div class="kv"><div class="k">The POC is the close</div><div class="v" style="font-weight:600;font-size:13px">Put a hard decision date on the proof of concept — drive to <b>Go / No-Go within '+dl+'</b>. The working POC plus a tight timeline is what moves the customer to a decision.</div></div>')+
+      sec("Follow-up &amp; follow-through",'<ul class="steps"><li>Confirm the win against the POC success metric.</li><li>Stay on it as the solution rolls out — check-ins + adoption.</li><li>Account health: <b>'+health+'</b> — flag risk early.</li></ul>')+
+      sec("Training",'<ul class="steps"><li><b>Lean</b> — rep &amp; customer training.</li><li><b>Grade</b> — video-based training.</li></ul>')+
+      sec("Professional services",'<div class="kv"><div class="k">Where it fits</div><div class="v" style="font-size:13px">Bundle i3 professional services into the rollout where relevant.</div></div>')+
+      sec("Upsell suggestions",'<ul class="steps"><li>Concierge service</li><li>Smart ER Analyst service</li><li>One Connect service</li><li>TrueView service</li></ul>')+
       sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
       saveBar();
   },

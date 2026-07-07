@@ -7,6 +7,20 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — make "← Back to dashboard" a visible button (`vision-sales-agent.html`)
+- The back control was a plain borderless text link and easy to miss. Restyled
+  it as a brand-tinted pill button (border, padding, subtle shadow, arrow) with
+  a fill-on-hover state. Visible in both light and dark.
+
+### Changed — Customer Success reflects Vy's framing (`vision-sales-agent.html`)
+- Reworked the Customer Success stage per Vy: closing IS a **tight timeline on
+  the POC** (the proof of concept is the close, driving a Go/No-Go within a set
+  deadline), then bundles **follow-up & follow-through**, **training** (Lean;
+  Grade = video-based), **professional services**, and **upsell suggestions**
+  (Concierge, Smart ER Analyst, One Connect, TrueView), plus references/
+  referrals. Added a POC-decision-deadline input. Service/tool names are used
+  verbatim from the transcript — no invented definitions (pending i3 docs).
+
 ### Changed — "Closing" → "Customer Success" (`vision-sales-agent.html`)
 - Converted the final stage from **Closing** to **Customer Success** (⭐,
   "Adoption · references · referrals"). Replaced the competitor battlecard /
