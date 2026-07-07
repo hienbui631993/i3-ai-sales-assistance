@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — segment "C-Store" → "C-Store / QSR"; removed separate QSR
+- Merged Quick Service Restaurants into the C-Store chip (now **C-Store / QSR**)
+  and removed the standalone QSR segment. Segments: C-Store / QSR · Grocery ·
+  Commercial · Education · Hospital · Integrator.
+
 ### Changed — Channel Partners don't see the Architecture card
 - The portal **Channel Partner** role now hides the **Architecture (for
   engineers)** card (added `partner-can-hide`; `setRole` toggles all such cards).
