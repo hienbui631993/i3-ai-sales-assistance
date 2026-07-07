@@ -7,6 +7,10 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — segment "Hospital" → "Institution"
+- Renamed the Hospital segment to **Institution**. Segments: C-Store / QSR ·
+  Grocery · Commercial · Education · Institution · Integrator.
+
 ### Changed — segment "C-Store" → "C-Store / QSR"; removed separate QSR
 - Merged Quick Service Restaurants into the C-Store chip (now **C-Store / QSR**)
   and removed the standalone QSR segment. Segments: C-Store / QSR · Grocery ·
