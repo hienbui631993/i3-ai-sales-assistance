@@ -272,7 +272,7 @@
       <div class="runrow">
         <button class="runbtn" id="runBtn" onclick="run()">▶ Run the engine</button>
         <button class="runbtn ghost" id="resetBtn" onclick="resetRun()">Reset</button>
-        <span class="runnote" id="runNote">Starts at: New Hire · Segment: Retail</span>
+        <span class="runnote" id="runNote">Starts at: New Hire · Segment: C-Store</span>
       </div>
     </div>
 
@@ -389,11 +389,13 @@ var ENTRIES=[
   {id:"poc", nm:"Jump to POC", sub:"active opportunity", start:6}
 ];
 var SEGMENTS=[
-  {id:"retail", nm:"Retail"},{id:"commercial", nm:"Commercial"},
-  {id:"school", nm:"School"},{id:"integrator", nm:"Integrator"}
+  {id:"cstore", nm:"C-Store"},{id:"grocery", nm:"Grocery"},{id:"qsr", nm:"Quick Service Restaurants"},
+  {id:"commercial", nm:"Commercial"},
+  {id:"education", nm:"Education"},{id:"hospital", nm:"Hospital"},
+  {id:"integrator", nm:"Integrator"}
 ];
 
-var sel={entry:"newhire", seg:"retail"};
+var sel={entry:"newhire", seg:"cstore"};
 var running=false, nodePos=[];
 
 /* ===== onboarding documents (parsed by V-Start) — from the real i3 docs ===== */
@@ -403,7 +405,7 @@ var DOCS={
     plan:"4-week fast-track (incl. NSM week)",
     mentors:["Hal Wever","Paul Leiba","Paul Kerling","George Karaolis","Brent Humphrey","Jason Feltham","Steven Middleton"]},
   newhire:{file:"Onboarding welcome — new hires 06062025.docx", name:"New Hire", role:"Sales Rep",
-    terr:"North America", start:"—", manager:"Sales Manager", advisor:"Vy Hoang", marketing:"Edward Chung", seg:"retail",
+    terr:"North America", start:"—", manager:"Sales Manager", advisor:"Vy Hoang", marketing:"Edward Chung", seg:"cstore",
     plan:"6-week acclimation (incl. NSM week)",
     mentors:["Hal Wever","Paul Leiba","Paul Kerling"]}
 };
@@ -417,7 +419,7 @@ function renderIntake(){
     body.innerHTML='<div class="drop"><div class="di">📄</div>'+
       '<div class="dt">Load an onboarding document and V-Start parses it into a rep profile, mentor team, acclimation plan and the weekly reflection cadence — then the engine runs against it.</div>'+
       '<div class="db"><button class="opt" onclick="loadDoc(\'elie\')">Load: Elie P. — BDM, MEA</button>'+
-      '<button class="opt" onclick="loadDoc(\'newhire\')">Load: New Hire — Retail</button></div></div>';
+      '<button class="opt" onclick="loadDoc(\'newhire\')">Load: New Hire — C-Store</button></div></div>';
   }
 }
 function loadDoc(id){
@@ -593,9 +595,9 @@ function resetRun(){
 var REPS=[
   {nm:"George Karaolis", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15],
     wk:"Week 2 of 4 · NSM training", focus:"Sales Mastery + Sales Ops fundamentals", next:"30-day business plan + SWOT", mentor:"David Crook"},
-  {nm:"Paul Kerling",    ro:"Account Executive",        seg:"Retail",     stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
+  {nm:"Paul Kerling",    ro:"Account Executive",        seg:"C-Store",    stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
     wk:"Week 5 · Guided outreach", focus:"Verified outreach + booking meetings", next:"First booked presentation", mentor:"Paul Leiba"},
-  {nm:"Tony Thomas",     ro:"Sales Rep",                seg:"School",     stage:"present", ready:71, refl:[3,5], ment:[9,15],
+  {nm:"Tony Thomas",     ro:"Sales Rep",                seg:"Education",  stage:"present", ready:71, refl:[3,5], ment:[9,15],
     wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"Hal Wever"},
   {nm:"Rajiv Patel",     ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15],
     wk:"POC · day 20 of 45", focus:"POC validation with PM team", next:"Executive Go / No-Go review", mentor:"Hal Wever"},
@@ -694,7 +696,8 @@ function sbox(k,v){ return '<div class="sbox"><div class="k">'+k+'</div><div cla
 function closeRep(){ document.getElementById('repModal').classList.add('hidden'); }
 function runRepInEngine(i){
   var r=REPS[i];
-  sel.seg = r.seg.toLowerCase();
+  var sm=SEGMENTS.find(function(x){return x.nm.toLowerCase()===r.seg.toLowerCase();});
+  sel.seg = sm ? sm.id : SEGMENTS[0].id;
   var st=r.stage;
   sel.entry = (st==='start'||st==='coach') ? 'newhire' : (['prove','guard','close'].indexOf(st)>-1 ? 'poc' : 'veteran');
   closeRep(); switchView('engine'); buildChips(); buildPipe();
