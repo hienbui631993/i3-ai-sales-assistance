@@ -128,7 +128,9 @@
   .stage .step{position:absolute;top:13px;right:14px;font-size:11px;font-weight:800;color:#9fb8cf}
   .stage.locked{opacity:.55;cursor:not-allowed}.stage.locked:hover{transform:none;box-shadow:none;border-color:var(--line)}
   .lock{position:absolute;top:13px;right:14px;font-size:10.5px;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
-  .back{background:none;border:none;color:var(--brand);font-weight:700;font-size:13.5px;cursor:pointer;padding:0;margin-bottom:14px}
+  .back{display:inline-flex;align-items:center;gap:8px;background:var(--inbg);border:1px solid var(--inbd);color:var(--brand);font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;padding:9px 15px;border-radius:10px;margin-bottom:16px;transition:.15s;box-shadow:0 1px 2px rgba(0,40,75,.06)}
+  .back:hover{background:var(--brand);border-color:var(--brand);color:#fff;transform:translateX(-2px);box-shadow:0 4px 12px rgba(0,88,143,.28)}
+  .back .ba{font-size:15px;line-height:1}
   .saveNote{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);background:var(--inbg);border:1px solid var(--inbd);border-radius:10px;padding:9px 12px;margin-top:14px}
   .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
   .hidden{display:none}
@@ -157,7 +159,7 @@
   <div id="view-home"></div>
   <!-- STAGE -->
   <div id="view-stage" class="hidden">
-    <button class="back" onclick="goHome()">← Back to dashboard</button>
+    <button class="back" onclick="goHome()"><span class="ba">←</span> Back to dashboard</button>
     <div class="card">
       <div class="h"><div class="ic" id="stIc"></div><div><h2 id="stName"></h2><div class="sub" id="stSub"></div></div></div>
       <div class="body">
