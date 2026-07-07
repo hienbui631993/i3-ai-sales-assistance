@@ -7,6 +7,16 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — merged Magenta into the Privacy & Cybersecurity Agent (removed login)
+- Consolidated the two privacy pages into **one**. Deleted
+  `magenta-portal-simulation.html` (its login/quote-builder sim is retired), and
+  rebranded `i3-privacy-compliance-agent.html` as **Magenta — Privacy &
+  Cybersecurity Agent**: the header now carries the "rides inside i3Host quoting,
+  no separate login" framing, over the existing conversational review (laws,
+  risk, signage, PIA, cyber). Replaced the two portal cards with a single
+  **Magenta · Privacy & Cybersecurity Agent** card, and repointed the sales-
+  engine V-Guard link and the demo doc to the merged page.
+
 ### Added — "← Portal" button on every page
 - Added an explicit **← Portal** button to the top bar of every sub-page (the
   logo already linked back, but a button is clearer). Injected via a small
