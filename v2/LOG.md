@@ -7,6 +7,12 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Sales Process shares the Engine menu bar + links to ROS
+- Added the same **Engine / Manager / Process** switcher to `process.html`'s
+  topbar (Process shown active): Engine → the sales engine, Manager → the engine
+  Manager view (`#manager` + localStorage flag), Process = current page. Made the
+  **"Beginning → end"** pill navigate to the **ROS** page. All htmlpreview-aware.
+
 ### Changed — Sales Process reachable from the Sales Engine
 - Removed the separate **Sales Process** portal card and added an **↗ Process**
   button to the Engine's view switcher (next to Engine / Manager) that opens
