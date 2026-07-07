@@ -133,7 +133,7 @@
       <div class="tags"><span class="tag">Revenue OS</span><span class="tag">Animated</span><span class="tag">8 stages</span></div>
     </a>
 
-    <a class="app v" href="vision-architecture.html" data-target="vision-architecture.html">
+    <a class="app v partner-can-hide" href="vision-architecture.html" data-target="vision-architecture.html">
       <div class="accent"></div><div class="go">→</div>
       <div class="ico">🗺️</div>
       <h3>Architecture (for engineers)</h3>
@@ -186,11 +186,13 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
   }
 })();
 
-/* role toggle */
+/* role toggle — Channel Partners don't see engineer-only cards (e.g. Architecture) */
 function setRole(role){
   document.getElementById('r-rep').classList.toggle('on',role==='rep');
   document.getElementById('r-partner').classList.toggle('on',role==='partner');
-  var m=document.getElementById('mgrCard'); if(m) m.style.display = role==='partner' ? 'none' : 'block';
+  var hide = role==='partner';
+  var cards = document.querySelectorAll('.partner-can-hide');
+  for(var i=0;i<cards.length;i++){ cards[i].style.display = hide ? 'none' : ''; }
 }
 </script>
 <!-- i3 custom chat widget (Vision) — built on the ClaudeChat client SDK -->
