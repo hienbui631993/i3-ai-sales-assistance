@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Fixed — keep the "i3" brand token lowercase in UPPERCASE labels
+- In uppercase-transformed text (hero eyebrows, section labels, etc.) the brand
+  token "i3" was rendering as "I3". Added a small self-contained script on every
+  page that wraps the `i3` token (incl. `i3Host` / `i3Live`) inside uppercase
+  elements in a `.i3lc` span (`text-transform:none`), so it always displays as
+  **i3** while the surrounding text stays uppercase. Injects its own CSS; runs
+  on load; future-proof for new content. Verified across pages — no JS errors.
+
 ### Changed — hide the SOP card from the portal
 - Commented out the **SOP** card in `index.html` so it no longer appears on the
   portal. `sop.html` is untouched and still reachable directly; restore the card

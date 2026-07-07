@@ -509,5 +509,9 @@ function applyToQuote(){
 <!-- i3 custom chat widget (Vision) — built on the ClaudeChat client SDK -->
 <script src="https://hub.i3international.com/client.js"></script>
 <script src="chat-widget.js" defer></script>
+<!-- i3 brand casing: keep the "i3" token lowercase even inside UPPERCASE labels -->
+<script>
+(function(){function fix(){var st=document.createElement("style");st.textContent=".i3lc{text-transform:none!important}";document.head.appendChild(st);var els=document.querySelectorAll("body *"),tg=[];for(var i=0;i<els.length;i++){var e=els[i];if(e.tagName==="SCRIPT"||e.tagName==="STYLE")continue;var t;try{t=getComputedStyle(e).textTransform;}catch(_){continue;}if(t!=="uppercase")continue;for(var c=e.firstChild;c;c=c.nextSibling){if(c.nodeType===3&&/i3/.test(c.nodeValue))tg.push(c);}}tg.forEach(function(n){var parts=n.nodeValue.split(/(i3[A-Za-z0-9]*)/g);if(parts.length<2)return;var f=document.createDocumentFragment();parts.forEach(function(p){if(/^i3[A-Za-z0-9]*$/.test(p)){var s=document.createElement("span");s.className="i3lc";s.textContent=p;f.appendChild(s);}else if(p)f.appendChild(document.createTextNode(p));});n.parentNode.replaceChild(f,n);});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",fix);else fix();})();
+</script>
 </body>
 </html>
