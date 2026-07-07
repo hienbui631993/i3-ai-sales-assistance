@@ -294,8 +294,8 @@ var STAGES=[
     intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
   {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"Marketing agent → 6sense leads → ready to present", partner:false,
     intro:"After onboarding, my marketing agent goes and finds leads for you — pulled from 6sense and our data. Run it and I'll hand you a short list with what I recommend; mark one Ready to present and I'll carry it into the presentation."},
-  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
-    intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
+  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Search the customer → pain points → solution → deck", partner:true,
+    intro:"Enter the customer name and I'll search their information and pain points, recommend what we can present (mapped to i3's three modules), and build a logo-branded deck. Present the solution — not the hardware. After you present, I capture the transcript for your POC."},
   {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
   {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Step 1 cyber (every deal) → Step 2 privacy (if it applies)", partner:true,
@@ -328,9 +328,10 @@ function renderInputs(id){
     h='<div class="saveNote">Using your territory <b>'+rep.terr+'</b> and segment <b>'+rep.seg+'</b>. My marketing agent pulls your leads from 6sense (following the existing 6-month filter) and recommends who to work first.</div>'+
       '<button class="btn p" style="margin-top:12px" onclick="runStage(\'prospect\')">Find my leads</button>';
   } else if(id==='present'){
-    h='<div class="upload"><div class="di">📄</div><div class="dt">Upload the transcript of your presentation (Teams / GoToMeeting). No file handy? Use a sample so you can see what Vision does.</div>'+
-      '<button class="btn p" onclick="runStage(\'present\')">Use sample transcript</button></div>'+
-      '<label class="f" style="margin-top:14px"><span class="l">…or paste the transcript</span><textarea id="i_tx" placeholder="Paste the meeting transcript here…"></textarea></label>';
+    h='<label class="f"><span class="l">Customer name</span><input id="i_company" value="Metro Retail Group"></label>'+
+      '<div class="saveNote">Enter the customer and I\'ll search their information and pain points, recommend what to present (mapped to i3\'s three modules), then build a logo-branded deck. I already have the site address from your ready lead.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'present\')">Search &amp; build my deck</button>'+
+      '<label class="f" style="margin-top:14px"><span class="l">After you present — paste the transcript (or leave blank for a sample)</span><textarea id="i_tx" placeholder="Paste the meeting transcript here…"></textarea></label>';
   } else if(id==='poc'){
     h='<label class="f"><span class="l">Site address (sets the exact legal &amp; privacy requirement)</span><input id="i_addr" value="1500 Rue Sainte-Catherine, Montréal, Quebec"></label>'+
       '<div class="upload"><div class="di">🧪</div><div class="dt">I\'ll generate the POC from your transcript and auto-check the exact legal doc for this address.</div>'+
@@ -365,7 +366,7 @@ function runStage(id){
 }
 var THINK={
   prospect:["handing off to the marketing agent…","pulling intent from 6sense (6-month filter)","de-duping against our data + Sales Navigator","scoring & shortlisting your leads","writing the recommendation"],
-  present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
+  present:["searching for the customer…","reading site type + recent news (Google Alerts)","surfacing their pain points","mapping to i3's three modules","recommending what to present","building your logo-branded deck","capturing the transcript"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["running the standard cyber checklist (every deal)…","checking the site's privacy requirement","applying Law 25 / GDPR where it applies","drafting signage + PIA"],
   close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
@@ -424,12 +425,32 @@ var OUTPUT={
   },
   present:function(){
     window._lastTranscript=(val('i_tx')||'')||"SAMPLE";
+    var company=(val('i_company')||'').trim()||"Metro Retail Group";
     var attendees=[["Chris Lytwyn","IT Director","Customer","Decision maker"],["Dana Roy","Ops VP","Customer","Supporter"],["Sam Patel","Loss Prevention","Customer","Supporter"],["Vy Hoang","CCO","i3","Sponsor"]];
-    return sec("What I heard (drivers)",'<div>'+["Fewer disconnected systems","Loss-prevention visibility","Reporting managers will use","Prove value before rollout"].map(function(d){return '<span class="chip">'+d+'</span>'}).join('')+'</div>')+
-      sec("Who was in the room (auto-captured)",'<table class="tbl"><tr><th>Name</th><th>Title</th><th>Org</th><th>Role</th></tr>'+attendees.map(function(a){return '<tr><td><b>'+a[0]+'</b></td><td>'+a[1]+'</td><td>'+a[2]+'</td><td>'+a[3]+'</td></tr>'}).join('')+'</table>')+
-      sec("Next",'<span class="badge warn">Build the POC</span> I\'ll carry these drivers and stakeholders straight into the proof of concept. '+
-        '<button class="btn p sm" onclick="openStage(\'poc\')">Build POC from this →</button>')+
-      saveBar("transcript + stakeholders captured");
+    return sec("Customer — what I found",
+      '<div class="grid2">'+kv("Customer",company)+kv("Site type","Retail — multi-site")+kv("Address (from the lead)","120 King St W, Toronto ON")+kv("Recent signals","Google Alerts: incident + fine (~2 mo) · CEO on customer engagement")+'</div>')+
+    sec("Their pain points",
+      '<ul class="steps"><li><b>Safety incidents</b> — a site incident and a fine in the last ~2 months.</li><li><b>Customer engagement</b> — the CEO said they need to improve it.</li><li><b>Shrink at the POS</b> — registers in use with no exception monitoring.</li></ul>')+
+    sec("What we can present — mapped to i3's three modules",
+      '<table class="tbl"><tr><th>Module</th><th>Their pain</th><th>What we present</th></tr>'+
+      '<tr><td><b>Safety &amp; Security</b></td><td>Incident + fine (~2 mo ago)</td><td>Lead with incident reduction — AI Sentry + cameras</td></tr>'+
+      '<tr><td><b>Operations</b></td><td>CEO wants better customer engagement</td><td>Video analytics tied to ops + engagement insight</td></tr>'+
+      '<tr><td><b>Asset Protection</b></td><td>POS registers in use</td><td>i3 AI smart-POS exception capability</td></tr>'+
+      '</table>')+
+    sec("Your deck — auto-built",
+      '<ul class="steps"><li>Tailored to '+company+'\'s <b>retail</b> site; opens with the <b>outcome</b>, not the camera specs.</li>'+
+      '<li><span class="badge ok">Logo</span> Put their logo on it? <button class="btn p sm" onclick="this.outerHTML=\'<span class=&quot;badge ok&quot;>Logo added ✓</span>\'">Add the logo</button></li>'+
+      '<li><b>Present the solution</b> — safety, operations and asset-protection outcomes first, then the how.</li></ul>')+
+    sec("After you present — transcript captured",
+      '<div>Drivers I heard: '+["Fewer disconnected systems","Loss-prevention visibility","Reporting managers will use","Prove value before rollout"].map(function(d){return '<span class="chip">'+d+'</span>'}).join('')+'</div>'+
+      '<div style="margin-top:9px;font-size:12px;color:var(--muted)">Who was in the room (auto-captured):</div>'+
+      '<table class="tbl"><tr><th>Name</th><th>Title</th><th>Org</th><th>Role</th></tr>'+attendees.map(function(a){return '<tr><td><b>'+a[0]+'</b></td><td>'+a[1]+'</td><td>'+a[2]+'</td><td>'+a[3]+'</td></tr>'}).join('')+'</table>')+
+    sec("Interested? → build the POC",
+      '<span class="badge warn">Interested in all three modules</span> When the prospect is in, I carry the drivers + stakeholders straight into the proof of concept. '+
+      '<button class="btn p sm" onclick="openStage(\'poc\')">Build POC from this →</button>')+
+    sec("Time saved",
+      '<div class="kv"><div class="k">Good leads + a solution-led deck</div><div class="v" style="font-size:13px">Save the marketing / BDM group <b>~20%</b> of their time — and present the <b>solution</b>, not the hardware.</div></div>')+
+    saveBar("transcript + stakeholders captured");
   },
   poc:function(){
     var addr=val('i_addr')||"1500 Rue Sainte-Catherine, Montréal, Quebec";

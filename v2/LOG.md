@@ -18,6 +18,25 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
   on the Sales Engine card (copy + a "Manager dashboard" tag) and null-guarded
   the portal role toggle that referenced the removed card.
 
+### Changed — Presentation: enter a customer name → search info + pain points + solution
+- Added a **Customer name** input to the Presentation stage. On run, the agent
+  "searches" the customer and surfaces **Customer — what I found**, **Their pain
+  points**, and **What we can present — mapped to i3's three modules** (pain →
+  recommended solution), then builds the deck tailored to that customer. The
+  entered name flows through the whole output. Verified with a custom name; POC
+  handoff still works; no JS errors.
+
+### Changed — Presentation stage per Vy (`vision-sales-agent.html`)
+- Reframed around the AI-built deck: from a **ready lead** (address already
+  known), Vision builds a **logo-branded, site-typed deck** (retail / commercial
+  / institutional), leads with the **solution not the hardware**, and briefs the
+  rep with **Google-Alert research mapped to i3's three modules** — Safety &
+  Security (incident/fine → incident reduction), Operations (CEO wants customer
+  engagement → video analytics), Asset Protection (POS in use → AI smart-POS
+  exception). Then the transcript is captured; **"interested in all three" →
+  build the POC**. Added a ~20% time-saved note. Verified all sections render,
+  logo + POC handoff work, no JS errors.
+
 ### Changed — Prospecting & Leads per Vy (`vision-sales-agent.html`)
 - Reframed as the **marketing agent** pulling leads from **6sense** + our data:
   returns a **5-lead recommended shortlist** (intent score, signal, what I
