@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — hide the SOP card from the portal
+- Commented out the **SOP** card in `index.html` so it no longer appears on the
+  portal. `sop.html` is untouched and still reachable directly; restore the card
+  to show it again.
+
 ### Changed — Education scope note (`v-vision-sales-engine.html`)
 - Added a sub-label under the **Education** segment chip: **"Kindergarten–Grade
   12 (K–12) only"**, to make the scope explicit. Segment chips now render an
