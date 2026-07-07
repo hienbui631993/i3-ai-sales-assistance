@@ -288,18 +288,18 @@ function renderPartnerHome(){
 
 /* ===== stages ===== */
 var STAGES=[
-  {id:"prospect", n:1, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
+  {id:"onboard", n:1, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
+    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
+  {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"LinkedIn + buying group + intent", partner:false,
     intro:"I've already got your segment and your LinkedIn. Run it — I'll tell you who to call first, in what order, and how to sharpen your presence."},
-  {id:"present", n:2, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
+  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Capture the meeting", partner:true,
     intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
-  {id:"poc", n:3, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
+  {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
-  {id:"legal", n:4, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
+  {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
     intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
-  {id:"close", n:5, ic:"🤝", nm:"Closing", sub:"Out-position & close", partner:false,
-    intro:"Pick who we're up against. I'll tell you how to beat them and what to do to close."},
-  {id:"onboard", n:6, ic:"🚀", nm:"My Onboarding", sub:"Ramp & training", partner:false,
-    intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."}
+  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Adoption · references · referrals", partner:false,
+    intro:"The deal's won — now let's make it stick. I'll hand off to Customer Success, keep an eye on adoption, and line up references and referrals."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
@@ -338,8 +338,8 @@ function renderInputs(id){
     h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
       '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
   } else if(id==='close'){
-    h='<label class="f"><span class="l">Incumbent / competitor</span><select id="i_comp">'+['Eagle Eye','Verkada','Solink','DTiQ','OpenEye','HME (drive-thru)'].map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></label>'+
-      '<button class="btn p" onclick="runStage(\'close\')">Build close plan</button>';
+    h='<label class="f"><span class="l">Account health</span><select id="i_health"><option>🟢 Green — healthy</option><option>🟡 Yellow — watch</option><option>🔴 Red — at risk</option></select></label>'+
+      '<button class="btn p" onclick="runStage(\'close\')">Build success plan</button>';
   } else if(id==='onboard'){
     h='<div class="upload"><div class="di">🚀</div><div class="dt">Load your onboarding plan and I\'ll turn it into your ramp.</div>'+
       '<button class="btn p" onclick="runStage(\'onboard\')">Load onboarding plan</button></div>';
@@ -365,7 +365,7 @@ var THINK={
   present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["checking jurisdiction…","classifying solutions","applying Law 25 / GDPR","drafting signage + PIA"],
-  close:["matching the competitor…","loading battlecard","benchmarking price","building close checklist"],
+  close:["handing off to Customer Success…","tracking adoption & account health","spotting expansion signals","lining up references & referrals"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
 
@@ -459,11 +459,10 @@ var OUTPUT={
       saveBar();
   },
   close:function(){
-    var comp=val('i_comp')||"the incumbent";
-    var BC={"Eagle Eye":"Weak Linux video bridge, little AI/POS for retail. Win on retail + specific AI applications.","Verkada":"Slick cloud but premium-priced and limited POS/AI retail depth. Win on value + data integration.","Solink":"Good POS-video but lighter analytics. Win on AI depth + predictive.","DTiQ":"Service-heavy/managed model. Win on price-to-own + platform control.","OpenEye":"Cloud VMS, limited retail AI. Win on integrated AI + insight.","HME (drive-thru)":"Timer-only. Win on full operational insight beyond the timer."};
-    return sec("Battlecard · "+comp,'<div class="kv"><div class="k">How to pitch against</div><div class="v" style="font-weight:600;font-size:13px">'+(BC[comp]||"Position i3 on integrated POS + AI and price-to-own.")+'</div></div>')+
-      sec("i3 value position",'<ul class="steps"><li>Most advanced smart, cloud, data-driven solution in our segment.</li><li>Strong POS + AI integration; 9 patents; 35+ years.</li><li>Affordable price-to-own that scales company-wide.</li></ul>')+
-      sec("Close checklist",'<ol class="steps"><li>Privacy review cleared</li><li>POC success metrics met → Go</li><li>Contract + commercials assembled</li><li>Sync Salesforce / Automatica, send DocuSign</li></ol>')+
+    var health=val('i_health')||"🟢 Green — healthy";
+    return sec("Account health",'<div class="kv"><div class="k">Signal</div><div class="v" style="font-weight:600;font-size:13px">'+health+' · monitored by Vision</div></div>')+
+      sec("Customer success plan",'<ul class="steps"><li>Hand off to Customer Success; keep comms open.</li><li>Track adoption and time-to-value; flag risk early.</li><li>Confirm the outcome against the POC success metric.</li></ul>')+
+      sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
       saveBar();
   },
   onboard:function(){
