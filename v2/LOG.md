@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — Channel Partners don't see the Architecture card
+- The portal **Channel Partner** role now hides the **Architecture (for
+  engineers)** card (added `partner-can-hide`; `setRole` toggles all such cards).
+  Visible again for the i3 Sales Rep role.
+
 ### Changed — Sales Process shares the Engine menu bar + links to ROS
 - Added the same **Engine / Manager / Process** switcher to `process.html`'s
   topbar (Process shown active): Engine → the sales engine, Manager → the engine
