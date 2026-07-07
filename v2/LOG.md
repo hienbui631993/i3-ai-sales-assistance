@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — "← Portal" button on every page
+- Added an explicit **← Portal** button to the top bar of every sub-page (the
+  logo already linked back, but a button is clearer). Injected via a small
+  self-contained script that places it in the topbar's right cluster (or, on
+  the privacy page's different header, top-right by the theme toggle) and calls
+  `goPortal()`. The portal (`index.html`) has no `goPortal`, so it self-skips.
+
 ### Changed — POC + Privacy/Cyber staging per Vy (`vision-sales-agent.html`)
 - **POC** ("transcript produces the POC") now shows the core solution **mapped
   to the i3 three modules** (Safety & Security · Operations · Asset Protection),
