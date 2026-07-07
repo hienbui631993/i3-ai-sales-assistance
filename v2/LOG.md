@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — "Closing" → "Customer Success" (`vision-sales-agent.html`)
+- Converted the final stage from **Closing** to **Customer Success** (⭐,
+  "Adoption · references · referrals"). Replaced the competitor battlecard /
+  DocuSign close flow with a customer-success flow: account-health input, a
+  success plan (handoff, adoption, outcome vs POC metric) and references /
+  referrals fed into the learning loop — consistent with the ROS Customer
+  Success stage. Verified it runs with no JS errors.
+
 ### Changed — Onboarding is the first stage (`vision-sales-agent.html`)
 - Moved **My Onboarding** to the front of the stage list and renumbered so it
   is step 1 (Onboarding → Prospecting → Presentation → POC → Privacy & Cyber →
