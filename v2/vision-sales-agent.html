@@ -298,8 +298,8 @@ var STAGES=[
     intro:"Drop your presentation transcript — or use the sample. I'll capture who was in the room and tee up your POC."},
   {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
-  {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Privacy + cyber review (Magenta)", partner:true,
-    intro:"I'll run the privacy and cybersecurity review using the defaults from your territory and quote. Run it — I'll tell you exactly what to do, no guesswork."},
+  {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Step 1 cyber (every deal) → Step 2 privacy (if it applies)", partner:true,
+    intro:"Cybersecurity applies to every deal — I'll run that first. Privacy is variable, so it's step two, only where a privacy statement applies. Run it and I'll tell you exactly what to do."},
   {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Timed POC close · follow-through · training · upsell", partner:false,
     intro:"Closing here is a tight timeline on the POC — the proof of concept is the close. I'll set the decision deadline, then line up the follow-through: follow-up, training, professional services and the right upsells."}
 ];
@@ -337,8 +337,8 @@ function renderInputs(id){
       '<button class="btn p" onclick="runStage(\'poc\')">Generate POC &amp; check legal</button></div>';
   } else if(id==='legal'){
     var L=window._pocLaw||lawFromAddress(rep.terr); var jdef=L.juris+' · '+L.laws.join(', ');
-    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>, sensitive solutions on the quote. I\'ll tell you what to do for <b>both privacy and cybersecurity</b>.</div>'+
-      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run privacy &amp; cybersecurity review</button>';
+    h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>. I\'ll run <b>cybersecurity first (every deal)</b>, then <b>privacy</b> where a statement applies.</div>'+
+      '<button class="btn p" style="margin-top:12px" onclick="runStage(\'legal\')">Run cybersecurity &amp; privacy review</button>';
   } else if(id==='close'){
     h='<label class="f"><span class="l">POC decision deadline</span><select id="i_deadline"><option>14 days</option><option selected>30 days</option><option>45 days</option></select></label>'+
       '<label class="f"><span class="l">Account health</span><select id="i_health"><option>🟢 Green — healthy</option><option>🟡 Yellow — watch</option><option>🔴 Red — at risk</option></select></label>'+
@@ -367,7 +367,7 @@ var THINK={
   prospect:["reading your LinkedIn presence…","scanning 6sense intent + ZoomInfo contacts","mapping the buying group","building your next-day actions"],
   present:["transcribing the meeting…","extracting drivers + objections","capturing who was in the room","linking it to the POC"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
-  legal:["checking jurisdiction…","classifying solutions","applying Law 25 / GDPR","drafting signage + PIA"],
+  legal:["running the standard cyber checklist (every deal)…","checking the site's privacy requirement","applying Law 25 / GDPR where it applies","drafting signage + PIA"],
   close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
@@ -445,6 +445,12 @@ var OUTPUT={
       '<div style="font-size:12px;color:#8a5d05;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:8px;padding:8px 10px"><b>Vision prompt:</b> add <b>everyone</b> who was on the email with their title — so we know who supports the POC before it kicks off. Don\'t leave anyone out.</div>')+
     sec("Recommended solution &amp; equipment (from the discussion)",
       '<ul class="steps"><li><b>Solution:</b> AI Sentry + POS-integrated video (loss prevention + ops insight)</li><li><b>Equipment:</b> i3 AI server, 8× dome cameras, 1× LPR at the dock, i3Host analytics</li><li><b>Why:</b> matches "fewer systems" + "reporting managers will use" from the transcript.</li></ul>')+
+    sec("Mapped to the i3 three modules",
+      '<ul class="steps"><li><b>Safety &amp; Security</b> — AI Sentry + cameras for loss prevention and incident response.</li><li><b>Operations</b> — POS-integrated video and reporting managers will actually use.</li><li><b>Asset Protection</b> — LPR + analytics protecting stock, the dock and the premises.</li></ul>')+
+    sec("Built into the POC (auto-assembled)",
+      '<ul class="steps"><li><b>Privacy &amp; cybersecurity documentation</b> — built in; the full review runs in the next stage.</li><li><b>Site drawings / diagrams</b> — 3–4 standard, reusable drawings (HD cameras, networking, firewall, ports) to drag-and-drop or tweak.</li><li><b>Site maps / images</b> — a standard set reused across POCs; just change the names and camera labels.</li><li><b>Upsell suggestions</b> — Concierge · Smart ER Analyst · One Connect · TrueView.</li></ul>')+
+    sec("PM time saved",
+      '<div class="kv"><div class="k">Transcript produces the POC</div><div class="v" style="font-size:13px"><b>~30–40% less PM time</b> — the PM confirms Vision\'s draft (~20 min) instead of writing the POC from scratch.</div></div>')+
     sec("Hand off to Project Management",
       '<span class="badge warn">Privacy &amp; cybersecurity review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Privacy &amp; Cybersecurity</button>'+
       '<div style="margin-top:10px"><button class="btn pink" onclick="showPM()">📨 Contact PM &amp; create the official POC →</button></div>'+
@@ -455,9 +461,10 @@ var OUTPUT={
     var L=window._pocLaw||lawFromAddress(rep.terr); var laws=L.laws;
     return sec("What applies (from the site address)",'<div><b>'+L.juris+'</b> &nbsp; '+laws.map(function(l){return '<span class="chip">'+l+'</span>'}).join('')+' <span class="badge hi">High risk — sensitive solutions</span></div>'+
       '<div style="margin-top:7px"><span class="badge warn">Exact legal doc</span> '+L.doc+'</div>')+
-      sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off. Below is exactly what to do.')+
-      sec("Do this — privacy",'<ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
-      sec("Do this — cybersecurity",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the i3Host / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
+      sec("How we stage it",'<div class="kv"><div class="k">Cyber first, privacy second</div><div class="v" style="font-size:13px"><b>Cybersecurity applies to every deal</b> — the drawings/diagrams and intake are standard. <b>Privacy is variable</b> — not every site has a privacy statement — so it runs as step two.</div></div>')+
+      sec("Step 1 · Cybersecurity — every deal",'<ol class="steps"><li>Complete the i3 cybersecurity intake forms — network segmentation, open ports, remote access.</li><li>Keep the data in <b>Canada</b> (Canada-for-Canada); document any U.S. / cross-border support access.</li><li>Turn on access control + <b>MFA</b> on the i3Host / VMS accounts.</li><li>Encrypt data <b>at rest and in transit</b>.</li><li>Run the vendor security / <b>SOC 2</b> check and set retention to the minimum needed.</li></ol>')+
+      sec("Step 2 · Privacy — only where a privacy statement applies",'<div style="font-size:12px;color:var(--muted);margin-bottom:8px">Applies here: <b>'+laws.join(', ')+'</b>. No privacy statement required at a site? Step 1 (cybersecurity) is enough.</div><ol class="steps"><li>Get <b>express opt-in consent</b> for biometrics — signage alone is not enough.</li><li>Post the purpose-specific signage below (the generic version was rejected by the OPC).</li><li>Complete the PIA before final approval.</li></ol>')+
+      sec("Decision",'Do <b>not</b> approve the POC until the i3 Privacy team signs off on <b>step 2</b> (where privacy applies). Cybersecurity (step 1) is required on <b>every</b> deal.')+
       sec("Post this signage",'<div class="doc">NOTICE — VIDEO MONITORING IN USE\n\nImages are monitored and recorded 24 hours a day for crime prevention, loss prevention and public safety.\n\nBiometric information is collected and used only for the stated purpose — not for marketing or demographics — and requires your consent.\n\nManaged by [Customer]. Privacy Office: privacy@[customer].ca</div>')+
       saveBar();
   },
