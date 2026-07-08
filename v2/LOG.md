@@ -7,6 +7,26 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — de-identified the example SOP popup: sample company, contacts + generated images (`vision-sales-agent.html`)
+- Removed the "real document — NTE_Ai_Configuration_SOP…pdf · Northern Tool +
+  Equipment · June 19, 2024" subtitle from the popup header, and reframed the
+  popup from "the real, in-use SOP" to a **sample of the standardized format**.
+- Replaced the real company/partner and contacts with **samples**: Northern Tool
+  and Equipment / NTE → **Northwind Retail**; Global Axiom → **Summit Integration
+  Partners**; Site 658 Burleson → **Site 042 · Riverside**; all contact names,
+  emails (`@…​.example`) and phones (`1-555-01xx`) are now fictional. Dropped the
+  "Open the original PDF" buttons from the popup and the Customer Success section.
+- Replaced the three PDF-extracted screenshots (which contained real footage and
+  device serials) with **generated look-alike samples** in `v2/media/`
+  (`sop-sample-detection-area.png` — camera view with the Max detection area
+  larger than the Area alarm; `sop-sample-alarm-settings.png`;
+  `sop-sample-object-detection.png`) and removed the old `sop-nte-*` images.
+  Updated `media/README.md`. Verified headless: all sample images load, no real
+  names remain, no JS errors.
+- Note: the POC stage's "Open the AI Configuration SOP (PDF)" button and the
+  real PDF at `v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf` are unchanged
+  (out of scope for this section) and still reference the real document.
+
 ### Added — "3 · Company size (locations)" dropdown in the Meet Vision engine (`v-vision-sales-engine.html`)
 - Added a **Company size** `<select>` under **2 · Target segment**, measured by
   **number of locations**: Small (1–5) · Mid-market (6–50, default) ·
