@@ -216,7 +216,7 @@
         <div class="chips" id="segChips"></div>
       </div>
       <div class="entry">
-        <div class="lab">3 · Company size</div>
+        <div class="lab">3 · Company size (locations)</div>
         <select class="sizesel" id="sizeSel" onchange="pickSize(this.value)"></select>
       </div>
 
@@ -342,9 +342,9 @@ var SEGMENTS=[
 ];
 
 var SIZES=[
-  {id:"smb",   nm:"Small business — 1–50 employees",  short:"SMB"},
-  {id:"mid",   nm:"Mid-market — 51–500 employees",     short:"Mid-market"},
-  {id:"ent",   nm:"Enterprise — 500+ employees",       short:"Enterprise"}
+  {id:"smb",   nm:"Small — 1–5 locations",        short:"1–5 sites"},
+  {id:"mid",   nm:"Mid-market — 6–50 locations",  short:"6–50 sites"},
+  {id:"ent",   nm:"Enterprise — 50+ locations",   short:"50+ sites"}
 ];
 var sel={entry:"newhire", seg:"cstore", size:"mid"};
 var running=false, nodePos=[];
