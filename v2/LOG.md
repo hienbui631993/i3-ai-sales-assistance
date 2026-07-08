@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — portal topbar brand is clickable back to the portal (`index.html`)
+- Made the **i3 logo** and the **"Vision Portal · Sales & Partner"** brand in the
+  portal topbar clickable (pointer cursor) — both call a new htmlpreview-aware
+  `goPortalHome()` that returns to `index.html`. Verified headless, no JS errors.
+
 ### Added — live ChatGPT agent launch buttons (V-Prove · V-Research · Magenta)
 - Wired the three live ChatGPT agents into the UI at each agent's home, as a
   green "▶ Open the live … agent ↗" button that opens the agent in a new tab:
