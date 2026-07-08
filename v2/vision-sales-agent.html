@@ -99,8 +99,6 @@
 
   /* dashboard */
   .greet{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
-  .adminbar{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border-radius:14px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}
-  .adminbar .t{font-size:13.5px}.adminbar b{font-weight:800}
   .widgets{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:12px 0}
   @media(max-width:860px){.widgets{grid-template-columns:1fr 1fr}}
   .wdg{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.14s}
@@ -134,6 +132,66 @@
   .saveNote{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);background:var(--inbg);border:1px solid var(--inbd);border-radius:10px;padding:9px 12px;margin-top:14px}
   .foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6}
   .hidden{display:none}
+
+  /* Admin menu + Manager Dashboard (moved here from the Sales Engine) */
+  .atabs{display:flex;gap:8px;margin:14px 0 16px;flex-wrap:wrap}
+  .atab{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;color:var(--ink2)}
+  .atab.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  @media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+  .kpi .k{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kpi .v{font-size:24px;font-weight:800;margin-top:4px}
+  .kpi .s{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .kpi .v.good{color:var(--green)}.kpi .v.warn{color:#b9770b}
+  .mcols{display:grid;grid-template-columns:1.55fr .9fr;gap:14px}
+  @media(max-width:940px){.mcols{grid-template-columns:1fr}}
+  .roster{display:flex;flex-direction:column;gap:10px}
+  .rrow{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.1fr auto;gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--panel);cursor:pointer;transition:.14s}
+  .rrow:hover{border-color:var(--brand)}
+  @media(max-width:720px){.rrow{grid-template-columns:1fr 1fr}}
+  .rrow.flag{border-color:var(--wnbd);box-shadow:inset 3px 0 0 var(--yellow)}
+  .rrow .nm{font-weight:800;font-size:13.5px}
+  .rrow .ro{font-size:11.5px;color:var(--muted)}
+  .rrow .segchip{font-size:11px;font-weight:700;color:var(--brand);background:var(--inbg);border:1px solid var(--inbd);border-radius:999px;padding:2px 9px;display:inline-block;margin-top:4px}
+  .rmini{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700;line-height:1.25;min-height:26px}
+  .rval{font-size:13px;font-weight:700;margin-top:2px}
+  .rbar{height:7px;border-radius:999px;background:var(--inbg);overflow:hidden;margin-top:5px}
+  .rbar>span{display:block;height:100%}
+  .fbar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .fbar .fn{width:96px;font-size:11.5px;font-weight:700;color:var(--ink2)}
+  .fbar .ft{flex:1;height:20px;background:var(--inbg);border-radius:7px;overflow:hidden;position:relative}
+  .fbar .ft>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#46b3ff)}
+  .fbar .fc{position:absolute;right:8px;top:2px;font-size:11px;font-weight:800}
+
+  /* real-SOP popup (the actual document from v2/SOP/) */
+  .modalbg{position:fixed;inset:0;background:rgba(2,20,38,.55);z-index:60;display:none;align-items:flex-start;justify-content:center;padding:28px 14px;overflow-y:auto}
+  .modalbg.show{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:840px;width:100%;box-shadow:0 24px 60px rgba(0,10,25,.35)}
+  .modal .mh{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}
+  .modal .mh .mic{width:38px;height:38px;border-radius:10px;background:var(--inbg);border:1px solid var(--inbd);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+  .modal .mh h3{margin:0;font-size:15px;font-weight:800}
+  .modal .mh .sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .modal .mx{margin-left:auto;flex:none;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink2);font-size:14px;cursor:pointer;font-family:inherit;line-height:1}
+  .modal .mx:hover{background:var(--inbg)}
+  .modal .mb{padding:18px;max-height:min(72vh,760px);overflow-y:auto}
+  .sopdoc h4{margin:16px 0 7px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);font-weight:800}
+  .sopdoc p,.sopdoc li{font-size:13.5px;line-height:1.6;color:var(--ink2)}
+  .sopdoc p{margin:0 0 8px}
+  .sopdoc ul{margin:0 0 10px;padding-left:19px}
+  .sopdoc li{margin-bottom:5px}
+  .sopdoc .note{font-size:12.5px;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:9px;padding:9px 11px;color:#8a5d05;margin:0 0 8px}
+  [data-theme="dark"] .sopdoc .note{color:#f0b93d}
+  .sopdoc table{width:100%;border-collapse:collapse;font-size:12.8px;margin:2px 0 8px}
+  .sopdoc th,.sopdoc td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left;line-height:1.55}
+  .sopdoc th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--inbg)}
+  .sopdoc .fig{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:10px 0;background:#f6f9fc}
+  [data-theme="dark"] .sopdoc .fig{background:rgba(255,255,255,.05)}
+  .sopdoc .fig img{display:block;width:100%;height:auto}
+  .sopdoc .fig .cap{font-size:11.5px;color:var(--muted);padding:8px 11px;border-top:1px solid var(--line);line-height:1.5}
+  .sopdoc .figrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  @media(max-width:560px){.sopdoc .figrow{grid-template-columns:1fr}}
+  .sopdoc .due{display:inline-block;font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 8px;background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -173,6 +231,127 @@
   <div class="foot">Working model / simulation — outputs are illustrative. Runs inside i3Host; not public. Data entered is saved to Salesforce and is proprietary to i3. © 2026 i3 International Inc.</div>
 </div>
 
+<!-- REAL SOP POPUP — the actual document from v2/SOP/ (NTE AI Configuration SOP) -->
+<div class="modalbg" id="sopModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="The real SOP — Configuring i3Ai Setup for optimal accuracy">
+    <div class="mh">
+      <div class="mic">📄</div>
+      <div><h3>SOP: Configuring i3Ai Setup for optimal accuracy</h3>
+      <div class="sub">The real document — <b>v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf</b> · Northern Tool + Equipment (NTE) · June 19, 2024</div></div>
+      <button class="mx" type="button" onclick="closeSOPModal()" title="Close" aria-label="Close">✕</button>
+    </div>
+    <div class="mb sopdoc">
+      <div class="note">This is the <b>real, in-use i3 SOP</b> from the SOP folder — the worked example of the standardized format Phase 2 runs on: <b>configure → verify → monitor weekly → audit monthly → improve</b>. That loop is what keeps the delivered solution performing as the contract promised.</div>
+      <h4>Objective</h4>
+      <p>Establish a consistent process for configuring and verifying i3Ai detection settings on all cameras to ensure proper operation and detection capabilities at Northern Tool and Equipment's sites. Regular checks and detailed documentation prevent future issues and enhance overall performance.</p>
+      <h4>Scope</h4>
+      <p>Applies to all support staff responsible for configuring and maintaining i3Ai cameras across all NTE sites.</p>
+      <h4>Limitations</h4>
+      <p>Environmental and infrastructure conditions outside i3's control — network performance, power fluctuations, camera lens/dome cleanliness, severe weather and other acts of God — may affect i3Ai accuracy and performance; i3 makes no accuracy claims under those circumstances.</p>
+      <h4>Responsibilities</h4>
+      <table>
+        <tr><th>i3 team</th><th>Global Axiom team</th></tr>
+        <tr>
+          <td>
+            <b>Technical Support:</b> provide the Global Axiom team with clear i3Ai setup documentation <span class="due">due June 20, 2024</span> (recommendations may change as i3Ai software evolves).<br><br>
+            <b>Technical Services Leads:</b> provide camera-installation recommendations for best i3Ai accuracy <span class="due">due June 28, 2024</span>; document issues identified on NTE sites after a joint review, with a clear timeline and owners for fixes; pass video of non-compliant events to i3's development team; notify Global Axiom when the i3Ai algorithm/engine is re-trained and the update is available.<br><br>
+            <b>Executive Sponsor:</b> approve the SOP and ensure compliance across all sites.
+          </td>
+          <td>
+            <b>Global Technical Support:</b> ensure the recommended i3 software is installed on all NTE GPU-enabled servers; ensure clear camera views; ensure camera configurations comply with i3's recommendations; verify i3Ai performance through audit and testing during the active alarm hours.<br><br>
+            <b>Global Technical Services Leads:</b> oversee the configuration process and conduct periodic audits; establish and maintain a regular camera-cleaning schedule; review existing NTE sites with the i3 Technical Services Lead for compliance; collect video of all non-compliant events (<b>*.i3d</b> format) to a shared SFTP location for i3's Team Leads as part of the escalation process (i3 uses the clips to improve i3Ai algorithm accuracy); install i3Ai software updates whenever new algorithm/engine updates become available.
+          </td>
+        </tr>
+      </table>
+      <p><b>Joint commitments (both teams):</b> NTE <b>Site 658 Burleson</b> is physically audited — detection accuracy, CMS connectivity and successful signal alerts to the Global monitoring station confirmed during the audit; <b>4–5 additional sites</b> upgraded on the same template by end of day June 19, 2024.</p>
+      <h4>Procedure · 1 — Infrastructure &amp; configuration requirements</h4>
+      <p><b>Server:</b> i3Ai Server with GPU is required — GPU = GTX1050i (minimum), GTX1060 or better (recommended).</p>
+      <p><b>Software</b> (all packages from i3's Downloads site, <b>i3international.com/download</b>; the latest packages are pre-staged on the local D: partition of the 121 GPU-enabled NTE servers, ready for installation):</p>
+      <ul>
+        <li>Install the latest <b>SRX-Software</b> (v7.3.2.120 as of June 19, 2024) on each server.</li>
+        <li>Install the <b>NVIDIA driver (64-bit)</b> on the i3Ai Server (GPU-enabled server).</li>
+        <li>Install the latest <b>i3Ai Server software</b> (v7.3.2.90 as of June 19, 2024).</li>
+      </ul>
+      <p><b>i3Ai Setup camera configuration requirements</b> (installation best practices — camera angle, bitrate, maximum coverage area — provided by i3 Team Leads <span class="due">due June 28, 2024</span>):</p>
+      <ul>
+        <li>Minimum acceptable resolution: <b>1280×960 (1.3 MP)</b>.</li>
+        <li>Required i3 and Axis IP camera frame rate: <b>5 FPS</b>.</li>
+        <li>Required HR16v2 encoder frame rate: <b>6 FPS</b>.</li>
+        <li><b>"Max detection area"</b> setting must be enabled.</li>
+        <li>Max detection area must be <b>larger than the detection area</b>.</li>
+        <li>Object detection must be set to <b>"Head"</b> and <b>"Person"</b>.</li>
+        <li>Object count must be set to <b>≥ 1</b>, Duration must be set to <b>≥ 1</b>.</li>
+      </ul>
+      <div class="fig">
+        <img data-rel="media/sop-nte-max-detection-area.jpg" alt="Exterior camera view with the magenta Max detection area drawn larger than the red Area alarm detection area">
+        <div class="cap"><b>From the SOP (p. 2):</b> exterior camera (server 2304076, channel C13, 1920×1080) — the magenta <b>Max detection area</b> polygon is drawn larger than the red <b>Area alarm / Area 1</b> detection area, exactly as rules 4–5 require.</div>
+      </div>
+      <div class="figrow">
+        <div class="fig">
+          <img data-rel="media/sop-nte-alarm-settings.png" alt="i3Ai Setup alarm panel with Object count 1, Duration 1 and Objects detection Person, Head">
+          <div class="cap"><b>From the SOP (p. 3):</b> the alarm panel — <b>Object count ≥ 1</b>, <b>Duration ≥ 1 (sec)</b>, Objects detection <b>"Person, Head — 2 selected"</b> (rules 6–7).</div>
+        </div>
+        <div class="fig">
+          <img data-rel="media/sop-nte-object-detection.png" alt="Objects detection picker with Head and Person checked and Automobile unchecked">
+          <div class="cap"><b>From the SOP (p. 3):</b> the objects-detection picker — <b>Head</b> + <b>Person</b> checked (Automobile off), matching rule 6.</div>
+        </div>
+      </div>
+      <h4>Procedure · 2 — Verification</h4>
+      <ul>
+        <li>Post-configuration checks: verify each camera's frame-rate settings and confirm the maximum-detection settings are applied.</li>
+        <li>Testing: run an AI detection + alert test at night wherever possible; if not, temporarily set Alarm Active Time to 24/7 for the test, then return it to 10PM–7AM. Review results for accuracy and reliability.</li>
+      </ul>
+      <h4>Procedure · 3 — Ongoing monitoring &amp; maintenance</h4>
+      <ul>
+        <li>Weekly checks that configurations remain consistent; recalibrate if discrepancies are found.</li>
+        <li>Incident response: an undetected event triggers an immediate camera-settings review; adjust as necessary and document the changes.</li>
+      </ul>
+      <h4>Procedure · 4 — Documentation &amp; reporting</h4>
+      <ul>
+        <li>Maintain detailed logs of all configurations and changes, with issues encountered and resolutions applied.</li>
+        <li>Monthly audits of camera settings; audit reports go to the Technical Support Manager.</li>
+      </ul>
+      <h4>Procedure · 5 — Continuous improvement</h4>
+      <ul>
+        <li>Collect feedback from on-site teams on AI performance; adjust and update configurations to feedback and new standards.</li>
+      </ul>
+      <h4>Troubleshooting common issues</h4>
+      <ul>
+        <li><b>Frame-rate discrepancies:</b> check the network bandwidth supports the configured rates; verify camera firmware is up to date.</li>
+        <li><b>Detection failures:</b> ensure the lens is clean and unobstructed; review recent changes to AI algorithms or software updates.</li>
+      </ul>
+      <h4>Contacts — account leads "Who owns it"</h4>
+      <table>
+        <tr><th>i3 International</th><th>Global Axiom</th></tr>
+        <tr>
+          <td>
+            <b>Nissan Britto</b> — day-to-day Technical Services Lead · 1-866-840-0004 ext. 138 · nbritto@i3international.com<br>
+            <b>Alexandra Malka</b> — day-to-day Account Manager · 716-334-3561 · amalka@i3international.com<br>
+            <b>Olga Skelly</b> — Technical Documentation Lead · 1-866-840-0004 ext. 135 · oskelly@i3international.com<br>
+            <b>Paul Kerling</b> — Account Sales Representative · 763-548-4617 · pkerling@i3international.com
+          </td>
+          <td>
+            <b>Efrain Saenz</b> — day-to-day Technical Services Lead · 832-794-0320 · efrain.saenz@globalaxiom.com<br>
+            <b>Valdis Gravis</b> — day-to-day Technical Services Lead · valdis.gravis@secureds.us
+          </td>
+        </tr>
+        <tr><th>i3 executive sponsors</th><th>Global Axiom executive sponsors</th></tr>
+        <tr>
+          <td><b>Bob Hoang</b> · 716-289-4862 · bhoang@i3international.com<br><b>Vy Hoang</b> · 716-783-0986 · vhoang@i3international.com<br><b>David Crook</b> · 716-255-0293 · dcrook@i3international.com</td>
+          <td><b>Jason Lansky</b> · jason.lansky@globalaxiom.com<br><b>David Heller</b> · david.heller@globalaxiom.com</td>
+        </tr>
+      </table>
+      <h4>Approval</h4>
+      <p>The document closes with a joint sign-off block — <b>name / title / date / signature</b> for an i3 representative and a Global Axiom representative. That signature is what makes the SOP binding on both teams.</p>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn p sm" type="button" onclick="openSOP()">📄 Open the original PDF</button>
+        <button class="btn g sm" type="button" onclick="openSOPPhase2()">📘 SOP catalog — Phase 2</button>
+        <button class="btn g sm" type="button" onclick="closeSOPModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 function toggleTheme(){var d=document.documentElement.getAttribute('data-theme')==='dark';var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('i3_theme',n)}catch(e){}var b=document.getElementById('themeToggle');if(b)b.textContent=n==='dark'?'☀️':'🌙';}
 (function(){var b=document.getElementById('themeToggle');if(b)b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';})();
@@ -182,6 +361,16 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'index.html';}else{location.href='index.html';}}
 /* open the AI Configuration SOP PDF (works self-hosted and via htmlpreview -> raw github) */
 function openSOP(){var f='SOP/NTE_Ai_Configuration_SOP_240619v2.pdf';var hp=location.hostname==='htmlpreview.github.io';var u=f;if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}u=i.replace(/[^\/]*$/,'')+f;}window.open(u,'_blank','noopener');}
+/* open the ROS SOP page at Phase 2 (hash when self-hosted; localStorage flag via htmlpreview, which drops fragments) */
+function openSOPPhase2(){try{localStorage.setItem('i3_sop_goto','phase2')}catch(e){}var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}window.open('https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'sop.html','_blank','noopener');}else{window.open('sop.html#phase2','_blank','noopener');}}
+/* real-SOP popup (the actual NTE AI Configuration SOP from v2/SOP/) */
+function openSOPModal(){document.getElementById('sopModal').classList.add('show');document.body.style.overflow='hidden';}
+function closeSOPModal(){document.getElementById('sopModal').classList.remove('show');document.body.style.overflow='';}
+document.getElementById('sopModal').addEventListener('click',function(e){if(e.target===this)closeSOPModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSOPModal();});
+/* resolve a repo-relative media path (raw-GitHub URL under htmlpreview, relative when self-hosted) */
+function mediaURL(rel){var hp=location.hostname==='htmlpreview.github.io';if(!hp)return rel;var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}return i.replace('//github.com/','//raw.githubusercontent.com/').replace('/blob/','/').replace(/[^\/]*$/,'')+rel;}
+(function(){var imgs=document.querySelectorAll('img[data-rel]');for(var k=0;k<imgs.length;k++)imgs[k].src=mediaURL(imgs[k].getAttribute('data-rel'));})();
 
 /* ===== state ===== */
 var S={role:'rep', seg:'Retail'};
@@ -190,19 +379,30 @@ var PMS=["Louel","Nissan","Des"];          // i3 PM team
 
 /* ===== voice (the 'aha' — Vision actually talks) ===== */
 /* ===== role / segment ===== */
-function setRole(r){ S.role=r;
+function setRole(r,sub){ S.role=r;
   ['admin','rep','integ','partner'].forEach(function(x){document.getElementById('ro-'+x).classList.toggle('on',x===r)});
-  if(r==='admin'){ showAdmin(); } else { goHome(); }
+  if(r==='admin'){ showAdmin(sub); } else { goHome(); }
 }
 function setSeg(v){ S.seg=v; rep.seg=v; document.getElementById('segPill').textContent=v; }
 function allowed(st){ return S.role==='partner' ? st.partner : true; }
 function show(id){ ['admin','home','stage'].forEach(function(v){document.getElementById('view-'+v).classList.toggle('hidden',v!==id)}); window.scrollTo(0,0); }
 
-/* ========================================================= ADMIN ONBOARDING ========================================================= */
-function showAdmin(){
+/* ========================================================= ADMIN MENU (onboarding + manager dashboard) ========================================================= */
+function showAdmin(sub){
   show('admin');
+  S.adminTab = sub || S.adminTab || 'manager';
   document.getElementById('view-admin').innerHTML=
-    '<div class="eyebrow">Administrator</div><h1>Onboard a salesperson</h1>'+
+    '<div class="eyebrow">Administrator</div><h1>Admin menu</h1>'+
+    '<div class="atabs">'+
+      '<button class="atab '+(S.adminTab==='manager'?'on':'')+'" onclick="showAdmin(\'manager\')">▦ Manager Dashboard</button>'+
+      '<button class="atab '+(S.adminTab==='onboard'?'on':'')+'" onclick="showAdmin(\'onboard\')">👤 Onboard a salesperson</button>'+
+    '</div>'+
+    '<div id="adminBody"></div>';
+  if(S.adminTab==='manager') renderManagerDash(); else renderAdminOnboard();
+  window.scrollTo(0,0);
+}
+function renderAdminOnboard(){
+  document.getElementById('adminBody').innerHTML=
     '<p class="lede">Set them up and Vision builds their workflow and kicks off the automated process — lead intelligence, training, and their daily plan.</p>'+
     '<div class="vsay"><div class="av">V</div><div class="bub">Tell me about the new rep and their year. I\'ll build their ramp and start the engine for them.</div></div>'+
     '<div class="card"><div class="body">'+
@@ -233,6 +433,82 @@ function runAdmin(){
 }
 function val(id){var e=document.getElementById(id);return e?(e.value||'').trim():'';}
 
+/* ===== Manager Dashboard (moved here from the Sales Engine) ===== */
+var MSTAGES=[["V-Start","Onboarding"],["V-Coach","Training"],["V-Target","Lead intel"],["V-Reach","Marketing"],["V-Guide","Outreach"],["V-Present","Presentation"],["V-Prove","POC"],["V-Guard","Privacy"],["V-Close","Closing"]];
+var MREPS=[
+  {nm:"George Karaolis", ro:"Business Development Mgr", seg:"Commercial", stage:"V-Coach",   area:"Onboarding · Training", ready:62, refl:[2,3], ment:[6,15],
+    wk:"Week 2 of 4 · NSM training", focus:"Sales Mastery + Sales Ops fundamentals", next:"30-day business plan + SWOT", mentor:"David Crook"},
+  {nm:"Paul Kerling",    ro:"Account Executive",        seg:"C-Store / QSR", stage:"V-Guide", area:"Outreach · Verification", ready:78, refl:[4,5], ment:[11,15],
+    wk:"Week 5 · Guided outreach", focus:"Verified outreach + booking meetings", next:"First booked presentation", mentor:"Paul Leiba"},
+  {nm:"Tony Thomas",     ro:"Sales Rep",                seg:"Education",  stage:"V-Present", area:"Presentation", ready:71, refl:[3,5], ment:[9,15],
+    wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"Hal Wever"},
+  {nm:"Rajiv Patel",     ro:"Business Development Mgr", seg:"Integrator", stage:"V-Prove",  area:"Proof of Concept", ready:85, refl:[5,5], ment:[14,15],
+    wk:"POC · day 20 of 45", focus:"POC validation with PM team", next:"Executive Go / No-Go review", mentor:"Hal Wever"},
+  {nm:"Andrew Ioannou",  ro:"Sales Rep",                seg:"Commercial", stage:"V-Start",  area:"Onboarding", ready:30, refl:[1,3], ment:[2,15],
+    wk:"Week 1 · Onboarding", focus:"i3 culture + systems setup", next:"Meet the mentor team", mentor:"David Crook"},
+  {nm:"Christian Combes",ro:"Account Executive",        seg:"Grocery",    stage:"V-Close",  area:"Closing", ready:90, refl:[5,5], ment:[13,15],
+    wk:"Closing", focus:"Out-position the incumbent + close", next:"Contract + DocuSign", mentor:"David Crook"}
+];
+function reflOk(r){return r.refl[0]/r.refl[1]>=0.8;}
+function readyCol(v){return v>=75?'var(--green)':v>=50?'var(--yellow)':'var(--red)';}
+function attention(r){return r.ready<50 || !reflOk(r);}
+function mkpi(k,v,s,cls){return '<div class="kpi"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="s">'+s+'</div></div>';}
+
+function renderManagerDash(){
+  var onboarding=MREPS.filter(function(r){return r.stage==='V-Start'||r.stage==='V-Coach'}).length;
+  var avg=Math.round(MREPS.reduce(function(s,r){return s+r.ready},0)/MREPS.length);
+  var onTrack=MREPS.filter(reflOk).length;
+  var pocs=MREPS.filter(function(r){return ['V-Prove','V-Guard','V-Close'].indexOf(r.stage)>-1}).length;
+
+  var rows=MREPS.map(function(r,ri){
+    var pct=Math.round(r.refl[0]/r.refl[1]*100);
+    return '<div class="rrow '+(attention(r)?'flag':'')+'" onclick="openMgrRep('+ri+')" title="Open rep detail">'+
+      '<div><div class="nm">'+r.nm+'</div><div class="ro">'+r.ro+'</div><span class="segchip">'+r.seg+'</span></div>'+
+      '<div><div class="rmini">Stage</div><div class="rval">'+r.stage+'</div><div class="ro" style="font-size:11px">'+r.area+'</div></div>'+
+      '<div><div class="rmini">Readiness</div><div class="rval">'+r.ready+'%</div><div class="rbar"><span style="width:'+r.ready+'%;background:'+readyCol(r.ready)+'"></span></div></div>'+
+      '<div><div class="rmini">Reflections · Mentor</div><div class="rval">'+r.refl[0]+'/'+r.refl[1]+' · '+r.ment[0]+'/'+r.ment[1]+'</div><div class="rbar"><span style="width:'+pct+'%;background:'+(reflOk(r)?'var(--green)':'var(--yellow)')+'"></span></div></div>'+
+      '<div class="badge '+(attention(r)?'warn':'ok')+'" style="align-self:center">'+(attention(r)?'Needs attention':'On track')+'</div>'+
+    '</div>';
+  }).join('');
+
+  var maxc=1; MSTAGES.forEach(function(a){var c=MREPS.filter(function(r){return r.stage===a[0]}).length; if(c>maxc)maxc=c;});
+  var funnel=MSTAGES.map(function(a){
+    var c=MREPS.filter(function(r){return r.stage===a[0]}).length;
+    return '<div class="fbar"><div class="fn">'+a[0]+'</div><div class="ft"><span style="width:'+(c/maxc*100)+'%"></span><div class="fc">'+c+'</div></div></div>';
+  }).join('');
+
+  document.getElementById('adminBody').innerHTML=
+    '<p class="lede">Live read on every rep Vision is guiding — readiness, weekly reflections, mentor progress and where they sit in the pipeline.</p>'+
+    '<div class="kpis" style="margin-top:14px">'+
+      mkpi('Reps onboarding', onboarding, MREPS.length+' total active','')+
+      mkpi('Avg readiness', avg+'%','team across all stages', avg>=70?'good':'warn')+
+      mkpi('Reflections on-track', onTrack+'/'+MREPS.length,'weekly Friday forms', onTrack>=MREPS.length-1?'good':'warn')+
+      mkpi('Active POCs', pocs,'in proof-of-concept','')+
+    '</div>'+
+    '<div class="mcols">'+
+      '<div class="card"><div class="h"><div class="ic">👥</div><div><h2>Rep roster</h2><div class="sub">'+MREPS.length+' reps · click a row for detail</div></div></div><div class="body"><div class="roster">'+rows+'</div><div id="mgrDetail"></div></div></div>'+
+      '<div class="card"><div class="h"><div class="ic">📶</div><div><h2>Where reps sit in Vision</h2><div class="sub">by agent stage</div></div></div><div class="body">'+funnel+'</div></div>'+
+    '</div>'+
+    '<div class="saveNote">🔒 Roster, readiness and reflections sync from Salesforce + i3Live — proprietary to i3.</div>';
+}
+function openMgrRep(i){
+  var r=MREPS[i];
+  var deliverables=[
+    ["Weekly Friday reflection forms", reflOk(r)],
+    ["12–15 mentor / shadow meetings", r.ment[0]>=12],
+    ["NSM national sales training", ["V-Guide","V-Present","V-Prove","V-Guard","V-Close"].indexOf(r.stage)>-1],
+    ["30-day business plan + SWOT", ["V-Present","V-Prove","V-Guard","V-Close"].indexOf(r.stage)>-1],
+    ["Mock + live demo (evaluated)", ["V-Prove","V-Guard","V-Close"].indexOf(r.stage)>-1]
+  ];
+  document.getElementById('mgrDetail').innerHTML=
+    '<div class="osec" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px"><h4>'+r.nm+' — '+r.ro+' · '+r.seg+'</h4>'+
+    '<div class="grid2">'+kv("Current stage",r.stage+' · '+r.area)+kv("Acclimation",r.wk)+kv("Readiness",r.ready+'%')+kv("Reflections · Mentor",r.refl[0]+'/'+r.refl[1]+' · '+r.ment[0]+'/'+r.ment[1])+kv("Current focus",r.focus)+kv("Next milestone",r.next)+kv("Direct manager",r.mentor)+kv("Status",attention(r)?'⚠ Needs attention':'✓ On track')+'</div>'+
+    '<div style="margin-top:10px"><div class="rmini" style="min-height:auto;margin-bottom:6px">Acclimation deliverables</div>'+
+      '<ul class="steps" style="list-style:none;padding-left:2px">'+deliverables.map(function(d){return '<li>'+(d[1]?'<span style="color:var(--green);font-weight:800">✓</span>':'<span style="color:var(--muted);font-weight:800">○</span>')+' '+d[0]+'</li>'}).join('')+'</ul></div>'+
+    '<div style="margin-top:8px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn g sm" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in i3Host / Salesforce.\')">Open in i3Host</button></div></div>';
+  document.getElementById('mgrDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
 /* ========================================================= REP DASHBOARD (home) ========================================================= */
 function goHome(){ show('home'); renderHome(); }
 function renderHome(){
@@ -241,7 +517,6 @@ function renderHome(){
     '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via i3Host':'Your dashboard')+'</div>'+
       '<h1>Good morning, '+rep.name.split(' ')[0]+'</h1>'+
       '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div></div>'+
-    '<div class="adminbar"><div class="t">👤 <b>Admin?</b> Onboard a new salesperson and Vision starts their workflow automatically.</div><button class="btn pink sm" onclick="setRole(\'admin\')">Onboard a rep →</button></div>'+
     '<div class="widgets">'+
       wdg('today','Today','5 tasks','3 calls · 1 prep · 1 POC','','act')+
       wdg('goal','This month','$210K','of '+rep.goal.replace("M","M ÷12 ≈ $375K")+' target','warn')+
@@ -302,8 +577,8 @@ var STAGES=[
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
   {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Step 1 cyber (every deal) → Step 2 privacy (if it applies)", partner:true,
     intro:"Cybersecurity applies to every deal — I'll run that first. Privacy is variable, so it's step two, only where a privacy statement applies. Run it and I'll tell you exactly what to do."},
-  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Timed POC close · follow-through · training · upsell", partner:false,
-    intro:"Closing here is a tight timeline on the POC — the proof of concept is the close. I'll set the decision deadline, then line up the follow-through: follow-up, training, professional services and the right upsells."}
+  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Phase 1 · Closing (sign-off) → Phase 2 · Prove the contract promise", partner:false,
+    intro:"Customer Success runs in two phases. Phase 1 is closing — a tight timeline on the POC drives the Go/No-Go and we sign off with the customer. Phase 2 is the follow-up: we prove the solution we provided is helping them as the contract promised — it runs on the SOP. I'll set the decision deadline and line up both phases."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
@@ -371,7 +646,7 @@ var THINK={
   present:["searching for the customer…","reading site type + recent news (Google Alerts)","surfacing their pain points","mapping to i3's three modules","recommending what to present","building your logo-branded deck","capturing the transcript"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["running the standard cyber checklist (every deal)…","checking the site's privacy requirement","applying Law 25 / GDPR where it applies","drafting signage + PIA"],
-  close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
+  close:["Phase 1 — setting the POC decision deadline…","driving the Go / No-Go to the customer sign-off","Phase 2 — loading the SOP follow-up","extracting the contract promises to prove","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
 function leadReady(b){ b.textContent='Ready ✓'; b.disabled=true; openStage('present'); }
@@ -502,12 +777,21 @@ var OUTPUT={
   close:function(){
     var dl=val('i_deadline')||"30 days";
     var health=val('i_health')||"🟢 Green — healthy";
-    return sec("Timed POC close",'<div class="kv"><div class="k">The POC is the close</div><div class="v" style="font-weight:600;font-size:13px">Put a hard decision date on the proof of concept — drive to <b>Go / No-Go within '+dl+'</b>. The working POC plus a tight timeline is what moves the customer to a decision.</div></div>')+
-      sec("Follow-up &amp; follow-through",'<ul class="steps"><li>Confirm the win against the POC success metric.</li><li>Stay on it as the solution rolls out — check-ins + adoption.</li><li>Account health: <b>'+health+'</b> — flag risk early.</li></ul>')+
+    return sec("Phase 1 · Closing — sign off with the customer",'<div class="kv"><div class="k">The POC is the close</div><div class="v" style="font-weight:600;font-size:13px">Put a hard decision date on the proof of concept — drive to <b>Go / No-Go within '+dl+'</b>. The working POC plus a tight timeline is what moves the customer to a decision. <b>Customer sign-off = contract signed — Phase 1 complete.</b></div></div>')+
+      sec("Phase 2 · Follow-up — prove the contract promise (runs on the SOP)",
+        '<div class="kv"><div class="k">After the sign-off</div><div class="v" style="font-size:13px">We follow up with the customer to <b>prove the solution we provided is helping them as the contract promised</b>. Phase 2 runs on the SOP — Vision extracts every contract promise and tracks it to proof.</div></div>'+
+        '<ul class="steps"><li><b>Extract the contract promises</b> into measurable success criteria (from the contract + the POC success metric).</li><li><b>30 / 60 / 90-day check-ins</b> — adoption, usage, and the <b>promise-vs-actual scorecard</b>.</li><li><b>Proof-of-value report</b> — show the customer, in their own numbers, that the contract promise is being delivered.</li><li>Account health: <b>'+health+'</b> — flag risk early; a promise off-track gets a remediation plan before the customer notices.</li></ul>'+
+        '<div style="margin-top:10px"><a class="btn g sm" style="display:inline-block;text-decoration:none" href="sop.html#phase2" onclick="openSOPPhase2();return false;">📘 Open the SOP — Phase 2 · Prove the promise</a></div>')+
+      sec("The real SOP — example from the SOP folder",
+        '<div class="kv"><div class="k">v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf</div><div class="v" style="font-size:13px;font-weight:600">This is the <b>real, in-use i3 SOP</b> — <i>Configuring i3Ai Setup for optimal accuracy</i> (Northern Tool + Equipment). Its <b>verify → monitor weekly → audit monthly → improve</b> loop is exactly how Phase 2 keeps the solution performing as the contract promised.</div></div>'+
+        '<div class="sopdoc" style="margin-top:10px"><div class="fig" style="cursor:pointer;margin:0" onclick="openSOPModal()" title="Open the full SOP">'+
+          '<img src="'+mediaURL('media/sop-nte-max-detection-area.jpg')+'" alt="From the real SOP: exterior camera with the Max detection area drawn larger than the detection area">'+
+          '<div class="cap"><b>From the real document (p. 2):</b> the magenta <b>Max detection area</b> drawn larger than the red <b>Area alarm</b> detection area — one of the seven camera-configuration rules the SOP audits every site against. Click to read the full SOP.</div></div></div>'+
+        '<div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn p sm" onclick="openSOPModal()">📄 View the real SOP (popup)</button><button class="btn g sm" onclick="openSOP()">⬇ Open the original PDF</button></div>')+
       sec("Training",'<ul class="steps"><li><b>Lean</b> — rep &amp; customer training.</li><li><b>Grade</b> — video-based training.</li></ul>')+
       sec("Professional services",'<div class="kv"><div class="k">Where it fits</div><div class="v" style="font-size:13px">Bundle i3 professional services into the rollout where relevant.</div></div>')+
       sec("Upsell suggestions",'<ul class="steps"><li>Concierge service</li><li>Smart ER Analyst service</li><li>One Connect service</li><li>TrueView service</li></ul>')+
-      sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
+      sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story — earned by the proof, not the pitch.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
       saveBar();
   },
   onboard:function(){
@@ -536,6 +820,13 @@ function showPM(){
 
 /* boot */
 setRole('rep');
+// deep-link into Admin → Manager Dashboard (#manager hash, or the i3_agent_view flag
+// set by process.html / legacy engine links — survives preview proxies that drop fragments)
+(function(){
+  var go = location.hash==='#manager';
+  try{ if(localStorage.getItem('i3_agent_view')==='manager'){ go=true; localStorage.removeItem('i3_agent_view'); } }catch(e){}
+  if(go) setRole('admin','manager');
+})();
 </script>
 <!-- i3 brand casing: keep the "i3" token lowercase even inside UPPERCASE labels -->
 <script>
