@@ -244,6 +244,6 @@ and intent 92 (call first)."
 
 ---
 
-*Part of the Vision agent set (see `MAGENTA_AGENT.md`). Working references:
+*Part of the Vision agent set (see `V_GUARD_AGENT.md`). Working references:
 `v2/vision-sales-agent.html` (Prospecting + Presentation) and
 `v2/v-vision-sales-engine.html`. © 2026 i3 International Inc.*

@@ -5,10 +5,10 @@ good meeting into a Proof of Concept. **The transcript produces the POC**: V-Pro
 drafts the whole document (Gardewine template) from the presentation transcript, maps
 the solution to i3's **three modules**, captures every stakeholder, recommends the
 equipment to quote, drops in the standard drawings and site maps, suggests upsells,
-hands the privacy/cyber review to **Magenta**, and hands off to the **PM team**.
+hands the privacy/cyber review to **V-Guard**, and hands off to the **PM team**.
 
 > AI drafts, a **PM confirms** (~20 min instead of writing from scratch — ~30–40% PM
-> time saved). High-risk privacy items need **Magenta / Privacy sign-off** before the
+> time saved). High-risk privacy items need **V-Guard / Privacy sign-off** before the
 > POC is approved.
 
 > **Never guess.** Anything V-Prove can't verify from the transcript or the catalog goes
@@ -16,7 +16,7 @@ hands the privacy/cyber review to **Magenta**, and hands off to the **PM team**.
 > confirmation** checklist at the top of the draft — so the PM sees exactly what to verify
 > in that ~20-minute review.
 
-Agent id: `V-Prove` — receives from `V-Present`, hands to `V-Guard` (Magenta) + the PM,
+Agent id: `V-Prove` — receives from `V-Present`, hands to `V-Guard` + the PM,
 then on to `V-Close`.
 
 ---
@@ -32,7 +32,7 @@ then on to `V-Close`.
 - **Attaches standard, reusable drawings/diagrams** (HD cameras, networking, firewall,
   ports) and **standard site maps/images** (reused, names & camera labels changed).
 - **Suggests upsells** (Concierge · Smart ER Analyst · One Connect · TrueView).
-- **Builds in privacy & cyber docs** and hands the full review to **Magenta (V-Guard)**,
+- **Builds in privacy & cyber docs** and hands the full review to **V-Guard**,
   using the site address → exact legal doc.
 - **Assigns + hands off to the PM** by territory, with the **45-day plan**.
 - Saves everything to Salesforce; proprietary to i3.
@@ -48,7 +48,7 @@ Presentation (interested)  ──►  V-Prove builds the POC
    │ 3 modules    │ stakeholders│ equipment │ drawings/maps│ upsell        │
    └──────────────┴────────────┴────────────┴──────────────┴───────────────┘
                                      │
-              privacy & cyber  ──►  Magenta (V-Guard)  ──► sign-off on high risk
+              privacy & cyber  ──►  V-Guard  ──► sign-off on high risk
                                      │
               PM handoff (45-day plan, forms)  ──►  V-Close
 ```
@@ -65,7 +65,7 @@ Presentation (interested)  ──►  V-Prove builds the POC
 | `account` | Salesforce | "Metro Retail Group" |
 | `segment` | onboarding | "C-Store / QSR" |
 
-The **site address** sets the exact legal doc (passed to Magenta) and, with the
+The **site address** sets the exact legal doc (passed to V-Guard) and, with the
 territory, the **PM assignment**.
 
 ---
@@ -82,7 +82,7 @@ territory, the **PM assignment**.
 5. **Site drawings / diagrams** — 3–4 **standard, reusable** drawings (HD cameras,
    networking, firewall, ports) to drag-and-drop or tweak.
 6. **Site maps / images** — a standard set reused across POCs; change names + camera labels.
-7. **Privacy & cybersecurity docs** — built in; full review by **Magenta**.
+7. **Privacy & cybersecurity docs** — built in; full review by **V-Guard**.
 8. **Upsell suggestions** — Concierge · Smart ER Analyst · One Connect · TrueView.
 9. **PM handoff** — assigned PM, 45-day plan, cyber/forms.
 
@@ -113,7 +113,7 @@ Always:
 - Suggest relevant upsells (Concierge, Smart ER Analyst, One Connect, TrueView).
 - Set a 45-day pilot with a clear success metric tied to the customer's driver.
 - Resolve the site address to the exact legal doc and hand privacy + cybersecurity to
-  Magenta (V-Guard). Do NOT approve the POC until high-risk privacy is signed off.
+  V-Guard. Do NOT approve the POC until high-risk privacy is signed off.
 - Assign the PM by territory and hand off with the 45-day plan.
 
 You DRAFT; the PM owns and confirms. Everything is saved to Salesforce and is
@@ -163,7 +163,7 @@ proprietary to i3.
   },
   {
     "name": "handoff_magenta",
-    "description": "Send site address + applications to Magenta (V-Guard) for the privacy + cybersecurity review.",
+    "description": "Send site address + applications to V-Guard for the privacy + cybersecurity review.",
     "parameters": { "type": "object",
       "properties": { "site_address": {"type":"string"}, "applications": {"type":"array","items":{"type":"string"}} },
       "required": ["site_address"] }
@@ -209,7 +209,7 @@ Typical order: `generate_poc` → `extract_stakeholders` → `recommend_equipmen
   stakeholder table, recommended solution + equipment, standard drawings + site maps
   (with relabel notes), built-in privacy/cyber docs, upsell suggestions — with
   `[TO CONFIRM: …]` placeholders highlighted inline wherever a value is unverified.
-- A **Magenta handoff** (site address + apps) for the privacy/cyber review.
+- A **V-Guard handoff** (site address + apps) for the privacy/cyber review.
 - A **PM handoff** — assigned PM + 45-day plan, saved to Salesforce.
 - Status: `draft — awaiting PM confirmation` (with N items to confirm); high-risk privacy
   → `awaiting sign-off`.
@@ -225,7 +225,7 @@ Typical order: `generate_poc` → `extract_stakeholders` → `recommend_equipmen
 - **Placeholders are visible, never silent** — every unverified value is marked inline
   and collected at the top; the POC is not "done" until the PM clears the checklist.
 - **Privacy gate** — high-risk privacy (biometrics / Law 25 / BIPA) must be signed off
-  by Magenta / Privacy before the POC is approved.
+  by V-Guard / Privacy before the POC is approved.
 - **Reusables are templates** — flag which names/labels must be changed per site.
 - **Data ownership** — the POC is saved to Salesforce, proprietary to i3.
 
@@ -241,7 +241,7 @@ Typical order: `generate_poc` → `extract_stakeholders` → `recommend_equipmen
 3. Trigger from V-Present when the prospect is interested; pass `transcript`,
    `site_address`, `applications`.
 4. Persist via `save_to_account`; branch to `handoff_magenta` (always) and gate approval
-   on Magenta sign-off for high risk.
+   on V-Guard sign-off for high risk.
 5. Keep PM assignment and the equipment mapping deterministic (tools); let the model do
    the drafting and the module justification.
 
@@ -264,7 +264,7 @@ drivers: fewer systems, loss-prevention visibility, reporting managers will use.
 - assign_pm → Ontario → Louel ; save_to_account
 Output: "POC drafted (Gardewine) — solution by module, stakeholders, equipment, drawings,
 upsell. ⚠ 2 items to confirm (LP lead name, camera count) highlighted up top.
-Privacy/cyber sent to Magenta. Handed to Louel with the 45-day plan. PM to confirm
+Privacy/cyber sent to V-Guard. Handed to Louel with the 45-day plan. PM to confirm
 (~20 min)."
 ```
 

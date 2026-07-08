@@ -1,6 +1,6 @@
 # Build Plan — From Simulation to Production
 
-How to turn the `v2/` prototypes (V engine, Magenta, Manager view, Privacy agent)
+How to turn the `v2/` prototypes (V engine, V-Guard, Manager view, Privacy agent)
 into a live system wired to i3's real stack. North America first, then global.
 
 ---
@@ -51,7 +51,7 @@ control progression; only *verified* activity advances a stage.
 | V-Guide | Email, calling, calendar, mobile/MDM | **Verification layer — build before UI** |
 | V-Present | GoToMeeting/Zoom, deck system | Transcript capture, manager invite |
 | V-Prove | i3Host POC docs, PM tooling | Gardewine template, 45-day metrics |
-| V-Guard (Magenta) | Q25 KB, signage/PIA generator, Salesforce | Privacy gate; jurisdiction rules |
+| V-Guard | Q25 KB, signage/PIA generator, Salesforce | Privacy gate; jurisdiction rules |
 | V-Close | Automatica (ERP), cost matrix, Salesforce, DocuSign | Pricing, battlecards, contract, sync |
 
 ## 4. Platform choice
@@ -60,7 +60,7 @@ Either works; the architecture is identical (system prompt + function tools +
 retrieval). Recommendation: **pilot on one, keep tools provider-agnostic.**
 
 - **OpenAI** — GPT-4o + function calling / Assistants API. (You asked to see this;
-  the Magenta sim shows the function-call pattern.)
+  the V-Guard sim shows the function-call pattern.)
 - **Claude (Anthropic)** — strong tool use + document generation; already in the
   i3 stack per the agentic-sales brief.
 - **Salesforce Agentforce** — if you want it native in the CRM long-term.
@@ -74,7 +74,7 @@ model later without rebuilding integrations.
    email, calling, calendar, GoToMeeting.
 3. **Build the verification layer** (V-Guide) — email/call/meeting/mobile proof +
    anti-gaming. This is the trust foundation; build it first.
-4. **Wire the privacy gate** (V-Guard/Magenta) into i3Host quoting triggers.
+4. **Wire the privacy gate** (V-Guard) into i3Host quoting triggers.
 5. **Rep action screen + Manager dashboard** on live data.
 6. **Scoring + leadership intelligence** last.
 
@@ -94,7 +94,7 @@ model later without rebuilding integrations.
   tied to sales activity, never personal mobile use.
 - **Human checkpoints:** AI guides; managers and the Privacy Officer approve
   high-risk steps. Keep the human in the loop.
-- **Not legal advice:** V-Guard/Magenta is decision-support; high-risk findings
+- **Not legal advice:** V-Guard is decision-support; high-risk findings
   route to the i3 Privacy team for sign-off.
 
 ## 8. What to load next (to deepen the agents)

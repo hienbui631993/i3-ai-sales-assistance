@@ -604,7 +604,7 @@ function openStage(id){
 var LIVE_AGENTS={
   prove:"https://chatgpt.com/agents/a/agt_6a4e671d40d48191b49cc6462f2e3e52",
   research:"https://chatgpt.com/agents/a/agt_6a4e58237f1081918314db4929d3d407",
-  magenta:"https://chatgpt.com/agents/a/agt_6a4e43b175148191ad7a5b8cdaf81d8e"
+  vguard:"https://chatgpt.com/agents/a/agt_6a4e43b175148191ad7a5b8cdaf81d8e"
 };
 function liveAgentBtn(key,label){return '<a class="btn live sm" href="'+LIVE_AGENTS[key]+'" target="_blank" rel="noopener" title="Opens the live agent in ChatGPT">▶ '+label+' <span aria-hidden="true">↗</span></a>';}
 
@@ -626,7 +626,7 @@ function renderInputs(id){
   } else if(id==='legal'){
     var L=window._pocLaw||lawFromAddress(rep.terr); var jdef=L.juris+' · '+L.laws.join(', ');
     h='<div class="saveNote" style="background:var(--wnbg);border-color:var(--wnbd);color:#8a5d05">'+(window._pocLaw?'From your POC site address':'Default')+' — jurisdiction <b>'+jdef+'</b>. I\'ll run <b>cybersecurity first (every deal)</b>, then <b>privacy</b> where a statement applies.</div>'+
-      '<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:12px"><button class="btn p" onclick="runStage(\'legal\')">Run cybersecurity &amp; privacy review</button>'+liveAgentBtn('magenta','Open the live Magenta agent')+'</div>';
+      '<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:12px"><button class="btn p" onclick="runStage(\'legal\')">Run cybersecurity &amp; privacy review</button>'+liveAgentBtn('vguard','Open the live V-Guard agent')+'</div>';
   } else if(id==='close'){
     h='<label class="f"><span class="l">POC decision deadline</span><select id="i_deadline"><option>14 days</option><option selected>30 days</option><option>45 days</option></select></label>'+
       '<label class="f"><span class="l">Account health</span><select id="i_health"><option>🟢 Green — healthy</option><option>🟡 Yellow — watch</option><option>🔴 Red — at risk</option></select></label>'+
