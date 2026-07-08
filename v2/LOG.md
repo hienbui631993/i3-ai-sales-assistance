@@ -7,6 +7,29 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — real-SOP popup: full detail + the **images extracted from the PDF**
+- Extracted the three content images from `v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf`
+  into **`v2/media/`** (`sop-nte-max-detection-area.jpg` — the exterior camera
+  view with the magenta Max detection area drawn larger than the red Area
+  alarm; `sop-nte-alarm-settings.png` — Object count ≥ 1 / Duration ≥ 1 /
+  "Person, Head — 2 selected"; `sop-nte-object-detection.png` — the Head +
+  Person picker) and documented them in `media/README.md`. Letterhead-logo
+  duplicates were discarded.
+- The popup now carries the images as captioned figures in Procedure 1, and the
+  **Customer Success section itself shows the camera-view figure** (click →
+  opens the full SOP popup). Images resolve via a new `mediaURL()` helper —
+  relative when self-hosted, rewritten to raw-GitHub under htmlpreview.
+- Deepened the popup to the full document: responsibilities split by role with
+  the real **due dates** (June 20 / June 28, 2024), the **joint commitments**
+  (Site 658 Burleson physical audit — detection accuracy, CMS connectivity,
+  Global monitoring-station alerts; 4–5 more sites by EOD June 19, 2024), the
+  software sources (i3international.com/download, packages pre-staged on D: of
+  the 121 GPU-enabled NTE servers), the full 7-rule camera-configuration list,
+  the complete **contacts table** (i3 + Global Axiom account leads and
+  executive sponsors with phone/email) and the joint **approval block**.
+  Verified headless: all 4 images load, popup renders the added detail, no JS
+  errors.
+
 ### Added — the **real SOP** from `v2/SOP/` as a section + popup in Customer Success Phase 2 (`vision-sales-agent.html`)
 - The Customer Success **Phase 2** output now carries a **"The real SOP — example
   from the SOP folder"** section pointing at the actual document

@@ -156,6 +156,13 @@
   .sopdoc table{width:100%;border-collapse:collapse;font-size:12.8px;margin:2px 0 8px}
   .sopdoc th,.sopdoc td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left;line-height:1.55}
   .sopdoc th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--inbg)}
+  .sopdoc .fig{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:10px 0;background:#f6f9fc}
+  [data-theme="dark"] .sopdoc .fig{background:rgba(255,255,255,.05)}
+  .sopdoc .fig img{display:block;width:100%;height:auto}
+  .sopdoc .fig .cap{font-size:11.5px;color:var(--muted);padding:8px 11px;border-top:1px solid var(--line);line-height:1.5}
+  .sopdoc .figrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  @media(max-width:560px){.sopdoc .figrow{grid-template-columns:1fr}}
+  .sopdoc .due{display:inline-block;font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 8px;background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -216,16 +223,50 @@
       <table>
         <tr><th>i3 team</th><th>Global Axiom team</th></tr>
         <tr>
-          <td>Technical Support provides clear i3Ai setup documentation. Technical Services Leads provide camera-installation recommendations for best i3Ai accuracy, document issues found on NTE sites after a joint review (with a clear timeline and owners for fixes), pass non-compliant event video to i3's development team, and notify when the i3Ai algorithm/engine is re-trained. The Executive Sponsor approves the SOP and ensures compliance across all sites.</td>
-          <td>Global Technical Support ensures the recommended i3 software is installed on all NTE GPU-enabled servers, camera views are clear, and configurations comply with i3's recommendations; verifies i3Ai performance through audit and testing during active alarm hours. Leads oversee the configuration process, run periodic audits, maintain the camera-cleaning schedule, collect video of non-compliant events (*.i3d) to a shared SFTP for escalation, and install i3Ai updates as they become available.</td>
+          <td>
+            <b>Technical Support:</b> provide the Global Axiom team with clear i3Ai setup documentation <span class="due">due June 20, 2024</span> (recommendations may change as i3Ai software evolves).<br><br>
+            <b>Technical Services Leads:</b> provide camera-installation recommendations for best i3Ai accuracy <span class="due">due June 28, 2024</span>; document issues identified on NTE sites after a joint review, with a clear timeline and owners for fixes; pass video of non-compliant events to i3's development team; notify Global Axiom when the i3Ai algorithm/engine is re-trained and the update is available.<br><br>
+            <b>Executive Sponsor:</b> approve the SOP and ensure compliance across all sites.
+          </td>
+          <td>
+            <b>Global Technical Support:</b> ensure the recommended i3 software is installed on all NTE GPU-enabled servers; ensure clear camera views; ensure camera configurations comply with i3's recommendations; verify i3Ai performance through audit and testing during the active alarm hours.<br><br>
+            <b>Global Technical Services Leads:</b> oversee the configuration process and conduct periodic audits; establish and maintain a regular camera-cleaning schedule; review existing NTE sites with the i3 Technical Services Lead for compliance; collect video of all non-compliant events (<b>*.i3d</b> format) to a shared SFTP location for i3's Team Leads as part of the escalation process (i3 uses the clips to improve i3Ai algorithm accuracy); install i3Ai software updates whenever new algorithm/engine updates become available.
+          </td>
         </tr>
       </table>
+      <p><b>Joint commitments (both teams):</b> NTE <b>Site 658 Burleson</b> is physically audited — detection accuracy, CMS connectivity and successful signal alerts to the Global monitoring station confirmed during the audit; <b>4–5 additional sites</b> upgraded on the same template by end of day June 19, 2024.</p>
       <h4>Procedure · 1 — Infrastructure &amp; configuration requirements</h4>
+      <p><b>Server:</b> i3Ai Server with GPU is required — GPU = GTX1050i (minimum), GTX1060 or better (recommended).</p>
+      <p><b>Software</b> (all packages from i3's Downloads site, <b>i3international.com/download</b>; the latest packages are pre-staged on the local D: partition of the 121 GPU-enabled NTE servers, ready for installation):</p>
       <ul>
-        <li><b>Server:</b> i3Ai Server with GPU — GTX1050i minimum, GTX1060 or better recommended.</li>
-        <li><b>Software:</b> latest SRX-Software (v7.3.2.120) on each server · NVIDIA 64-bit driver on the i3Ai server · latest i3Ai Server software (v7.3.2.90). All packages pre-staged on the local D: partition of the 121 GPU-enabled NTE servers.</li>
-        <li><b>Camera configuration:</b> minimum resolution 1280×960 (1.3 MP) · i3 / Axis IP cameras at 5 FPS · HR16v2 encoder at 6 FPS · "Max detection area" enabled and larger than the detection area · object detection set to <b>Head</b> and <b>Person</b> · object count ≥ 1, duration ≥ 1.</li>
+        <li>Install the latest <b>SRX-Software</b> (v7.3.2.120 as of June 19, 2024) on each server.</li>
+        <li>Install the <b>NVIDIA driver (64-bit)</b> on the i3Ai Server (GPU-enabled server).</li>
+        <li>Install the latest <b>i3Ai Server software</b> (v7.3.2.90 as of June 19, 2024).</li>
       </ul>
+      <p><b>i3Ai Setup camera configuration requirements</b> (installation best practices — camera angle, bitrate, maximum coverage area — provided by i3 Team Leads <span class="due">due June 28, 2024</span>):</p>
+      <ul>
+        <li>Minimum acceptable resolution: <b>1280×960 (1.3 MP)</b>.</li>
+        <li>Required i3 and Axis IP camera frame rate: <b>5 FPS</b>.</li>
+        <li>Required HR16v2 encoder frame rate: <b>6 FPS</b>.</li>
+        <li><b>"Max detection area"</b> setting must be enabled.</li>
+        <li>Max detection area must be <b>larger than the detection area</b>.</li>
+        <li>Object detection must be set to <b>"Head"</b> and <b>"Person"</b>.</li>
+        <li>Object count must be set to <b>≥ 1</b>, Duration must be set to <b>≥ 1</b>.</li>
+      </ul>
+      <div class="fig">
+        <img data-rel="media/sop-nte-max-detection-area.jpg" alt="Exterior camera view with the magenta Max detection area drawn larger than the red Area alarm detection area">
+        <div class="cap"><b>From the SOP (p. 2):</b> exterior camera (server 2304076, channel C13, 1920×1080) — the magenta <b>Max detection area</b> polygon is drawn larger than the red <b>Area alarm / Area 1</b> detection area, exactly as rules 4–5 require.</div>
+      </div>
+      <div class="figrow">
+        <div class="fig">
+          <img data-rel="media/sop-nte-alarm-settings.png" alt="i3Ai Setup alarm panel with Object count 1, Duration 1 and Objects detection Person, Head">
+          <div class="cap"><b>From the SOP (p. 3):</b> the alarm panel — <b>Object count ≥ 1</b>, <b>Duration ≥ 1 (sec)</b>, Objects detection <b>"Person, Head — 2 selected"</b> (rules 6–7).</div>
+        </div>
+        <div class="fig">
+          <img data-rel="media/sop-nte-object-detection.png" alt="Objects detection picker with Head and Person checked and Automobile unchecked">
+          <div class="cap"><b>From the SOP (p. 3):</b> the objects-detection picker — <b>Head</b> + <b>Person</b> checked (Automobile off), matching rule 6.</div>
+        </div>
+      </div>
       <h4>Procedure · 2 — Verification</h4>
       <ul>
         <li>Post-configuration checks: verify each camera's frame-rate settings and confirm the maximum-detection settings are applied.</li>
@@ -250,8 +291,29 @@
         <li><b>Frame-rate discrepancies:</b> check the network bandwidth supports the configured rates; verify camera firmware is up to date.</li>
         <li><b>Detection failures:</b> ensure the lens is clean and unobstructed; review recent changes to AI algorithms or software updates.</li>
       </ul>
-      <h4>Who owns it</h4>
-      <p><b>i3:</b> Nissan Britto (day-to-day Technical Services Lead) · Alexandra Malka (day-to-day Account Manager) · Olga Skelly (Technical Documentation Lead) · Paul Kerling (Account Sales Representative). <b>Global Axiom:</b> Efrain Saenz &amp; Valdis Gravis (day-to-day Technical Services Leads). Executive sponsors on both sides; a joint approval block (name / title / date / signature) closes the document.</p>
+      <h4>Contacts — account leads "Who owns it"</h4>
+      <table>
+        <tr><th>i3 International</th><th>Global Axiom</th></tr>
+        <tr>
+          <td>
+            <b>Nissan Britto</b> — day-to-day Technical Services Lead · 1-866-840-0004 ext. 138 · nbritto@i3international.com<br>
+            <b>Alexandra Malka</b> — day-to-day Account Manager · 716-334-3561 · amalka@i3international.com<br>
+            <b>Olga Skelly</b> — Technical Documentation Lead · 1-866-840-0004 ext. 135 · oskelly@i3international.com<br>
+            <b>Paul Kerling</b> — Account Sales Representative · 763-548-4617 · pkerling@i3international.com
+          </td>
+          <td>
+            <b>Efrain Saenz</b> — day-to-day Technical Services Lead · 832-794-0320 · efrain.saenz@globalaxiom.com<br>
+            <b>Valdis Gravis</b> — day-to-day Technical Services Lead · valdis.gravis@secureds.us
+          </td>
+        </tr>
+        <tr><th>i3 executive sponsors</th><th>Global Axiom executive sponsors</th></tr>
+        <tr>
+          <td><b>Bob Hoang</b> · 716-289-4862 · bhoang@i3international.com<br><b>Vy Hoang</b> · 716-783-0986 · vhoang@i3international.com<br><b>David Crook</b> · 716-255-0293 · dcrook@i3international.com</td>
+          <td><b>Jason Lansky</b> · jason.lansky@globalaxiom.com<br><b>David Heller</b> · david.heller@globalaxiom.com</td>
+        </tr>
+      </table>
+      <h4>Approval</h4>
+      <p>The document closes with a joint sign-off block — <b>name / title / date / signature</b> for an i3 representative and a Global Axiom representative. That signature is what makes the SOP binding on both teams.</p>
       <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:14px">
         <button class="btn p sm" type="button" onclick="openSOP()">📄 Open the original PDF</button>
         <button class="btn g sm" type="button" onclick="openSOPPhase2()">📘 SOP catalog — Phase 2</button>
@@ -277,6 +339,9 @@ function openSOPModal(){document.getElementById('sopModal').classList.add('show'
 function closeSOPModal(){document.getElementById('sopModal').classList.remove('show');document.body.style.overflow='';}
 document.getElementById('sopModal').addEventListener('click',function(e){if(e.target===this)closeSOPModal();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSOPModal();});
+/* resolve a repo-relative media path (raw-GitHub URL under htmlpreview, relative when self-hosted) */
+function mediaURL(rel){var hp=location.hostname==='htmlpreview.github.io';if(!hp)return rel;var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}return i.replace('//github.com/','//raw.githubusercontent.com/').replace('/blob/','/').replace(/[^\/]*$/,'')+rel;}
+(function(){var imgs=document.querySelectorAll('img[data-rel]');for(var k=0;k<imgs.length;k++)imgs[k].src=mediaURL(imgs[k].getAttribute('data-rel'));})();
 
 /* ===== state ===== */
 var S={role:'rep', seg:'Retail'};
@@ -604,6 +669,9 @@ var OUTPUT={
         '<div style="margin-top:10px"><a class="btn g sm" style="display:inline-block;text-decoration:none" href="sop.html#phase2" onclick="openSOPPhase2();return false;">📘 Open the SOP — Phase 2 · Prove the promise</a></div>')+
       sec("The real SOP — example from the SOP folder",
         '<div class="kv"><div class="k">v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf</div><div class="v" style="font-size:13px;font-weight:600">This is the <b>real, in-use i3 SOP</b> — <i>Configuring i3Ai Setup for optimal accuracy</i> (Northern Tool + Equipment). Its <b>verify → monitor weekly → audit monthly → improve</b> loop is exactly how Phase 2 keeps the solution performing as the contract promised.</div></div>'+
+        '<div class="sopdoc" style="margin-top:10px"><div class="fig" style="cursor:pointer;margin:0" onclick="openSOPModal()" title="Open the full SOP">'+
+          '<img src="'+mediaURL('media/sop-nte-max-detection-area.jpg')+'" alt="From the real SOP: exterior camera with the Max detection area drawn larger than the detection area">'+
+          '<div class="cap"><b>From the real document (p. 2):</b> the magenta <b>Max detection area</b> drawn larger than the red <b>Area alarm</b> detection area — one of the seven camera-configuration rules the SOP audits every site against. Click to read the full SOP.</div></div></div>'+
         '<div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn p sm" onclick="openSOPModal()">📄 View the real SOP (popup)</button><button class="btn g sm" onclick="openSOP()">⬇ Open the original PDF</button></div>')+
       sec("Training",'<ul class="steps"><li><b>Lean</b> — rep &amp; customer training.</li><li><b>Grade</b> — video-based training.</li></ul>')+
       sec("Professional services",'<div class="kv"><div class="k">Where it fits</div><div class="v" style="font-size:13px">Bundle i3 professional services into the rollout where relevant.</div></div>')+
