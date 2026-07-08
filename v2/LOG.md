@@ -7,6 +7,34 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — portal card renamed **"Meet Vision"**; Manager Dashboard moved to the Sales Agent's **Admin menu**
+- **Portal (`index.html`):** the "Vision Sales Engine" card is now **"Meet
+  Vision"** (pink-V styling kept); its copy/tag no longer mention the Manager
+  dashboard. The **Vision · Sales Agent** card now notes that Admins onboard
+  reps and see the **Manager Dashboard** from the Admin menu (new tag).
+- **Meet Vision (`v-vision-sales-engine.html`):** removed the Manager Dashboard
+  entirely — the ▦ Manager toggle, the manager view, the rep-detail modal, and
+  all related CSS/JS (REPS roster, renderManager, switchView, openRep,
+  runRepInEngine). Legacy `#manager` links / `v_view` flags now **redirect** to
+  the Sales Agent's Admin → Manager Dashboard so old bookmarks keep working.
+- **Sales Agent (`vision-sales-agent.html`):** the Admin view is now an **Admin
+  menu** with two tabs — **👤 Onboard a salesperson** (existing flow) and
+  **▦ Manager Dashboard** (moved from the engine): 4 KPIs (reps onboarding,
+  avg readiness, reflections on-track, active POCs), the clickable 6-rep
+  roster (stage, readiness bar, reflections · mentor, flag), the
+  stage-distribution funnel, and an **inline rep detail** (plan, acclimation
+  deliverables checklist, next milestone) — restyled to the agent's light/dark
+  tokens. Deep-link via `#manager` or the `i3_agent_view` localStorage flag;
+  the rep dashboard's admin bar gained a **▦ Manager Dashboard** button.
+- **Sales Process (`process.html`):** the ▦ Manager button now opens the
+  Sales Agent's Admin → Manager Dashboard (was the engine's manager view).
+- **`DEMO.md`:** walkthrough §4 updated (manager view now Sales Agent · Admin
+  menu); the stale "Manager Dashboard card disappears" partner line now points
+  at the Architecture card; "V · Vision Sales Engine card" → "Meet Vision card".
+- Verified headless across all three pages: portal shows Meet Vision, engine
+  has no manager button/view, `#manager` deep-link opens the dashboard (roster,
+  KPIs, rep detail, onboard tab all render) — no JS errors.
+
 ### Changed — real-SOP popup: full detail + the **images extracted from the PDF**
 - Extracted the three content images from `v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf`
   into **`v2/media/`** (`sop-nte-max-detection-area.jpg` — the exterior camera

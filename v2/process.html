@@ -82,7 +82,7 @@
   <div class="ilogo" id="logo" onclick="goPortal()" style="cursor:pointer" title="Back to portal"></div>
   <div class="sep"></div>
   <div class="prod"><span class="vhi">V</span>ision · Sales Process<small>Rep · AI · Manager</small></div>
-  <div class="right" style="display:flex;align-items:center;gap:10px"><span class="vtoggle"><button class="vt" onclick="goEngine()" title="Open the Sales Engine">▶ Engine</button><button class="vt" onclick="goManager()" title="Open the Manager dashboard">▦ Manager</button><button class="vt on" title="Sales Process (current)">↗ Process</button></span><span class="pill link" onclick="goROS()" title="Open ROS — Beginning to End">Beginning → end ↗</span><button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button></div>
+  <div class="right" style="display:flex;align-items:center;gap:10px"><span class="vtoggle"><button class="vt" onclick="goEngine()" title="Open the Sales Engine">▶ Engine</button><button class="vt" onclick="goManager()" title="Open the Manager Dashboard (Sales Agent · Admin menu)">▦ Manager</button><button class="vt on" title="Sales Process (current)">↗ Process</button></span><span class="pill link" onclick="goROS()" title="Open ROS — Beginning to End">Beginning → end ↗</span><button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button></div>
 </div>
 
 <div class="wrap">
@@ -125,7 +125,7 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'index.html';}else{location.href='index.html';}}
 function navTo(f,hash){hash=hash||'';var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+f+hash;}else{location.href=f+hash;}}
 function goEngine(){navTo('v-vision-sales-engine.html');}
-function goManager(){try{localStorage.setItem('v_view','manager')}catch(e){}navTo('v-vision-sales-engine.html','#manager');}
+function goManager(){try{localStorage.setItem('i3_agent_view','manager')}catch(e){}navTo('vision-sales-agent.html','#manager');}
 function goROS(){navTo('ros.html');}
 
 var STAGES=[
