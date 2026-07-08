@@ -5,6 +5,18 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ---
 
+## 2026-07-08
+
+### Changed — `v2/agents/POC_AGENT.md`: placeholders + highlight what to confirm
+- V-Prove now **never guesses**: any value it can't verify from the transcript or
+  catalog goes in as a **`[TO CONFIRM: …]` placeholder**, highlighted inline and
+  collected into a **⚠ Needs confirmation** checklist at the top of the draft so the
+  PM sees exactly what to verify in the ~20-minute review. Updated the intro note,
+  the POC contents (§4 item 0), system prompt (§5), `generate_poc` tool description
+  (§6), outputs (§8), guardrails (§9), and the example run (§11).
+
+---
+
 ## 2026-07-06
 
 ### Added — `v2/agents/POC_AGENT.md` (V-Prove)
