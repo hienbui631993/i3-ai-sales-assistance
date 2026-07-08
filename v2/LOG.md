@@ -5,7 +5,35 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ---
 
+## 2026-07-08
+
+### Changed — `v2/agents/POC_AGENT.md`: placeholders + highlight what to confirm
+- V-Prove now **never guesses**: any value it can't verify from the transcript or
+  catalog goes in as a **`[TO CONFIRM: …]` placeholder**, highlighted inline and
+  collected into a **⚠ Needs confirmation** checklist at the top of the draft so the
+  PM sees exactly what to verify in the ~20-minute review. Updated the intro note,
+  the POC contents (§4 item 0), system prompt (§5), `generate_poc` tool description
+  (§6), outputs (§8), guardrails (§9), and the example run (§11).
+
+---
+
 ## 2026-07-06
+
+### Added — `v2/agents/POC_AGENT.md` (V-Prove)
+- Build spec for the **POC agent**: transcript → POC (Gardewine template),
+  solution mapped to the three modules, stakeholder capture, recommended
+  equipment, standard reusable drawings + site maps, upsell, privacy/cyber
+  handoff to Magenta, and PM assignment by territory (Quebec→Nissan, Ontario→
+  Louel, West/other→Des) with the 45-day plan. System prompt, tools, KB,
+  outputs, guardrails (AI drafts / PM confirms ~20 min; privacy sign-off gate).
+
+### Added — `v2/agents/` folder + Market Research agent spec
+- Created a **`v2/agents/`** folder and moved **MAGENTA_AGENT.md** into it.
+- Added **MARKET_RESEARCH_AGENT.md** — build spec for the Market Research agent
+  (`V-Research`): segment / account / competitor research tied to i3's three
+  modules, data sources (6sense, ZoomInfo, Sales Navigator, Google Alerts,
+  HubSpot), system prompt, tools, outputs, guardrails, and build steps. Feeds
+  V-Target (Prospecting) and V-Present (Presentation).
 
 ### Changed — dropped "i3Host / quoting" framing from Magenta (for now)
 - Reworded the Magenta trigger away from **i3Host quoting** to a generic "the
