@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Changed — dropped "i3Host / quoting" framing from Magenta (for now)
+- Reworded the Magenta trigger away from **i3Host quoting** to a generic "the
+  moment a privacy-sensitive solution is on the deal" — on the Magenta page, its
+  portal card (tag "Triggered in quoting" → "Privacy + cyber"), and
+  `MAGENTA_AGENT.md`. Left the broader project's i3Host mentions (Sales Agent
+  card, Architecture, footers) untouched.
+
 ### Removed — the Vision chat widget
 - Removed the floating chat widget from every page (deleted the `client.js` +
   `chat-widget.js` includes) and deleted `v2/chat-widget.js`. No chat launcher

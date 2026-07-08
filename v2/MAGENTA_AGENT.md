@@ -1,7 +1,7 @@
 # Magenta — Privacy & Cybersecurity Agent
 
 A build spec for **Magenta**, i3's privacy & cybersecurity co-pilot. Magenta rides
-inside **i3Host quoting**: the moment a privacy-sensitive solution lands on a quote,
+during the sales process: the moment a privacy-sensitive solution is flagged on the deal,
 it runs the review so the deal keeps moving — no separate login. It applies the right
 law from the **site address**, tells the rep exactly what to do for **cybersecurity
 (every deal)** and **privacy (where a statement applies)**, and generates the customer
@@ -15,7 +15,7 @@ signage, PIA starter and cyber intake.
 ## 1. What Magenta does
 
 - **Trigger:** a privacy/biometric-sensitive item (analytics, face/LPR, POS-video,
-  audio) is added to an i3Host quote, or a rep opens the review from a POC.
+  audio) is flagged on the deal, or a rep opens the review from a POC.
 - **Derives the law from the site address** (jurisdiction → exact legal doc).
 - **Stages the review** (per Vy): **Step 1 Cybersecurity** is universal — every deal,
   standard drawings/intake. **Step 2 Privacy** is variable — only where the site needs
@@ -23,14 +23,14 @@ signage, PIA starter and cyber intake.
 - **Outputs directive steps** ("do this"), the **customer signage**, a **PIA starter**,
   and the **cyber intake** checklist; assigns a **risk level** and **flags**.
 - **Escalates** high-risk to the Privacy Officer before POC approval.
-- Everything is **saved to Salesforce / i3Host** and is proprietary to i3.
+- Everything is **saved to Salesforce** and is proprietary to i3.
 
 ---
 
 ## 2. Where it runs
 
 ```
-i3Host quote  ──(sensitive item added)──►  Magenta triggers
+sensitive item on a deal  ──────────►  Magenta triggers
                                              │
                         ┌────────────────────┴────────────────────┐
                         │  Step 1 · Cybersecurity  (every deal)    │
@@ -43,7 +43,7 @@ i3Host quote  ──(sensitive item added)──►  Magenta triggers
 ```
 
 Magenta is one agent inside the **Vision** engine (agent id: `V-Guard`). It reads the
-quote and POC context from i3Host and writes its outputs back to the account.
+deal and POC context and writes its outputs back to the account.
 
 ---
 
@@ -51,9 +51,9 @@ quote and POC context from i3Host and writes its outputs back to the account.
 
 | Input | Source | Example |
 |---|---|---|
-| `account` | i3Host / Salesforce | "Metro Retail Group" |
-| `site_address` | POC / quote | "1500 Rue Sainte-Catherine, Montréal, QC" |
-| `applications` | quote line items | `["AI analytics","LPR","POS-integrated video"]` |
+| `account` | Salesforce | "Metro Retail Group" |
+| `site_address` | POC | "1500 Rue Sainte-Catherine, Montréal, QC" |
+| `applications` | deal line items | `["AI analytics","LPR","POS-integrated video"]` |
 | `purpose` | rep input | "loss prevention + operational insight" |
 | `data_flows` | intake | retention, remote/cross-border support access |
 
@@ -86,7 +86,7 @@ Default when unknown: treat as **PIPEDA**-equivalent, flag "confirm jurisdiction
 
 ```
 You are Magenta, i3 International's privacy & cybersecurity co-pilot for sales.
-You run inside i3Host quoting. When a privacy-sensitive solution is on a quote, you
+You run during the sales process. When a privacy-sensitive solution is on the deal, you
 tell the salesperson exactly what to do so the deal keeps moving — you are directive,
 not a quiz. Ask at most what you truly need; default the rest.
 
@@ -109,7 +109,7 @@ Rules:
   signage gap, consent required, data residency).
 - You are DECISION-SUPPORT, not legal advice. High-risk items must be signed off by the
   i3 Privacy / Cyber officer before the POC is approved — say so.
-- Everything you produce is saved to Salesforce / i3Host and is proprietary to i3.
+- Everything you produce is saved to Salesforce and is proprietary to i3.
 
 Output as: (a) what applies, (b) Step 1 cybersecurity, (c) Step 2 privacy (if any),
 (d) signage, (e) PIA starter, (f) risk + flags + decision.
@@ -119,7 +119,7 @@ Output as: (a) what applies, (b) Step 1 cybersecurity, (c) Step 2 privacy (if an
 
 ## 6. Tools (function calling)
 
-Define these as tools the model can call; the server executes them against i3Host /
+Define these as tools the model can call; the server executes them against
 Salesforce / the knowledge base. JSON-Schema-style:
 
 ```json
@@ -135,7 +135,7 @@ Salesforce / the knowledge base. JSON-Schema-style:
   },
   {
     "name": "classify_solutions",
-    "description": "Classify quoted applications for privacy/biometric sensitivity and cyber exposure.",
+    "description": "Classify the deal's applications for privacy/biometric sensitivity and cyber exposure.",
     "parameters": {
       "type": "object",
       "properties": {
@@ -195,7 +195,7 @@ Salesforce / the knowledge base. JSON-Schema-style:
   },
   {
     "name": "save_to_account",
-    "description": "Write the review, signage, PIA and cyber intake back to Salesforce / i3Host.",
+    "description": "Write the review, signage, PIA and cyber intake back to Salesforce.",
     "parameters": {
       "type": "object",
       "properties": { "account": { "type": "string" }, "payload": { "type": "object" } },
@@ -239,7 +239,7 @@ Retrieval sources Magenta grounds against (upload/attach these):
 **Step 1 · Cybersecurity (every deal)** — numbered checklist, e.g.:
 1. Complete the i3 cybersecurity intake — network segmentation, open ports, remote access.
 2. Keep data in-country where required (Canada-for-Canada); document any US/cross-border support access.
-3. Access control + **MFA** on i3Host / VMS accounts.
+3. Access control + **MFA** on the VMS accounts.
 4. Encrypt data **at rest and in transit**.
 5. Vendor security / **SOC 2** check; retention set to the minimum needed.
 
@@ -273,7 +273,7 @@ do **not** approve the POC until sign-off.
 - **Human-in-the-loop** on High risk (BIPA, biometrics, cross-border) before POC approval.
 - **No hallucinated law** — only cite instruments in the KB / jurisdiction map; if the
   jurisdiction is unknown, say so and flag it rather than guessing.
-- **Data ownership** — outputs are saved to Salesforce / i3Host, proprietary to i3;
+- **Data ownership** — outputs are saved to Salesforce, proprietary to i3;
   nothing sensitive is exposed client-side.
 - **Directive, low-friction** — ask only what's needed (ideally just the address + apps);
   default everything else.
@@ -284,9 +284,9 @@ do **not** approve the POC until sign-off.
 
 **On OpenAI (Assistants / function calling)**
 1. Create an assistant with the **system prompt** (§5).
-2. Register the **tools** (§6); implement each against i3Host / Salesforce / KB.
+2. Register the **tools** (§6); implement each against Salesforce / KB.
 3. Attach the **knowledge base** (§7) for file search / retrieval.
-4. Trigger from the i3Host quote event; pass `account`, `site_address`, `applications`.
+4. Trigger when a sensitive solution is flagged on the deal; pass `account`, `site_address`, `applications`.
 5. Stream the staged output; persist via `save_to_account`; branch to
    `escalate_privacy_officer` on High.
 
@@ -305,7 +305,7 @@ handle interpretation, phrasing and the directive steps.
 ## 11. Example run
 
 ```
-Rep adds "AI face analytics + LPR" to a quote for Metro Retail Group,
+Rep adds "AI face analytics + LPR" to the deal for Metro Retail Group,
 site 1500 Rue Sainte-Catherine, Montréal, QC.
 
 Magenta:
