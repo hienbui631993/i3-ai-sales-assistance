@@ -99,8 +99,6 @@
 
   /* dashboard */
   .greet{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
-  .adminbar{background:linear-gradient(120deg,var(--brand-900),var(--brand));color:#fff;border-radius:14px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}
-  .adminbar .t{font-size:13.5px}.adminbar b{font-weight:800}
   .widgets{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:12px 0}
   @media(max-width:860px){.widgets{grid-template-columns:1fr 1fr}}
   .wdg{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.14s}
@@ -519,7 +517,6 @@ function renderHome(){
     '<div class="greet"><div><div class="eyebrow">'+(S.role==='integ'?'Integrator · via i3Host':'Your dashboard')+'</div>'+
       '<h1>Good morning, '+rep.name.split(' ')[0]+'</h1>'+
       '<div class="lede">'+rep.seg+' · '+rep.terr+' · goal '+rep.goal+'</div></div></div>'+
-    '<div class="adminbar"><div class="t">👤 <b>Admin?</b> Onboard a new salesperson or open the <b>Manager Dashboard</b> from the Admin menu.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pink sm" onclick="setRole(\'admin\',\'onboard\')">Onboard a rep →</button><button class="btn sm" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35)" onclick="setRole(\'admin\',\'manager\')">▦ Manager Dashboard</button></div></div>'+
     '<div class="widgets">'+
       wdg('today','Today','5 tasks','3 calls · 1 prep · 1 POC','','act')+
       wdg('goal','This month','$210K','of '+rep.goal.replace("M","M ÷12 ≈ $375K")+' target','warn')+

@@ -7,6 +7,11 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Removed — the "Admin?" banner from the rep dashboard (`vision-sales-agent.html`)
+- Dropped the **"👤 Admin? Onboard a new salesperson or open the Manager
+  Dashboard…"** promo bar (`.adminbar`) from the rep dashboard, plus its now-dead
+  CSS. Admin is still reachable from the **Admin** role button in the topbar.
+
 ### Changed — Admin menu opens on the **Manager Dashboard** by default (`vision-sales-agent.html`)
 - The Admin menu now defaults to **▦ Manager Dashboard** (was Onboard) — it's
   listed first in the tab row and is the tab shown when an admin opens the menu
