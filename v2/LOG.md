@@ -7,6 +7,19 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Added — live ChatGPT agent launch buttons (V-Prove · V-Research · Magenta)
+- Wired the three live ChatGPT agents into the UI at each agent's home, as a
+  green "▶ Open the live … agent ↗" button that opens the agent in a new tab:
+  - **V-Prove** → Sales Agent **Proof of Concept** stage.
+  - **V-Research** → Sales Agent **Presentation** stage (the market/account
+    research that powers the deck), with a one-line note.
+  - **Magenta** → Sales Agent **Privacy & Cybersecurity** stage **and** the
+    dedicated **Magenta page** (`i3-privacy-compliance-agent.html`) hero.
+- Added a `LIVE_AGENTS` map + `liveAgentBtn()` helper in `vision-sales-agent.html`
+  and a shared `.btn.live` / `.liveagent` style (ChatGPT green #10a37f).
+  Verified headless: every button resolves to the correct agent URL, opens in a
+  new tab, is visible and styled — no JS errors.
+
 ### Changed — de-identified the example SOP popup: sample company, contacts + generated images (`vision-sales-agent.html`)
 - Removed the "real document — NTE_Ai_Configuration_SOP…pdf · Northern Tool +
   Equipment · June 19, 2024" subtitle from the popup header, and reframed the
