@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — topbar brand is clickable back to the portal on every page
+- Made the **"Vision · <page>"** topbar brand clickable (pointer cursor →
+  `goPortal()`) on all six sub-pages: process, ros, sop, v-vision-sales-engine,
+  vision-architecture, vision-sales-agent. The portal's own brand already links
+  home via `goPortalHome()`; the Magenta page's logo already links to the portal.
+  Verified headless on all six — no JS errors.
+
 ### Changed — portal topbar brand is clickable back to the portal (`index.html`)
 - Made the **i3 logo** and the **"Vision Portal · Sales & Partner"** brand in the
   portal topbar clickable (pointer cursor) — both call a new htmlpreview-aware
