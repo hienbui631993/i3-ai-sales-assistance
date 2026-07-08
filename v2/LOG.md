@@ -7,6 +7,13 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Added — "3 · Company size" dropdown in the Meet Vision engine (`v-vision-sales-engine.html`)
+- Added a **Company size** `<select>` under **2 · Target segment**: SMB (1–50
+  employees) · Mid-market (51–500, default) · Enterprise (500+). The choice
+  flows into `sel.size`, the run note ("… · Size: Mid-market") and the boot log
+  (`size=…`); it's locked while the engine is running. Styled to the engine's
+  light/dark tokens. Verified headless.
+
 ### Removed — the "Admin?" banner from the rep dashboard (`vision-sales-agent.html`)
 - Dropped the **"👤 Admin? Onboard a new salesperson or open the Manager
   Dashboard…"** promo bar (`.adminbar`) from the rep dashboard, plus its now-dead

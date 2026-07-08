@@ -68,6 +68,9 @@
   .chip.on{background:var(--brand);border-color:var(--acc);color:#fff;box-shadow:0 0 0 3px rgba(70,179,255,.18)}
   .chip small{display:block;font-weight:400;font-size:10.5px;color:var(--subro);margin-top:1px}
   .chip.on small{color:#cfe6fb}
+  .sizesel{border:1px solid var(--pline);background:var(--panel);color:var(--ink);border-radius:11px;padding:10px 13px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;min-width:260px;max-width:100%}
+  .sizesel:hover{border-color:var(--acc)}
+  .sizesel:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(70,179,255,.18)}
   .runrow{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
   .runbtn{border:none;border-radius:12px;padding:13px 22px;font-size:14.5px;font-weight:800;cursor:pointer;font-family:inherit;
     background:linear-gradient(120deg,var(--brand),#46b3ff);color:#fff;box-shadow:0 8px 22px rgba(0,88,143,.4)}
@@ -212,6 +215,10 @@
         <div class="lab">2 · Target segment</div>
         <div class="chips" id="segChips"></div>
       </div>
+      <div class="entry">
+        <div class="lab">3 · Company size</div>
+        <select class="sizesel" id="sizeSel" onchange="pickSize(this.value)"></select>
+      </div>
 
       <div class="runrow">
         <button class="runbtn" id="runBtn" onclick="run()">▶ Run the engine</button>
@@ -334,7 +341,12 @@ var SEGMENTS=[
   {id:"integrator", nm:"Integrator"}
 ];
 
-var sel={entry:"newhire", seg:"cstore"};
+var SIZES=[
+  {id:"smb",   nm:"Small business — 1–50 employees",  short:"SMB"},
+  {id:"mid",   nm:"Mid-market — 51–500 employees",     short:"Mid-market"},
+  {id:"ent",   nm:"Enterprise — 500+ employees",       short:"Enterprise"}
+];
+var sel={entry:"newhire", seg:"cstore", size:"mid"};
 var running=false, nodePos=[];
 
 /* ===== onboarding documents (parsed by V-Start) — from the real i3 docs ===== */
@@ -395,12 +407,17 @@ function buildChips(){
   document.getElementById('segChips').innerHTML=SEGMENTS.map(function(s){
     return '<div class="chip '+(sel.seg===s.id?'on':'')+'" onclick="pickSeg(\''+s.id+'\')">'+s.nm+(s.note?'<small>'+s.note+'</small>':'')+'</div>';
   }).join('');
+  document.getElementById('sizeSel').innerHTML=SIZES.map(function(z){
+    return '<option value="'+z.id+'"'+(sel.size===z.id?' selected':'')+'>'+z.nm+'</option>';
+  }).join('');
   var e=ENTRIES.find(function(x){return x.id===sel.entry});
   var s=SEGMENTS.find(function(x){return x.id===sel.seg});
-  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm+(state_profile?' · Doc: '+state_profile.name:'');
+  var z=SIZES.find(function(x){return x.id===sel.size});
+  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm+' · Size: '+z.short+(state_profile?' · Doc: '+state_profile.name:'');
 }
 function pickEntry(id){ if(running)return; sel.entry=id; buildChips(); buildPipe(); paintStart(); }
 function pickSeg(id){ if(running)return; sel.seg=id; buildChips(); }
+function pickSize(id){ if(running){ document.getElementById('sizeSel').value=sel.size; return; } sel.size=id; buildChips(); }
 function startIdx(){ return ENTRIES.find(function(x){return x.id===sel.entry}).start; }
 
 /* ---- orbit nodes + links ---- */
@@ -479,8 +496,9 @@ async function run(){
   document.getElementById('core').classList.add('think');
   document.getElementById('console').innerHTML='';
   var segNm=SEGMENTS.find(function(x){return x.id===sel.seg}).nm;
+  var sizeNm=SIZES.find(function(x){return x.id===sel.size}).short;
   var s=startIdx(), total=AGENTS.length;
-  log('<span class="c">// Vision boot · entry='+sel.entry+' · segment='+segNm+'</span>');
+  log('<span class="c">// Vision boot · entry='+sel.entry+' · segment='+segNm+' · size='+sizeNm+'</span>');
   log('<span class="ag">Vision</span> orchestrating '+(total-s)+' agents…',''); await sleep(500);
 
   for(var i=s;i<total;i++){
