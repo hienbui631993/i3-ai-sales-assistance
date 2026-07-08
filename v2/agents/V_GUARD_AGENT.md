@@ -1,6 +1,6 @@
-# Magenta — Privacy & Cybersecurity Agent
+# V-Guard — Privacy & Cybersecurity Agent
 
-A build spec for **Magenta**, i3's privacy & cybersecurity co-pilot. Magenta rides
+A build spec for **V-Guard**, i3's privacy & cybersecurity co-pilot. V-Guard rides
 during the sales process: the moment a privacy-sensitive solution is flagged on the deal,
 it runs the review so the deal keeps moving — no separate login. It applies the right
 law from the **site address**, tells the rep exactly what to do for **cybersecurity
@@ -12,7 +12,7 @@ signage, PIA starter and cyber intake.
 
 ---
 
-## 1. What Magenta does
+## 1. What V-Guard does
 
 - **Trigger:** a privacy/biometric-sensitive item (analytics, face/LPR, POS-video,
   audio) is flagged on the deal, or a rep opens the review from a POC.
@@ -30,7 +30,7 @@ signage, PIA starter and cyber intake.
 ## 2. Where it runs
 
 ```
-sensitive item on a deal  ──────────►  Magenta triggers
+sensitive item on a deal  ──────────►  V-Guard triggers
                                              │
                         ┌────────────────────┴────────────────────┐
                         │  Step 1 · Cybersecurity  (every deal)    │
@@ -42,7 +42,7 @@ sensitive item on a deal  ──────────►  Magenta triggers
                              human sign-off on high-risk → POC approved
 ```
 
-Magenta is one agent inside the **Vision** engine (agent id: `V-Guard`). It reads the
+V-Guard is one agent inside the **Vision** engine (agent id: `V-Guard`). It reads the
 deal and POC context and writes its outputs back to the account.
 
 ---
@@ -85,7 +85,7 @@ Default when unknown: treat as **PIPEDA**-equivalent, flag "confirm jurisdiction
 ## 5. System prompt
 
 ```
-You are Magenta, i3 International's privacy & cybersecurity co-pilot for sales.
+You are V-Guard, i3 International's privacy & cybersecurity co-pilot for sales.
 You run during the sales process. When a privacy-sensitive solution is on the deal, you
 tell the salesperson exactly what to do so the deal keeps moving — you are directive,
 not a quiz. Ask at most what you truly need; default the rest.
@@ -222,7 +222,7 @@ Typical call order: `resolve_jurisdiction` → `classify_solutions` → `get_cyb
 
 ## 7. Knowledge base
 
-Retrieval sources Magenta grounds against (upload/attach these):
+Retrieval sources V-Guard grounds against (upload/attach these):
 
 - **Q25 KB** — Quebec Law 25 obligations, consent, retention, cross-border rules.
 - **LP & Privacy Guide** — i3's loss-prevention + privacy playbook.
@@ -308,7 +308,7 @@ handle interpretation, phrasing and the directive steps.
 Rep adds "AI face analytics + LPR" to the deal for Metro Retail Group,
 site 1500 Rue Sainte-Catherine, Montréal, QC.
 
-Magenta:
+V-Guard:
 - resolve_jurisdiction → Quebec · Law 25 (+PIPEDA) · bilingual signage
 - classify_solutions → biometric = true, high sensitivity
 - Step 1 Cybersecurity: intake, Canada-for-Canada, MFA, encryption, SOC 2
@@ -322,5 +322,5 @@ what to do (cyber first, then privacy) + the signage + the PIA."
 
 ---
 
-*Working reference implementation: `v2/i3-privacy-compliance-agent.html` (the Magenta
+*Working reference implementation: `v2/i3-privacy-compliance-agent.html` (the V-Guard
 agent UI). © 2026 i3 International Inc.*

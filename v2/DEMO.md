@@ -64,14 +64,14 @@ spec for the build — see `ARCHITECTURE.md` and `BUILD_PLAN.md`.”
 
 ---
 
-# Full Portal Walkthrough (V + Magenta) — ~8–10 min
+# Full Portal Walkthrough (V + V-Guard) — ~8–10 min
 
-A click-by-click script for the whole portal (engine, Magenta, manager view).
+A click-by-click script for the whole portal (engine, V-Guard, manager view).
 
 ## Open these tabs first
 1. **Portal** — `v2/index.html`
 2. **V engine** — `v2/v-vision-sales-engine.html`
-3. **Magenta · Privacy & Cybersecurity Agent** — `v2/i3-privacy-compliance-agent.html`
+3. **V-Guard · Privacy & Cybersecurity Agent** — `v2/i3-privacy-compliance-agent.html`
    (merged; the old `magenta-portal-simulation.html` login/quote sim was retired)
 
 (Branch preview: `https://htmlpreview.github.io/?https://github.com/hienbui631993/i3-ai-sales-assistance/blob/claude/v2/v2/portal.html`)
@@ -103,18 +103,18 @@ Click the **Meet Vision** card.
   > "Each agent lights up and streams its reasoning. V-Start builds the plan,
   > V-Target pulls 6sense intent, V-Reach activates marketing and the VAR network,
   > V-Coach runs NSM training, V-Guide *verifies* the work actually happened…"
-- When it reaches **V-Guard**, point to the **Open Magenta portal →** link on its
+- When it reaches **V-Guard**, point to the **Open V-Guard portal →** link on its
   card. "Legal/privacy isn't a side tool — it's an agent in the line. That's the
-  privacy review, and it opens the Magenta portal."
+  privacy review, and it opens the V-Guard portal."
 
-## 3 · Privacy in the quote (2 min) — Magenta
-Click **Open Magenta portal →** (or the Magenta tab).
+## 3 · Privacy in the quote (2 min) — V-Guard
+Click **Open V-Guard portal →** (or the V-Guard tab).
 
 - **Sign in** (rep or partner).
 - In the quote builder, **Add** *i3 AI Loyalty (facial)* and *Audio Monitoring*.
-  > "The moment a privacy-sensitive solution lands on the quote, Magenta triggers —
+  > "The moment a privacy-sensitive solution lands on the quote, V-Guard triggers —
   > this is the gate in our POC due diligence."
-- Click **Open Magenta review** → watch the **function-call trace** pull from
+- Click **Open V-Guard review** → watch the **function-call trace** pull from
   Salesforce, i3Host, Automatica and the GoToMeeting transcript.
 - Answer the 4 questions → show the **decision + signage + PIA**, then **Apply to
   quote**.
@@ -157,4 +157,4 @@ production build — see `v2/BUILD_PLAN.md`.
 
 ## Reset between runs
 - V engine: **Reset** button (or reload).
-- Magenta: **Restart** isn't needed — reload the tab.
+- V-Guard: **Restart** isn't needed — reload the tab.

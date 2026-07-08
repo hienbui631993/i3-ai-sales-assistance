@@ -7,6 +7,27 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — company-size dropdown ranges (`v-vision-sales-engine.html`)
+- Updated the **Company size (locations)** options to **Small 10–50 · Mid-market
+  50–100 (default) · Enterprise 100+** (was 1–5 / 6–50 / 50+). Run note/boot log
+  follow the new short labels. Verified headless.
+
+### Changed — renamed the privacy agent **Magenta → V-Guard** across v2
+- Renamed the agent everywhere it's user-facing or spec'd: the privacy page
+  (`i3-privacy-compliance-agent.html` — title, eyebrow, h1, live-agent button),
+  the portal card + flowline (`index.html`), the engine agent card
+  (`v-vision-sales-engine.html`), and `process.html` / `ros.html` / `sop.html` /
+  `vision-architecture.html`. Compound labels like "V-Guard (Magenta)" and
+  "V-Guard · Magenta" collapse to just **V-Guard**.
+- Sales Agent: the live-agent button is now "Open the live **V-Guard** agent" and
+  the `LIVE_AGENTS` key `magenta` → `vguard` (call site updated).
+- Specs: `MAGENTA_AGENT.md` → **`V_GUARD_AGENT.md`** (content renamed;
+  reference in `MARKET_RESEARCH_AGENT.md` updated), plus `POC_AGENT.md`,
+  `ARCHITECTURE.md`, `BUILD_PLAN.md`, `DEMO.md`.
+- **Left untouched on purpose:** the **color** "magenta" (the Max-detection-area
+  overlay in the sample SOP images) and historical `LOG.md` / `REQUEST_LOG.md`
+  entries. Verified headless: no visible "Magenta" remains, no JS errors.
+
 ### Changed — topbar brand is clickable back to the portal on every page
 - Made the **"Vision · <page>"** topbar brand clickable (pointer cursor →
   `goPortal()`) on all six sub-pages: process, ros, sop, v-vision-sales-engine,

@@ -350,7 +350,7 @@ var SOPS=[
   ["500","Discovery & Qualification","V-Guide","Discover needs and qualify against the Ideal Customer Profile; separate prospects from dead-ends."],
   ["600","Solution Design","V-Prove","Design the solution and the equipment that fits the customer's problem."],
   ["700","Proposal Generation","V-Prove / V-Close","Generate a best-practice proposal automatically (terms, pricing, scope). Every promise in it must be provable in Phase 2."],
-  ["800","Privacy & Compliance","V-Guard (Magenta)","Embed privacy & cybersecurity (Law 25 / GDPR) by design; signage + PIA before POC approval."],
+  ["800","Privacy & Compliance","V-Guard","Embed privacy & cybersecurity (Law 25 / GDPR) by design; signage + PIA before POC approval."],
   ["900","Deal Management","V-Close","Manage the deal to close — pricing, battlecards, contract, signatures, Salesforce/Automatica sync. Ends at the customer sign-off: Phase 1 complete."]
 ];
 var TMPL=["Business Objective","Trigger","Inputs","AI Responsibilities","Human Responsibilities","Workflow","Outputs","System Integrations","Exception Handling","KPIs","Future Enhancements","AI Agent Spec"];
@@ -401,14 +401,14 @@ var SOPS2=[
   {no:"1300",nm:"AI Governance",ag:"Governance",
    obj:"Keep the AI accountable across both phases — approvals, guardrails, auditability, human-in-the-loop.",
    trig:"Continuous — every agent action; anything customer-facing.",
-   inputs:"Agent action logs · approval records · privacy rulings (Magenta).",
+   inputs:"Agent action logs · approval records · privacy rulings (V-Guard).",
    ai:"Log every recommendation and action; enforce approval gates; watch for drift between what was promised and what is reported.",
    human:"Managers approve customer-facing outputs; the Privacy Officer signs off high-risk items.",
    wf:"Agent Acts → Logged → Gate Check → Human Approves → Released → Audited",
    out:"Audit trail · approval records · governance report.",
    kpi:"Audit coverage · approval SLA · zero unapproved external communications.",
    exc:"Gate bypass attempt → block, log, notify governance.",
-   sys:"All Vision agents · Salesforce · Magenta."}
+   sys:"All Vision agents · Salesforce · V-Guard."}
 ];
 document.getElementById('sopList2').innerHTML=SOPS2.map(function(s,i){
   return '<div class="sop" id="sopB'+i+'"><div class="hd" onclick="document.getElementById(\'sopB'+i+'\').classList.toggle(\'open\')">'+
