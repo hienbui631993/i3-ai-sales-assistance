@@ -180,6 +180,8 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 
 /* click the i3 logo -> back to the portal (works self-hosted and via htmlpreview) */
 function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'index.html';}else{location.href='index.html';}}
+/* open the AI Configuration SOP PDF (works self-hosted and via htmlpreview -> raw github) */
+function openSOP(){var f='SOP/NTE_Ai_Configuration_SOP_240619v2.pdf';var hp=location.hostname==='htmlpreview.github.io';var u=f;if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}u=i.replace(/[^\/]*$/,'')+f;}window.open(u,'_blank','noopener');}
 
 /* ===== state ===== */
 var S={role:'rep', seg:'Retail'};
@@ -477,6 +479,9 @@ var OUTPUT={
       '<ul class="steps"><li><b>Privacy &amp; cybersecurity documentation</b> — built in; the full review runs in the next stage.</li><li><b>Site drawings / diagrams</b> — 3–4 standard, reusable drawings (HD cameras, networking, firewall, ports) to drag-and-drop or tweak.</li><li><b>Site maps / images</b> — a standard set reused across POCs; just change the names and camera labels.</li><li><b>Upsell suggestions</b> — Concierge · Smart ER Analyst · One Connect · TrueView.</li></ul>')+
     sec("PM time saved",
       '<div class="kv"><div class="k">Transcript produces the POC</div><div class="v" style="font-size:13px"><b>~30–40% less PM time</b> — the PM confirms Vision\'s draft (~20 min) instead of writing the POC from scratch.</div></div>')+
+    sec("Phase 2 · Rollout — AI Configuration SOP",
+      '<div class="kv"><div class="k">Once the POC proves out</div><div class="v" style="font-size:13px"><b>Phase 1</b> is the 45-day pilot. Once success is proven and the client rolls our solution out, deployment follows the standardized <b>AI Configuration SOP</b> — so every site is configured the same, repeatable way.</div></div>'+
+      '<div style="margin-top:10px"><a class="btn g sm" style="display:inline-block;text-decoration:none" href="SOP/NTE_Ai_Configuration_SOP_240619v2.pdf" onclick="openSOP();return false;">📄 Open the AI Configuration SOP (PDF)</a></div>')+
     sec("Hand off to Project Management",
       '<span class="badge warn">Privacy &amp; cybersecurity review required first →</span> <button class="btn g sm" onclick="openStage(\'legal\')">Run Privacy &amp; Cybersecurity</button>'+
       '<div style="margin-top:10px"><button class="btn pink" onclick="showPM()">📨 Contact PM &amp; create the official POC →</button></div>'+

@@ -7,6 +7,16 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Added — AI Configuration SOP as POC **Phase 2** (`vision-sales-agent.html`)
+- Added the **NTE AI Configuration SOP** PDF to a new **`v2/SOP/`** folder and
+  surfaced it in the Sales Agent's **POC** stage as a **"Phase 2 · Rollout — AI
+  Configuration SOP"** section: Phase 1 is the 45-day pilot; once success is
+  proven and the client rolls the solution out, deployment follows the
+  standardized SOP so every site is configured the same way. An **"Open the AI
+  Configuration SOP (PDF)"** button links the doc (relative when self-hosted;
+  rewrites to the raw-GitHub URL under htmlpreview via `openSOP()`). Verified in
+  light + dark, no JS errors.
+
 ### Changed — `v2/agents/POC_AGENT.md`: placeholders + highlight what to confirm
 - V-Prove now **never guesses**: any value it can't verify from the transcript or
   catalog goes in as a **`[TO CONFIRM: …]` placeholder**, highlighted inline and
