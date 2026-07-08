@@ -7,6 +7,41 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — recreated `v2/sop.html` around the **two-phase** model (Phase 2 built out)
+- Restructured the entire SOP page into the two phases, split at the customer's
+  signature: **Phase 1 · Sell & close (SOP 100–900)** — everything up to
+  **closing**, when we sign off with the customer — and **Phase 2 · Prove the
+  promise (SOP 1000–1300)** — we follow up with the customer to prove the
+  solution we provided is helping them **as the contract promised**.
+- New **"The two phases"** section (flow diagram + a "Customer Success spans the
+  seam" note: Phase 1 = closing/sign-off, Phase 2 = follow-up proof). The SOP
+  catalog is now split into a Phase 1 section and a **Phase 2 section
+  (`#phase2`)** where each SOP (1000 Customer Success & Contract-Promise
+  Validation, 1100 Organizational Learning, 1200 Performance Management,
+  1300 AI Governance) is **fully authored to the standard template** (trigger,
+  inputs, AI/human responsibilities, workflow, outputs, KPIs, exceptions,
+  integrations) instead of a one-line objective.
+- Added a second **worked example — SOP 1000** (trigger = the signature; extract
+  contract promises → 30/60/90 check-ins → promise-vs-actual scorecard →
+  proof-of-value review → references/expansion → renewal) and a **Customer
+  Success Agent (Phase 2)** spec next to the Market Intelligence Agent spec.
+  The 7-stage sales cycle notes stages 1–6 = Phase 1, stage 7 = Phase 2. Deep
+  link into Phase 2 via `#phase2` (or an `i3_sop_goto` localStorage flag under
+  htmlpreview, which drops fragments). Verified headless in both themes — all
+  sections render, no JS errors.
+
+### Changed — Customer Success stage now runs the two phases (`vision-sales-agent.html`)
+- Split the Customer Success output into **Phase 1 · Closing — sign off with
+  the customer** (the timed POC close; sign-off = contract signed, Phase 1
+  complete) and **Phase 2 · Follow-up — prove the contract promise (runs on the
+  SOP)**: extract the contract promises into measurable criteria, 30/60/90
+  check-ins with the promise-vs-actual scorecard, the proof-of-value report,
+  and early remediation when a promise is off-track. Added an **"Open the SOP —
+  Phase 2"** button (`openSOPPhase2()`, htmlpreview-aware, sets the
+  `i3_sop_goto` flag) linking to `sop.html#phase2`. Stage sub-label, intro and
+  thinking lines updated to the two-phase framing; references are "earned by
+  the proof, not the pitch".
+
 ### Added — AI Configuration SOP as POC **Phase 2** (`vision-sales-agent.html`)
 - Added the **NTE AI Configuration SOP** PDF to a new **`v2/SOP/`** folder and
   surfaced it in the Sales Agent's **POC** stage as a **"Phase 2 · Rollout — AI

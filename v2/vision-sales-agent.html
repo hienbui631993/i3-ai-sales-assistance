@@ -182,6 +182,8 @@ document.getElementById('logo').innerHTML='<svg width="800" height="339" viewBox
 function goPortal(){var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'index.html';}else{location.href='index.html';}}
 /* open the AI Configuration SOP PDF (works self-hosted and via htmlpreview -> raw github) */
 function openSOP(){var f='SOP/NTE_Ai_Configuration_SOP_240619v2.pdf';var hp=location.hostname==='htmlpreview.github.io';var u=f;if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}u=i.replace(/[^\/]*$/,'')+f;}window.open(u,'_blank','noopener');}
+/* open the ROS SOP page at Phase 2 (hash when self-hosted; localStorage flag via htmlpreview, which drops fragments) */
+function openSOPPhase2(){try{localStorage.setItem('i3_sop_goto','phase2')}catch(e){}var hp=location.hostname==='htmlpreview.github.io';if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}window.open('https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'sop.html','_blank','noopener');}else{window.open('sop.html#phase2','_blank','noopener');}}
 
 /* ===== state ===== */
 var S={role:'rep', seg:'Retail'};
@@ -302,8 +304,8 @@ var STAGES=[
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
   {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Step 1 cyber (every deal) → Step 2 privacy (if it applies)", partner:true,
     intro:"Cybersecurity applies to every deal — I'll run that first. Privacy is variable, so it's step two, only where a privacy statement applies. Run it and I'll tell you exactly what to do."},
-  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Timed POC close · follow-through · training · upsell", partner:false,
-    intro:"Closing here is a tight timeline on the POC — the proof of concept is the close. I'll set the decision deadline, then line up the follow-through: follow-up, training, professional services and the right upsells."}
+  {id:"close", n:6, ic:"⭐", nm:"Customer Success", sub:"Phase 1 · Closing (sign-off) → Phase 2 · Prove the contract promise", partner:false,
+    intro:"Customer Success runs in two phases. Phase 1 is closing — a tight timeline on the POC drives the Go/No-Go and we sign off with the customer. Phase 2 is the follow-up: we prove the solution we provided is helping them as the contract promised — it runs on the SOP. I'll set the decision deadline and line up both phases."}
 ];
 function stage(id){return STAGES.find(function(s){return s.id===id})}
 function renderStages(){
@@ -371,7 +373,7 @@ var THINK={
   present:["searching for the customer…","reading site type + recent news (Google Alerts)","surfacing their pain points","mapping to i3's three modules","recommending what to present","building your logo-branded deck","capturing the transcript"],
   poc:["loading the POC template…","pulling stakeholders from the transcript","matching solution + equipment","prepping the PM handoff"],
   legal:["running the standard cyber checklist (every deal)…","checking the site's privacy requirement","applying Law 25 / GDPR where it applies","drafting signage + PIA"],
-  close:["setting the POC decision deadline…","driving the Go / No-Go","lining up follow-up & rollout","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
+  close:["Phase 1 — setting the POC decision deadline…","driving the Go / No-Go to the customer sign-off","Phase 2 — loading the SOP follow-up","extracting the contract promises to prove","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
 function leadReady(b){ b.textContent='Ready ✓'; b.disabled=true; openStage('present'); }
@@ -502,12 +504,15 @@ var OUTPUT={
   close:function(){
     var dl=val('i_deadline')||"30 days";
     var health=val('i_health')||"🟢 Green — healthy";
-    return sec("Timed POC close",'<div class="kv"><div class="k">The POC is the close</div><div class="v" style="font-weight:600;font-size:13px">Put a hard decision date on the proof of concept — drive to <b>Go / No-Go within '+dl+'</b>. The working POC plus a tight timeline is what moves the customer to a decision.</div></div>')+
-      sec("Follow-up &amp; follow-through",'<ul class="steps"><li>Confirm the win against the POC success metric.</li><li>Stay on it as the solution rolls out — check-ins + adoption.</li><li>Account health: <b>'+health+'</b> — flag risk early.</li></ul>')+
+    return sec("Phase 1 · Closing — sign off with the customer",'<div class="kv"><div class="k">The POC is the close</div><div class="v" style="font-weight:600;font-size:13px">Put a hard decision date on the proof of concept — drive to <b>Go / No-Go within '+dl+'</b>. The working POC plus a tight timeline is what moves the customer to a decision. <b>Customer sign-off = contract signed — Phase 1 complete.</b></div></div>')+
+      sec("Phase 2 · Follow-up — prove the contract promise (runs on the SOP)",
+        '<div class="kv"><div class="k">After the sign-off</div><div class="v" style="font-size:13px">We follow up with the customer to <b>prove the solution we provided is helping them as the contract promised</b>. Phase 2 runs on the SOP — Vision extracts every contract promise and tracks it to proof.</div></div>'+
+        '<ul class="steps"><li><b>Extract the contract promises</b> into measurable success criteria (from the contract + the POC success metric).</li><li><b>30 / 60 / 90-day check-ins</b> — adoption, usage, and the <b>promise-vs-actual scorecard</b>.</li><li><b>Proof-of-value report</b> — show the customer, in their own numbers, that the contract promise is being delivered.</li><li>Account health: <b>'+health+'</b> — flag risk early; a promise off-track gets a remediation plan before the customer notices.</li></ul>'+
+        '<div style="margin-top:10px"><a class="btn g sm" style="display:inline-block;text-decoration:none" href="sop.html#phase2" onclick="openSOPPhase2();return false;">📘 Open the SOP — Phase 2 · Prove the promise</a></div>')+
       sec("Training",'<ul class="steps"><li><b>Lean</b> — rep &amp; customer training.</li><li><b>Grade</b> — video-based training.</li></ul>')+
       sec("Professional services",'<div class="kv"><div class="k">Where it fits</div><div class="v" style="font-size:13px">Bundle i3 professional services into the rollout where relevant.</div></div>')+
       sec("Upsell suggestions",'<ul class="steps"><li>Concierge service</li><li>Smart ER Analyst service</li><li>One Connect service</li><li>TrueView service</li></ul>')+
-      sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
+      sec("References &amp; referrals",'<ol class="steps"><li>Ask for a reference and a short customer story — earned by the proof, not the pitch.</li><li>Request referrals to sister sites / banners.</li><li>Feed the win reasons into the learning loop.</li></ol>')+
       saveBar();
   },
   onboard:function(){
