@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — `v2/agents/POC_AGENT.md` (V-Prove)
+- Build spec for the **POC agent**: transcript → POC (Gardewine template),
+  solution mapped to the three modules, stakeholder capture, recommended
+  equipment, standard reusable drawings + site maps, upsell, privacy/cyber
+  handoff to Magenta, and PM assignment by territory (Quebec→Nissan, Ontario→
+  Louel, West/other→Des) with the 45-day plan. System prompt, tools, KB,
+  outputs, guardrails (AI drafts / PM confirms ~20 min; privacy sign-off gate).
+
 ### Added — `v2/agents/` folder + Market Research agent spec
 - Created a **`v2/agents/`** folder and moved **MAGENTA_AGENT.md** into it.
 - Added **MARKET_RESEARCH_AGENT.md** — build spec for the Market Research agent
