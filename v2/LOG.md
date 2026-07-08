@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-06
 
+### Added — `v2/agents/` folder + Market Research agent spec
+- Created a **`v2/agents/`** folder and moved **MAGENTA_AGENT.md** into it.
+- Added **MARKET_RESEARCH_AGENT.md** — build spec for the Market Research agent
+  (`V-Research`): segment / account / competitor research tied to i3's three
+  modules, data sources (6sense, ZoomInfo, Sales Navigator, Google Alerts,
+  HubSpot), system prompt, tools, outputs, guardrails, and build steps. Feeds
+  V-Target (Prospecting) and V-Present (Presentation).
+
 ### Changed — dropped "i3Host / quoting" framing from Magenta (for now)
 - Reworded the Magenta trigger away from **i3Host quoting** to a generic "the
   moment a privacy-sensitive solution is on the deal" — on the Magenta page, its
