@@ -68,6 +68,9 @@
   .chip.on{background:var(--brand);border-color:var(--acc);color:#fff;box-shadow:0 0 0 3px rgba(70,179,255,.18)}
   .chip small{display:block;font-weight:400;font-size:10.5px;color:var(--subro);margin-top:1px}
   .chip.on small{color:#cfe6fb}
+  .sizesel{border:1px solid var(--pline);background:var(--panel);color:var(--ink);border-radius:11px;padding:10px 13px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;min-width:260px;max-width:100%}
+  .sizesel:hover{border-color:var(--acc)}
+  .sizesel:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(70,179,255,.18)}
   .runrow{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
   .runbtn{border:none;border-radius:12px;padding:13px 22px;font-size:14.5px;font-weight:800;cursor:pointer;font-family:inherit;
     background:linear-gradient(120deg,var(--brand),#46b3ff);color:#fff;box-shadow:0 8px 22px rgba(0,88,143,.4)}
@@ -155,63 +158,7 @@
   .vt{background:transparent;color:#bcd2e6;border:none;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
   .vt.on{background:var(--brand);color:#fff}
 
-  /* ---- manager dashboard ---- */
-  .mhead{margin:6px 0 16px}
-  .mhead h1{font-size:26px;margin:6px 0 4px;font-weight:800}
-  .mhead .lede{color:var(--ink-soft);font-size:13.5px}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
-  @media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}}
-  .kpi{background:var(--panel);border:1px solid var(--pline);border-radius:14px;padding:15px 16px}
-  .kpi .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .kpi .v{font-size:28px;font-weight:800;margin-top:5px;color:var(--ink)}
-  .kpi .s{font-size:12px;color:var(--muted);margin-top:3px}
-  .kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}
-  .mcols{display:grid;grid-template-columns:1.55fr .9fr;gap:18px}
-  @media(max-width:940px){.mcols{grid-template-columns:1fr}}
-  .roster{display:flex;flex-direction:column;gap:10px;padding:12px}
-  .rrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.05fr auto;gap:12px;align-items:start;border:1px solid var(--pline);border-radius:12px;padding:13px;background:var(--panel2);cursor:pointer;transition:.14s}
-  .rrow:hover{border-color:var(--acc);background:var(--rowhov)}
-  @media(max-width:720px){.rrow{grid-template-columns:1fr 1fr}}
-  .rrow.flag{border-color:rgba(255,193,7,.5);box-shadow:inset 3px 0 0 var(--yellow)}
-  .rrow .who .nm{font-weight:800;font-size:13.5px;color:var(--ink)}
-  .rrow .who .ro{font-size:11.5px;color:var(--subro)}
-  .seg{font-size:11px;font-weight:700;color:var(--tagc);background:var(--tagbg);border:1px solid var(--tagbd);border-radius:999px;padding:2px 9px;display:inline-block;margin-top:4px}
-  .rmini{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700;line-height:1.25;min-height:28px}
-  .rval{font-size:13px;font-weight:700;color:var(--ink);margin-top:2px}
-  .rbar{height:7px;border-radius:999px;background:var(--track);overflow:hidden;margin-top:5px}
-  .rbar>span{display:block;height:100%}
-  .badge2{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:999px;white-space:nowrap;align-self:center}
-  .badge2.ok{color:var(--okc);background:rgba(0,166,97,.16);border:1px solid rgba(0,166,97,.4)}
-  .badge2.att{color:#0a1a2b;background:var(--yellow)}
-  .funnel{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-  .fbar{display:flex;align-items:center;gap:10px}
-  .fbar .fn{width:96px;font-size:11.5px;color:var(--ink-soft);font-weight:700}
-  .fbar .ft{flex:1;height:22px;background:var(--track);border-radius:7px;overflow:hidden;position:relative}
-  .fbar .ft>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#46b3ff)}
-  .fbar .fc{position:absolute;right:8px;top:3px;font-size:11px;font-weight:800;color:var(--ink)}
-
-  /* rep detail modal */
-  .modal{position:fixed;inset:0;background:rgba(4,14,24,.72);backdrop-filter:blur(3px);z-index:50;display:flex;align-items:center;justify-content:center;padding:22px}
-  .sheet{background:var(--panel);border:1px solid var(--pline);border-radius:18px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-  .sheet .sh{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--pline)}
-  .sheet .sh .nm{font-size:19px;font-weight:800}
-  .sheet .sh .ro{font-size:12.5px;color:var(--subro);margin-top:2px}
-  .sheet .x{background:none;border:none;color:var(--subro);font-size:20px;cursor:pointer;line-height:1}
-  .sheet .body{padding:18px 20px}
-  .srow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-  .sbox{background:var(--panel2);border:1px solid var(--pline);border-radius:11px;padding:11px 13px}
-  .sbox .k{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .sbox .v{font-size:13.5px;font-weight:700;margin-top:3px;color:var(--ink)}
-  .schk{margin-top:6px}
-  .schk .ci{display:flex;align-items:center;gap:9px;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--pline);color:var(--ink-soft)}
-  .schk .ci:last-child{border-bottom:none}
-  .schk .bx{flex:none;width:18px;height:18px;border-radius:5px;border:1.5px solid var(--pline);display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a1a2b}
-  .schk .ci.done .bx{background:var(--green);border-color:var(--green)}
-  .schk .ci.done{color:var(--okc)}
-  .sbtn{margin-top:16px;display:flex;gap:9px}
-  .sbtn button{flex:1;border:none;border-radius:10px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
-  .sbtn .pr{background:var(--brand);color:#fff}.sbtn .gh{background:var(--panel2);color:var(--ink-soft);border:1px solid var(--pline)}
-
+  /* (Manager dashboard moved to the Sales Agent's Admin menu — vision-sales-agent.html) */
   .intake{margin-top:18px}
   .intakeBody{padding:16px}
   .drop{border:1.5px dashed var(--pline);border-radius:13px;padding:20px;text-align:center;background:var(--panel2)}
@@ -243,7 +190,7 @@
   <div class="sep"></div>
   <div class="prod"><span class="vhi">V</span>ision<small>Agentic Sales Engine</small></div>
   <div class="right">
-    <span class="vtoggle"><button class="vt on" id="vt-engine" onclick="switchView('engine')">▶ Engine</button><button class="vt" id="vt-manager" onclick="switchView('manager')">▦ Manager</button><button class="vt" id="vt-process" onclick="goProcess()" title="Open the Sales Process (Rep · AI · Manager)">↗ Process</button></span>
+    <span class="vtoggle"><button class="vt on" id="vt-engine">▶ Engine</button><button class="vt" id="vt-process" onclick="goProcess()" title="Open the Sales Process (Rep · AI · Manager)">↗ Process</button></span>
     <span class="pill">North America · v1</span>
     <span class="pill live" id="livePill"><span class="d"></span>Engine idle</span>
     <button id="themeToggle" class="themebtn" type="button" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark mode">🌙</button>
@@ -256,7 +203,7 @@
     <div>
       <div class="eyebrow">i3 Future Revenue System</div>
       <h1 class="big">Meet <span class="v">V</span>ision — your<br>sales engine</h1>
-      <p class="lede"><span class="v" style="color:var(--pink);font-weight:800">V</span>ision is a team of specialized AI agents that runs your whole sales motion —
+      <p class="lede"><span class="v" style="color:var(--pink);font-weight:800">V</span>ision is a team of specialized AI agents that runs your whole sales process —
       from onboarding a new rep to closing the deal. Pick where to start, hit run, and watch each
       agent think through its part of the pipeline.</p>
 
@@ -267,6 +214,10 @@
       <div class="entry">
         <div class="lab">2 · Target segment</div>
         <div class="chips" id="segChips"></div>
+      </div>
+      <div class="entry">
+        <div class="lab">3 · Company size (locations)</div>
+        <select class="sizesel" id="sizeSel" onchange="pickSize(this.value)"></select>
       </div>
 
       <div class="runrow">
@@ -313,12 +264,6 @@
   </div>
 
  </div><!-- /engineView -->
-
- <div id="managerView" class="hidden"><div id="mBody"></div></div>
-
- <div id="repModal" class="modal hidden" onclick="if(event.target===this)closeRep()">
-   <div class="sheet" id="repSheet"></div>
- </div>
 
   <div class="foot">
     Grounded in your documents:
@@ -396,7 +341,12 @@ var SEGMENTS=[
   {id:"integrator", nm:"Integrator"}
 ];
 
-var sel={entry:"newhire", seg:"cstore"};
+var SIZES=[
+  {id:"smb",   nm:"Small — 1–5 locations",        short:"1–5 sites"},
+  {id:"mid",   nm:"Mid-market — 6–50 locations",  short:"6–50 sites"},
+  {id:"ent",   nm:"Enterprise — 50+ locations",   short:"50+ sites"}
+];
+var sel={entry:"newhire", seg:"cstore", size:"mid"};
 var running=false, nodePos=[];
 
 /* ===== onboarding documents (parsed by V-Start) — from the real i3 docs ===== */
@@ -457,12 +407,17 @@ function buildChips(){
   document.getElementById('segChips').innerHTML=SEGMENTS.map(function(s){
     return '<div class="chip '+(sel.seg===s.id?'on':'')+'" onclick="pickSeg(\''+s.id+'\')">'+s.nm+(s.note?'<small>'+s.note+'</small>':'')+'</div>';
   }).join('');
+  document.getElementById('sizeSel').innerHTML=SIZES.map(function(z){
+    return '<option value="'+z.id+'"'+(sel.size===z.id?' selected':'')+'>'+z.nm+'</option>';
+  }).join('');
   var e=ENTRIES.find(function(x){return x.id===sel.entry});
   var s=SEGMENTS.find(function(x){return x.id===sel.seg});
-  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm+(state_profile?' · Doc: '+state_profile.name:'');
+  var z=SIZES.find(function(x){return x.id===sel.size});
+  document.getElementById('runNote').textContent='Starts at: '+e.nm+' · Segment: '+s.nm+' · Size: '+z.short+(state_profile?' · Doc: '+state_profile.name:'');
 }
 function pickEntry(id){ if(running)return; sel.entry=id; buildChips(); buildPipe(); paintStart(); }
 function pickSeg(id){ if(running)return; sel.seg=id; buildChips(); }
+function pickSize(id){ if(running){ document.getElementById('sizeSel').value=sel.size; return; } sel.size=id; buildChips(); }
 function startIdx(){ return ENTRIES.find(function(x){return x.id===sel.entry}).start; }
 
 /* ---- orbit nodes + links ---- */
@@ -541,8 +496,9 @@ async function run(){
   document.getElementById('core').classList.add('think');
   document.getElementById('console').innerHTML='';
   var segNm=SEGMENTS.find(function(x){return x.id===sel.seg}).nm;
+  var sizeNm=SIZES.find(function(x){return x.id===sel.size}).short;
   var s=startIdx(), total=AGENTS.length;
-  log('<span class="c">// Vision boot · entry='+sel.entry+' · segment='+segNm+'</span>');
+  log('<span class="c">// Vision boot · entry='+sel.entry+' · segment='+segNm+' · size='+sizeNm+'</span>');
   log('<span class="ag">Vision</span> orchestrating '+(total-s)+' agents…',''); await sleep(500);
 
   for(var i=s;i<total;i++){
@@ -592,127 +548,19 @@ function resetRun(){
   buildPipe();
 }
 
-/* ===== manager dashboard ===== */
-var REPS=[
-  {nm:"George Karaolis", ro:"Business Development Mgr", seg:"Commercial", stage:"coach",   ready:62, refl:[2,3], ment:[6,15],
-    wk:"Week 2 of 4 · NSM training", focus:"Sales Mastery + Sales Ops fundamentals", next:"30-day business plan + SWOT", mentor:"David Crook"},
-  {nm:"Paul Kerling",    ro:"Account Executive",        seg:"C-Store",    stage:"guide",   ready:78, refl:[4,5], ment:[11,15],
-    wk:"Week 5 · Guided outreach", focus:"Verified outreach + booking meetings", next:"First booked presentation", mentor:"Paul Leiba"},
-  {nm:"Tony Thomas",     ro:"Sales Rep",                seg:"Education",  stage:"present", ready:71, refl:[3,5], ment:[9,15],
-    wk:"Week 6 · Presentation", focus:"Demo skills + manager-joined meetings", next:"Manager-joined live demo", mentor:"Hal Wever"},
-  {nm:"Rajiv Patel",     ro:"Business Development Mgr", seg:"Integrator", stage:"prove",   ready:85, refl:[5,5], ment:[14,15],
-    wk:"POC · day 20 of 45", focus:"POC validation with PM team", next:"Executive Go / No-Go review", mentor:"Hal Wever"},
-  {nm:"Andrew Ioannou",  ro:"Sales Rep",                seg:"Commercial", stage:"start",   ready:30, refl:[1,3], ment:[2,15],
-    wk:"Week 1 · Onboarding", focus:"i3 culture + systems setup", next:"Meet the mentor team", mentor:"David Crook"},
-  {nm:"Christian Combes",ro:"Account Executive",        seg:"Grocery",    stage:"close",   ready:90, refl:[5,5], ment:[13,15],
-    wk:"Closing", focus:"Out-position the incumbent + close", next:"Contract + DocuSign", mentor:"David Crook"}
-];
-function agName(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.nm:id;}
-function agArea(id){var a=AGENTS.find(function(x){return x.id===id});return a?a.area:id;}
-function reflOk(r){return r.refl[0]/r.refl[1]>=0.8;}
-function readyCol(v){return v>=75?'var(--green)':v>=50?'var(--yellow)':'var(--red)';}
-function attention(r){return r.ready<50 || !reflOk(r);}
-
-function renderManager(){
-  var onboarding=REPS.filter(function(r){return r.stage==='start'||r.stage==='coach'}).length;
-  var avg=Math.round(REPS.reduce(function(s,r){return s+r.ready},0)/REPS.length);
-  var onTrack=REPS.filter(reflOk).length;
-  var pocs=REPS.filter(function(r){return ['prove','guard','close'].indexOf(r.stage)>-1}).length;
-
-  var kpis=
-    kpi('Reps onboarding', onboarding, REPS.length+' total active','') +
-    kpi('Avg readiness', avg+'%','team across all stages', avg>=70?'good':'warn') +
-    kpi('Reflections on-track', onTrack+'/'+REPS.length,'weekly Friday forms', onTrack>=REPS.length-1?'good':'warn') +
-    kpi('Active POCs', pocs,'in proof-of-concept','');
-
-  var rows=REPS.map(function(r,ri){
-    var pct=Math.round(r.refl[0]/r.refl[1]*100);
-    return '<div class="rrow '+(attention(r)?'flag':'')+'" onclick="openRep('+ri+')" title="Open rep detail">'+
-      '<div class="who"><div class="nm">'+r.nm+'</div><div class="ro">'+r.ro+'</div><span class="seg">'+r.seg+'</span></div>'+
-      '<div><div class="rmini">Stage</div><div class="rval">'+agName(r.stage)+'</div><div class="ro" style="font-size:11px;color:var(--muted)">'+agArea(r.stage)+'</div></div>'+
-      '<div><div class="rmini">Readiness</div><div class="rval">'+r.ready+'%</div><div class="rbar"><span style="width:'+r.ready+'%;background:'+readyCol(r.ready)+'"></span></div></div>'+
-      '<div><div class="rmini">Reflections · Mentor</div><div class="rval">'+r.refl[0]+'/'+r.refl[1]+' · '+r.ment[0]+'/'+r.ment[1]+'</div><div class="rbar"><span style="width:'+pct+'%;background:'+(reflOk(r)?'var(--green)':'var(--yellow)')+'"></span></div></div>'+
-      '<div class="badge2 '+(attention(r)?'att':'ok')+'">'+(attention(r)?'Needs attention':'On track')+'</div>'+
-    '</div>';
-  }).join('');
-
-  // pipeline distribution
-  var maxc=1; AGENTS.forEach(function(a){var c=REPS.filter(function(r){return r.stage===a.id}).length; if(c>maxc)maxc=c;});
-  var funnel=AGENTS.map(function(a){
-    var c=REPS.filter(function(r){return r.stage===a.id}).length;
-    return '<div class="fbar"><div class="fn">'+a.nm+'</div><div class="ft"><span style="width:'+(c/maxc*100)+'%"></span><div class="fc">'+c+'</div></div></div>';
-  }).join('');
-
-  document.getElementById('mBody').innerHTML=
-    '<div class="mhead"><div class="eyebrow">Manager view</div><h1>Team onboarding &amp; pipeline</h1>'+
-      '<div class="lede">Live read on every rep V is guiding — readiness, weekly reflections, mentor progress and where they sit in the pipeline.</div></div>'+
-    '<div class="kpis">'+kpis+'</div>'+
-    '<div class="mcols">'+
-      '<div class="card"><div class="h"><h2>Rep roster</h2><span class="meta">'+REPS.length+' reps</span></div><div class="roster">'+rows+'</div></div>'+
-      '<div class="card"><div class="h"><h2>Where reps sit in V</h2><span class="meta">by agent stage</span></div><div class="funnel">'+funnel+'</div></div>'+
-    '</div>';
-}
-function kpi(k,v,s,cls){ return '<div class="kpi"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="s">'+s+'</div></div>'; }
-
-function switchView(v){
-  document.getElementById('vt-engine').classList.toggle('on',v==='engine');
-  document.getElementById('vt-manager').classList.toggle('on',v==='manager');
-  document.getElementById('engineView').classList.toggle('hidden',v!=='engine');
-  document.getElementById('managerView').classList.toggle('hidden',v!=='manager');
-  document.getElementById('livePill').innerHTML='<span class="d"'+(v==='manager'?' style="background:#46b3ff"':'')+'></span>'+(v==='manager'?'Manager view':'Engine idle');
-  window.scrollTo(0,0);
-}
-
-/* ---- rep detail modal ---- */
-function openRep(i){
-  var r=REPS[i];
-  var deliverables=[
-    {t:"Weekly Friday reflection forms", done:reflOk(r)},
-    {t:"12–15 mentor / shadow meetings", done:r.ment[0]>=12},
-    {t:"NSM national sales training", done:["guide","present","prove","guard","close"].indexOf(r.stage)>-1},
-    {t:"30-day business plan + SWOT", done:["present","prove","guard","close"].indexOf(r.stage)>-1},
-    {t:"Mock + live demo (evaluated)", done:["prove","guard","close"].indexOf(r.stage)>-1}
-  ];
-  document.getElementById('repSheet').innerHTML=
-    '<div class="sh"><div><div class="nm">'+r.nm+'</div><div class="ro">'+r.ro+' · '+r.seg+' segment</div></div>'+
-      '<button class="x" onclick="closeRep()">✕</button></div>'+
-    '<div class="body">'+
-      '<div class="srow">'+
-        sbox('Current stage', agName(r.stage)+' · '+agArea(r.stage))+
-        sbox('Acclimation', r.wk)+
-        sbox('Readiness', r.ready+'%')+
-        sbox('Reflections · Mentor', r.refl[0]+'/'+r.refl[1]+' · '+r.ment[0]+'/'+r.ment[1])+
-        sbox('Current focus', r.focus)+
-        sbox('Next milestone', r.next)+
-      '</div>'+
-      '<div class="sbox"><div class="k">Direct manager</div><div class="v">'+r.mentor+'</div></div>'+
-      '<div style="margin-top:14px"><div class="sbox" style="background:transparent;border:none;padding:0"><div class="k">Acclimation deliverables</div></div>'+
-        '<div class="schk">'+deliverables.map(function(d){return '<div class="ci '+(d.done?'done':'')+'"><span class="bx">'+(d.done?'✓':'')+'</span>'+d.t+'</div>';}).join('')+'</div></div>'+
-      '<div class="sbtn"><button class="pr" onclick="runRepInEngine('+i+')">▶ View this rep in V engine</button>'+
-        '<button class="gh" onclick="alert(\'Simulated: opened '+r.nm.replace(/'/g,'')+' in i3Host / Salesforce.\')">Open in i3Host</button></div>'+
-    '</div>';
-  document.getElementById('repModal').classList.remove('hidden');
-}
-function sbox(k,v){ return '<div class="sbox"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
-function closeRep(){ document.getElementById('repModal').classList.add('hidden'); }
-function runRepInEngine(i){
-  var r=REPS[i];
-  var sm=SEGMENTS.find(function(x){return x.nm.toLowerCase()===r.seg.toLowerCase();});
-  sel.seg = sm ? sm.id : SEGMENTS[0].id;
-  var st=r.stage;
-  sel.entry = (st==='start'||st==='coach') ? 'newhire' : (['prove','guard','close'].indexOf(st)>-1 ? 'poc' : 'veteran');
-  closeRep(); switchView('engine'); buildChips(); buildPipe();
-  document.getElementById('runNote').scrollIntoView({behavior:'smooth',block:'center'});
-}
-
 /* boot */
-buildChips(); buildOrbit(); buildPipe(); renderIntake(); renderManager();
-// open Manager view via #manager hash OR a localStorage flag set by the portal
-// (the flag survives preview proxies that drop the URL fragment)
-var wantManager = location.hash==='#manager';
-try{ if(localStorage.getItem('v_view')==='manager'){ wantManager=true; localStorage.removeItem('v_view'); } }catch(e){}
-if(wantManager) switchView('manager');
-window.addEventListener('hashchange', function(){ switchView(location.hash==='#manager'?'manager':'engine'); });
+buildChips(); buildOrbit(); buildPipe(); renderIntake();
+// The Manager Dashboard moved to the Sales Agent's Admin menu (vision-sales-agent.html).
+// Redirect legacy #manager links / v_view flags there so old bookmarks keep working.
+(function(){
+  var wantManager = location.hash==='#manager';
+  try{ if(localStorage.getItem('v_view')==='manager'){ wantManager=true; localStorage.removeItem('v_view'); } }catch(e){}
+  if(!wantManager) return;
+  try{ localStorage.setItem('i3_agent_view','manager'); }catch(e){}
+  var hp=location.hostname==='htmlpreview.github.io';
+  if(hp){var i=location.search.slice(1);try{i=decodeURIComponent(i)}catch(e){}location.href='https://htmlpreview.github.io/?'+i.replace(/[^\/]*$/,'')+'vision-sales-agent.html';}
+  else{location.href='vision-sales-agent.html#manager';}
+})();
 </script>
 <!-- i3 brand casing: keep the "i3" token lowercase even inside UPPERCASE labels -->
 <script>

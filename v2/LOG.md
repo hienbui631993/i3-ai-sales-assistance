@@ -7,6 +7,136 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Added — "3 · Company size (locations)" dropdown in the Meet Vision engine (`v-vision-sales-engine.html`)
+- Added a **Company size** `<select>` under **2 · Target segment**, measured by
+  **number of locations**: Small (1–5) · Mid-market (6–50, default) ·
+  Enterprise (50+). The choice flows into `sel.size`, the run note
+  ("… · Size: 6–50 sites") and the boot log (`size=…`); it's locked while the
+  engine is running. Styled to the engine's light/dark tokens. Verified headless.
+
+### Removed — the "Admin?" banner from the rep dashboard (`vision-sales-agent.html`)
+- Dropped the **"👤 Admin? Onboard a new salesperson or open the Manager
+  Dashboard…"** promo bar (`.adminbar`) from the rep dashboard, plus its now-dead
+  CSS. Admin is still reachable from the **Admin** role button in the topbar.
+
+### Changed — Admin menu opens on the **Manager Dashboard** by default (`vision-sales-agent.html`)
+- The Admin menu now defaults to **▦ Manager Dashboard** (was Onboard) — it's
+  listed first in the tab row and is the tab shown when an admin opens the menu
+  with no sub-tab specified. Onboard a salesperson is still one click away.
+
+### Changed — portal card renamed **"Meet Vision"**; Manager Dashboard moved to the Sales Agent's **Admin menu**
+- **Portal (`index.html`):** the "Vision Sales Engine" card is now **"Meet
+  Vision"** (pink-V styling kept); its copy/tag no longer mention the Manager
+  dashboard. The **Vision · Sales Agent** card now notes that Admins onboard
+  reps and see the **Manager Dashboard** from the Admin menu (new tag).
+- **Meet Vision (`v-vision-sales-engine.html`):** removed the Manager Dashboard
+  entirely — the ▦ Manager toggle, the manager view, the rep-detail modal, and
+  all related CSS/JS (REPS roster, renderManager, switchView, openRep,
+  runRepInEngine). Legacy `#manager` links / `v_view` flags now **redirect** to
+  the Sales Agent's Admin → Manager Dashboard so old bookmarks keep working.
+- **Sales Agent (`vision-sales-agent.html`):** the Admin view is now an **Admin
+  menu** with two tabs — **👤 Onboard a salesperson** (existing flow) and
+  **▦ Manager Dashboard** (moved from the engine): 4 KPIs (reps onboarding,
+  avg readiness, reflections on-track, active POCs), the clickable 6-rep
+  roster (stage, readiness bar, reflections · mentor, flag), the
+  stage-distribution funnel, and an **inline rep detail** (plan, acclimation
+  deliverables checklist, next milestone) — restyled to the agent's light/dark
+  tokens. Deep-link via `#manager` or the `i3_agent_view` localStorage flag;
+  the rep dashboard's admin bar gained a **▦ Manager Dashboard** button.
+- **Sales Process (`process.html`):** the ▦ Manager button now opens the
+  Sales Agent's Admin → Manager Dashboard (was the engine's manager view).
+- **`DEMO.md`:** walkthrough §4 updated (manager view now Sales Agent · Admin
+  menu); the stale "Manager Dashboard card disappears" partner line now points
+  at the Architecture card; "V · Vision Sales Engine card" → "Meet Vision card".
+- Verified headless across all three pages: portal shows Meet Vision, engine
+  has no manager button/view, `#manager` deep-link opens the dashboard (roster,
+  KPIs, rep detail, onboard tab all render) — no JS errors.
+
+### Changed — real-SOP popup: full detail + the **images extracted from the PDF**
+- Extracted the three content images from `v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf`
+  into **`v2/media/`** (`sop-nte-max-detection-area.jpg` — the exterior camera
+  view with the magenta Max detection area drawn larger than the red Area
+  alarm; `sop-nte-alarm-settings.png` — Object count ≥ 1 / Duration ≥ 1 /
+  "Person, Head — 2 selected"; `sop-nte-object-detection.png` — the Head +
+  Person picker) and documented them in `media/README.md`. Letterhead-logo
+  duplicates were discarded.
+- The popup now carries the images as captioned figures in Procedure 1, and the
+  **Customer Success section itself shows the camera-view figure** (click →
+  opens the full SOP popup). Images resolve via a new `mediaURL()` helper —
+  relative when self-hosted, rewritten to raw-GitHub under htmlpreview.
+- Deepened the popup to the full document: responsibilities split by role with
+  the real **due dates** (June 20 / June 28, 2024), the **joint commitments**
+  (Site 658 Burleson physical audit — detection accuracy, CMS connectivity,
+  Global monitoring-station alerts; 4–5 more sites by EOD June 19, 2024), the
+  software sources (i3international.com/download, packages pre-staged on D: of
+  the 121 GPU-enabled NTE servers), the full 7-rule camera-configuration list,
+  the complete **contacts table** (i3 + Global Axiom account leads and
+  executive sponsors with phone/email) and the joint **approval block**.
+  Verified headless: all 4 images load, popup renders the added detail, no JS
+  errors.
+
+### Added — the **real SOP** from `v2/SOP/` as a section + popup in Customer Success Phase 2 (`vision-sales-agent.html`)
+- The Customer Success **Phase 2** output now carries a **"The real SOP — example
+  from the SOP folder"** section pointing at the actual document
+  (`v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf`), with two buttons:
+  **"View the real SOP (popup)"** and **"Open the original PDF"** (existing
+  htmlpreview-aware `openSOP()`).
+- The popup is a new theme-aware modal that recreates the real 4-page NTE SOP —
+  *Configuring i3Ai Setup for optimal accuracy* — faithfully from the PDF:
+  objective, scope, limitations, the i3 / Global Axiom responsibilities table,
+  the 5-part procedure (infrastructure & camera configuration requirements,
+  verification, ongoing monitoring & maintenance, documentation & reporting,
+  continuous improvement), troubleshooting, and the "who owns it" contacts +
+  approval block. Framed as the worked example of the standardized format
+  Phase 2 runs on (verify → monitor weekly → audit monthly → improve).
+  Closes on ✕, backdrop click or Esc; body scroll locks while open. Verified
+  headless: stage output renders, popup opens/closes, no JS errors.
+
+### Changed — recreated `v2/sop.html` around the **two-phase** model (Phase 2 built out)
+- Restructured the entire SOP page into the two phases, split at the customer's
+  signature: **Phase 1 · Sell & close (SOP 100–900)** — everything up to
+  **closing**, when we sign off with the customer — and **Phase 2 · Prove the
+  promise (SOP 1000–1300)** — we follow up with the customer to prove the
+  solution we provided is helping them **as the contract promised**.
+- New **"The two phases"** section (flow diagram + a "Customer Success spans the
+  seam" note: Phase 1 = closing/sign-off, Phase 2 = follow-up proof). The SOP
+  catalog is now split into a Phase 1 section and a **Phase 2 section
+  (`#phase2`)** where each SOP (1000 Customer Success & Contract-Promise
+  Validation, 1100 Organizational Learning, 1200 Performance Management,
+  1300 AI Governance) is **fully authored to the standard template** (trigger,
+  inputs, AI/human responsibilities, workflow, outputs, KPIs, exceptions,
+  integrations) instead of a one-line objective.
+- Added a second **worked example — SOP 1000** (trigger = the signature; extract
+  contract promises → 30/60/90 check-ins → promise-vs-actual scorecard →
+  proof-of-value review → references/expansion → renewal) and a **Customer
+  Success Agent (Phase 2)** spec next to the Market Intelligence Agent spec.
+  The 7-stage sales cycle notes stages 1–6 = Phase 1, stage 7 = Phase 2. Deep
+  link into Phase 2 via `#phase2` (or an `i3_sop_goto` localStorage flag under
+  htmlpreview, which drops fragments). Verified headless in both themes — all
+  sections render, no JS errors.
+
+### Changed — Customer Success stage now runs the two phases (`vision-sales-agent.html`)
+- Split the Customer Success output into **Phase 1 · Closing — sign off with
+  the customer** (the timed POC close; sign-off = contract signed, Phase 1
+  complete) and **Phase 2 · Follow-up — prove the contract promise (runs on the
+  SOP)**: extract the contract promises into measurable criteria, 30/60/90
+  check-ins with the promise-vs-actual scorecard, the proof-of-value report,
+  and early remediation when a promise is off-track. Added an **"Open the SOP —
+  Phase 2"** button (`openSOPPhase2()`, htmlpreview-aware, sets the
+  `i3_sop_goto` flag) linking to `sop.html#phase2`. Stage sub-label, intro and
+  thinking lines updated to the two-phase framing; references are "earned by
+  the proof, not the pitch".
+
+### Added — AI Configuration SOP as POC **Phase 2** (`vision-sales-agent.html`)
+- Added the **NTE AI Configuration SOP** PDF to a new **`v2/SOP/`** folder and
+  surfaced it in the Sales Agent's **POC** stage as a **"Phase 2 · Rollout — AI
+  Configuration SOP"** section: Phase 1 is the 45-day pilot; once success is
+  proven and the client rolls the solution out, deployment follows the
+  standardized SOP so every site is configured the same way. An **"Open the AI
+  Configuration SOP (PDF)"** button links the doc (relative when self-hosted;
+  rewrites to the raw-GitHub URL under htmlpreview via `openSOP()`). Verified in
+  light + dark, no JS errors.
+
 ### Changed — `v2/agents/POC_AGENT.md`: placeholders + highlight what to confirm
 - V-Prove now **never guesses**: any value it can't verify from the transcript or
   catalog goes in as a **`[TO CONFIRM: …]` placeholder**, highlighted inline and

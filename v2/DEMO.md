@@ -85,12 +85,12 @@ Open **portal.html**.
 > agentic engine guides the deal, the privacy co-pilot keeps it compliant, and
 > managers see the truth. Today it's North America, v1."
 
-- Click the **Channel Partner** toggle → point out the **Manager Dashboard card
-  disappears**. "Partners get the tools, not our internal team data."
+- Click the **Channel Partner** toggle → point out the **Architecture card
+  disappears**. "Partners get the tools, not our internal engineering detail."
 - Toggle back to **i3 Sales Rep**.
 
 ## 2 · The engine thinks (2 min) — V
-Click the **V · Vision Sales Engine** card.
+Click the **Meet Vision** card.
 
 > "V is nine specialized agents — one per area of our motion, from onboarding to
 > close. Watch it think."
@@ -121,18 +121,16 @@ Click **Open Magenta portal →** (or the Magenta tab).
   > "Privacy step just went from ~3–5 days to ~8 minutes — and it's written back to
   > Salesforce so the deal keeps moving."
 
-## 4 · The manager sees the truth (2 min) — V Manager view
-Back in the **V** tab, click **▦ Manager** (top bar).
+## 4 · The manager sees the truth (2 min) — Sales Agent · Admin menu
+Open the **Vision Sales Agent** tab → top-right role **Admin** → **▦ Manager
+Dashboard** tab. (The Sales Process page's ▦ Manager button lands here too.)
 
-> "Every rep V is guiding — readiness, weekly reflections, mentor progress, and
-> where they sit in the pipeline. Reps in trouble are flagged."
+> "Every rep Vision is guiding — readiness, weekly reflections, mentor progress,
+> and where they sit in the pipeline. Reps in trouble are flagged."
 
-- Point to the **3 flagged** reps (low readiness or behind on reflections).
-- Click a row (e.g. **Devon Klein**) → the **rep detail** opens.
-  > "Their plan, deliverables checklist, next milestone. And I can drop straight
-  > into the engine for this rep."
-- Click **▶ View this rep in V engine** → it returns to the engine pre-set to
-  that rep's stage/segment.
+- Point to the flagged reps (low readiness or behind on reflections).
+- Click a row (e.g. **Andrew Ioannou**) → the **rep detail** opens inline —
+  their plan, acclimation-deliverables checklist, and next milestone.
 
 ## 5 · The deep-dive (1 min) — Privacy agent
 Open the **Privacy Compliance Agent** tab.
