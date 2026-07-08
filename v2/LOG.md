@@ -7,6 +7,23 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Added — the **real SOP** from `v2/SOP/` as a section + popup in Customer Success Phase 2 (`vision-sales-agent.html`)
+- The Customer Success **Phase 2** output now carries a **"The real SOP — example
+  from the SOP folder"** section pointing at the actual document
+  (`v2/SOP/NTE_Ai_Configuration_SOP_240619v2.pdf`), with two buttons:
+  **"View the real SOP (popup)"** and **"Open the original PDF"** (existing
+  htmlpreview-aware `openSOP()`).
+- The popup is a new theme-aware modal that recreates the real 4-page NTE SOP —
+  *Configuring i3Ai Setup for optimal accuracy* — faithfully from the PDF:
+  objective, scope, limitations, the i3 / Global Axiom responsibilities table,
+  the 5-part procedure (infrastructure & camera configuration requirements,
+  verification, ongoing monitoring & maintenance, documentation & reporting,
+  continuous improvement), troubleshooting, and the "who owns it" contacts +
+  approval block. Framed as the worked example of the standardized format
+  Phase 2 runs on (verify → monitor weekly → audit monthly → improve).
+  Closes on ✕, backdrop click or Esc; body scroll locks while open. Verified
+  headless: stage output renders, popup opens/closes, no JS errors.
+
 ### Changed — recreated `v2/sop.html` around the **two-phase** model (Phase 2 built out)
 - Restructured the entire SOP page into the two phases, split at the customer's
   signature: **Phase 1 · Sell & close (SOP 100–900)** — everything up to
