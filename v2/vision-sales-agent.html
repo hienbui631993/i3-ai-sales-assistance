@@ -392,12 +392,12 @@ function show(id){ ['admin','home','stage'].forEach(function(v){document.getElem
 /* ========================================================= ADMIN MENU (onboarding + manager dashboard) ========================================================= */
 function showAdmin(sub){
   show('admin');
-  S.adminTab = sub || S.adminTab || 'onboard';
+  S.adminTab = sub || S.adminTab || 'manager';
   document.getElementById('view-admin').innerHTML=
     '<div class="eyebrow">Administrator</div><h1>Admin menu</h1>'+
     '<div class="atabs">'+
-      '<button class="atab '+(S.adminTab==='onboard'?'on':'')+'" onclick="showAdmin(\'onboard\')">👤 Onboard a salesperson</button>'+
       '<button class="atab '+(S.adminTab==='manager'?'on':'')+'" onclick="showAdmin(\'manager\')">▦ Manager Dashboard</button>'+
+      '<button class="atab '+(S.adminTab==='onboard'?'on':'')+'" onclick="showAdmin(\'onboard\')">👤 Onboard a salesperson</button>'+
     '</div>'+
     '<div id="adminBody"></div>';
   if(S.adminTab==='manager') renderManagerDash(); else renderAdminOnboard();
