@@ -7,6 +7,15 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — Prospecting leads: named accounts, no "Ready to present" buttons (`vision-sales-agent.html`)
+- Replaced the five sample leads with three named accounts — **International Data
+  Corporation (IDC) · Carnegie Museum of Art · Getty Images** — and removed the
+  **"Ready to present →"** button column (header + cells) and the now-unused
+  `leadReady()` handler. Updated the count copy (5→3 leads / accounts), dropped
+  the "mark one Ready to present" line from the stage intro, and updated the
+  dashboard to-do to name the three accounts. Verified headless: 3 leads render,
+  zero Ready-to-present buttons, no JS errors.
+
 ### Changed — restored the Small company-size tier (`v-vision-sales-engine.html`)
 - Added **Small — 10–50 locations** back as the first option; sizes are now
   Small 10–50 · Mid-market 50–150 (default) · Enterprise 150+. Verified headless.

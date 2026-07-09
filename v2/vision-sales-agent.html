@@ -531,7 +531,7 @@ function renderHome(){
       wdg('orders','Orders won','$96K','this quarter','good')+
     '</div>'+
     '<div class="today"><div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 0 2px">What you need to do today</div>'+
-      ti('var(--red)','Call 3 leads showing intent (Metro, Northline, Harbour)','Leads','prospect')+
+      ti('var(--red)','Call 3 leads showing intent (IDC, Carnegie Museum of Art, Getty Images)','Leads','prospect')+
       ti('var(--yellow)','Prep the Metro deck — manager invited 2pm','Present','present')+
       ti('var(--green)','Review the Gardewine POC — day 20 of 45','POC','poc')+
     '</div>'+
@@ -576,7 +576,7 @@ var STAGES=[
   {id:"onboard", n:1, ic:"🚀", nm:"Onboarding", sub:"Ramp & training", partner:false,
     intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
   {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"Marketing agent → 6sense leads → ready to present", partner:false,
-    intro:"After onboarding, my marketing agent goes and finds leads for you — pulled from 6sense and our data. Run it and I'll hand you a short list with what I recommend; mark one Ready to present and I'll carry it into the presentation."},
+    intro:"After onboarding, my marketing agent goes and finds leads for you — pulled from 6sense and our data. Run it and I'll hand you a short list with what I recommend."},
   {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Prep → Present", partner:true,
     intro:"Two steps. Prep: enter the customer name and I'll search their information and pain points, recommend what we can present (mapped to i3's three modules), and build a logo-branded deck. Present: deliver the solution — not the hardware — then I capture the transcript for your POC."},
   {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
@@ -664,7 +664,6 @@ var THINK={
   close:["Phase 1 — setting the POC decision deadline…","driving the Go / No-Go to the customer sign-off","Phase 2 — loading the SOP follow-up","extracting the contract promises to prove","matching training — Lean + Grade","scoping professional services","surfacing upsell options"],
   onboard:["parsing onboarding plan…","mapping training + mentors","scheduling reflections"]
 };
-function leadReady(b){ b.textContent='Ready ✓'; b.disabled=true; openStage('present'); }
 
 /* ===== helpers ===== */
 function kv(k,v){return '<div class="kv"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>';}
@@ -692,22 +691,19 @@ var OUTPUT={
     var seg=rep.seg;
     var assoc=ASSOC[seg]||["industry associations"];
     var leads=[
-      ["Metro Retail Group","92","surging on 'retail video analytics' (6sense)","Call first — highest intent this week"],
-      ["Northline Grocery","78","pricing page ×3 this week","Warm with the shrink one-pager, then call"],
-      ["Harbour C-Stores","74","just hired an LP director","Lead with loss prevention + ops insight"],
-      ["Parkside QSR","66","comparing cloud VMS vendors","Send the integration + data-residency note"],
-      ["Cedar Pharmacy","61","renewal window in ~90 days","Nurture now; book a Q3 review"]
+      ["International Data Corporation (IDC)","84","evaluating video analytics + data-security vendors","Lead with Operations insight + data residency"],
+      ["Carnegie Museum of Art","77","visitor-safety &amp; collection-protection review","Lead with Safety &amp; Security + Asset Protection"],
+      ["Getty Images","72","securing production &amp; archive facilities","Lead with Asset Protection + access control"]
     ];
     return sec("Your leads — pulled by the marketing agent",
-      '<div style="font-size:13px;margin-bottom:9px">Here\'s what I got for you in <b>'+seg+'</b> · '+rep.terr+' — <b>5 leads</b> from 6sense + our data, ranked by intent. Mark one <b>Ready to present</b> and I\'ll carry it into the presentation.</div>'+
-      '<table class="tbl"><tr><th>Account</th><th>Intent</th><th>Signal</th><th>What I recommend</th><th></th></tr>'+
+      '<div style="font-size:13px;margin-bottom:9px">Here\'s what I got for you in <b>'+seg+'</b> · '+rep.terr+' — <b>3 leads</b> from 6sense + our data, ranked by intent.</div>'+
+      '<table class="tbl"><tr><th>Account</th><th>Intent</th><th>Signal</th><th>What I recommend</th></tr>'+
       leads.map(function(l){var b=(+l[1])>=80?'hi':(+l[1])>=70?'warn':'lock';
-        return '<tr><td><b>'+l[0]+'</b></td><td><span class="badge '+b+'" style="font-size:9px">'+l[1]+'</span></td><td>'+l[2]+'</td><td>'+l[3]+'</td>'+
-          '<td><button class="btn p sm" onclick="leadReady(this)">Ready to present →</button></td></tr>';
+        return '<tr><td><b>'+l[0]+'</b></td><td><span class="badge '+b+'" style="font-size:9px">'+l[1]+'</span></td><td>'+l[2]+'</td><td>'+l[3]+'</td></tr>';
       }).join('')+'</table>')+
     sec("Sharpen your presence (while marketing warms them)",
       '<div class="grid2">'+kv("LinkedIn relevance to "+seg,"62 / 100 · room to grow")+kv("Posting cadence","Low — 1 / 6 wks")+'</div>'+
-      '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week; engage '+assoc[0]+' threads and follow your 5 accounts before outreach.</li></ul>')+
+      '<ul class="steps" style="margin-top:10px"><li>Re-write your headline around '+seg+' outcomes (shrink, safety, ops insight).</li><li>Post 1×/week; engage '+assoc[0]+' threads and follow your 3 accounts before outreach.</li></ul>')+
     sec("Where leads come from (hardest → easiest)",
       '<ol class="steps"><li><b>Brand-new</b> — SEO / cold outreach (hardest).</li><li><b>References</b> — people you already know.</li><li><b>Integrators / channel partners</b> — they bring you into their accounts if you make them look good.</li><li><b>Trade shows</b> — handled by marketing.</li></ol>'+
       '<div style="font-size:12px;color:var(--muted);margin-top:6px">Goal: keep lead-gen <b>systematic and constant</b>, not sporadic — drip campaigns (HubSpot) + Sales Navigator feed the top of the funnel.</div>')+
