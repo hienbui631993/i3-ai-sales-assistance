@@ -572,8 +572,8 @@ var STAGES=[
     intro:"Here's your ramp — training, mentors and your weekly cadence. Just run it."},
   {id:"prospect", n:2, ic:"🎯", nm:"Prospecting & Leads", sub:"Marketing agent → 6sense leads → ready to present", partner:false,
     intro:"After onboarding, my marketing agent goes and finds leads for you — pulled from 6sense and our data. Run it and I'll hand you a short list with what I recommend; mark one Ready to present and I'll carry it into the presentation."},
-  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Search the customer → pain points → solution → deck", partner:true,
-    intro:"Enter the customer name and I'll search their information and pain points, recommend what we can present (mapped to i3's three modules), and build a logo-branded deck. Present the solution — not the hardware. After you present, I capture the transcript for your POC."},
+  {id:"present", n:3, ic:"🖥️", nm:"Presentation", sub:"Prep → Present", partner:true,
+    intro:"Two steps. Prep: enter the customer name and I'll search their information and pain points, recommend what we can present (mapped to i3's three modules), and build a logo-branded deck. Present: deliver the solution — not the hardware — then I capture the transcript for your POC."},
   {id:"poc", n:4, ic:"🧪", nm:"Proof of Concept", sub:"Built from your transcript", partner:false,
     intro:"I'll build the POC from your transcript: the right solution, the equipment to quote, and who to lock in. Just run it."},
   {id:"legal", n:5, ic:"🛡️", nm:"Privacy & Cybersecurity", sub:"Step 1 cyber (every deal) → Step 2 privacy (if it applies)", partner:true,
@@ -823,6 +823,7 @@ function showPM(){
     '<div class="body"><div class="vsay"><div class="av">'+pm[0]+'</div><div class="bub">Hi '+rep.name.split(' ')[0]+', '+pm+' here from PM. POC received — I\'ll keep us on the timeline and make sure the data &amp; cybersecurity forms are complete.</div></div>'+
     '<div class="grid2" style="margin-bottom:14px">'+kv("Assigned PM (by territory)",pm+" · "+rep.terr)+kv("PM coverage","Quebec → Nissan · Ontario → Louel · West/Other → Des")+'</div>'+
     sec("PM checklist",'<ul class="steps"><li>Site walkthrough scheduled with SI / integrator</li><li>Cybersecurity forms — network, data residency, access</li><li>Install &amp; configure to the POC timeline</li><li>Collect the right data for the 45-day validation</li><li>Executive review → Go / No-Go</li></ul>')+
+    sec("Documents to include (signed before kickoff)",'<ul class="steps"><li><b>ROI document</b> — projected savings / payback vs the POC success metric.</li><li><b>NDA</b> — signed by the customer.</li><li><b>CMS Legal documents</b> — signed (data handling / monitoring terms).</li></ul><div style="font-size:12px;color:#8a5d05;background:var(--wnbg);border:1px solid var(--wnbd);border-radius:8px;padding:8px 10px;margin-top:8px"><b>Vision prompt:</b> the official POC is not created until the ROI, NDA and CMS Legal documents are attached and signed.</div>')+
     sec("Timeline",'<div class="grid2">'+kv("Kickoff / walkthrough","Week 1")+kv("Install & config","Week 1–2")+kv("Data collection","45 days")+kv("Review & decision","Day 45")+'</div>')+
     '<div class="saveNote">🔒 Synced to Salesforce + i3Host · PM agent interconnected with Vision.</div></div></div>';
   document.getElementById('pmPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
