@@ -7,6 +7,10 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — restored the Small company-size tier (`v-vision-sales-engine.html`)
+- Added **Small — 10–50 locations** back as the first option; sizes are now
+  Small 10–50 · Mid-market 50–150 (default) · Enterprise 150+. Verified headless.
+
 ### Changed — SOP example images → "Drag your Image here" drop-zones (`vision-sales-agent.html`)
 - Replaced the four generated sample images in the example-SOP popup (3) and the
   Customer Success section (1) with the app's dashed **drop-zone placeholder**
