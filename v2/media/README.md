@@ -12,12 +12,7 @@ Planned contents (to be added):
 > Drop the image files into this folder with the names above (or tell me the
 > filenames you use) and they'll be referenced from the Architecture page.
 
-Sample (de-identified) illustrations of the i3Ai Configuration SOP, generated to mirror the
-original screenshots — no real footage, sites, or serials. Used in the Sales Agent's
-Customer Success · Phase 2 "example SOP" section + popup:
-
-| File | What it is | Used on |
-|---|---|---|
-| `sop-sample-detection-area.png` | Illustrated exterior camera view — magenta **Max detection area** drawn larger than the red **Area alarm / Area 1** detection area (sample overlay: CAM-12 · Site 042) | `vision-sales-agent.html` (Customer Success · example-SOP section + popup) |
-| `sop-sample-alarm-settings.png` | Mock i3Ai Setup alarm panel — Object count ≥ 1, Duration ≥ 1 (sec), Objects detection "Person, Head — 2 selected" | `vision-sales-agent.html` (example-SOP popup) |
-| `sop-sample-object-detection.png` | Mock objects-detection picker — **Head** + **Person** checked, Automobile off | `vision-sales-agent.html` (example-SOP popup) |
+The SOP example (Sales Agent · Customer Success · Phase 2 "example SOP" section + popup) no
+longer ships sample screenshots — the image slots are now **"Drag your Image here"** drop-zone
+placeholders, so each site drops in its own camera view / settings screenshots. The previous
+generated samples (`sop-sample-*.png`) were removed (recoverable from git history).
