@@ -7,6 +7,20 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — size ranges, Presentation flow, POC docs, ROS wording
+- **Company size** (`v-vision-sales-engine.html`) → two tiers: **Mid-market
+  50–150 (default) · Enterprise 150+** locations (dropped the small tier).
+- **Presentation stage** (`vision-sales-agent.html`) sub-label → **"Prep →
+  Present"**; intro reframed as the two steps (prep the deck, then present +
+  capture the transcript).
+- **Contact PM / official POC** (`vision-sales-agent.html` `showPM`): added a
+  **"Documents to include (signed before kickoff)"** section — **ROI document,
+  NDA (signed), CMS Legal documents (signed)** — with a note that the official
+  POC isn't created until they're attached and signed.
+- **ROS wording**: "watch a deal move from a brand-new rep to closed-won" →
+  **"the Sales Process from Lead to Closed"** (ros.html h1 + portal ROS card).
+  Verified headless, no JS errors.
+
 ### Changed — company-size dropdown ranges (`v-vision-sales-engine.html`)
 - Updated the **Company size (locations)** options to **Small 10–50 · Mid-market
   50–100 (default) · Enterprise 100+** (was 1–5 / 6–50 / 50+). Run note/boot log
