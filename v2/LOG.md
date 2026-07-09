@@ -7,6 +7,14 @@ Tracks changes to the `v2/` privacy compliance agent and related work on the
 
 ## 2026-07-08
 
+### Changed — SOP example images → "Drag your Image here" drop-zones (`vision-sales-agent.html`)
+- Replaced the four generated sample images in the example-SOP popup (3) and the
+  Customer Success section (1) with the app's dashed **drop-zone placeholder**
+  (🖼️ + **"Drag your Image here"**), keeping each caption reworded to "What goes
+  here: …" so it says which screenshot belongs there. Removed the unused
+  `sop-sample-*.png` files and updated `media/README.md`. Verified headless:
+  4 drop-zones render with the right text, no images remain, no JS errors.
+
 ### Changed — size ranges, Presentation flow, POC docs, ROS wording
 - **Company size** (`v-vision-sales-engine.html`) → two tiers: **Mid-market
   50–150 (default) · Enterprise 150+** locations (dropped the small tier).

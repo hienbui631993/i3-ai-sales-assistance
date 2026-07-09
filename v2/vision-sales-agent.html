@@ -193,6 +193,11 @@
   .sopdoc .fig .cap{font-size:11.5px;color:var(--muted);padding:8px 11px;border-top:1px solid var(--line);line-height:1.5}
   .sopdoc .figrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
   @media(max-width:560px){.sopdoc .figrow{grid-template-columns:1fr}}
+  .sopdoc .figph{margin:10px 0}
+  .sopdoc .figph .drop{border:1.5px dashed var(--inbd);border-radius:11px;background:var(--inbg);text-align:center;padding:30px 14px;color:var(--muted);font-weight:800;font-size:13.5px;cursor:pointer;transition:.15s}
+  .sopdoc .figph .drop:hover{border-color:var(--brand);color:var(--brand)}
+  .sopdoc .figph .drop .di{font-size:28px;display:block;margin-bottom:7px}
+  .sopdoc .figph .cap{font-size:11.5px;color:var(--muted);padding:8px 2px 0;line-height:1.5}
   .sopdoc .due{display:inline-block;font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 8px;background:var(--wnbg);border:1px solid var(--wnbd);color:#8a5d05;white-space:nowrap}
 </style>
 </head>
@@ -284,18 +289,18 @@
         <li>Object detection must be set to <b>"Head"</b> and <b>"Person"</b>.</li>
         <li>Object count must be set to <b>≥ 1</b>, Duration must be set to <b>≥ 1</b>.</li>
       </ul>
-      <div class="fig">
-        <img data-rel="media/sop-sample-detection-area.png" alt="Sample exterior camera view with the magenta Max detection area drawn larger than the red Area alarm detection area">
-        <div class="cap"><b>Illustration (sample):</b> an exterior camera view — the magenta <b>Max detection area</b> polygon is drawn larger than the red <b>Area alarm / Area 1</b> detection area, exactly as rules 4–5 require.</div>
+      <div class="figph">
+        <div class="drop"><span class="di">🖼️</span>Drag your Image here</div>
+        <div class="cap"><b>What goes here:</b> an exterior camera view — the magenta <b>Max detection area</b> polygon drawn larger than the red <b>Area alarm / Area 1</b> detection area, exactly as rules 4–5 require.</div>
       </div>
       <div class="figrow">
-        <div class="fig">
-          <img data-rel="media/sop-sample-alarm-settings.png" alt="Sample i3Ai Setup alarm panel with Object count 1, Duration 1 and Objects detection Person, Head">
-          <div class="cap"><b>Illustration (sample):</b> the alarm panel — <b>Object count ≥ 1</b>, <b>Duration ≥ 1 (sec)</b>, Objects detection <b>"Person, Head — 2 selected"</b> (rules 6–7).</div>
+        <div class="figph">
+          <div class="drop"><span class="di">🖼️</span>Drag your Image here</div>
+          <div class="cap"><b>What goes here:</b> the alarm panel — <b>Object count ≥ 1</b>, <b>Duration ≥ 1 (sec)</b>, Objects detection <b>"Person, Head — 2 selected"</b> (rules 6–7).</div>
         </div>
-        <div class="fig">
-          <img data-rel="media/sop-sample-object-detection.png" alt="Sample objects detection picker with Head and Person checked and Automobile unchecked">
-          <div class="cap"><b>Illustration (sample):</b> the objects-detection picker — <b>Head</b> + <b>Person</b> checked (Automobile off), matching rule 6.</div>
+        <div class="figph">
+          <div class="drop"><span class="di">🖼️</span>Drag your Image here</div>
+          <div class="cap"><b>What goes here:</b> the objects-detection picker — <b>Head</b> + <b>Person</b> checked (Automobile off), matching rule 6.</div>
         </div>
       </div>
       <h4>Procedure · 2 — Verification</h4>
@@ -794,10 +799,10 @@ var OUTPUT={
         '<div style="margin-top:10px"><a class="btn g sm" style="display:inline-block;text-decoration:none" href="sop.html#phase2" onclick="openSOPPhase2();return false;">📘 Open the SOP — Phase 2 · Prove the promise</a></div>')+
       sec("Example SOP — the standardized configuration format",
         '<div class="kv"><div class="k">AI Configuration SOP · sample</div><div class="v" style="font-size:13px;font-weight:600">A <b>sample of the standardized i3 SOP</b> — <i>Configuring i3Ai Setup for optimal accuracy</i>. Its <b>verify → monitor weekly → audit monthly → improve</b> loop is exactly how Phase 2 keeps the solution performing as the contract promised.</div></div>'+
-        '<div class="sopdoc" style="margin-top:10px"><div class="fig" style="cursor:pointer;margin:0" onclick="openSOPModal()" title="Open the full SOP">'+
-          '<img src="'+mediaURL('media/sop-sample-detection-area.png')+'" alt="Sample exterior camera view with the Max detection area drawn larger than the detection area">'+
-          '<div class="cap"><b>Illustration (sample):</b> the magenta <b>Max detection area</b> drawn larger than the red <b>Area alarm</b> detection area — one of the seven camera-configuration rules the SOP audits every site against. Click to read the full SOP.</div></div></div>'+
-        '<div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn p sm" onclick="openSOPModal()">📄 View the sample SOP (popup)</button></div>')+
+        '<div class="sopdoc" style="margin-top:10px"><div class="figph">'+
+          '<div class="drop" onclick="openSOPModal()" title="Open the full SOP"><span class="di">🖼️</span>Drag your Image here</div>'+
+          '<div class="cap"><b>What goes here:</b> the magenta <b>Max detection area</b> drawn larger than the red <b>Area alarm</b> detection area — one of the seven camera-configuration rules the SOP audits every site against.</div></div></div>'+
+        '<div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn p sm" onclick="openSOPModal()">📄 View the SOP (popup)</button></div>')+
       sec("Training",'<ul class="steps"><li><b>Lean</b> — rep &amp; customer training.</li><li><b>Grade</b> — video-based training.</li></ul>')+
       sec("Professional services",'<div class="kv"><div class="k">Where it fits</div><div class="v" style="font-size:13px">Bundle i3 professional services into the rollout where relevant.</div></div>')+
       sec("Upsell suggestions",'<ul class="steps"><li>Concierge service</li><li>Smart ER Analyst service</li><li>One Connect service</li><li>TrueView service</li></ul>')+
